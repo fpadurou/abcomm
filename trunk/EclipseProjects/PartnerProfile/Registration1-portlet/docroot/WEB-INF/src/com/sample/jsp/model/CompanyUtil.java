@@ -66,29 +66,33 @@ public class CompanyUtil {
 		return list;
 	}
 	
-	public static List getCompanySAPSolution(int id) throws SQLException {
+	public static String getCompanySAPSolution(CompanyItem companyItem) throws SQLException {
 		List list = new ArrayList();
-
+		String companySapSolutions = "";
+		int companyId = 0;
+		if(companyItem != null)
+			companyId = companyItem.getId();
+			
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-
+		
 		try {
 			con = ConnectionPool.getConnection();
 
-			ps = con.prepareStatement(_GET_COMPANY_INDUSTRIES);
-
+			ps = con.prepareStatement(_GET_COMPANY_SAP_SOLUTIONS);
+			ps.setInt(1, companyId);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				list.add(rs.getString(2));
+				companySapSolutions = companySapSolutions + rs.getString(1) + ", ";
 			}
 		}
 		finally {
 			ConnectionPool.cleanUp(con, ps, rs);
 		}
 
-		return list;
+		return companySapSolutions;
 	}	
 	
 	public static String getCompanyCountryName(CompanyItem companyItem) throws SQLException {
@@ -160,5 +164,8 @@ public class CompanyUtil {
 
 	private static final String _GET_COMPANY_INDUSTRIES =
 		"SELECT industry_name FROM tbl_companies_industries t1 join tbl_industry_microvertical t2 WHERE (t1.industryId = t2.industryId) AND  t1.companyId = ?";
+
+	private static final String _GET_COMPANY_SAP_SOLUTIONS =
+		"SELECT SAPSolution_name FROM tbl_companies_sapsolution t1 join tbl_sapsolutions t2 WHERE (t1.sapsolutionId = t2.sapsolutionId) AND  t1.companyId = ?";
 
 }
