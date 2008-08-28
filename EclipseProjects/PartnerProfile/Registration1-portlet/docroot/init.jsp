@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/common/init.jsp" %>
+<%@ include file="../ROOT/html/portlet/init.jsp" %>
 
 <portlet:defineObjects />
 
