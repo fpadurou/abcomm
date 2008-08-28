@@ -21,7 +21,6 @@
  * SOFTWARE.
  */
 %>
-
 <%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
 
 <%@ page import="com.sample.registration.model.UserItem" %>
@@ -75,7 +74,6 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
     String userWorkPhone = ""; 
 	String partnerDescription = ""; 
 	int partnerNumber = 1; 
-    String partnerNumberWideEdit = ""; 
     String telephone = ""; 
     String telefax = ""; 
     String mail = ""; 
@@ -98,7 +96,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	String city_user = "";	
 	String state_province_user = "";	
 	String country_user = "";
-    String noemployees = "";
+    String noemployees = "" ;
     String geographic_coverage = ""; 	
     String parent_company_name = ""; 
     String country_parent_company = ""; 
@@ -138,7 +136,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 				street2_user = adressUserItem.getStreet2();	
 				zipcode_user = adressUserItem.getZip();	
 				city_user = adressUserItem.getCity();	
-				state_province_user = adressUserItem.getCity();
+				state_province_user = adressUserItem.getStateregionname();
 				countryId = adressUserItem.getCountryId();
 			}	
 			if(countryId > 0)
@@ -153,34 +151,47 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		CompanyItem companyItem = CompanyItemDAO.getCompanyItem(id);
 		userCompanyName = companyItem.getName();
 		partnerDescription = companyItem.getDescription();
-		//partnerNumber = companyItem.getCompanyNo(); 
-		micrositeAdress = ""; 
-		company_website = "";
-	    noemployees = "";
+		partnerNumber = companyItem.getCompanyNo(); 
+	    parent_company_name = companyItem.getParentCompanyName(); 
+	    channel_partner_since = String.valueOf(companyItem.getYear()); 
+		micrositeAdress = companyItem.getCompanyFriendlySite(); 
+		company_website = companyItem.getCompanySite();
+	    noemployees = String.valueOf(companyItem.getCompanyEmpNo());
 	    last_review_Date = ""; 	
-	    reviewed_by = ""; 
+	    reviewed_by = companyItem.getReviewedBy(); 
 	    profile_added = ""; 
 	    date_updated = ""; 
-	    modified_by = ""; 		
+	    modified_by = companyItem.getModifiedBy(); 		
+// get the adress item
+		AdressItem adressCompanyItem = null;
+		int adressId = companyItem.getAdressId();
+		int countryId = 0;
+			
+		if(adressId>0)
+		{
+			adressCompanyItem = AdressItemDAO.getAdressItem(adressId);
+			mail = adressCompanyItem.getMail();	
+			street1 = adressCompanyItem.getStreet1();	
+			street2 = adressCompanyItem.getStreet2();	
+			zipcode = adressCompanyItem.getZip();	
+			city_user = adressCompanyItem.getCity();	
+			state_province = adressCompanyItem.getStateregionname();
+			countryId = adressCompanyItem.getCountryId();
+		}	
+		if(countryId > 0)
+			country = CountryItemDAO.getCountryItem(countryId).getCountryName();
 
     	telephone = "";// companyItem.getAdressId(); 
     	telefax = "" ;//companyItem.getAdressId(); 
-    	mail = "";//companyItem.getAdressId(); 
-	    street1 = "";//companyItem.getAdressId(); 
-	    street2 = "";//companyItem.getAdressId(); 
-    	zipcode = ""; 
-    	city = ""; 
-    	state_province = ""; 
+
     	country = ""; 
+
 	    geographic_coverage = ""; 	
-	    parent_company_name = ""; 
 	    country_parent_company = ""; 
-	    channel_partner_since = ""; 
 	    primary_business_type = ""; 	
 	    secondary_business_type	= ""; 
 	    sap_solution_focus = ""; 
 	    industry = ""; 
-	    industry_micro_vertical_focus = ""; 	
 		
 	}
 %>
@@ -191,7 +202,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	<input name="id" type="hidden" value="<%= id %>">
 	<input name="userId" type="hidden" value="<%= userId %>">
 
-	<table border="0" cellpadding="0" cellspacing="0">
+	<table class="lfr-table">
 
 	<%
 	if (command.equals("edit")) {
@@ -644,7 +655,7 @@ else {
 
 	<br><br>
 
-	<table border="1" cellpadding="4" cellspacing="2" width="100%">
+	<table class="lfr-table" border="1" cellpadding="4" cellspacing="2" width="100%">
 	<tr>
 		<td>
 			<b>Company Name</b>
