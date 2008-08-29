@@ -42,14 +42,43 @@
 <%@ page import="com.sample.registration.model.CompanyUtil" %>
 
 <%@ page import="java.util.List" %>
+<%@ page import="java.text.DateFormat" %>
 
 <%@ page import="javax.portlet.WindowState" %>
 
 <portlet:defineObjects />
 
-<form action="<portlet:actionURL />" method="post" name="fm">
+<script type="text/javascript">
+function validateForm(compprofile)
+{
+
+if(""==document.forms.compprofile.userCompanyName.value)
+{
+alert("Please enter your full name.");
+return false;
+}else
+{alert("E bine.");
+}return true;
+}
+
+if(""==document.forms.compprofile.email.value)
+{
+alert("Please enter your email address.");
+return false;
+}
+
+if(""==document.forms.compprofile.phoneNum.value)
+{
+alert("Please enter your phone number.");
+return false;
+}
+
+}
+</script>
+<form action="<portlet:actionURL />" method="post" name="compprofile" onSubmit="return validateForm(compprofile);">
 
 <%
+DateFormat dateFormatDateTime = DateFormat.getDateInstance();
 String command = request.getParameter("command");
 List countryItems = CountryItemDAO.getCountryItems();
 List userCountryItems = CountryItemDAO.getCountryItems();
@@ -61,10 +90,7 @@ List sapSolutionItems = SAPSolutionItemDAO.getSAPSolutionItems();
 List industryItems = IndustryItemDAO.getIndustryItems(); 
 
 
-if (command == null)
-{
 
-}
 if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	int id = 0;
 	int userId = 0;
@@ -103,8 +129,8 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
     String channel_partner_since = ""; 
     String primary_business_type = ""; 	
     String secondary_business_type	= ""; 
-    String sap_solution_focus = ""; 
-    String industry	= ""; 
+    List sap_solution_focus = null; 
+    List industry = null; 
     String industry_micro_vertical_focus = ""; 	
     String last_review_Date = ""; 	
     String reviewed_by = ""; 
@@ -157,15 +183,16 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		micrositeAdress = companyItem.getCompanyFriendlySite(); 
 		company_website = companyItem.getCompanySite();
 	    noemployees = String.valueOf(companyItem.getCompanyEmpNo());
-	    last_review_Date = ""; 	
+	    last_review_Date = String.valueOf(dateFormatDateTime.format(companyItem.getDateLastReview())); 	
 	    reviewed_by = companyItem.getReviewedBy(); 
-	    profile_added = ""; 
-	    date_updated = ""; 
+	    profile_added = String.valueOf(dateFormatDateTime.format(companyItem.getDateCreated())); 
+	    date_updated = String.valueOf(dateFormatDateTime.format(companyItem.getDateUpdated()));; 
 	    modified_by = companyItem.getModifiedBy(); 		
 // get the adress item
 		AdressItem adressCompanyItem = null;
 		int adressId = companyItem.getAdressId();
 		int countryId = 0;
+		int countryParentId = companyItem.getCountryRegistrationId();
 			
 		if(adressId>0)
 		{
@@ -174,29 +201,26 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 			street1 = adressCompanyItem.getStreet1();	
 			street2 = adressCompanyItem.getStreet2();	
 			zipcode = adressCompanyItem.getZip();	
-			city_user = adressCompanyItem.getCity();	
+			city = adressCompanyItem.getCity();	
 			state_province = adressCompanyItem.getStateregionname();
 			countryId = adressCompanyItem.getCountryId();
+			telephone = AdressItemDAO.getPhone(adressCompanyItem.getPhoneId());
+			telefax = AdressItemDAO.getFax(adressCompanyItem.getFaxId());
 		}	
 		if(countryId > 0)
 			country = CountryItemDAO.getCountryItem(countryId).getCountryName();
 
-    	telephone = "";// companyItem.getAdressId(); 
-    	telefax = "" ;//companyItem.getAdressId(); 
+	    country_parent_company = CountryItemDAO.getCountryItem(countryParentId).getCountryName(); 
+	    sap_solution_focus = CompanyUtil.getCompanySAPSolutionList(companyItem);
+	    industry = CompanyUtil.getCompanyIndustries(id);
 
-    	country = ""; 
-
-	    geographic_coverage = ""; 	
-	    country_parent_company = ""; 
-	    primary_business_type = ""; 	
-	    secondary_business_type	= ""; 
-	    sap_solution_focus = ""; 
-	    industry = ""; 
+	    geographic_coverage = "";
+	    primary_business_type = CompanyUtil.getCompanyBusinessSolution(id, 1); 	
+	    secondary_business_type	= CompanyUtil.getCompanyBusinessSolution(id, 2);
 		
 	}
 %>
 <script type="text/javascript">
-
 </script>
 	<input name="command" type="hidden" value="<%= command %>">
 	<input name="id" type="hidden" value="<%= id %>">
@@ -337,10 +361,10 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                     //Construct the option tag in a String variable
                     String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                    //if(optionCategoryValue.equals(userSelectedCategory))
-                    //{
-                    //    optionTag += " selected=\"selected\"";
-                    //}
+                    if(optionCategoryValue.equals(country))
+                    {
+                        optionTag += " selected=\"selected\"";
+                    }
                     
                     //close the option tag
                     optionTag += ">" + optionCategoryValue + "</OPTION>";
@@ -379,7 +403,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="noemployees" type="text" value="<%= noemployees %>">
+			<input class="form-text" name="noemployees" type="int" value="<%= noemployees %>">
 		</td>
 	</tr>		
 	<tr>
@@ -443,10 +467,10 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                     //Construct the option tag in a String variable
                     String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                    //if(optionCategoryValue.equals(userSelectedCategory))
-                    //{
-                    //    optionTag += " selected=\"selected\"";
-                    //}
+                    if(optionCategoryValue.equals(country_parent_company))
+                    {
+                        optionTag += " selected=\"selected\"";
+                    }
                     
                     //close the option tag
                     optionTag += ">" + optionCategoryValue + "</OPTION>";
@@ -486,10 +510,10 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                 //Construct the option tag in a String variable
                 String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                //if(optionCategoryValue.equals(userSelectedCategory))
-                //{
-                //    optionTag += " selected=\"selected\"";
-                //}
+                if(optionCategoryValue.equals(primary_business_type))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
                     
                 //close the option tag
                 optionTag += ">" + optionCategoryValue + "</OPTION>";
@@ -521,10 +545,10 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                 //Construct the option tag in a String variable
                 String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                //if(optionCategoryValue.equals(userSelectedCategory))
-                //{
-                //    optionTag += " selected=\"selected\"";
-                //}
+                if(optionCategoryValue.equals(secondary_business_type))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
                     
                 //close the option tag
                 optionTag += ">" + optionCategoryValue + "</OPTION>";
@@ -555,10 +579,10 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                 //Construct the option tag in a String variable
                 String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                //if(optionCategoryValue.equals(userSelectedCategory))
-                //{
-                //    optionTag += " selected=\"selected\"";
-                //}
+                if(sap_solution_focus.contains(optionCategoryValue))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
                     
                 //close the option tag
                 optionTag += ">" + optionCategoryValue + "</OPTION>";
@@ -589,10 +613,10 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                 //Construct the option tag in a String variable
                 String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                //if(optionCategoryValue.equals(userSelectedCategory))
-                //{
-                //    optionTag += " selected=\"selected\"";
-                //}
+                if(industry.contains(optionCategoryValue))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
                     
                 //close the option tag
                 optionTag += ">" + optionCategoryValue + "</OPTION>";
@@ -637,7 +661,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	%>
 
 		<script type="text/javascript">
-			document.fm.name.focus();
+			document.compprofile.userCompanyName.focus();
 		</script>
 	<%
 	}

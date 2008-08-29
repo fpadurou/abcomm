@@ -43,7 +43,8 @@ public class CompanyUtil {
 
 	public static List getCompanyIndustries(int id) throws SQLException {
 		List list = new ArrayList();
-
+		if(id<=0)
+			return null;
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -52,11 +53,11 @@ public class CompanyUtil {
 			con = ConnectionPool.getConnection();
 
 			ps = con.prepareStatement(_GET_COMPANY_INDUSTRIES);
-
+			ps.setInt(1, id);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				list.add(rs.getString(2));
+				list.add(rs.getString(1));
 			}
 		}
 		finally {
@@ -93,6 +94,35 @@ public class CompanyUtil {
 		}
 
 		return companySapSolutions;
+	}	
+
+	public static List getCompanySAPSolutionList(CompanyItem companyItem) throws SQLException {
+		List list = new ArrayList();
+		String companySapSolutions = "";
+		int companyId = 0;
+		if(companyItem != null)
+			companyId = companyItem.getId();
+			
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_COMPANY_SAP_SOLUTIONS);
+			ps.setInt(1, companyId);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
 	}	
 	
 	public static String getCompanyCountryName(CompanyItem companyItem) throws SQLException {
@@ -160,7 +190,34 @@ public class CompanyUtil {
 
 		return industriesName;
 	}	
-	
+
+	public static String getCompanyBusinessSolution(int id, int type) throws SQLException {
+		String companyBusiness = "";
+		if(id <=0 )
+			return companyBusiness;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_COMPANY_BUSINESS_BY_TYPE);
+			ps.setInt(1, id);
+			ps.setInt(2, type);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				companyBusiness = rs.getString(1);
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return companyBusiness;
+	}		
 
 	private static final String _GET_COMPANY_INDUSTRIES =
 		"SELECT industry_name FROM tbl_companies_industries t1 join tbl_industry_microvertical t2 WHERE (t1.industryId = t2.industryId) AND  t1.companyId = ?";
@@ -168,4 +225,10 @@ public class CompanyUtil {
 	private static final String _GET_COMPANY_SAP_SOLUTIONS =
 		"SELECT SAPSolution_name FROM tbl_companies_sapsolution t1 join tbl_sapsolutions t2 WHERE (t1.sapsolutionId = t2.sapsolutionId) AND  t1.companyId = ?";
 
+	private static final String _GET_COMPANY_BUSINESS_BY_TYPE =
+		"SELECT business_name FROM tbl_companies_businesstype t1 join tbl_businesstype t2 WHERE (t1.businesstypeId = t2.businesstypeId) AND  t1.companyId = ? AND t1.type_= ?";
+
+	private static final String _GET_COMPANY_COVERAGE =
+		"SELECT country_name FROM tbl_countries WHERE t1.companyId = ?";
+	
 }

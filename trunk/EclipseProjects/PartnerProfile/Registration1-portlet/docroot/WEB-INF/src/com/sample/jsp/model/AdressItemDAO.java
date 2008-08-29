@@ -193,7 +193,61 @@ public class AdressItemDAO {
 			ConnectionPool.cleanUp(con, ps);
 		}
 	}
+	
+	public static String getPhone(int phoneId) throws SQLException {
+		String phone = ""; 
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		if(phoneId <=0)
+			return phone;
 
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_PHONE);
+			ps.setInt(1, phoneId);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				phone = rs.getString(1);				
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return phone;
+	}
+
+	public static String getFax(int faxId) throws SQLException {
+		String phone = ""; 
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		if(faxId <=0)
+			return phone;
+
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_FAX);
+			ps.setInt(1, faxId);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				phone = rs.getString(1);				
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return phone;
+	}
+	
 	private static final String _ADD_ADRESS_ITEM =
 		"INSERT INTO tbl_adress (companyId, userId, street1, street2, city, zip, stateregionname, countryId, phoneId, faxId, mail ) " +
 		"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -210,4 +264,9 @@ public class AdressItemDAO {
 	private static final String _UPDATE_ADRESS_ITEM =
 		"UPDATE tbl_adress SET companyId = ?, userId = ?, street1 = ?, street2 = ?, city = ?, zip = ?, stateregionname = ?, countryId = ?, phoneId = ?, faxId = ?, mail = ? WHERE adressId = ?";
 
+	private static final String _GET_PHONE =
+		"SELECT number_ FROM tbl_phone WHERE phoneId = ?";	
+	
+	private static final String _GET_FAX =
+		"SELECT number_ FROM tbl_phone WHERE phoneId = ?";	
 }
