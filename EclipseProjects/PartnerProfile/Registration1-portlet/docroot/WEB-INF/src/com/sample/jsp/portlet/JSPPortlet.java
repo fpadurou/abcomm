@@ -71,7 +71,7 @@ public class JSPPortlet extends GenericPortlet {
 
 		try {
 			id = Integer.parseInt(req.getParameter("id"));
-			userId = Integer.parseInt(req.getParameter("userId"));
+			//userId = Integer.parseInt(req.getParameter("userId"));
 		} catch (Exception e) {
 		}
 
@@ -121,16 +121,6 @@ public class JSPPortlet extends GenericPortlet {
 		try {
 			if (command.equals("add")) {
 				// user
-				UserItem userItem = new UserItem();
-
-				userItem.setName(name);
-				userItem.setUserLastName(userLastName);
-				userItem.setUserCompanyName(userCompanyName);
-				userItem.setUserPosition(userPositionCompany);
-				userItem.setUserMobilePhone(userMobilePhone);
-				userItem.setUserWorkPhone(userWorkPhone);
-
-				UserItemDAO.addUserItem(userItem);
 				// user adress + phone
 
 				// company
