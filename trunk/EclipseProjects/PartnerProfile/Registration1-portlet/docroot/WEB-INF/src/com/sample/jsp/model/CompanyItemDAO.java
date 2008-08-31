@@ -54,23 +54,61 @@ public class CompanyItemDAO {
 			ps.setString(1, companyItem.getName());
 			ps.setString(2, companyItem.getDescription());
 			ps.setString(3, companyItem.getParentCompanyName());
-			ps.setInt(4, companyItem.getCompanyEmpNo());
-			ps.setInt(5, companyItem.getCompanyNo());
+			if(companyItem.getCompanyEmpNo() > 0)
+				ps.setInt(4, companyItem.getCompanyEmpNo());
+			else
+				ps.setInt(4, -1);
+			if(companyItem.getCompanyNo() >0)
+				ps.setInt(5, companyItem.getCompanyNo());
+			else				
+				ps.setInt(5, -1);
 			ps.setString(6, companyItem.getCompanyFriendlySite());
-			ps.setInt(7, companyItem.getAdressId());
-			ps.setInt(8, companyItem.getCountryRegistrationId());
-			ps.setInt(9, companyItem.getYear());
-			
-			java.sql.Date sqlDate =
-				   new java.sql.Date(companyItem.getDateCreated().getTime());
+			if(companyItem.getAdressId() >0)
+				ps.setInt(7, companyItem.getAdressId());
+			else 
+				ps.setInt(7, -1);
+			if(companyItem.getCountryRegistrationId() >0)
+				ps.setInt(8, companyItem.getCountryRegistrationId());
+			else
+				ps.setInt(8, -1);
+			if(companyItem.getYear() > 0)
+				ps.setInt(9, companyItem.getYear());
+			else 
+				ps.setInt(9, -1);
+
+			java.util.Date date = new java.util.Date();
+			java.sql.Date sqlDate = null ;
+			if(companyItem.getDateCreated() != null)
+			{
+				sqlDate =
+					   new java.sql.Date(companyItem.getDateCreated().getTime());
+			}
+			else 
+			{
+				sqlDate =
+					   new java.sql.Date(date.getTime());
+			}
 			ps.setDate(10, sqlDate);
-			sqlDate = new java.sql.Date(companyItem.getDateUpdated().getTime());
+
+			if(companyItem.getDateUpdated() != null)
+			{
+				sqlDate = new java.sql.Date(companyItem.getDateUpdated().getTime());
+			}
+			else 
+				sqlDate =
+					   new java.sql.Date(date.getTime());
+
 			ps.setDate(11, sqlDate);
-			sqlDate = new java.sql.Date(companyItem.getDateLastReview().getTime());
+			if(companyItem.getDateLastReview() != null)
+				sqlDate = new java.sql.Date(companyItem.getDateLastReview().getTime());
+			else
+				sqlDate = new java.sql.Date(date.getTime());
+			
 			ps.setDate(12, sqlDate);
 			ps.setString(13, companyItem.getReviewedBy());
 			ps.setString(14, companyItem.getModifiedBy());
 			ps.setString(15, companyItem.getCompanySite());
+			String value =  companyItem.getName() + companyItem.getDescription() ; 
 			ps.executeUpdate();
 		}
 		finally {
@@ -231,7 +269,7 @@ public class CompanyItemDAO {
 	}
 	
 	private static final String _ADD_COMPANY_ITEM =
-	"INSERT INTO tbl_company (companyName, description, partnerNumber, friendlySAP_site, adressId, noEmployees, parent_companyname, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site) " +
+	"INSERT INTO tbl_company (companyName, description, parent_companyname, noEmployees, partnerNumber, friendlySAP_site, adressId, countryRegistrationId ,partner_since, date_created, date_updated, last_review_date, reviewed_By, modified_by, web_site) " +
 		"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 
 	private static final String _DELETE_COMPANY_ITEM =

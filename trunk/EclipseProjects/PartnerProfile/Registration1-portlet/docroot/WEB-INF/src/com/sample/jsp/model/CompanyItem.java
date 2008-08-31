@@ -32,6 +32,9 @@ import java.util.Date;
 public class CompanyItem {
 
 	public CompanyItem() {
+		_date_created = null;
+		_date_updated = null;
+		_date_lastreviewdate = null;
 	}
 
 	public int getId() {

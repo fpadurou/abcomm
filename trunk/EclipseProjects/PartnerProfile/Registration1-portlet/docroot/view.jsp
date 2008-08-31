@@ -138,8 +138,15 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	    channel_partner_since = String.valueOf(companyItem.getYear()); 
 		micrositeAdress = companyItem.getCompanyFriendlySite();
 		company_website = companyItem.getCompanySite();
-	    noemployees = String.valueOf(companyItem.getCompanyEmpNo());
-	    last_review_Date = String.valueOf(dateFormatDateTime.format(companyItem.getDateLastReview())); 	
+		if(companyItem.getCompanyEmpNo() >0)
+	    	noemployees = String.valueOf(companyItem.getCompanyEmpNo());
+	    else
+	    	noemployees ="";	
+	    if(companyItem.getDateLastReview() != null)
+		    last_review_Date = String.valueOf(dateFormatDateTime.format(companyItem.getDateLastReview()));
+		else
+			last_review_Date = "";
+	    
 	    reviewed_by = companyItem.getReviewedBy(); 
 	    profile_added = String.valueOf(dateFormatDateTime.format(companyItem.getDateCreated())); 
 	    date_updated = String.valueOf(dateFormatDateTime.format(companyItem.getDateUpdated())); 
@@ -167,7 +174,8 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		if(countryId > 0)
 			country = CountryItemDAO.getCountryItem(countryId).getCountryName();
 
-	    country_parent_company = CountryItemDAO.getCountryItem(countryParentId).getCountryName(); 
+	    if(countryParentId >0)
+	    	country_parent_company = CountryItemDAO.getCountryItem(countryParentId).getCountryName(); 
 	    sap_solution_focus = CompanyUtil.getCompanySAPSolutionList(companyItem);
 	    industry = CompanyUtil.getCompanyIndustries(id);
 
