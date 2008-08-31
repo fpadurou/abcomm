@@ -45,7 +45,7 @@ public class AdressItem {
 		return _companyId;
 	}
 
-	protected void setCompanyId(int id) {
+	public void setCompanyId(int id) {
 		_companyId = id;
 	}
 

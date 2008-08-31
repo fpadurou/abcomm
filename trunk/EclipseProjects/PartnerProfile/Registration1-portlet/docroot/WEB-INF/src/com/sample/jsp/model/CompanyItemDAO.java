@@ -32,7 +32,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
-
+import java.sql.Types;
+import java.sql.*;
 /**
  * <a href="CompanyItemDAO.java.html"><b><i>View Source</i></b></a>
  *
@@ -201,12 +202,22 @@ public class CompanyItemDAO {
 			ps.setInt(7, companyItem.getAdressId());
 			ps.setInt(8, companyItem.getCountryRegistrationId());
 			ps.setInt(9, companyItem.getYear());
-			java.sql.Date sqlDate = new java.sql.Date(companyItem.getDateCreated().getTime());
-			ps.setDate(10, sqlDate);
-			sqlDate = new java.sql.Date(companyItem.getDateUpdated().getTime());
-			ps.setDate(11, sqlDate);
-			sqlDate = new java.sql.Date(companyItem.getDateLastReview().getTime());
-			ps.setDate(12, sqlDate);
+			java.util.Date date = new java.util.Date();
+			if(companyItem.getDateCreated() != null)
+				ps.setDate(10, new java.sql.Date(companyItem.getDateCreated().getTime()));
+			else
+				ps.setDate(10, new java.sql.Date(date.getTime()));
+
+			if(companyItem.getDateUpdated() != null)
+				ps.setDate(11, new java.sql.Date(companyItem.getDateUpdated().getTime()));
+			else
+				ps.setDate(11, new java.sql.Date(date.getTime()));
+					
+			if(companyItem.getDateLastReview() != null)
+				ps.setDate(12, new java.sql.Date(companyItem.getDateLastReview().getTime()));
+			else
+				ps.setDate(12, new java.sql.Date(date.getTime()));
+
 			ps.setString(13, companyItem.getReviewedBy());
 			ps.setString(14, companyItem.getModifiedBy());
 			ps.setString(15, companyItem.getCompanySite());				
@@ -233,6 +244,6 @@ public class CompanyItemDAO {
 		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company";
 
 	private static final String _UPDATE_COMPANY_ITEM =
-		"UPDATE tbl_company SET companyName = ?, description = ?, partnerNumber = ?, friendlySAP_site = ?, adressId = ?, noEmployees = ?, parent_companyname = ?, countryRegistrationId = ?, partner_since = ?, last_review_date = ?, reviewed_By = ?, date_created = ?, date_updated = ?, modified_by = ?, web_site = ? WHERE userId = ?";
+		"UPDATE tbl_company SET companyName = ?, description = ?, parent_companyname = ?, noEmployees = ?, partnerNumber = ?, friendlySAP_site = ?, adressId = ?, countryRegistrationId = ?, partner_since = ?, date_created = ?, date_updated = ?, last_review_date = ?, reviewed_By = ?, modified_by = ?, web_site = ? WHERE companyId = ?";
 
 }

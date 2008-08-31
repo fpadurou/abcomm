@@ -131,9 +131,42 @@ public class CountryItemDAO {
 		return list;
 	}
 	
+	public static CountryItem getCountryItemByName(String name) throws SQLException {
+		CountryItem countryItem = null;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_COUNTRY_BY_NAME);
+
+			ps.setString(1, name);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				countryItem = new CountryItem();
+
+				countryItem.setId(rs.getInt(1));
+				countryItem.setCountryName(rs.getString(2));
+				countryItem.setRegionId(rs.getInt(3));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return countryItem;
+	}
 
 	private static final String _GET_COUNTRY_ITEM =
 		"SELECT countryId, country_name, regionId FROM tbl_countries WHERE countryId = ?";
+
+	private static final String _GET_COUNTRY_BY_NAME =
+		"SELECT countryId, country_name, regionId FROM tbl_countries WHERE country_name = ?";
 
 	private static final String _GET_COUNTRY_BYREGION_ITEMS =
 		"SELECT countryId, country_name, regionId FROM tbl_countries WHERE regionId = ?";
