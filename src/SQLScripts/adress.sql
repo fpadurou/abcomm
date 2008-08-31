@@ -22,7 +22,7 @@ CREATE TABLE  tbl_adress (
 
 DROP TABLE IF EXISTS tbl_phone;
 CREATE TABLE  tbl_phone (
-  `phoneId` bigint(20) NOT NULL,
+  `phoneId` bigint(20) NOT NULL auto_increment,
   `companyId` bigint(20) default NULL,
   `userId` bigint(20) default NULL,
   `userName` varchar(75) default NULL,
