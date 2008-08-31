@@ -123,6 +123,8 @@ public class JSPPortlet extends GenericPortlet {
 		String[] countryCoverage = req.getParameterValues("country_coverage");
 	    
 		try {
+			DateFormat df = DateFormat.getDateInstance();
+
 			if (command.equals("add")) {
 				// user
 				// user adress + phone
@@ -135,12 +137,20 @@ public class JSPPortlet extends GenericPortlet {
 				companyItem.setCompanyNo(partnerNumber);
 				companyItem.setCompanyFriendlySite(micrositeAdress);
 				companyItem.setCompanySite(company_website);
-				companyItem.setCompanyEmpNo(Integer.parseInt(noemployees));
+				if(noemployees != null && !noemployees.isEmpty())
+					companyItem.setCompanyEmpNo(Integer.parseInt(noemployees));
 				companyItem.setParentCompanyName(parent_company_name);
-				companyItem.setYear(Integer.parseInt(channel_partner_since));
-
-/*				DateFormat df = DateFormat.getDateInstance();
+				if(channel_partner_since != null && !channel_partner_since.isEmpty())
+					companyItem.setYear(Integer.parseInt(channel_partner_since));
+				Date tempDate = new Date();
+				String value = tempDate.toString();
+				System.out.println(value);
 				
+				companyItem.setDateUpdated(new Date());
+				companyItem.setDateLastReview(new Date());
+				companyItem.setDateUpdated(new Date());
+
+/*				
 				Date dateTmp = new Date();
 				if(last_review_Date != null && !last_review_Date.isEmpty())
 				{
@@ -193,17 +203,17 @@ public class JSPPortlet extends GenericPortlet {
 				companyItem.setCompanyNo(partnerNumber);
 				companyItem.setCompanyFriendlySite(micrositeAdress);
 				companyItem.setCompanySite(company_website);
-				companyItem.setCompanyEmpNo(Integer.parseInt(noemployees));
+				if(noemployees != null && !noemployees.isEmpty())
+					companyItem.setCompanyEmpNo(Integer.parseInt(noemployees));
 				companyItem.setParentCompanyName(parent_company_name);
-				companyItem.setYear(Integer.parseInt(channel_partner_since));
+				if(channel_partner_since != null && !channel_partner_since.isEmpty())
+					companyItem.setYear(Integer.parseInt(channel_partner_since));
 				if (country_parent_company != "")
 				{
 					CountryItem countryItemTemp = CountryItemDAO.getCountryItemByName(country_parent_company);
 					if(countryItemTemp != null)
 						companyItem.setCountryRegistrationId(countryItemTemp.getId());
 				}
-
-				DateFormat df = DateFormat.getDateInstance();
 
 				Date date = new Date();
 				try {date = df.parse(last_review_Date);
