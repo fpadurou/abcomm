@@ -79,8 +79,8 @@ CREATE TABLE `tbl_adress` (
 
 /*!40000 ALTER TABLE `tbl_adress` DISABLE KEYS */;
 INSERT INTO `tbl_adress` (`adressId`,`companyId`,`userId`,`userName`,`mail`,`createDate`,`modifiedDate`,`street1`,`street2`,`city`,`zip`,`stateregionname`,`countryId`,`phoneId`,`faxId`) VALUES 
- (1,1,NULL,NULL,'gigi@yahoo.com',NULL,NULL,'123123 Street Av','Street Av','Brasov','121234234','Valea Prahovei',21,3,4),
- (2,2,NULL,NULL,'accentway@aaa.com',NULL,NULL,'12 Street Av','51 Street','Ottawa','2134 adas','Canada 12',11,1,2);
+ (1,1,0,NULL,'gigi@yahoo.com',NULL,NULL,'Street Av','Street Av','Brasov','70000','Valea Prahovei',220,3,7),
+ (2,2,0,NULL,'accentway@aaa.com',NULL,NULL,'51 Street','51 Street','Ottawa','2134 adas','Canada 12',39,1,2);
 /*!40000 ALTER TABLE `tbl_adress` ENABLE KEYS */;
 
 
@@ -128,8 +128,9 @@ CREATE TABLE `tbl_companies_businesstype` (
 
 /*!40000 ALTER TABLE `tbl_companies_businesstype` DISABLE KEYS */;
 INSERT INTO `tbl_companies_businesstype` (`companyId`,`businesstypeId`,`type_`) VALUES 
- (1,2,1),
- (1,2,2),
+ (1,4,2),
+ (1,6,1),
+ (2,1,2),
  (2,3,1);
 /*!40000 ALTER TABLE `tbl_companies_businesstype` ENABLE KEYS */;
 
@@ -151,6 +152,10 @@ CREATE TABLE `tbl_companies_coverage` (
 --
 
 /*!40000 ALTER TABLE `tbl_companies_coverage` DISABLE KEYS */;
+INSERT INTO `tbl_companies_coverage` (`companyId`,`countryId`,`regionId`) VALUES 
+ (1,1,0),
+ (1,3,0),
+ (1,4,0);
 /*!40000 ALTER TABLE `tbl_companies_coverage` ENABLE KEYS */;
 
 
@@ -173,9 +178,15 @@ CREATE TABLE `tbl_companies_industries` (
 INSERT INTO `tbl_companies_industries` (`companyId`,`industryId`) VALUES 
  (1,2),
  (1,3),
- (1,7),
+ (1,4),
  (2,1),
- (2,2);
+ (2,2),
+ (2,11),
+ (2,12),
+ (2,13),
+ (2,27),
+ (2,28),
+ (2,29);
 /*!40000 ALTER TABLE `tbl_companies_industries` ENABLE KEYS */;
 
 
@@ -198,9 +209,13 @@ CREATE TABLE `tbl_companies_sapsolution` (
 INSERT INTO `tbl_companies_sapsolution` (`companyId`,`sapsolutionId`) VALUES 
  (1,1),
  (1,2),
+ (1,3),
  (2,1),
  (2,2),
- (2,3);
+ (2,3),
+ (4,4),
+ (4,6),
+ (4,7);
 /*!40000 ALTER TABLE `tbl_companies_sapsolution` ENABLE KEYS */;
 
 
@@ -235,8 +250,8 @@ CREATE TABLE `tbl_company` (
 
 /*!40000 ALTER TABLE `tbl_company` DISABLE KEYS */;
 INSERT INTO `tbl_company` (`companyId`,`companyName`,`description`,`partnerNumber`,`friendlySAP_site`,`web_site`,`adressId`,`noEmployees`,`parent_companyname`,`countryRegistrationId`,`partner_since`,`last_review_date`,`reviewed_By`,`date_created`,`date_updated`,`modified_by`) VALUES 
- (1,'Cunningham Blythe','Cunningham Blythe is a consultancy organisationthat advises small and medium enterprises on business management and technology best practise. We specialise in enabling fast growing companies to make best use of SAP solutions in support of their growth strategy and business aspirations.',810449,'http://cpsn-channel.sap.com/','www.sap.com',1,8,'SAP',2,2006,'2008-08-06 23:12:35','Andy Cunningham','2008-08-06 23:12:35','2008-08-06 23:12:35','Andy Cunningham'),
- (2,'The Createch Group','Dedicated in improving business performance, The Createch Group is a leader in supply chain optimization and information technology integration. The consulting firm offers services in manufacturing and logistics performance, process reengineering, asset management optimization, change management, ERP and information technology solution implementation. The Createch Group helps customers configure and implement their SAP business solution to match their unique requirements. With their extensive SAP knowledge, the Group?s consultants (who are all certified by the SAP Solution Academy) can also apply industry best practices to help customers maximize their performance across the enterprise.',318473,'http://cpsn-channel.sap.com/','www.accentway.com',2,200,'IBM',21,1998,'2008-08-05 23:12:00','Helene Gamache','2008-08-05 23:12:00','2008-08-05 23:12:00','Helene Gamache');
+ (1,'Cunningham Blythe','																								Cunningham Blythe is a consultancy organisationthat advises small and medium enterprises on business management and technology best practise. We specialise in enabling fast growing companies to make best use of SAP solutions in support of their growth strategy and business aspirations.\r\n			\r\n			\r\n			\r\n			\r\n			\r\n			\r\n			\r\n			\r\n			\r\n			',810449,'http://cpsn-channel.sap.com/','www.myWebSite.ro',1,250,'SAP',26,2006,'2008-09-03 00:00:00','Jhon MKcanzie','2008-09-03 00:00:00','2008-08-31 00:00:00',NULL),
+ (2,'The Createch Group','												Dedicated in improving business performance, The Createch Group is a leader in supply chain optimization and information technology integration. The consulting firm offers services in manufacturing and logistics performance, process reengineering, asset management optimization, change management, ERP and information technology solution implementation. The Createch Group helps customers configure and implement their SAP business solution to match their unique requirements. With their extensive SAP knowledge, the Group?s consultants (who are all certified by the SAP Solution Academy) can also apply industry best practices to help customers maximize their performance across the enterprise.\r\n			\r\n			\r\n			\r\n			\r\n			\r\n			\r\n			\r\n			\r\n			',318473,'http://cpsn-channel.sap.com/','www.accentway.com',2,200,'IBM',21,1998,'2008-08-12 00:00:00','Helene Gamache','2008-08-12 00:00:00','2008-08-31 00:00:00',NULL);
 /*!40000 ALTER TABLE `tbl_company` ENABLE KEYS */;
 
 
@@ -741,7 +756,7 @@ INSERT INTO `tbl_industry_microvertical` (`industry_name`,`microvertical_name`,`
 
 DROP TABLE IF EXISTS `tbl_phone`;
 CREATE TABLE `tbl_phone` (
-  `phoneId` bigint(20) NOT NULL,
+  `phoneId` bigint(20) NOT NULL auto_increment,
   `companyId` bigint(20) default NULL,
   `userId` bigint(20) default NULL,
   `userName` varchar(75) default NULL,
@@ -753,7 +768,7 @@ CREATE TABLE `tbl_phone` (
   PRIMARY KEY  (`phoneId`),
   KEY `IX_9F704A14` (`companyId`),
   KEY `IX_F202B9CE` (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_phone`
@@ -763,8 +778,11 @@ CREATE TABLE `tbl_phone` (
 INSERT INTO `tbl_phone` (`phoneId`,`companyId`,`userId`,`userName`,`createDate`,`modifiedDate`,`number_`,`extension`,`typeId`) VALUES 
  (1,1,NULL,NULL,NULL,NULL,'123233 3231','122',NULL),
  (2,1,NULL,NULL,NULL,NULL,'444 4324 2423','22',NULL),
- (3,NULL,NULL,NULL,NULL,NULL,'','23',NULL),
- (4,NULL,NULL,NULL,NULL,NULL,'213 2133 ','11',NULL);
+ (3,NULL,NULL,NULL,NULL,NULL,'123123123','23',NULL),
+ (4,NULL,NULL,NULL,NULL,NULL,'213 2133 ','11',NULL),
+ (5,NULL,NULL,NULL,NULL,NULL,'123 321',NULL,1),
+ (6,NULL,NULL,NULL,NULL,NULL,'111111111',NULL,2),
+ (7,NULL,NULL,NULL,NULL,NULL,'22222222',NULL,2);
 /*!40000 ALTER TABLE `tbl_phone` ENABLE KEYS */;
 
 
