@@ -28,6 +28,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,6 +128,45 @@ public class AdressItemDAO {
 		return adressItem;
 	}
 
+	public static AdressItem getAdressItemByCompId(int id) throws SQLException {
+		AdressItem adressItem = null;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_ADRESS_ITEM_BY_COMPANY_ID);
+
+			ps.setInt(1, id);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				adressItem = new AdressItem();
+
+				adressItem.setId(rs.getInt(1));
+				adressItem.setCompanyId(rs.getInt(2));
+				adressItem.setUserId(rs.getInt(3));
+				adressItem.setStreet1(rs.getString(4));
+				adressItem.setStreet2(rs.getString(5));
+				adressItem.setCity(rs.getString(6));
+				adressItem.setZip(rs.getString(7));
+				adressItem.setStateregionname(rs.getString(8));
+				adressItem.setCountryId(rs.getInt(9));
+				adressItem.setPhoneId(rs.getInt(10));
+				adressItem.setFaxId(rs.getInt(11));
+				adressItem.setMail(rs.getString(12));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return adressItem;
+	}	
 	public static List getAdressItems() throws SQLException {
 		List list = new ArrayList();
 
@@ -247,6 +287,122 @@ public class AdressItemDAO {
 
 		return phone;
 	}
+
+	public static void updatePhoneItem(AdressItem adressItem, String phone, int type ) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionPool.getConnection();
+
+			if(type == 1)//phone			
+			{
+				if(adressItem.getPhoneId() >0) // do update
+				{
+					ps = con.prepareStatement(_UPDATE_PHONE);
+					ps.setString(1, phone);
+					ps.setInt(2, adressItem.getPhoneId());		
+					ps.executeUpdate();
+				}
+				else
+				{
+					//
+					// Insert one row that will generate an AUTO INCREMENT
+					// key in the 'priKey' field
+					//
+					stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
+		                       java.sql.ResultSet.CONCUR_UPDATABLE);
+					stmt.executeUpdate(
+				   "INSERT INTO tbl_phone (number_, typeId) "
+				   + "values (" + phone + ", "+ type +")",
+				   Statement.RETURN_GENERATED_KEYS);
+			
+					//
+					// Example of using Statement.getGeneratedKeys()
+					// to retrieve the value of an auto-increment
+					// value
+					//
+					int autoIncKeyFromApi = -1;
+					
+					rs = stmt.getGeneratedKeys();
+				
+					if (rs.next()) {
+					autoIncKeyFromApi = rs.getInt(1);
+					} else {
+					// throw an exception from here
+						}
+					if(autoIncKeyFromApi > 0)
+						adressItem.setPhoneId(autoIncKeyFromApi);
+						
+					rs.close();
+					rs = null;
+				}
+			}
+			else //fax
+			{
+				if(adressItem.getFaxId() >0) // do update
+				{
+					ps = con.prepareStatement(_UPDATE_PHONE);
+					ps.setString(1, phone);
+					ps.setInt(2, adressItem.getFaxId());		
+					ps.executeUpdate();
+				}
+				else
+				{
+					//
+					// Insert one row that will generate an AUTO INCREMENT
+					// key in the 'priKey' field
+					//
+					stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
+		                       java.sql.ResultSet.CONCUR_UPDATABLE);
+					stmt.executeUpdate(
+				   "INSERT INTO tbl_phone (number_, typeId) "
+				   + "values (" + phone + ", "+ type +")",
+				   Statement.RETURN_GENERATED_KEYS);
+			
+					//
+					// Example of using Statement.getGeneratedKeys()
+					// to retrieve the value of an auto-increment
+					// value
+					//
+					int autoIncKeyFromApi = -1;
+					rs = stmt.getGeneratedKeys();
+				
+					if (rs.next()) {
+					autoIncKeyFromApi = rs.getInt(1);
+					} else {
+					// throw an exception from here
+						}
+					if(autoIncKeyFromApi > 0)
+						adressItem.setFaxId(autoIncKeyFromApi);
+						
+					rs.close();
+					rs = null;
+				}
+			}
+		}
+		finally {
+		    if (rs != null) {
+		        try {
+		            rs.close();
+		        } catch (SQLException ex) {
+		            // ignore
+		        }
+		    }
+
+		    if (stmt != null) {
+		        try {
+		            stmt.close();
+		        } catch (SQLException ex) {
+		            // ignore
+		        }
+		    }
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+	}
+	
 	
 	private static final String _ADD_ADRESS_ITEM =
 		"INSERT INTO tbl_adress (companyId, userId, street1, street2, city, zip, stateregionname, countryId, phoneId, faxId, mail ) " +
@@ -268,5 +424,15 @@ public class AdressItemDAO {
 		"SELECT number_ FROM tbl_phone WHERE phoneId = ?";	
 	
 	private static final String _GET_FAX =
-		"SELECT number_ FROM tbl_phone WHERE phoneId = ?";	
+		"SELECT number_ FROM tbl_phone WHERE phoneId = ?";
+
+	private static final String _UPDATE_PHONE =
+		"UPDATE tbl_phone SET number_ = ? WHERE phoneId = ?";	
+
+	private static final String _ADD_PHONE =
+		"INSERT INTO tbl_phone (number_, typeId) VALUES (?, ?)";
+
+	private static final String _GET_ADRESS_ITEM_BY_COMPANY_ID =
+		"SELECT adressId, companyId, userId, street1, street2, city, zip, stateregionname, countryId, phoneId, faxId, mail FROM tbl_adress WHERE companyId = ?";
+	
 }

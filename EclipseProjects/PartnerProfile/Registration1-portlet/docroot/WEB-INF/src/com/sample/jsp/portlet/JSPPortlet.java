@@ -26,6 +26,11 @@ import com.sample.registration.model.UserItem;
 import com.sample.registration.model.UserItemDAO;
 import com.sample.registration.model.CompanyItem;
 import com.sample.registration.model.CompanyItemDAO;
+import com.sample.registration.model.CompanyUtil;
+import com.sample.registration.model.CountryItem;
+import com.sample.registration.model.CountryItemDAO;
+import com.sample.registration.model.AdressItem;
+import com.sample.registration.model.AdressItemDAO;
 import com.sample.registration.util.ConnectionPool;
 
 import java.io.IOException;
@@ -84,7 +89,9 @@ public class JSPPortlet extends GenericPortlet {
 		String userWorkPhone = req.getParameter("telefax_user");
 		// company related
 		String partnerDescription = req.getParameter("partnerDescription");
-		int partnerNumber = Integer.parseInt(req.getParameter("partnerNumber"));
+		int partnerNumber = 1;
+		if(req.getParameter("partnerNumber") != null)
+			partnerNumber = Integer.parseInt(req.getParameter("partnerNumber"));
 		String telephone = req.getParameter("telephone");
 		String telefax = req.getParameter("telefax");
 		String mail = req.getParameter("mail");
@@ -99,25 +106,22 @@ public class JSPPortlet extends GenericPortlet {
 		String noemployees = req.getParameter("noemployees");
 		String geographic_coverage = req.getParameter("geographic_coverage");
 		String parent_company_name = req.getParameter("parent_company_name");
-		String country_parent_company = req
-				.getParameter("country_parent_company");
-		String channel_partner_since = req
-				.getParameter("channel_partner_since");
-		String primary_business_type = req
-				.getParameter("primary_business_type");
-		String secondary_business_type = req
-				.getParameter("secondary_business_type");
+		String country_parent_company = req.getParameter("country_parent_company");
+		String channel_partner_since = req.getParameter("channel_partner_since");
+		String primary_business_type = req.getParameter("primary_business_type");
+		String secondary_business_type = req.getParameter("secondary_business_type");
 		String sap_solution_focus = req.getParameter("sap_solution_focus");
-		String industry = req.getParameter("industry");
-		String industry_micro_vertical_focus = req
-				.getParameter("industry_micro_vertical_focus");
+		String industry_micro_vertical_focus = req.getParameter("industry_micro_vertical_focus");
 
 		String last_review_Date = req.getParameter("last_review_Date");
 		String reviewed_by = req.getParameter("reviewed_by");
-		String profile_added = req.getParameter("profile_added");
-		String date_updated = req.getParameter("date_updated");
+		String profile_added = "" ;//req.getParameter("profile_added");
+		String date_updated = "";//req.getParameter("date_updated");
 		String modified_by = req.getParameter("modified_by");
-
+	    String[] SAPitems = req.getParameterValues("sap_solution_focus");
+		String[] industry = req.getParameterValues("industry");
+		String[] countryCoverage = req.getParameterValues("country_coverage");
+	    
 		try {
 			if (command.equals("add")) {
 				// user
@@ -135,13 +139,14 @@ public class JSPPortlet extends GenericPortlet {
 				companyItem.setParentCompanyName(parent_company_name);
 				companyItem.setYear(Integer.parseInt(channel_partner_since));
 
-				DateFormat df = DateFormat.getDateInstance();
-
-				Date date = new Date();
-				try{date = df.parse(last_review_Date);
-				} catch (ParseException ex){
-				}
+/*				DateFormat df = DateFormat.getDateInstance();
 				
+				Date dateTmp = new Date();
+				if(last_review_Date != null && !last_review_Date.isEmpty())
+				{
+					try{dateTmp = df.parse(last_review_Date);
+					} catch (ParseException ex){}
+				}
 				companyItem.setDateLastReview(date);
 				companyItem.setReviewedBy(reviewed_by);
 				try{date = df.parse(profile_added);
@@ -151,7 +156,7 @@ public class JSPPortlet extends GenericPortlet {
 				} catch (ParseException ex){}
 				companyItem.setDateUpdated(date);
 				companyItem.setModifiedBy(modified_by);
-
+*/
 				CompanyItemDAO.addCompanyItem(companyItem);
 
 				/*
@@ -182,18 +187,6 @@ public class JSPPortlet extends GenericPortlet {
 			} else if (command.equals("edit")) {
 				//user
 				CompanyItem companyItem = CompanyItemDAO.getCompanyItem(id);
-				if(userId >0)
-				{
-					UserItem userItem = UserItemDAO.getUserItem(userId);
-		
-					userItem.setName(name);
-					userItem.setUserLastName(userLastName);
-					userItem.setUserCompanyName(userCompanyName);
-					userItem.setUserPosition(userPositionCompany);
-					userItem.setUserMobilePhone(userMobilePhone);
-					userItem.setUserWorkPhone(userWorkPhone);
-					UserItemDAO.updateUserItem(userItem);
-				}
 
 				companyItem.setName(userCompanyName);
 				companyItem.setDescription(partnerDescription);
@@ -203,6 +196,12 @@ public class JSPPortlet extends GenericPortlet {
 				companyItem.setCompanyEmpNo(Integer.parseInt(noemployees));
 				companyItem.setParentCompanyName(parent_company_name);
 				companyItem.setYear(Integer.parseInt(channel_partner_since));
+				if (country_parent_company != "")
+				{
+					CountryItem countryItemTemp = CountryItemDAO.getCountryItemByName(country_parent_company);
+					if(countryItemTemp != null)
+						companyItem.setCountryRegistrationId(countryItemTemp.getId());
+				}
 
 				DateFormat df = DateFormat.getDateInstance();
 
@@ -210,18 +209,79 @@ public class JSPPortlet extends GenericPortlet {
 				try {date = df.parse(last_review_Date);
 				} catch(ParseException ex){
 				}
-				companyItem.setDateLastReview(date);
-				companyItem.setReviewedBy(reviewed_by);
+				/*companyItem.setDateLastReview(date);
 				try {date = df.parse(profile_added);
 				}catch (ParseException ex){
 				}
-				companyItem.setDateCreated(date);
-				try {date = df.parse(date_updated);
-				}catch(ParseException ex){
-				}
-				companyItem.setDateUpdated(date);
+				companyItem.setDateCreated(date);*/
+				
+				companyItem.setDateUpdated(new Date());
+				companyItem.setReviewedBy(reviewed_by);
 				companyItem.setModifiedBy(modified_by);
 				CompanyItemDAO.updateCompanyItem(companyItem);
+				// update childs
+				//1 . adress + phone
+				int adressId = companyItem.getAdressId();
+				AdressItem adressItem = null;
+				boolean bIsNew = false;  
+				if(adressId > 0 )
+				{
+					adressItem = AdressItemDAO.getAdressItem(adressId);
+				}
+				else
+				{
+					adressItem = new AdressItem();
+					bIsNew = true;
+				}
+				if(adressItem != null)
+				{
+					adressItem.setCompanyId(id);
+					adressItem.setStreet1(street1);
+					adressItem.setStreet1(street2);
+					adressItem.setCity(city);
+					adressItem.setZip(zipcode);
+					adressItem.setStateregionname(state_province);
+					adressItem.setMail(mail);
+					// countryId
+					if (country != "")
+					{
+						CountryItem countryItemTemp = CountryItemDAO.getCountryItemByName(country);
+						adressItem.setCountryId(countryItemTemp.getId());
+					}
+						
+					if(bIsNew)
+					{
+						AdressItemDAO.addAdressItem(adressItem);
+						adressItem = AdressItemDAO.getAdressItemByCompId(id);
+					}
+					if(telephone != "")
+						AdressItemDAO.updatePhoneItem(adressItem, telephone, 1);
+					if(telefax != "")
+						AdressItemDAO.updatePhoneItem(adressItem, telefax, 2);
+					AdressItemDAO.updateAdressItem(adressItem);
+				}
+				//2 . SAP solution focus
+		        for(int loopIndex = 0; loopIndex < SAPitems.length; loopIndex++){
+		            System.out.println(SAPitems[loopIndex]);
+		            }
+	            CompanyUtil.updateCompanySAPSolutionList(companyItem, SAPitems);
+	            // 3. Industry
+		        for(int loopIndex = 0; loopIndex < industry.length; loopIndex++){
+		            System.out.println(industry[loopIndex]);
+		            }
+	            CompanyUtil.updateCompanyIndustriesList(companyItem, industry);
+	            //4. primary business type -- primary_business_type
+	            System.out.println(primary_business_type);
+	            CompanyUtil.updateBusinessType(companyItem, primary_business_type, 1);
+	            //5. secondary business type - secondary_business_type
+	            System.out.println(secondary_business_type);
+	            CompanyUtil.updateBusinessType(companyItem, secondary_business_type, 2);
+	            //6. country coverage
+		        for(int loopIndex = 0; loopIndex < countryCoverage.length; loopIndex++){
+		            System.out.println(countryCoverage[loopIndex]);
+		            }
+	            CompanyUtil.updateCompanyCountryCoverage(companyItem, countryCoverage);
+				
 			} else if (command.equals("delete")) {
 				CompanyItemDAO.deleteCompanyItem(id);
 			}

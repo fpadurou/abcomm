@@ -49,33 +49,9 @@
 <portlet:defineObjects />
 
 <script type="text/javascript">
-function validateForm(compprofile)
-{
-
-if(""==document.forms.compprofile.userCompanyName.value)
-{
-alert("Please enter your full name.");
-return false;
-}else
-{alert("E bine.");
-}return true;
-}
-
-if(""==document.forms.compprofile.email.value)
-{
-alert("Please enter your email address.");
-return false;
-}
-
-if(""==document.forms.compprofile.phoneNum.value)
-{
-alert("Please enter your phone number.");
-return false;
-}
-
-}
 </script>
-<form action="<portlet:actionURL />" method="post" name="compprofile" onSubmit="return validateForm(compprofile);">
+
+<form action="<portlet:actionURL />" method="post" name="compprofile">
 
 <%
 DateFormat dateFormatDateTime = DateFormat.getDateInstance();
@@ -123,7 +99,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	String state_province_user = "";	
 	String country_user = "";
     String noemployees = "" ;
-    String geographic_coverage = ""; 	
+    List geographic_coverage = null; 	
     String parent_company_name = ""; 
     String country_parent_company = ""; 
     String channel_partner_since = ""; 
@@ -147,26 +123,6 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 			userId = userItem.getId();
 			first_name = userItem.getName();
 			last_name = userItem.getUserLastName();
-			userCompanyName = userItem.getUserCompanyName();
-			userPositionCompany = userItem.getUserPosition();
-			telephone_user = userItem.getUserMobilePhone();
-			telefax_user = userItem.getUserWorkPhone();
-			int adressId = userItem.getAdressId();
-			int countryId = 0;
-			
-			if(adressId>0)
-			{
-				adressUserItem = AdressItemDAO.getAdressItem(adressId);
-				mail_user= adressUserItem.getMail();	
-				street1_user = adressUserItem.getStreet1();	
-				street2_user = adressUserItem.getStreet2();	
-				zipcode_user = adressUserItem.getZip();	
-				city_user = adressUserItem.getCity();	
-				state_province_user = adressUserItem.getStateregionname();
-				countryId = adressUserItem.getCountryId();
-			}	
-			if(countryId > 0)
-				country_user = CountryItemDAO.getCountryItem(countryId).getCountryName();
 		}
 		else
 		{
@@ -180,14 +136,15 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		partnerNumber = companyItem.getCompanyNo(); 
 	    parent_company_name = companyItem.getParentCompanyName(); 
 	    channel_partner_since = String.valueOf(companyItem.getYear()); 
-		micrositeAdress = companyItem.getCompanyFriendlySite(); 
+		micrositeAdress = companyItem.getCompanyFriendlySite();
 		company_website = companyItem.getCompanySite();
 	    noemployees = String.valueOf(companyItem.getCompanyEmpNo());
 	    last_review_Date = String.valueOf(dateFormatDateTime.format(companyItem.getDateLastReview())); 	
 	    reviewed_by = companyItem.getReviewedBy(); 
 	    profile_added = String.valueOf(dateFormatDateTime.format(companyItem.getDateCreated())); 
-	    date_updated = String.valueOf(dateFormatDateTime.format(companyItem.getDateUpdated()));; 
-	    modified_by = companyItem.getModifiedBy(); 		
+	    date_updated = String.valueOf(dateFormatDateTime.format(companyItem.getDateUpdated())); 
+	    modified_by = companyItem.getModifiedBy();
+	     		
 // get the adress item
 		AdressItem adressCompanyItem = null;
 		int adressId = companyItem.getAdressId();
@@ -214,17 +171,20 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	    sap_solution_focus = CompanyUtil.getCompanySAPSolutionList(companyItem);
 	    industry = CompanyUtil.getCompanyIndustries(id);
 
-	    geographic_coverage = "";
+	    geographic_coverage = CompanyUtil.getCompanyCountryCoverage(companyItem);
 	    primary_business_type = CompanyUtil.getCompanyBusinessSolution(id, 1); 	
 	    secondary_business_type	= CompanyUtil.getCompanyBusinessSolution(id, 2);
-		
+	
+	}
+	else  //add
+	{
+	
 	}
 %>
 <script type="text/javascript">
 </script>
 	<input name="command" type="hidden" value="<%= command %>">
 	<input name="id" type="hidden" value="<%= id %>">
-	<input name="userId" type="hidden" value="<%= userId %>">
 
 	<table class="lfr-table">
 
@@ -260,7 +220,9 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="partnerDescription" type="text" value="<%= partnerDescription %>">
+			<TEXTAREA rows="4" cols= "60" input class="form-text" name="partnerDescription" align = left>
+			<%= partnerDescription %>
+			</TEXTAREA>
 		</td>
 	</tr>
 	<tr>
@@ -423,10 +385,10 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                     //Construct the option tag in a String variable
                     String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                    //if(optionCategoryValue.equals(userSelectedCategory))
-                    //{
-                    //    optionTag += " selected=\"selected\"";
-                    //}
+                    if((geographic_coverage != null) && (geographic_coverage.contains(optionCategoryValue)))
+                    {
+                        optionTag += " selected=\"selected\"";
+                    }
                     
                     //close the option tag
                     optionTag += ">" + optionCategoryValue + "</OPTION>";
@@ -579,7 +541,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                 //Construct the option tag in a String variable
                 String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                if(sap_solution_focus.contains(optionCategoryValue))
+                if((sap_solution_focus != null) &&  (sap_solution_focus.contains(optionCategoryValue)))
                 {
                     optionTag += " selected=\"selected\"";
                 }
@@ -613,7 +575,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                 //Construct the option tag in a String variable
                 String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                if(industry.contains(optionCategoryValue))
+                if(industry != null && industry.contains(optionCategoryValue))
                 {
                     optionTag += " selected=\"selected\"";
                 }
