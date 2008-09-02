@@ -153,7 +153,6 @@ public class JSPPortlet extends GenericPortlet {
 					try{
 						tempDate = df.parse(last_review_Date);
 						String value = tempDate.toString();
-						System.out.println(value);
 						companyItem.setDateLastReview(tempDate);
 					} catch (ParseException ex){}
 				}
@@ -164,9 +163,9 @@ public class JSPPortlet extends GenericPortlet {
 				CompanyItemDAO.addCompanyItem(companyItem);
 
 				int adressId = companyItem.getAdressId();
+				int compAddedId = companyItem.getAdressId();
 				AdressItem adressItem = null;
-				boolean bIsNew = false;  
-				if(adressId < 0 )
+				if(adressId <= 0 )
 				{
 					adressItem = new AdressItem();
 					adressItem.setCompanyId(companyItem.getId());
@@ -182,8 +181,6 @@ public class JSPPortlet extends GenericPortlet {
 						CountryItem countryItemTemp = CountryItemDAO.getCountryItemByName(country);
 						adressItem.setCountryId(countryItemTemp.getId());
 					}
-						
-
 					AdressItemDAO.addAdressItem(adressItem);
 
 					if(telephone != "")
@@ -192,6 +189,38 @@ public class JSPPortlet extends GenericPortlet {
 						AdressItemDAO.updatePhoneItem(adressItem, telefax, 2);
 					AdressItemDAO.updateAdressItem(adressItem);
 				}
+
+				//2 . SAP solution focus
+				if(SAPitems != null)
+		        {
+					for(int loopIndex = 0; loopIndex < SAPitems.length; loopIndex++){
+		            System.out.println(SAPitems[loopIndex]);
+		            }
+		        }
+	            CompanyUtil.updateCompanySAPSolutionList(companyItem, SAPitems);
+	            // 3. Industry
+	            if(industry != null)
+		        {
+	            	for(int loopIndex = 0; loopIndex < industry.length; loopIndex++){
+		            System.out.println(industry[loopIndex]);
+		            }
+		        }
+	            CompanyUtil.updateCompanyIndustriesList(companyItem, industry);
+	            //4. primary business type -- primary_business_type
+	            if(primary_business_type != null)
+	            	CompanyUtil.updateBusinessType(companyItem, primary_business_type, 1);
+	            //5. secondary business type - secondary_business_type
+	            if(secondary_business_type != null)
+	            	CompanyUtil.updateBusinessType(companyItem, secondary_business_type, 2);
+	            //6. country coverage
+
+	            if(countryCoverage != null)
+		        {
+	            	for(int loopIndex = 0; loopIndex < countryCoverage.length; loopIndex++){
+	            		System.out.println(countryCoverage[loopIndex]);
+		            }
+		        }
+	            CompanyUtil.updateCompanyCountryCoverage(companyItem, countryCoverage);				
 				
 			} else if (command.equals("edit")) {
 				//user
@@ -223,11 +252,10 @@ public class JSPPortlet extends GenericPortlet {
 				}catch (ParseException ex){
 				}
 				companyItem.setDateCreated(date);*/
-				
 				companyItem.setDateUpdated(new Date());
 				companyItem.setReviewedBy(reviewed_by);
 				companyItem.setModifiedBy(modified_by);
-				CompanyItemDAO.updateCompanyItem(companyItem);
+	            
 				// update childs
 				//1 . adress + phone
 				int adressId = companyItem.getAdressId();
@@ -246,7 +274,7 @@ public class JSPPortlet extends GenericPortlet {
 				{
 					adressItem.setCompanyId(id);
 					adressItem.setStreet1(street1);
-					adressItem.setStreet1(street2);
+					adressItem.setStreet2(street2);
 					adressItem.setCity(city);
 					adressItem.setZip(zipcode);
 					adressItem.setStateregionname(state_province);
@@ -261,7 +289,7 @@ public class JSPPortlet extends GenericPortlet {
 					if(bIsNew)
 					{
 						AdressItemDAO.addAdressItem(adressItem);
-						adressItem = AdressItemDAO.getAdressItemByCompId(id);
+						companyItem.setAdressId(adressItem.getId());
 					}
 					if(telephone != "")
 						AdressItemDAO.updatePhoneItem(adressItem, telephone, 1);
@@ -269,28 +297,40 @@ public class JSPPortlet extends GenericPortlet {
 						AdressItemDAO.updatePhoneItem(adressItem, telefax, 2);
 					AdressItemDAO.updateAdressItem(adressItem);
 				}
+				// Do update in main table
+				CompanyItemDAO.updateCompanyItem(companyItem);
+
 				//2 . SAP solution focus
-		        for(int loopIndex = 0; loopIndex < SAPitems.length; loopIndex++){
+				if(SAPitems != null)
+		        {
+					for(int loopIndex = 0; loopIndex < SAPitems.length; loopIndex++){
 		            System.out.println(SAPitems[loopIndex]);
 		            }
+		        }
 	            CompanyUtil.updateCompanySAPSolutionList(companyItem, SAPitems);
 	            // 3. Industry
-		        for(int loopIndex = 0; loopIndex < industry.length; loopIndex++){
+	            if(industry != null)
+		        {
+	            	for(int loopIndex = 0; loopIndex < industry.length; loopIndex++){
 		            System.out.println(industry[loopIndex]);
 		            }
+		        }
 	            CompanyUtil.updateCompanyIndustriesList(companyItem, industry);
 	            //4. primary business type -- primary_business_type
-	            System.out.println(primary_business_type);
-	            CompanyUtil.updateBusinessType(companyItem, primary_business_type, 1);
+	            if(primary_business_type != null)
+	            	CompanyUtil.updateBusinessType(companyItem, primary_business_type, 1);
 	            //5. secondary business type - secondary_business_type
-	            System.out.println(secondary_business_type);
-	            CompanyUtil.updateBusinessType(companyItem, secondary_business_type, 2);
+	            if(secondary_business_type != null)
+	            	CompanyUtil.updateBusinessType(companyItem, secondary_business_type, 2);
 	            //6. country coverage
-		        for(int loopIndex = 0; loopIndex < countryCoverage.length; loopIndex++){
-		            System.out.println(countryCoverage[loopIndex]);
+
+	            if(countryCoverage != null)
+		        {
+	            	for(int loopIndex = 0; loopIndex < countryCoverage.length; loopIndex++){
+	            		System.out.println(countryCoverage[loopIndex]);
 		            }
+		        }
 	            CompanyUtil.updateCompanyCountryCoverage(companyItem, countryCoverage);
-				
 			} else if (command.equals("delete")) {
 				CompanyItemDAO.deleteCompanyItem(id);
 			}

@@ -189,8 +189,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	
 	}
 %>
-<script type="text/javascript">
-</script>
+
 	<input name="command" type="hidden" value="<%= command %>">
 	<input name="id" type="hidden" value="<%= id %>">
 

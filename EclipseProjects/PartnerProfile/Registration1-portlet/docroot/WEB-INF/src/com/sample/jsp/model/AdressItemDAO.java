@@ -49,25 +49,44 @@ public class AdressItemDAO {
 		
 		try {
 			con = ConnectionPool.getConnection();
-
 			ps = con.prepareStatement(_ADD_ADRESS_ITEM, Statement.RETURN_GENERATED_KEYS);
 
-			ps.setInt(1, adressItem.getCompanyId());
-			ps.setInt(2, adressItem.getUserId());
+			if(adressItem.getCompanyId()>0)
+				ps.setInt(1, adressItem.getCompanyId());
+			else
+				ps.setInt(1, -1);
+			if(adressItem.getUserId() > 0)
+				ps.setInt(2, adressItem.getUserId());
+			else
+				ps.setInt(2, -1);
+			System.out.println("pune date1!");
+				
 			ps.setString(3, adressItem.getStreet1());
 			ps.setString(4, adressItem.getStreet2());
 			ps.setString(5, adressItem.getCity());
 			ps.setString(6, adressItem.getZip());
 			ps.setString(7, adressItem.getStateregionname());
-			ps.setInt(8, adressItem.getCountryId());
-			ps.setInt(9, adressItem.getPhoneId());
-			ps.setInt(10, adressItem.getFaxId());
+			System.out.println("pune date2!");
+			if(adressItem.getCountryId() > 0)
+				ps.setInt(8, adressItem.getCountryId());
+			else
+				ps.setInt(8, -1);
+			if(adressItem.getPhoneId()>0)
+				ps.setInt(9, adressItem.getPhoneId());
+			else
+				ps.setInt(9, -1);
+			if(adressItem.getFaxId() >0)
+				ps.setInt(10, adressItem.getFaxId());
+			else
+				ps.setInt(10, -1);
 			ps.setString(11, adressItem.getMail());
-
+			System.out.println("face add adress!");
 			ps.executeUpdate();
 			// get the primary key;
 			int autoIncKeyFromApi = -1;
+			System.out.println("ps.getGeneratedKeys();");
 			rs = ps.getGeneratedKeys();
+			System.out.println("a facut ps.getGeneratedKeys();");
 		
 			if (rs.next()) {
 			autoIncKeyFromApi = rs.getInt(1);

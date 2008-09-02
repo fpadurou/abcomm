@@ -272,7 +272,8 @@ public class CompanyUtil {
 			ps = con.prepareStatement(_DELETE_COMPANY_SAP_SOLUTIONS);
 			ps.setInt(1, companyId);
 			ps.executeUpdate();
-
+			if(selectedArray != null)
+			{
 			// add new values
 			String querry = "INSERT INTO tbl_companies_sapsolution (companyId, sapsolutionId) values ";
 				
@@ -300,6 +301,7 @@ public class CompanyUtil {
 			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
                     java.sql.ResultSet.CONCUR_UPDATABLE);
 			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
+			}
 		}
 		finally {
 		    if (stmt != null) {
@@ -335,7 +337,8 @@ public class CompanyUtil {
 			ps = con.prepareStatement(_DELETE_COMPANY_INDUSTRIES);
 			ps.setInt(1, companyId);
 			ps.executeUpdate();
-
+			if(selectedArray != null)
+			{
 			// add new values
 			String querry = "INSERT INTO tbl_companies_industries (companyId, industryId) values ";
 				
@@ -359,10 +362,10 @@ public class CompanyUtil {
 					}
 				}
 			}
-			System.out.println(querry);
 			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
                     java.sql.ResultSet.CONCUR_UPDATABLE);
 			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
+			}
 		}
 		finally {
 		    if (stmt != null) {
@@ -450,34 +453,36 @@ public class CompanyUtil {
 			ps = con.prepareStatement(_DELETE_COMPANY_COVERAGE);
 			ps.setInt(1, companyId);
 			ps.executeUpdate();
-
-			// add new values
-			String querry = "INSERT INTO tbl_companies_coverage (companyId, countryId) values ";
-				
-			boolean bFirst = true;
-			for(int i = 0; i<selectedArray.length; i++ )
+			if(selectedArray != null)
 			{
-				String value = (String)selectedArray[i];
-				for(int j = 0; j<countries.size();j++)
+				// add new values
+				String querry = "INSERT INTO tbl_companies_coverage (companyId, countryId) values ";
+					
+				boolean bFirst = true;
+				for(int i = 0; i<selectedArray.length; i++ )
 				{
-					if(value.equalsIgnoreCase(((CountryItem)countries.get(j)).getCountryName()))
+					String value = (String)selectedArray[i];
+					for(int j = 0; j<countries.size();j++)
 					{
-						if(!bFirst)
+						if(value.equalsIgnoreCase(((CountryItem)countries.get(j)).getCountryName()))
 						{
-							querry +=", ";
-						}
-						querry += "(" + companyId + ", "+ ((CountryItem)countries.get(j)).getId() +")";
-						if(bFirst)
-						{
-							bFirst = false;
+							if(!bFirst)
+							{
+								querry +=", ";
+							}
+							querry += "(" + companyId + ", "+ ((CountryItem)countries.get(j)).getId() +")";
+							if(bFirst)
+							{
+								bFirst = false;
+							}
 						}
 					}
 				}
+				System.out.println(querry);
+				stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
+	                    java.sql.ResultSet.CONCUR_UPDATABLE);
+				stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
 			}
-			System.out.println(querry);
-			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
-                    java.sql.ResultSet.CONCUR_UPDATABLE);
-			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
 		}
 		finally {
 		    if (stmt != null) {
