@@ -143,57 +143,56 @@ public class JSPPortlet extends GenericPortlet {
 				if(channel_partner_since != null && !channel_partner_since.isEmpty())
 					companyItem.setYear(Integer.parseInt(channel_partner_since));
 				Date tempDate = new Date();
-				String value = tempDate.toString();
-				System.out.println(value);
 				
 				companyItem.setDateUpdated(new Date());
 				companyItem.setDateLastReview(new Date());
 				companyItem.setDateUpdated(new Date());
 
-/*				
-				Date dateTmp = new Date();
 				if(last_review_Date != null && !last_review_Date.isEmpty())
 				{
-					try{dateTmp = df.parse(last_review_Date);
+					try{
+						tempDate = df.parse(last_review_Date);
+						String value = tempDate.toString();
+						System.out.println(value);
+						companyItem.setDateLastReview(tempDate);
 					} catch (ParseException ex){}
 				}
-				companyItem.setDateLastReview(date);
+				
 				companyItem.setReviewedBy(reviewed_by);
-				try{date = df.parse(profile_added);
-				} catch (ParseException ex){}
-				companyItem.setDateCreated(date);
-				try{date = df.parse(date_updated);
-				} catch (ParseException ex){}
-				companyItem.setDateUpdated(date);
 				companyItem.setModifiedBy(modified_by);
-*/
+
 				CompanyItemDAO.addCompanyItem(companyItem);
 
-				/*
-				 * String country_parent_company =
-				 * req.getParameter("country_parent_company"); String
-				 * geographic_coverage =
-				 * req.getParameter("geographic_coverage"); String
-				 * primary_business_type =
-				 * req.getParameter("primary_business_type"); String
-				 * secondary_business_type =
-				 * req.getParameter("secondary_business_type"); String
-				 * sap_solution_focus = req.getParameter("sap_solution_focus");
-				 * String industry = req.getParameter("industry"); String
-				 * industry_micro_vertical_focus =
-				 * req.getParameter("industry_micro_vertical_focus");
-				 * 
-				 * // company adress String telephone =
-				 * req.getParameter("telephone"); String telefax =
-				 * req.getParameter("telefax"); String mail =
-				 * req.getParameter("mail"); String street1 =
-				 * req.getParameter("street1"); String street2 =
-				 * req.getParameter("street2"); String zipcode =
-				 * req.getParameter("zipcode"); String city =
-				 * req.getParameter("city"); String state_province =
-				 * req.getParameter("state_province"); String country =
-				 * req.getParameter("country");
-				 */
+				int adressId = companyItem.getAdressId();
+				AdressItem adressItem = null;
+				boolean bIsNew = false;  
+				if(adressId < 0 )
+				{
+					adressItem = new AdressItem();
+					adressItem.setCompanyId(companyItem.getId());
+					adressItem.setStreet1(street1);
+					adressItem.setStreet1(street2);
+					adressItem.setCity(city);
+					adressItem.setZip(zipcode);
+					adressItem.setStateregionname(state_province);
+					adressItem.setMail(mail);
+					// countryId
+					if (country != "")
+					{
+						CountryItem countryItemTemp = CountryItemDAO.getCountryItemByName(country);
+						adressItem.setCountryId(countryItemTemp.getId());
+					}
+						
+
+					AdressItemDAO.addAdressItem(adressItem);
+
+					if(telephone != "")
+						AdressItemDAO.updatePhoneItem(adressItem, telephone, 1);
+					if(telefax != "")
+						AdressItemDAO.updatePhoneItem(adressItem, telefax, 2);
+					AdressItemDAO.updateAdressItem(adressItem);
+				}
+				
 			} else if (command.equals("edit")) {
 				//user
 				CompanyItem companyItem = CompanyItemDAO.getCompanyItem(id);

@@ -693,7 +693,15 @@ else {
 				<%= CompanyUtil.getCompanyIndustries(companyItem) %>
 			</td>
 			<td>
+				<% if (companyItem.getCompanyEmpNo() > 0){ 
+				%>
 				<%= companyItem.getCompanyEmpNo() %>
+				<%} else  {%>
+				<b></b>
+				<% 
+				} 
+				%>
+				
 			</td>
 			<td>
 				<%= CompanyUtil.getCompanyCountryName(companyItem) %>

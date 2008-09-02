@@ -45,11 +45,12 @@ public class AdressItemDAO {
 	public static void addAdressItem(AdressItem adressItem) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-
+		ResultSet rs =  null;
+		
 		try {
 			con = ConnectionPool.getConnection();
 
-			ps = con.prepareStatement(_ADD_ADRESS_ITEM);
+			ps = con.prepareStatement(_ADD_ADRESS_ITEM, Statement.RETURN_GENERATED_KEYS);
 
 			ps.setInt(1, adressItem.getCompanyId());
 			ps.setInt(2, adressItem.getUserId());
@@ -64,6 +65,19 @@ public class AdressItemDAO {
 			ps.setString(11, adressItem.getMail());
 
 			ps.executeUpdate();
+			// get the primary key;
+			int autoIncKeyFromApi = -1;
+			rs = ps.getGeneratedKeys();
+		
+			if (rs.next()) {
+			autoIncKeyFromApi = rs.getInt(1);
+			} else {
+			// throw an exception from here
+				}
+			if(autoIncKeyFromApi > 0)
+				adressItem.setId(autoIncKeyFromApi);
+			rs.close();
+			rs = null;				
 		}
 		finally {
 			ConnectionPool.cleanUp(con, ps);
