@@ -49,7 +49,7 @@ public class CompanyItemDAO {
 		try {
 			con = ConnectionPool.getConnection();
 
-			ps = con.prepareStatement(_ADD_COMPANY_ITEM);
+			ps = con.prepareStatement(_ADD_COMPANY_ITEM, Statement.RETURN_GENERATED_KEYS);
 
 			ps.setString(1, companyItem.getName());
 			ps.setString(2, companyItem.getDescription());
@@ -108,8 +108,22 @@ public class CompanyItemDAO {
 			ps.setString(13, companyItem.getReviewedBy());
 			ps.setString(14, companyItem.getModifiedBy());
 			ps.setString(15, companyItem.getCompanySite());
-			String value =  companyItem.getName() + companyItem.getDescription() ; 
 			ps.executeUpdate();
+			
+			// get the primary key;
+			int autoIncKeyFromApi = -1;
+			ResultSet rs = null;
+			rs = ps.getGeneratedKeys();
+		
+			if (rs.next()) {
+			autoIncKeyFromApi = rs.getInt(1);
+			} else {
+			// throw an exception from here
+				}
+			if(autoIncKeyFromApi > 0)
+				companyItem.setId(autoIncKeyFromApi);
+			rs.close();
+			rs = null;			
 		}
 		finally {
 			ConnectionPool.cleanUp(con, ps);
