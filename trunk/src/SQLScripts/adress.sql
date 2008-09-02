@@ -1,6 +1,6 @@
 ﻿DROP TABLE IF EXISTS tbl_adress;
 CREATE TABLE  tbl_adress (
-  `adressId` bigint(20) NOT NULL,
+  `adressId` bigint(20) NOT NULL auto_increment,
   `companyId` bigint(20) default NULL,
   `userId` bigint(20) default NULL,
   `userName` varchar(75) default NULL,

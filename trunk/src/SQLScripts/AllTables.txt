@@ -1,11 +1,12 @@
 1) User Table				use LR user table
-2) Company Profile			
-3) Company Profile details
+2) Company Profile			ok
+3) CompanyToindustries			ok
+4) CompanyToSapsolutions		ok
 4) Country 				ok
 5) regions				ok
 6) SAPsolutions				ok
 7) Industry				ok
-8) Industry microvertical		ok
-9) adress				ok
-10) phone/fax				ok
-11) businesstype 			ok
+8) adress				ok
+9) companycoverage 			ok
+10) businesstype 			ok
+11) countryregions			ok
