@@ -218,7 +218,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="userCompanyName" type="text" value="<%= userCompanyName %>">
+			<input class="form-text" size = 40 name="userCompanyName" type="text" value="<%= userCompanyName %>">
 		</td>
 	</tr>
 	<tr>
@@ -228,7 +228,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<TEXTAREA rows="4" cols= "60" input class="form-text" name="partnerDescription" align = left>
-			<%= partnerDescription %>
+			<%= partnerDescription.trim() %>
 			</TEXTAREA>
 		</td>
 	</tr>
@@ -238,7 +238,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="partnerNumber" type="text" value="<%= partnerNumber %>">
+			<input class="form-text" size = 40 name="partnerNumber" type="text" value="<%= partnerNumber %>">
 		</td>
 	</tr>
 	<tr>
@@ -247,7 +247,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="telephone" type="text" value="<%= telephone %>">
+			<input class="form-text" size = 40 name="telephone" type="text" value="<%= telephone %>">
 		</td>
 	</tr>
 	<tr>
@@ -256,7 +256,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="telefax" type="text" value="<%= telefax %>">
+			<input class="form-text" size = 40 name="telefax" type="text" value="<%= telefax %>">
 		</td>
 	</tr>
 	<tr>
@@ -265,7 +265,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="mail" type="text" value="<%= mail %>">
+			<input class="form-text" size = 40 name="mail" type="text" value="<%= mail %>">
 		</td>
 	</tr>
 	<tr>
@@ -274,7 +274,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="street1" type="text" value="<%= street1 %>">
+			<input class="form-text" size = 40 name="street1" type="text" value="<%= street1 %>">
 		</td>
 	</tr>
 	<tr>
@@ -283,7 +283,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="street2" type="text" value="<%= street2 %>">
+			<input class="form-text" size = 40 name="street2" type="text" value="<%= street2 %>">
 		</td>
 	</tr>
 	<tr>
@@ -292,7 +292,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="zipcode" type="text" value="<%= zipcode %>">
+			<input class="form-text" size = 40 name="zipcode" type="text" value="<%= zipcode %>">
 		</td>
 	</tr>
 	<tr>
@@ -301,7 +301,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="city" type="text" value="<%= city %>">
+			<input class="form-text" size = 40 name="city" type="text" value="<%= city %>">
 		</td>
 	</tr>
 	<tr>
@@ -310,7 +310,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="state_province" type="text" value="<%= state_province %>">
+			<input class="form-text" size = 40 name="state_province" type="text" value="<%= state_province %>">
 		</td>
 	</tr>
 	<tr>
@@ -319,7 +319,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="country" >
+			<SELECT NAME="country" style="width:40">
 			 <%
 			     for (int j = 0; j< countryItems.size(); j++ )
 			      {
@@ -354,7 +354,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="micrositeAdress" type="url" value="<%= micrositeAdress %>">
+			<input class="form-text" size = 40 name="micrositeAdress" type="url" value="<%= micrositeAdress %>">
 		</td>
 	</tr>
 	<tr>
@@ -363,7 +363,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="company_website" type="url" value="<%= company_website %>">
+			<input class="form-text" size = 40 name="company_website" type="url" value="<%= company_website %>">
 		</td>
 	</tr>
 	<tr>
@@ -372,7 +372,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="noemployees" type="int" value="<%= noemployees %>">
+			<input class="form-text" size = 40 name="noemployees" type="int" value="<%= noemployees %>">
 		</td>
 	</tr>		
 	<tr>
@@ -381,7 +381,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="country_coverage" MULTIPLE>
+			<SELECT NAME="country_coverage" style="width:40" MULTIPLE>
 			 <%
 			     for (int j = 0; j< coverageCountryItems.size(); j++ )
 			      {
@@ -416,7 +416,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="parent_company_name" type="text" value="<%= parent_company_name %>">
+			<input class="form-text" size = 40 name="parent_company_name" type="text" value="<%= parent_company_name %>">
 		</td>
 	</tr>	
 	<tr>
@@ -425,7 +425,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="country_parent_company" >
+			<SELECT NAME="country_parent_company" style="width:40" >
 			 <%
 			     for (int j = 0; j< parentCountryItems.size(); j++ )
 			      {
@@ -459,7 +459,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="channel_partner_since" type="text" value="<%= channel_partner_since %>">
+			<input class="form-text" size = 40 name="channel_partner_since" type="text" value="<%= channel_partner_since %>">
 		</td>
 	</tr>	
 	<tr>
@@ -468,7 +468,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="primary_business_type" >
+			<SELECT NAME="primary_business_type" style="width:40" >
 			 <%
 		     for (int j = 0; j< businessTypeItems.size(); j++ )
 		      {
@@ -503,7 +503,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="secondary_business_type" >
+			<SELECT NAME="secondary_business_type" style="width:40">
 			 <%
 		     for (int j = 0; j< businessTypeItems2.size(); j++ )
 		      {
@@ -537,7 +537,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="sap_solution_focus" MULTIPLE SIZE 3 >
+			<SELECT NAME="sap_solution_focus" style="width:40" MULTIPLE SIZE: 3 >
 			 <%
 		     for (int j = 0; j< sapSolutionItems.size(); j++ )
 		      {
@@ -571,7 +571,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="industry" MULTIPLE SIZE: 10>
+			<SELECT NAME="industry" style="width:40" MULTIPLE SIZE: 10>
 			 <%
 		     for (int j = 0; j< industryItems.size(); j++ )
 		      {
@@ -605,7 +605,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="last_review_Date" type="text" value="<%= last_review_Date %>">
+			<input class="form-text" size = 40 name="last_review_Date" type="text" value="<%= last_review_Date %>">
 		</td>
 	</tr>	
 	<tr>
@@ -614,7 +614,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" name="reviewed_by" type="text" value="<%= reviewed_by %>">
+			<input class="form-text" size = 40 name="reviewed_by" type="text" value="<%= reviewed_by %>">
 		</td>
 	</tr>	
 
@@ -654,9 +654,6 @@ else {
 			<b>Company Name</b>
 		</td>
 		<td>
-			<b>Partner Description</b>
-		</td>
-		<td>
 			<b>Industry</b>
 		</td>
 		<td>
@@ -676,17 +673,17 @@ else {
 	<%
 	List userItems = UserItemDAO.getUserItems();
 	List companyItems = CompanyItemDAO.getCompanyItems();
-
-	for (int i = 0; i < companyItems.size(); i++) {
-		CompanyItem companyItem = (CompanyItem)companyItems.get(i);
+	int count = companyItems.size();
+	boolean even = false;
+	for (int i = 0; i < 2*companyItems.size(); i++) {
+		CompanyItem companyItem = (CompanyItem)companyItems.get(i/2);
+		even = (i%2 == 0);
 	%>
-
+		<% if (even){ 
+		%>
 		<tr>
 			<td>
 				<%= companyItem.getName() %>
-			</td>
-			<td>
-				<%= companyItem.getDescription() %>
 			</td>
 			<td>
 				<%= CompanyUtil.getCompanyIndustries(companyItem) %>
@@ -713,6 +710,15 @@ else {
 				<input class="portlet-form-button" type="button" value="Edit" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="edit" /><portlet:param name="id" value="<%= String.valueOf(companyItem.getId()) %>" /></portlet:renderURL>';">
 			</td>
 		</tr>
+		<%} else  {%>
+		<tr>
+		<TH colspan="6" style="font-size: 8pt; color: navy">
+				<%= companyItem.getDescription().substring(0, 200) %>
+				</TH>
+		</tr>
+		<%
+		}
+		%>
 
 	<%
 	}

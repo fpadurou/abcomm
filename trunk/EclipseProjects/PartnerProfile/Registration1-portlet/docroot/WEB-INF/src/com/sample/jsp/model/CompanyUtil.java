@@ -498,6 +498,24 @@ public class CompanyUtil {
 		return list;
 	}		
 	
+	int computePage()throws SQLException {
+
+		int t = 0;
+		List companyItems = CompanyItemDAO.getCompanyItems();
+		int count = companyItems.size();
+		for (int i = 0; i < companyItems.size(); i++) {
+			CompanyItem companyItem = (CompanyItem)companyItems.get(i);	
+			if((i%2) == 0)
+			{
+				t =  i/2;
+			}
+			String str;
+			str = companyItem.getDescription();
+		}
+		return t;
+		
+	}
+	
 	private static final String _GET_COMPANY_INDUSTRIES =
 		"SELECT industry_name FROM tbl_companies_industries t1 join tbl_industry_microvertical t2 WHERE (t1.industryId = t2.industryId) AND  t1.companyId = ?";
 
