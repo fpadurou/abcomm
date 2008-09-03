@@ -21,32 +21,7 @@
  * SOFTWARE.
  */
 %>
-<%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
-
-<%@ page import="com.sample.registration.model.UserItem" %>
-<%@ page import="com.sample.registration.model.CountryItem" %>
-<%@ page import="com.sample.registration.model.CompanyItem" %>
-<%@ page import="com.sample.registration.model.BusinesstypeItem" %>
-<%@ page import="com.sample.registration.model.UserItemDAO" %>
-<%@ page import="com.sample.registration.model.CountryItemDAO" %>
-<%@ page import="com.sample.registration.model.CompanyItemDAO" %>
-<%@ page import="com.sample.registration.model.AdressItem" %>
-<%@ page import="com.sample.registration.model.AdressItemDAO" %>
-<%@ page import="com.sample.registration.model.BusinesstypeItemDAO" %>
-<%@ page import="com.sample.registration.model.CompanyToBusinesstypeItemDAO" %>
-<%@ page import="com.sample.registration.model.SAPSolutionItem" %>
-<%@ page import="com.sample.registration.model.SAPSolutionItemDAO" %>
-<%@ page import="com.sample.registration.model.IndustryItem" %>
-<%@ page import="com.sample.registration.model.IndustryItemDAO" %>
-<%@ page import="com.sample.registration.util.ConnectionPool" %>
-<%@ page import="com.sample.registration.model.CompanyUtil" %>
-
-<%@ page import="java.util.List" %>
-<%@ page import="java.text.DateFormat" %>
-
-<%@ page import="javax.portlet.WindowState" %>
-
-<portlet:defineObjects />
+<%@ include file="init.jsp" %>
 
 <script type="text/javascript">
 </script>
