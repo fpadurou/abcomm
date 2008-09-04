@@ -23,10 +23,22 @@
 %>
 <%@ include file="init.jsp" %>
 
-<script type="text/javascript">
-</script>
+<SCRIPT TYPE="text/javascript">
+<!--
+function submitconfirm(compprofile)
+{
+	if(""==document.forms.compprofile.userCompanyName.value)
+	{
+	alert("Please enter a company name.");
+	return false;
+	}
+	return true;
+}
+//-->
+</SCRIPT>
 
-<form action="<portlet:actionURL />" method="post" name="compprofile">
+
+<form action="<portlet:actionURL />" method="post" name="compprofile" onSubmit="return submitconfirm(this)">
 
 <%
 DateFormat dateFormatDateTime = DateFormat.getDateInstance();
@@ -614,18 +626,171 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 <%
 }
 else {
+//search + viewall
 %>
 
 	<input name="command" type="hidden" value="">
 	<input name="id" type="hidden" value="">
+	<input name="sapSolSearch" type="hidden" value="">
+	<input name="industrySearch" type="hidden" value="">
+	<input name="countrySeacrh" type="hidden" value="">
+	<input name="coverageSearch" type="hidden" value="">
+	<input name="busstypeSearch" type="hidden" value="">
 
 	<input class="portlet-form-button" type="button" value="Add" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="add" /></portlet:renderURL>';">
 
 	<br><br>
 
-	<table class="lfr-table" border="1" cellpadding="4" cellspacing="2" width="100%">
+	<table class="lfr-table" border="1" cellpadding="4" cellspacing="2" width="50%">
+	<tr BGCOLOR="#99CCFF">
+		<th colspan="4" >
+			Search By
+		</th>
+	</tr>
 	<tr>
+		<th colspan="2">
+			SAP solution focus
+		</th>
+		<td style="padding-left: 10px;"></td>
 		<td>
+			<SELECT NAME="sap_solution_focus_search" style="width:40" MULTIPLE SIZE: 3 >
+			 <%
+		     for (int j = 0; j< sapSolutionItems.size(); j++ )
+		      {
+				SAPSolutionItem sapsolutionItem = (SAPSolutionItem)sapSolutionItems.get(j);			 
+                //This is a category from the database
+                String optionCategoryValue = sapsolutionItem.getSAPSolutionName();
+ 
+                //Construct the option tag in a String variable
+                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                    
+                //close the option tag
+                optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                //printout the option tag
+                out.println(optionTag);
+		      }			 
+            	//Close the result set and statment to free up resoures
+			%>
+		</td>
+	</tr>
+	<tr>
+		<th colspan="2">
+			Country
+		</th>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<SELECT NAME="country_search" >
+			 <%
+			     for (int j = 0; j< countryItems.size(); j++ )
+			      {
+					CountryItem countryItem = (CountryItem)countryItems.get(j);			 
+                    //This is a category from the database
+                    String optionCategoryValue = countryItem.getCountryName();
+ 
+                    //Construct the option tag in a String variable
+                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                    
+                    //close the option tag
+                    optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                    //printout the option tag
+                    out.println(optionTag);
+			      }			 
+			%>
+			</SELECT>
+		</td>
+	</tr>
+	<tr>
+	
+		<th colspan= "2">
+			Company geographic coverage
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<SELECT NAME="country_coverage_search" style="width:40">
+			 <%
+			     for (int j = 0; j< coverageCountryItems.size(); j++ )
+			      {
+					CountryItem countryItem = (CountryItem)coverageCountryItems.get(j);			 
+                    //This is a category from the database
+                    String optionCategoryValue = countryItem.getCountryName();
+ 
+                    //Construct the option tag in a String variable
+                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                    
+                    //close the option tag
+                    optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                    //printout the option tag
+                    out.println(optionTag);
+			      }			 
+			%>
+			</SELECT>
+		</td>
+	</tr>
+	<tr>
+		<th colspan = "2">
+			Primary business type
+		</th>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<SELECT NAME="primary_business_type_search" style="width:40" >
+			 <%
+		     for (int j = 0; j< businessTypeItems.size(); j++ )
+		      {
+				BusinesstypeItem businessItem = (BusinesstypeItem)businessTypeItems.get(j);			 
+                //This is a category from the database
+                String optionCategoryValue = businessItem.getBusinessName();
+ 
+                //Construct the option tag in a String variable
+                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                    
+                //close the option tag
+                optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                //printout the option tag
+                out.println(optionTag);
+		      }			 
+			%>
+			</SELECT>		
+		</td>
+	</tr>	
+	<tr>
+		<th colspan = "2" >
+			Industry
+		</th>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<SELECT NAME="industry_search" style="width:40" >
+			 <%
+		     for (int j = 0; j< industryItems.size(); j++ )
+		      {
+				IndustryItem industryItem = (IndustryItem)industryItems.get(j);			 
+                //This is a category from the database
+                String optionCategoryValue = industryItem.getIndustryName();
+ 
+                //Construct the option tag in a String variable
+                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                    
+                //close the option tag
+                optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                //printout the option tag
+                out.println(optionTag);
+		      }			 
+			%>
+		</td>
+	</tr>
+	</table>
+	<br>
+	<input class="portlet-form-button" type="button" value="Search" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="search" /><portlet:param name="industry_search" value="${industry_search}" /></portlet:renderURL>';">
+		
+		<br><br>
+
+	<table class="lfr-table" border="1" cellpadding="4" cellspacing="2" width="100%">
+	<tr BGCOLOR="#99CCFF">
+		<td >
 			<b>Company Name</b>
 		</td>
 		<td>
@@ -647,7 +812,14 @@ else {
 
 	<%
 	List userItems = UserItemDAO.getUserItems();
-	List companyItems = CompanyItemDAO.getCompanyItems();
+	List companyItems = null;
+	if((command == null) || ((command != null) && (command.equals("viewall"))))
+		companyItems = CompanyItemDAO.getCompanyItems();
+	else {
+		String value = request.getParameter("industry_search");
+		companyItems = CompanyItemDAO.getCompanyItemsBySearch(value);
+		}
+	
 	int count = companyItems.size();
 	boolean even = false;
 	for (int i = 0; i < 2*companyItems.size(); i++) {
@@ -688,7 +860,7 @@ else {
 		<%} else  {%>
 		<tr>
 		<TH colspan="6" style="font-size: 8pt; color: navy">
-				<%= companyItem.getDescription().substring(0, 200) %>
+				<%= companyItem.getDescription().substring(0, 200)+"..." %>
 				</TH>
 		</tr>
 		<%

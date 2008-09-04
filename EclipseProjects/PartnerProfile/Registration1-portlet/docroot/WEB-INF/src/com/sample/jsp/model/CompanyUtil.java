@@ -497,7 +497,33 @@ public class CompanyUtil {
 
 		return list;
 	}		
-	
+
+	public static List getCompaniesBySearch(int id) throws SQLException {
+		List list = new ArrayList();
+		if(id<=0)
+			return null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_COMPANY_INDUSTRIES);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
+	}
+
 	int computePage()throws SQLException {
 
 		int t = 0;

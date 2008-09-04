@@ -121,7 +121,14 @@ public class JSPPortlet extends GenericPortlet {
 	    String[] SAPitems = req.getParameterValues("sap_solution_focus");
 		String[] industry = req.getParameterValues("industry");
 		String[] countryCoverage = req.getParameterValues("country_coverage");
-	    
+
+//search related
+	    String[] SAPitems_search = req.getParameterValues("sap_solution_focus_search");
+		String[] industry_search = req.getParameterValues("industry_search");
+		String[] countryCoverage_search = req.getParameterValues("country_coverage_search");
+		String country_search = req.getParameter("country_search");
+		String primary_business_type_search = req.getParameter("primary_business_type_search");
+		
 		try {
 			DateFormat df = DateFormat.getDateInstance();
 
@@ -333,6 +340,12 @@ public class JSPPortlet extends GenericPortlet {
 	            CompanyUtil.updateCompanyCountryCoverage(companyItem, countryCoverage);
 			} else if (command.equals("delete")) {
 				CompanyItemDAO.deleteCompanyItem(id);
+			}
+			else if (command.equals("search")) {
+				;
+			}		
+			else if (command.equals("viewall")) {
+				;
 			}
 		} catch (SQLException sqle) {
 			throw new PortletException(sqle);
