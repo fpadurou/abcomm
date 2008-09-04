@@ -14,8 +14,8 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<portlet-info>
-			<title>Registration1</title>
-			<short-title>Registration1</short-title>
+			<title>Partner Directory</title>
+			<short-title>Partner Directory</short-title>
 			<keywords>Registration1</keywords>
 		</portlet-info>
 		<security-role-ref>
