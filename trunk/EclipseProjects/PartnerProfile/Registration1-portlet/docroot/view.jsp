@@ -626,21 +626,29 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 <%
 }
 else {
+	String industrySearch ="";
+	industrySearch = request.getParameter("industrySearch");
 //search + viewall
 %>
 
-	<input name="command" type="hidden" value="">
-	<input name="id" type="hidden" value="">
-	<input name="sapSolSearch" type="hidden" value="">
-	<input name="industrySearch" type="hidden" value="">
-	<input name="countrySeacrh" type="hidden" value="">
-	<input name="coverageSearch" type="hidden" value="">
-	<input name="busstypeSearch" type="hidden" value="">
+<%
+String industry_search_liv= request.getParameter("industry_search");
+String sapsol_search_liv= request.getParameter("sap_solution_focus_search");
+String country_search_liv= request.getParameter("country_search");
+String country_coverage_search_liv= request.getParameter("country_coverage_search");
+String primary_business_type_search_liv= request.getParameter("primary_business_type_search");
 
+PrintWriter pout=null;
+pout = response.getWriter();
+pout.write("<BR> industrySerachParam : " + industry_search_liv);
+pout.write("<BR> countryParam : " + country_search_liv);
+pout.write("<BR> sapsolsearchParam : " + sapsol_search_liv);
+pout.write("<BR> countryCoverageParam : " + country_coverage_search_liv);
+pout.write("<BR> bustypeParam : " + primary_business_type_search_liv);
+%>
 	<input class="portlet-form-button" type="button" value="Add" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="add" /></portlet:renderURL>';">
 
 	<br><br>
-
 	<table class="lfr-table" border="1" cellpadding="4" cellspacing="2" width="50%">
 	<tr BGCOLOR="#99CCFF">
 		<th colspan="4" >
@@ -653,7 +661,7 @@ else {
 		</th>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="sap_solution_focus_search" style="width:40" MULTIPLE SIZE: 3 >
+			<SELECT NAME="sap_solution_focus_search" style="width:40" >
 			 <%
 		     for (int j = 0; j< sapSolutionItems.size(); j++ )
 		      {
@@ -784,7 +792,8 @@ else {
 	</tr>
 	</table>
 	<br>
-	<input class="portlet-form-button" type="button" value="Search" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="search" /><portlet:param name="industry_search" value="${industry_search}" /></portlet:renderURL>';">
+	<input class="portlet-form-button" type="submit" value="Search"> 
+	<!-- <input class="portlet-form-button" type="button" value="Search" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="search" /><portlet:param name="industrySearch" value="${industry_search}" /></portlet:renderURL>';"> -->
 		
 		<br><br>
 
@@ -813,11 +822,18 @@ else {
 	<%
 	List userItems = UserItemDAO.getUserItems();
 	List companyItems = null;
-	if((command == null) || ((command != null) && (command.equals("viewall"))))
+	boolean cond = industry_search_liv != null ||  
+				   sapsol_search_liv != null ||
+				   country_search_liv!= null ||
+				   country_coverage_search_liv != null ||
+				   primary_business_type_search_liv != null ;
+				   
+	if(!cond)
+		{
 		companyItems = CompanyItemDAO.getCompanyItems();
+		}
 	else {
-		String value = request.getParameter("industry_search");
-		companyItems = CompanyItemDAO.getCompanyItemsBySearch(value);
+		companyItems = CompanyItemDAO.getCompanyItemsBySearch(industry_search_liv, sapsol_search_liv, country_search_liv, country_coverage_search_liv, primary_business_type_search_liv);
 		}
 	
 	int count = companyItems.size();

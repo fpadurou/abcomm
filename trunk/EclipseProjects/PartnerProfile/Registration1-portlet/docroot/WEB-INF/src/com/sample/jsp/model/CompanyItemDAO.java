@@ -282,13 +282,25 @@ public class CompanyItemDAO {
 		}
 	}
 
-	public static List getCompanyItemsBySearch(String search) throws SQLException {
+	public static List getCompanyItemsBySearch(String industry_search, String  sapsol_search, String country_search, String country_coverage_search, String primary_business_type_search) throws SQLException {
 		List list = new ArrayList();
-
+		
+		String value = "";
+		if(industry_search != null)
+			value += industry_search + " ";
+		if(sapsol_search != null )
+			value += sapsol_search + " ";
+		if(country_search != null )
+			value += country_search + " ";
+		if(country_coverage_search != null)
+			value += country_coverage_search + " ";
+		if(primary_business_type_search != null)
+			value += primary_business_type_search + " ";
+		
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-			System.out.println("search with " + search);
+			System.out.println("search with " + value);
 		try {
 			con = ConnectionPool.getConnection();
 
