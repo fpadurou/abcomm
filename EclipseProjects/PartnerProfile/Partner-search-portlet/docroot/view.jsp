@@ -825,6 +825,15 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 		<td>
 			<b>Primary region</b>
 		</td>
+		<td>
+			<b>Primary business type</b>
+		</td>
+		<td>
+			<b>Country coverage</b>
+		</td>
+		<td>
+			<b>SAP solution</b>
+		</td>
 	</tr>
 
 	<%
@@ -877,10 +886,19 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 				<%= CompanyUtil.getCompanyRegionName(companyItem) %>
 				<!--  -->
 			</td>
+			<td>
+				<%= CompanyUtil.getCompanyBusinessSolution(companyItem.getId(), 1) %>
+			</td>
+			<td>
+				<%= CompanyUtil.getCompanyCountryCoverageString(companyItem) %>
+			</td>
+			<td>
+				<%= CompanyUtil.getCompanySAPSolution(companyItem) %>
+			</td>
 		</tr>
 		<%} else  {%>
 		<tr>
-		<TH colspan="6" style="font-size: 8pt; color: navy">
+		<TH colspan="9" style="font-size: 8pt; color: navy">
 		<% if(companyItem.getDescription() != null) {%>
 				<%= companyItem.getDescription().substring(0, java.lang.Math.min(200,companyItem.getDescription().length()))+"..." %>
 				<%}else {%>
