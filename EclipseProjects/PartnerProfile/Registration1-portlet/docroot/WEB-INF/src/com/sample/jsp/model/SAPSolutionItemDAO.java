@@ -105,6 +105,36 @@ public class SAPSolutionItemDAO {
 		return sapsolutionItem;
 	}
 
+	public static SAPSolutionItem getSAPSolutionItemByName(String name) throws SQLException {
+		SAPSolutionItem sapsolutionItem = null;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_SAPSOLUTION_ITEM_BY_NAME);
+
+			ps.setString(1, name);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				sapsolutionItem = new SAPSolutionItem();
+
+				sapsolutionItem.setId(rs.getInt(1));
+				sapsolutionItem.setSAPSolutionName(rs.getString(2));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return sapsolutionItem;
+	}	
+	
 	public static List getSAPSolutionItems() throws SQLException {
 		List list = new ArrayList();
 
@@ -162,6 +192,9 @@ public class SAPSolutionItemDAO {
 
 	private static final String _GET_SAPSOLUTION_ITEM =
 		"SELECT sapsolutionId, SAPSolution_name FROM tbl_sapsolutions WHERE sapsolutionId = ?";
+
+	private static final String _GET_SAPSOLUTION_ITEM_BY_NAME =
+		"SELECT sapsolutionId, SAPSolution_name FROM tbl_sapsolutions WHERE SAPSolution_name = ?";
 
 	private static final String _GET_SAPSOLUTION_ITEMS =
 		"SELECT sapsolutionId, SAPSolution_name FROM tbl_sapsolutions";

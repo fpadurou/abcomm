@@ -542,6 +542,268 @@ public class CompanyUtil {
 		
 	}
 	
+	public static List getCompanyItemsBySearch(String industry_search, String  sapsol_search, String country_search, String country_coverage_search, String primary_business_type_search) throws SQLException {
+		List list = new ArrayList();
+		List listByInd = new ArrayList();
+		List listBySap = new ArrayList();
+		List listByCountryCov = new ArrayList();
+		List listByCountry = new ArrayList();
+		List listByBssType = new ArrayList();
+		
+		String value = "";
+		if(industry_search != null)
+			value += industry_search + " ";
+		if(sapsol_search != null )
+			value += sapsol_search + " ";
+		if(country_search != null )
+			value += country_search + " ";
+		if(country_coverage_search != null)
+			value += country_coverage_search + " ";
+		if(primary_business_type_search != null)
+			value += primary_business_type_search + " ";
+
+		int indId = -1;
+		int sapsolId = -1;
+		int countrycoverageId = -1;
+		int businesstypeId = -1;
+		
+		if(industry_search != null)
+		{
+			IndustryItem item = IndustryItemDAO.getIndustryItemByName(industry_search);
+			if(item != null)
+				indId = item.getId(); 
+		}
+
+		if(sapsol_search != null)
+		{
+			SAPSolutionItem item = SAPSolutionItemDAO.getSAPSolutionItemByName(sapsol_search);
+			if(item != null)
+				sapsolId = item.getId(); 
+		}
+
+		if(country_coverage_search != null)
+		{
+			CountryItem item = CountryItemDAO.getCountryItemByName(country_coverage_search);
+			if(item != null)
+				countrycoverageId = item.getId(); 
+		}
+		
+		if(primary_business_type_search != null)
+		{
+			BusinesstypeItem item = BusinesstypeItemDAO.getBusinesstypeItemByName(primary_business_type_search);
+			if(item != null)
+				businesstypeId = item.getId(); 
+		}
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+			System.out.println("search with " + value);
+		try {
+			con = ConnectionPool.getConnection();
+			
+			{
+				if(indId >0 )	
+				{
+					ps = con.prepareStatement(_GET_COMPANY_ITEMS_BY_SEARCH_COMP_IND);
+					ps.setInt(1, indId);
+				}
+				else // get all
+				{
+					ps = con.prepareStatement(_GET_COMPANY_ITEMS_ALL);
+				}
+				rs = ps.executeQuery();
+				while (rs.next()) {
+					CompanyItem companyItem = new CompanyItem();
+
+					companyItem.setId(rs.getInt(1));
+					companyItem.setName(rs.getString(2));
+					companyItem.setDescription(rs.getString(3));
+					companyItem.setParentCompanyName(rs.getString(4));
+					companyItem.setCompanyNo(rs.getInt(5));
+					companyItem.setCompanyFriendlySite(rs.getString(5));
+					companyItem.setAdressId(rs.getInt(7));
+					companyItem.setCompanyEmpNo(rs.getInt(8));
+					companyItem.setCountryRegistrationId(rs.getInt(9));
+					companyItem.setYear(rs.getInt(10));
+					companyItem.setDateLastReview(rs.getDate(11));
+					companyItem.setReviewedBy(rs.getString(12));
+					companyItem.setDateCreated(rs.getDate(13));
+					companyItem.setDateUpdated(rs.getDate(14));
+					companyItem.setModifiedBy(rs.getString(15));				
+					companyItem.setCompanySite(rs.getString(16));				
+					
+					listByInd.add(companyItem);
+				}
+			}
+			{
+				if(sapsolId >0 )	
+				{
+					ps = con.prepareStatement(_GET_COMPANY_ITEMS_BY_SEARCH_COMP_SAPSOL);
+					ps.setInt(1, sapsolId);
+				}
+				else
+				{
+					ps = con.prepareStatement(_GET_COMPANY_ITEMS_ALL);
+				}
+				rs = ps.executeQuery();
+				while (rs.next()) {
+					CompanyItem companyItem = new CompanyItem();
+
+					companyItem.setId(rs.getInt(1));
+					companyItem.setName(rs.getString(2));
+					companyItem.setDescription(rs.getString(3));
+					companyItem.setParentCompanyName(rs.getString(4));
+					companyItem.setCompanyNo(rs.getInt(5));
+					companyItem.setCompanyFriendlySite(rs.getString(5));
+					companyItem.setAdressId(rs.getInt(7));
+					companyItem.setCompanyEmpNo(rs.getInt(8));
+					companyItem.setCountryRegistrationId(rs.getInt(9));
+					companyItem.setYear(rs.getInt(10));
+					companyItem.setDateLastReview(rs.getDate(11));
+					companyItem.setReviewedBy(rs.getString(12));
+					companyItem.setDateCreated(rs.getDate(13));
+					companyItem.setDateUpdated(rs.getDate(14));
+					companyItem.setModifiedBy(rs.getString(15));				
+					companyItem.setCompanySite(rs.getString(16));				
+					
+					listBySap.add(companyItem);
+				}
+			}
+			
+			{
+				if(countrycoverageId >0 )	
+				{
+					ps = con.prepareStatement(_GET_COMPANY_ITEMS_BY_SEARCH_COMP_BSSTYPE);
+					ps.setInt(1, countrycoverageId);
+				}
+				else
+				{
+					ps = con.prepareStatement(_GET_COMPANY_ITEMS_ALL);
+				}
+				rs = ps.executeQuery();
+				while (rs.next()) {
+					CompanyItem companyItem = new CompanyItem();
+
+					companyItem.setId(rs.getInt(1));
+					companyItem.setName(rs.getString(2));
+					companyItem.setDescription(rs.getString(3));
+					companyItem.setParentCompanyName(rs.getString(4));
+					companyItem.setCompanyNo(rs.getInt(5));
+					companyItem.setCompanyFriendlySite(rs.getString(5));
+					companyItem.setAdressId(rs.getInt(7));
+					companyItem.setCompanyEmpNo(rs.getInt(8));
+					companyItem.setCountryRegistrationId(rs.getInt(9));
+					companyItem.setYear(rs.getInt(10));
+					companyItem.setDateLastReview(rs.getDate(11));
+					companyItem.setReviewedBy(rs.getString(12));
+					companyItem.setDateCreated(rs.getDate(13));
+					companyItem.setDateUpdated(rs.getDate(14));
+					companyItem.setModifiedBy(rs.getString(15));				
+					companyItem.setCompanySite(rs.getString(16));				
+					
+					listByCountryCov.add(companyItem);
+				}
+			}	
+			{
+				if(businesstypeId >0 )	
+				{
+					ps = con.prepareStatement(_GET_COMPANY_ITEMS_BY_SEARCH_COMP_BSSTYPE);
+					ps.setInt(1, businesstypeId);
+				}
+				else // get all
+				{
+					ps = con.prepareStatement(_GET_COMPANY_ITEMS_ALL);
+				}
+				rs = ps.executeQuery();
+				while (rs.next()) {
+					CompanyItem companyItem = new CompanyItem();
+
+					companyItem.setId(rs.getInt(1));
+					companyItem.setName(rs.getString(2));
+					companyItem.setDescription(rs.getString(3));
+					companyItem.setParentCompanyName(rs.getString(4));
+					companyItem.setCompanyNo(rs.getInt(5));
+					companyItem.setCompanyFriendlySite(rs.getString(5));
+					companyItem.setAdressId(rs.getInt(7));
+					companyItem.setCompanyEmpNo(rs.getInt(8));
+					companyItem.setCountryRegistrationId(rs.getInt(9));
+					companyItem.setYear(rs.getInt(10));
+					companyItem.setDateLastReview(rs.getDate(11));
+					companyItem.setReviewedBy(rs.getString(12));
+					companyItem.setDateCreated(rs.getDate(13));
+					companyItem.setDateUpdated(rs.getDate(14));
+					companyItem.setModifiedBy(rs.getString(15));				
+					companyItem.setCompanySite(rs.getString(16));				
+					
+					listByBssType.add(companyItem);
+				}
+			}				
+			// perform some list intersection!!!
+			//List listByInd = new ArrayList();
+			//List listBySap = new ArrayList();
+			//List listByCountryCov = new ArrayList();
+			//List listByCountry = new ArrayList();
+			//List listByBssType = new ArrayList();
+			for (int i = 0; i < listByInd.size(); i++) {
+				CompanyItem companyItem1 = (CompanyItem)listByInd.get(i);
+				for (int j = 0; j < listBySap.size(); j++)
+				{
+					CompanyItem companyItem2 = (CompanyItem)listBySap.get(j);
+					if(companyItem1.getId() == companyItem2.getId()) // check in the sec list
+					{
+						for (int t = 0; t < listByCountryCov.size(); t++)
+						{
+							CompanyItem companyItem3 = (CompanyItem)listByCountryCov.get(t);
+							if(companyItem3.getId() == companyItem2.getId())
+							{
+								for (int k = 0; k < listByBssType.size(); k++)
+								{
+									CompanyItem companyItem4 = (CompanyItem)listByBssType.get(k);
+									if(companyItem4.getId() == companyItem3.getId())
+									{
+										list.add(companyItem1);
+									}
+								}								
+							}
+						}
+						
+					}
+				}
+
+			}
+			//int indId = -1;
+			//int sapsolId = -1;
+			//int countrycoverageId = -1;
+			//int businesstypeId = -1;
+			
+
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
+	}
+	
+	private static final String _GET_COMPANY_ITEMS_BY_SEARCH =
+		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company";
+	
+	private static final String _GET_COMPANY_ITEMS_BY_SEARCH_COMP_COVERAGE =
+		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company t1 join tbl_companies_coverage t2 USING ( companyId) WHERE t2.countryId = ?";
+
+	private static final String _GET_COMPANY_ITEMS_BY_SEARCH_COMP_SAPSOL =
+		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company t1 join tbl_companies_sapsolution t2 USING ( companyId) WHERE t2.sapsolutionId = ?";
+
+	private static final String _GET_COMPANY_ITEMS_BY_SEARCH_COMP_BSSTYPE =
+		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company t1 join tbl_companies_businesstype t2 USING ( companyId) WHERE t2.businesstypeId = ?";
+	
+	private static final String _GET_COMPANY_ITEMS_BY_SEARCH_COMP_IND =
+		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company t1 join tbl_companies_industries t2 USING ( companyId) WHERE t2.industryId = ?";
+
+	private static final String _GET_COMPANY_ITEMS_BY_SEARCH_COMP_COUNTRY =
+		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company t1 join tbl_companies_coverage t2 USING ( companyId) WHERE t2.countryId = ?";
+	
 	private static final String _GET_COMPANY_INDUSTRIES =
 		"SELECT industry_name FROM tbl_companies_industries t1 join tbl_industry_microvertical t2 WHERE (t1.industryId = t2.industryId) AND  t1.companyId = ?";
 
@@ -565,6 +827,9 @@ public class CompanyUtil {
 
 	private static final String _DELETE_COMPANY_COVERAGE =	
 		"DELETE FROM tbl_companies_coverage WHERE companyId = ?";
+
+	private static final String _GET_COMPANY_ITEMS_ALL =
+		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company";
 	
 	
 }

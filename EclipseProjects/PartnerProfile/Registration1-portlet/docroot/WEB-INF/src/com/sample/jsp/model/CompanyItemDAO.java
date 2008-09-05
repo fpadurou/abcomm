@@ -282,61 +282,7 @@ public class CompanyItemDAO {
 		}
 	}
 
-	public static List getCompanyItemsBySearch(String industry_search, String  sapsol_search, String country_search, String country_coverage_search, String primary_business_type_search) throws SQLException {
-		List list = new ArrayList();
-		
-		String value = "";
-		if(industry_search != null)
-			value += industry_search + " ";
-		if(sapsol_search != null )
-			value += sapsol_search + " ";
-		if(country_search != null )
-			value += country_search + " ";
-		if(country_coverage_search != null)
-			value += country_coverage_search + " ";
-		if(primary_business_type_search != null)
-			value += primary_business_type_search + " ";
-		
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-			System.out.println("search with " + value);
-		try {
-			con = ConnectionPool.getConnection();
 
-			ps = con.prepareStatement(_GET_COMPANY_ITEMS_BY_SEARCH);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				CompanyItem companyItem = new CompanyItem();
-
-				companyItem.setId(rs.getInt(1));
-				companyItem.setName(rs.getString(2));
-				companyItem.setDescription(rs.getString(3));
-				companyItem.setParentCompanyName(rs.getString(4));
-				companyItem.setCompanyNo(rs.getInt(5));
-				companyItem.setCompanyFriendlySite(rs.getString(5));
-				companyItem.setAdressId(rs.getInt(7));
-				companyItem.setCompanyEmpNo(rs.getInt(8));
-				companyItem.setCountryRegistrationId(rs.getInt(9));
-				companyItem.setYear(rs.getInt(10));
-				companyItem.setDateLastReview(rs.getDate(11));
-				companyItem.setReviewedBy(rs.getString(12));
-				companyItem.setDateCreated(rs.getDate(13));
-				companyItem.setDateUpdated(rs.getDate(14));
-				companyItem.setModifiedBy(rs.getString(15));				
-				companyItem.setCompanySite(rs.getString(16));				
-				
-				list.add(companyItem);
-			}
-		}
-		finally {
-			ConnectionPool.cleanUp(con, ps, rs);
-		}
-
-		return list;
-	}
 	
 	private static final String _ADD_COMPANY_ITEM =
 	"INSERT INTO tbl_company (companyName, description, parent_companyname, noEmployees, partnerNumber, friendlySAP_site, adressId, countryRegistrationId ,partner_since, date_created, date_updated, last_review_date, reviewed_By, modified_by, web_site) " +
@@ -353,9 +299,5 @@ public class CompanyItemDAO {
 
 	private static final String _UPDATE_COMPANY_ITEM =
 		"UPDATE tbl_company SET companyName = ?, description = ?, parent_companyname = ?, noEmployees = ?, partnerNumber = ?, friendlySAP_site = ?, adressId = ?, countryRegistrationId = ?, partner_since = ?, date_created = ?, date_updated = ?, last_review_date = ?, reviewed_By = ?, modified_by = ?, web_site = ? WHERE companyId = ?";
-	
-	private static final String _GET_COMPANY_ITEMS_BY_SEARCH =
-		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company";
-	
 	
 }

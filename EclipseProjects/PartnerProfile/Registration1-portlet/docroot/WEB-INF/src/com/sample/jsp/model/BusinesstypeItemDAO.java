@@ -105,6 +105,36 @@ public class BusinesstypeItemDAO {
 		return businesstypeItem;
 	}
 
+	public static BusinesstypeItem getBusinesstypeItemByName(String name) throws SQLException {
+		BusinesstypeItem businesstypeItem = null;
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_BUSINESSTYPE_ITEM_BY_NAME);
+
+			ps.setString(1, name);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				businesstypeItem = new BusinesstypeItem();
+
+				businesstypeItem.setId(rs.getInt(1));
+				businesstypeItem.setBusinessName(rs.getString(2));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return businesstypeItem;
+	}
+
 	public static List getBusinessTypeItems() throws SQLException {
 		List list = new ArrayList();
 
@@ -162,6 +192,9 @@ public class BusinesstypeItemDAO {
 
 	private static final String _GET_BUSINESSTYPE_ITEM =
 		"SELECT businesstypeId, business_name FROM tbl_businesstype WHERE businesstypeId = ?";
+	
+	private static final String _GET_BUSINESSTYPE_ITEM_BY_NAME = 
+		"SELECT businesstypeId, business_name FROM tbl_businesstype WHERE business_name = ?";
 
 	private static final String _GET_BUSINESSTYPE_ITEMS =
 		"SELECT businesstypeId, business_name FROM tbl_businesstype";

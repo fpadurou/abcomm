@@ -640,11 +640,18 @@ String primary_business_type_search_liv= request.getParameter("primary_business_
 
 PrintWriter pout=null;
 pout = response.getWriter();
-pout.write("<BR> industrySerachParam : " + industry_search_liv);
-pout.write("<BR> countryParam : " + country_search_liv);
-pout.write("<BR> sapsolsearchParam : " + sapsol_search_liv);
-pout.write("<BR> countryCoverageParam : " + country_coverage_search_liv);
-pout.write("<BR> bustypeParam : " + primary_business_type_search_liv);
+pout.write("<BR> Search by: ");
+if((industry_search_liv != null) && !industry_search_liv.equalsIgnoreCase("---------Any---------"))
+	pout.write(" industry --> " + industry_search_liv);
+if((sapsol_search_liv != null) && !sapsol_search_liv.equalsIgnoreCase("---------Any---------"))
+	pout.write(" sap solution --> " + sapsol_search_liv);
+if((country_search_liv != null) && !country_search_liv.equalsIgnoreCase("---------Any---------"))
+	pout.write(" country --> " + country_search_liv);
+if((country_coverage_search_liv != null) && !country_coverage_search_liv.equalsIgnoreCase("---------Any---------"))
+	pout.write(" country coverage --> " + country_coverage_search_liv);
+if((primary_business_type_search_liv != null) && !primary_business_type_search_liv.equalsIgnoreCase("---------Any---------"))
+	pout.write(" business type --> " + primary_business_type_search_liv);
+
 %>
 	<input class="portlet-form-button" type="button" value="Add" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="add" /></portlet:renderURL>';">
 
@@ -662,6 +669,7 @@ pout.write("<BR> bustypeParam : " + primary_business_type_search_liv);
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="sap_solution_focus_search" style="width:40" >
+			<OPTION>---------Any---------</OPTION>
 			 <%
 		     for (int j = 0; j< sapSolutionItems.size(); j++ )
 		      {
@@ -689,6 +697,7 @@ pout.write("<BR> bustypeParam : " + primary_business_type_search_liv);
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="country_search" >
+			<OPTION>---------Any---------</OPTION>
 			 <%
 			     for (int j = 0; j< countryItems.size(); j++ )
 			      {
@@ -717,6 +726,7 @@ pout.write("<BR> bustypeParam : " + primary_business_type_search_liv);
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="country_coverage_search" style="width:40">
+			<OPTION>---------Any---------</OPTION>
 			 <%
 			     for (int j = 0; j< coverageCountryItems.size(); j++ )
 			      {
@@ -744,6 +754,7 @@ pout.write("<BR> bustypeParam : " + primary_business_type_search_liv);
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="primary_business_type_search" style="width:40" >
+			<OPTION>---------Any---------</OPTION>
 			 <%
 		     for (int j = 0; j< businessTypeItems.size(); j++ )
 		      {
@@ -771,6 +782,7 @@ pout.write("<BR> bustypeParam : " + primary_business_type_search_liv);
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="industry_search" style="width:40" >
+			<OPTION>---------Any---------</OPTION>
 			 <%
 		     for (int j = 0; j< industryItems.size(); j++ )
 		      {
@@ -833,7 +845,7 @@ pout.write("<BR> bustypeParam : " + primary_business_type_search_liv);
 		companyItems = CompanyItemDAO.getCompanyItems();
 		}
 	else {
-		companyItems = CompanyItemDAO.getCompanyItemsBySearch(industry_search_liv, sapsol_search_liv, country_search_liv, country_coverage_search_liv, primary_business_type_search_liv);
+		companyItems = CompanyUtil.getCompanyItemsBySearch(industry_search_liv, sapsol_search_liv, country_search_liv, country_coverage_search_liv, primary_business_type_search_liv);
 		}
 	
 	int count = companyItems.size();
@@ -876,7 +888,11 @@ pout.write("<BR> bustypeParam : " + primary_business_type_search_liv);
 		<%} else  {%>
 		<tr>
 		<TH colspan="6" style="font-size: 8pt; color: navy">
-				<%= companyItem.getDescription().substring(0, 200)+"..." %>
+		<% if(companyItem.getDescription() != null) {%>
+				<%= companyItem.getDescription().substring(0, java.lang.Math.min(200,companyItem.getDescription().length()))+"..." %>
+				<%}else {%>
+				<b></b>
+				<%}%>
 				</TH>
 		</tr>
 		<%
