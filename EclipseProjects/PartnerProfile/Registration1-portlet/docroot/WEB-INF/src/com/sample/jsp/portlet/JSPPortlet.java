@@ -124,14 +124,15 @@ public class JSPPortlet extends GenericPortlet {
 
 //search related
 	    String[] SAPitems_search = req.getParameterValues("sap_solution_focus_search");
-		String[] industry_search = req.getParameterValues("industry_search");
+		String industrySearch = req.getParameter("industry_search");
 		String[] countryCoverage_search = req.getParameterValues("country_coverage_search");
 		String country_search = req.getParameter("country_search");
 		String primary_business_type_search = req.getParameter("primary_business_type_search");
-		
+		if (command == null)
+			return;
 		try {
 			DateFormat df = DateFormat.getDateInstance();
-
+			
 			if (command.equals("add")) {
 				// user
 				// user adress + phone
@@ -347,6 +348,7 @@ public class JSPPortlet extends GenericPortlet {
 			else if (command.equals("viewall")) {
 				;
 			}
+			System.out.println("iese");
 		} catch (SQLException sqle) {
 			throw new PortletException(sqle);
 		}
@@ -356,8 +358,29 @@ public class JSPPortlet extends GenericPortlet {
 	public void doView(RenderRequest req, RenderResponse res)
 			throws IOException, PortletException {
 
+		String command = req.getParameter("command");
+		String value = "/view.jsp";
+		if(command != null)
+		{
+			System.out.println("command param in doview  =" + command);
+		}
+		else
+		{
+			String industry_search = req.getParameter("industry_search");
+			String sapsol_search = req.getParameter("sap_solution_focus_search");
+			String country_search = req.getParameter("country_search");
+			String countrycov_search = req.getParameter("country_coverage_search");
+			String bustype_search = req.getParameter("primary_business_type_search");
+			command = "search";			
+			System.out.println("search param hidden in doview  =" + industry_search);
+			value += "?ind=" + industry_search + "&sap=" + sapsol_search + "&cty=" + country_search + "&ctv=" + countrycov_search + "&bss=" + bustype_search + "&cmd=" + command;
+		}
+		
+		//PortletRequestDispatcher prd = getPortletContext()
+			//.getRequestDispatcher("/view.jsp");
 		PortletRequestDispatcher prd = getPortletContext()
-				.getRequestDispatcher("/view.jsp");
+				.getRequestDispatcher(value);
+
 
 		if (prd == null) {
 			_log.error("/view.jsp is not a valid include");
