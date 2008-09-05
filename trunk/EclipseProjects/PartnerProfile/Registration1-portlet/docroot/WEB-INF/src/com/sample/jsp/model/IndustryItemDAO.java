@@ -70,6 +70,38 @@ public class IndustryItemDAO {
 		return industryItem;
 	}
 
+	public static IndustryItem getIndustryItemByName(String name) throws SQLException {
+		IndustryItem industryItem = null;
+
+		if(name == null)
+			return null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_INDUSTRY_ITEM_BY_NAME);
+
+			ps.setString(1, name);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				industryItem = new IndustryItem();
+
+				industryItem.setId(rs.getInt(1));
+				industryItem.setIndustryName(rs.getString(2));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return industryItem;
+	}
+	
 	public static List getIndustryItems() throws SQLException {
 		List list = new ArrayList();
 
@@ -107,5 +139,8 @@ public class IndustryItemDAO {
 
 	private static final String _GET_INDUSTRY_ITEMS =
 		"SELECT industryId, industry_name FROM tbl_industry_microvertical GROUP BY industry_name";
+
+	private static final String _GET_INDUSTRY_ITEM_BY_NAME =
+		"SELECT industryId, industry_name FROM tbl_industry_microvertical WHERE industry_name = ?";
 	
 }
