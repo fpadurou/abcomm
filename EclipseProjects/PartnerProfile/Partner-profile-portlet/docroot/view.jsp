@@ -23,8 +23,22 @@
 %>
 <%@ include file="init.jsp" %>
 
-<form action="<portlet:actionURL />" method="post" name="partprofile" onSubmit="return submitconfirm(this)">
+<SCRIPT TYPE="text/javascript">
+<!--
+function submitconfirm(compprofile)
+{
+	if(""==document.forms.compprofile.userCompanyName.value)
+	{
+	alert("Please enter a company name.");
+	return false;
+	}
+	return true;
+}
+//-->
+</SCRIPT>
 
+
+<form action="<portlet:actionURL />" method="post" name="compprofile" onSubmit="return submitconfirm(this)">
 <%
 DateFormat dateFormatDateTime = DateFormat.getDateInstance();
 String command = request.getParameter("command");
@@ -717,7 +731,7 @@ String primary_business_type_search_liv= request.getParameter("primary_business_
 </form>
 
 <script language="JavaScript" type="text/javascript">
- var frmvalidator = new Validator("partprofile");
+ var frmvalidator = new Validator("compprofile");
  frmvalidator.addValidation("userCompanyName","req","Please enter the Company Name");
  //frmvalidator.addValidation("userCompanyName","alpha");
  
