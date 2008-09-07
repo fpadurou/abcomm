@@ -71,7 +71,7 @@ CREATE TABLE `tbl_adress` (
   PRIMARY KEY  (`adressId`),
   KEY `IX_93D5AD4E` (`companyId`),
   KEY `IX_5BC8B0D4` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_adress`
@@ -79,8 +79,21 @@ CREATE TABLE `tbl_adress` (
 
 /*!40000 ALTER TABLE `tbl_adress` DISABLE KEYS */;
 INSERT INTO `tbl_adress` (`adressId`,`companyId`,`userId`,`userName`,`mail`,`createDate`,`modifiedDate`,`street1`,`street2`,`city`,`zip`,`stateregionname`,`countryId`,`phoneId`,`faxId`) VALUES 
- (1,1,0,NULL,'gigi@yahoo.com',NULL,NULL,'Street Av','Street Av','Brasov','70000','Valea Prahovei',218,3,7),
- (60,2,0,NULL,'',NULL,NULL,'','','','','',210,0,11);
+ (1,1,0,NULL,'gigi@yahoo.com',NULL,NULL,'Street Av','Street Av 2','Brasov','70000','Valea Prahovei',165,3,7),
+ (60,2,0,NULL,'',NULL,NULL,'','','','','Ottawa',38,0,11),
+ (61,3,-1,NULL,'',NULL,NULL,'',NULL,'','','',165,-1,-1),
+ (62,3,0,NULL,'',NULL,NULL,'','Street Av 2','','','',165,12,0),
+ (63,4,0,NULL,'',NULL,NULL,'',NULL,'','','',1,0,0),
+ (64,5,-1,NULL,'',NULL,NULL,'',NULL,'','','',38,-1,-1),
+ (65,5,0,NULL,'',NULL,NULL,'','','','','',38,0,0),
+ (66,6,0,NULL,'',NULL,NULL,'',NULL,'','','',1,0,0),
+ (67,6,0,NULL,'',NULL,NULL,'','','','','',1,0,0),
+ (68,4,0,NULL,'',NULL,NULL,'','','','','',1,0,0),
+ (69,7,0,NULL,'',NULL,NULL,'',NULL,'','','',1,0,0),
+ (70,7,0,NULL,'',NULL,NULL,'','','','','',1,13,0),
+ (71,8,0,NULL,'',NULL,NULL,'',NULL,'','','',1,0,0),
+ (72,8,0,NULL,'',NULL,NULL,'','','','','',1,0,0),
+ (73,9,0,NULL,'',NULL,NULL,'',NULL,'','','',1,0,0);
 /*!40000 ALTER TABLE `tbl_adress` ENABLE KEYS */;
 
 
@@ -101,7 +114,7 @@ CREATE TABLE `tbl_businesstype` (
 
 /*!40000 ALTER TABLE `tbl_businesstype` DISABLE KEYS */;
 INSERT INTO `tbl_businesstype` (`business_name`,`businesstypeId`) VALUES 
- ('Value-added',1),
+ ('Value-added reseller',1),
  ('Independent',2),
  ('Service',3),
  ('Consulting',4),
@@ -128,12 +141,24 @@ CREATE TABLE `tbl_companies_businesstype` (
 
 /*!40000 ALTER TABLE `tbl_companies_businesstype` DISABLE KEYS */;
 INSERT INTO `tbl_companies_businesstype` (`companyId`,`businesstypeId`,`type_`) VALUES 
+ (1,3,1),
  (1,4,2),
- (1,6,1),
  (2,1,2),
  (2,3,1),
- (9,3,2),
- (9,6,1),
+ (3,1,2),
+ (3,3,1),
+ (4,1,1),
+ (4,2,2),
+ (5,1,1),
+ (5,1,2),
+ (6,2,2),
+ (6,4,1),
+ (7,1,1),
+ (7,1,2),
+ (8,1,1),
+ (8,1,2),
+ (9,1,1),
+ (9,1,2),
  (10,1,2),
  (10,4,1),
  (11,1,1),
@@ -166,9 +191,10 @@ INSERT INTO `tbl_companies_coverage` (`companyId`,`countryId`,`regionId`) VALUES
  (1,3,0),
  (1,4,0),
  (2,210,0),
- (9,1,0),
- (9,2,0),
- (9,3,0),
+ (3,2,0),
+ (3,3,0),
+ (5,38,0),
+ (6,38,0),
  (10,4,0),
  (10,5,0),
  (10,6,0),
@@ -206,8 +232,28 @@ INSERT INTO `tbl_companies_industries` (`companyId`,`industryId`) VALUES
  (2,27),
  (2,28),
  (2,29),
- (9,1),
- (9,2),
+ (3,3),
+ (3,4),
+ (3,5),
+ (3,6),
+ (3,7),
+ (3,8),
+ (3,9),
+ (3,10),
+ (3,11),
+ (3,12),
+ (3,13),
+ (3,14),
+ (3,15),
+ (3,16),
+ (3,17),
+ (3,18),
+ (3,19),
+ (4,2),
+ (4,3),
+ (4,4),
+ (5,3),
+ (6,3),
  (10,1),
  (10,2),
  (10,3),
@@ -240,10 +286,10 @@ INSERT INTO `tbl_companies_sapsolution` (`companyId`,`sapsolutionId`) VALUES
  (1,2),
  (1,3),
  (2,2),
- (4,4),
- (4,6),
- (4,7),
- (9,3),
+ (3,1),
+ (4,3),
+ (5,2),
+ (6,2),
  (11,1),
  (12,2);
 /*!40000 ALTER TABLE `tbl_companies_sapsolution` ENABLE KEYS */;
@@ -272,7 +318,7 @@ CREATE TABLE `tbl_company` (
   `date_updated` datetime default NULL,
   `modified_by` varchar(75) default NULL,
   PRIMARY KEY  (`companyId`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_company`
@@ -280,8 +326,15 @@ CREATE TABLE `tbl_company` (
 
 /*!40000 ALTER TABLE `tbl_company` DISABLE KEYS */;
 INSERT INTO `tbl_company` (`companyId`,`companyName`,`description`,`partnerNumber`,`friendlySAP_site`,`web_site`,`adressId`,`noEmployees`,`parent_companyname`,`countryRegistrationId`,`partner_since`,`last_review_date`,`reviewed_By`,`date_created`,`date_updated`,`modified_by`) VALUES 
- (1,'Cunningham Blythe','			Cunningham Blythe is a consultancy organisationthat advises small and medium enterprises on business management and technology best practise. We specialise in enabling fast growing companies to make best use of SAP solutions in support of their growth strategy and business aspirations.\r\n			',810449,'http://cpsn-channel.sap.com/','',1,8,'SAP',2,2006,'2008-08-06 00:00:00','Andy Cunningham','2008-08-06 00:00:00','2008-09-02 00:00:00',NULL),
- (2,'The Createch Group','															Dedicated in improving business performance, The Createch Group is a leader in supply chain optimization and information technology integration. The consulting firm offers services in manufacturing and logistics performance, process reengineering, asset management optimization, change management, ERP and information technology solution implementation. The Createch Group helps customers configure and implement their SAP business solution to match their unique requirements. With their extensive SAP knowledge, the Group?s consultants (who are all certified by the SAP Solution Academy) can also apply industry best practices to help customers maximize their performance across the enterprise.\r\n			\r\n			\r\n			\r\n			\r\n			',318473,'http://cpsn-channel.sap.com/','',60,200,'',30,1998,'2008-08-05 00:00:00','Helene Gamache','2008-08-05 00:00:00','2008-09-02 00:00:00',NULL);
+ (1,'Cunningham Blythe','Cunningham Blythe is a consultancy organisationthat advises small and medium enterprises on business management and technology best practise. We specialise in enabling fast growing companies to make best use of SAP solutions in support of their growth strategy and business aspirations.',810449,'http://cpsn-channel.sap.com/','',1,8,'SAP',38,2006,'2008-08-06 00:00:00','Andy Cunningham','2008-08-06 00:00:00','2008-09-07 00:00:00',NULL),
+ (2,'The Createch Group','Dedicated in improving business performance, The Createch Group is a leader in supply chain optimization and information technology integration. The consulting firm offers services in manufacturing and logistics performance, process reengineering, asset management optimization, change management, ERP and information technology solution implementation. The Createch Group helps customers configure and implement their SAP business solution to match their unique requirements. With their extensive SAP knowledge, the Group?s consultants (who are all certified by the SAP Solution Academy) can also apply industry best practices to help customers maximize their performance across the enterprise.',318473,'http://cpsn-channel.sap.com/','',60,200,'',30,1998,'2008-08-05 00:00:00','Helene Gamache','2008-08-05 00:00:00','2008-09-07 00:00:00',NULL),
+ (3,'Test Company','This is a test companyd f sdfdssddsdsdf sdf sddsf dsfdsfdsfsd\r\nds\r\nfd\r\ndfs',121,'','',62,-1,'',30,1991,'2008-09-05 00:00:00','','2008-09-05 00:00:00','2008-09-07 00:00:00',NULL),
+ (4,'Vennware','test',123,'','',68,-1,'',1,1233,'2008-09-05 00:00:00','','2008-09-05 00:00:00','2008-09-07 00:00:00',NULL),
+ (5,'Jim Test','Jim\'s test company',123456,'','',65,1,'',38,1234,'2008-09-05 00:00:00','','2008-09-05 00:00:00','2008-09-07 00:00:00',NULL),
+ (6,'walk through test','',1,'','',67,-1,'',1,2001,'2008-09-06 00:00:00','','2008-09-06 00:00:00','2008-09-07 00:00:00',NULL),
+ (7,'11 Comp','',1,'http://','http://',70,-1,'',1,1990,'2008-09-07 00:00:00','','2008-09-07 00:00:00','2008-09-07 00:00:00',NULL),
+ (8,'asdsadasd','',1,'http://','http://',72,-1,'',1,1990,'2008-09-07 00:00:00','','2008-09-07 00:00:00','2008-09-07 00:00:00',NULL),
+ (9,'New comp','',1,'http://','http://',-1,-1,'',-1,-1,'2008-09-07 00:00:00','','2008-09-07 00:00:00','2008-09-07 00:00:00',NULL);
 /*!40000 ALTER TABLE `tbl_company` ENABLE KEYS */;
 
 
@@ -798,7 +851,7 @@ CREATE TABLE `tbl_phone` (
   PRIMARY KEY  (`phoneId`),
   KEY `IX_9F704A14` (`companyId`),
   KEY `IX_F202B9CE` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_phone`
@@ -808,7 +861,7 @@ CREATE TABLE `tbl_phone` (
 INSERT INTO `tbl_phone` (`phoneId`,`companyId`,`userId`,`userName`,`createDate`,`modifiedDate`,`number_`,`extension`,`typeId`) VALUES 
  (1,1,NULL,NULL,NULL,NULL,'123233 3231','122',NULL),
  (2,1,NULL,NULL,NULL,NULL,'444 4324 2423','22',NULL),
- (3,NULL,NULL,NULL,NULL,NULL,'123123123 2','23',NULL),
+ (3,NULL,NULL,NULL,NULL,NULL,'1231231232','23',NULL),
  (4,NULL,NULL,NULL,NULL,NULL,'213 2133 ','11',NULL),
  (5,NULL,NULL,NULL,NULL,NULL,'123 321',NULL,1),
  (6,NULL,NULL,NULL,NULL,NULL,'111111111',NULL,2),
@@ -816,7 +869,9 @@ INSERT INTO `tbl_phone` (`phoneId`,`companyId`,`userId`,`userName`,`createDate`,
  (8,NULL,NULL,NULL,NULL,NULL,'121212',NULL,1),
  (9,NULL,NULL,NULL,NULL,NULL,'222222',NULL,1),
  (10,NULL,NULL,NULL,NULL,NULL,'2122',NULL,2),
- (11,NULL,NULL,NULL,NULL,NULL,'1212',NULL,2);
+ (11,NULL,NULL,NULL,NULL,NULL,'1212',NULL,2),
+ (12,NULL,NULL,NULL,NULL,NULL,'121',NULL,1),
+ (13,NULL,NULL,NULL,NULL,NULL,'12312',NULL,1);
 /*!40000 ALTER TABLE `tbl_phone` ENABLE KEYS */;
 
 
