@@ -15,15 +15,6 @@
   -------------------------------------------------------------------------  
 */
 
-function submitconfirm(partprofile)
-{
-	var answer = confirm ("Do you want to save and exit?");
-	if(var)
-		return true;
-	return false;
-}
-
-
 function Validator(frmname)
 {
   this.formobj=document.forms[frmname];
@@ -98,13 +89,7 @@ function form_submit_handler()
     if(!ret) return ret;
 	}
 	
-	var answer = confirm ("Do you want to save and exit?");
-	if(var)
-		return true;
-	else
-		return false;
-	
-	//return true;
+	return true;
 }
 function add_validation(itemname,descriptor,errstr)
 {
