@@ -637,6 +637,12 @@ public class CompanyUtil {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 			System.out.println("search with " + value);
+			/*indId = -1;
+			sapsolId = -1;
+			countrycoverageId = -1;
+			businesstypeId = -1;
+			countryId = -1;*/
+			System.out.println("search with " + String.valueOf(indId) +" " + String.valueOf(sapsolId) +" " + String.valueOf(countrycoverageId) +" " +String.valueOf(businesstypeId) +" " +String.valueOf(countryId) );
 		try {
 			con = ConnectionPool.getConnection();
 			
@@ -712,7 +718,7 @@ public class CompanyUtil {
 			{
 				if(countrycoverageId >0 )	
 				{
-					ps = con.prepareStatement(_GET_COMPANY_ITEMS_BY_SEARCH_COMP_BSSTYPE);
+					ps = con.prepareStatement(_GET_COMPANY_ITEMS_BY_SEARCH_COMP_COVERAGE);
 					ps.setInt(1, countrycoverageId);
 				}
 				else
@@ -875,7 +881,7 @@ public class CompanyUtil {
 		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company t1 join tbl_companies_sapsolution t2 USING ( companyId) WHERE t2.sapsolutionId = ?";
 
 	private static final String _GET_COMPANY_ITEMS_BY_SEARCH_COMP_BSSTYPE =
-		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company t1 join tbl_companies_businesstype t2 USING ( companyId) WHERE t2.businesstypeId = ?";
+		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company t1 join tbl_companies_businesstype t2 USING ( companyId) WHERE t2.businesstypeId = ? AND t2.type_ = 1";
 	
 	private static final String _GET_COMPANY_ITEMS_BY_SEARCH_COMP_IND =
 		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company t1 join tbl_companies_industries t2 USING ( companyId) WHERE t2.industryId = ?";
