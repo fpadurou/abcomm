@@ -678,6 +678,10 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
  
                 //Construct the option tag in a String variable
                 String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                if(optionCategoryValue.equals(sapsol_search_liv))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
                     
                 //close the option tag
                 optionTag += ">" + optionCategoryValue + "</OPTION>";
@@ -706,6 +710,10 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
  
                     //Construct the option tag in a String variable
                     String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+	                if(optionCategoryValue.equals(country_search_liv))
+	                {
+	                    optionTag += " selected=\"selected\"";
+	                }
                     
                     //close the option tag
                     optionTag += ">" + optionCategoryValue + "</OPTION>";
@@ -735,6 +743,10 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
  
                     //Construct the option tag in a String variable
                     String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+	                if(optionCategoryValue.equals(country_coverage_search_liv))
+	                {
+	                    optionTag += " selected=\"selected\"";
+	                }
                     
                     //close the option tag
                     optionTag += ">" + optionCategoryValue + "</OPTION>";
@@ -763,6 +775,10 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
  
                 //Construct the option tag in a String variable
                 String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                if(optionCategoryValue.equals(primary_business_type_search_liv))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
                     
                 //close the option tag
                 optionTag += ">" + optionCategoryValue + "</OPTION>";
@@ -791,6 +807,10 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
  
                 //Construct the option tag in a String variable
                 String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                if(optionCategoryValue.equals(industry_search_liv))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
                     
                 //close the option tag
                 optionTag += ">" + optionCategoryValue + "</OPTION>";
