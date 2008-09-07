@@ -23,22 +23,7 @@
 %>
 <%@ include file="init.jsp" %>
 
-<SCRIPT TYPE="text/javascript">
-<!--
-function submitconfirm(compprofile)
-{
-	if(""==document.forms.compprofile.userCompanyName.value)
-	{
-	alert("Please enter a company name.");
-	return false;
-	}
-	return true;
-}
-//-->
-</SCRIPT>
-
-
-<form action="<portlet:actionURL />" method="post" name="compprofile" onSubmit="return submitconfirm(this)">
+<form action="<portlet:actionURL />" method="post" name="partprofile" onSubmit="return submitconfirm(this)">
 
 <%
 DateFormat dateFormatDateTime = DateFormat.getDateInstance();
@@ -72,8 +57,8 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
     String city = ""; 
     String state_province = ""; 
     String country = ""; 
-	String micrositeAdress = ""; 
-	String company_website = "";
+	String micrositeAdress = "http://"; 
+	String company_website = "http://";
 	String first_name = "";	
 	String last_name = ""	;
 	String telephone_user = ""; 	
@@ -214,9 +199,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<TEXTAREA rows="4" cols= "60" input class="form-text" name="partnerDescription" align = left>
-			<%= partnerDescription.trim() %>
-			</TEXTAREA>
+			<TEXTAREA style="text-align: left" rows="4" cols= "60" name="partnerDescription"><%= partnerDescription.trim() %></TEXTAREA>
 		</td>
 	</tr>
 	<tr>
@@ -337,7 +320,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	</tr>
 	<tr>
 		<td>
-			CPSN Partner Community/Microsite Address
+			Partner Community/Microsite Address
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
@@ -446,7 +429,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="channel_partner_since" type="text" value="<%= channel_partner_since %>">
+			<input class="form-text" size = 40 name="channel_partner_since" type="text" maxlength="4" value="<%= channel_partner_since %>">
 		</td>
 	</tr>	
 	<tr>
@@ -732,3 +715,29 @@ String primary_business_type_search_liv= request.getParameter("primary_business_
 %>
 
 </form>
+
+<script language="JavaScript" type="text/javascript">
+ var frmvalidator = new Validator("partprofile");
+ frmvalidator.addValidation("userCompanyName","req","Please enter the Company Name");
+ //frmvalidator.addValidation("userCompanyName","alpha");
+ 
+
+ frmvalidator.addValidation("mail","maxlen=50", "Please provide a valid e-mail adress");
+ //frmvalidator.addValidation("mail","req");
+ frmvalidator.addValidation("mail","email", "Please provide a valid e-mail adress");
+ 
+ frmvalidator.addValidation("telephone","maxlen=50", "Please provide a valid phone number, data entered too long");
+ frmvalidator.addValidation("telephone","numeric", "Please provide a valid phone number, digits only");
+ frmvalidator.addValidation("telefax","maxlen=50", "Please provide a valid fax number, data entered too long");
+ frmvalidator.addValidation("telefax","numeric", "Please provide a valid phone number, digits only");
+
+ frmvalidator.addValidation("channel_partner_since", "numeric", "Please provide a valid 4 digit year");
+ frmvalidator.addValidation("channel_partner_since", "maxlen=4", "Please provide a valid 4 digit year, data enetered too long");
+// frmvalidator.addValidation("channel_partner_since", "minlen=4", "Please provide a valid 4 digit year, data enetered too short");
+
+ frmvalidator.addValidation("noemployees", "numeric", "Please provide a valid digit number");
+  
+ frmvalidator.addValidation("partnerNumber","numeric", "Please provide a valid number");  
+ //frmvalidator.addValidation("Address","maxlen=50");
+ //frmvalidator.addValidation("Country","dontselect=0");
+</script>
