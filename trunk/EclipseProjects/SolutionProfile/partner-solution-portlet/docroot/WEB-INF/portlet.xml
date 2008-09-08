@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>partner-solution</portlet-name>
 		<display-name>Partner solution</display-name>
-		<portlet-class>com.sample.jsp.portlet.JSPPortlet</portlet-class>
+		<portlet-class>com.sample.solutionprofile.portlet.JSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
 			<value>/view.jsp</value>
