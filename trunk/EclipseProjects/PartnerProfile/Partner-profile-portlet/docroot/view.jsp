@@ -121,7 +121,11 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		partnerDescription = companyItem.getDescription();
 		partnerNumber = companyItem.getCompanyNo(); 
 	    parent_company_name = companyItem.getParentCompanyName(); 
-	    channel_partner_since = String.valueOf(companyItem.getYear()); 
+	    
+		if(companyItem.getYear() >0)
+		    channel_partner_since = String.valueOf(companyItem.getYear());
+		else 
+		    channel_partner_since = "";
 		micrositeAdress = companyItem.getCompanyFriendlySite();
 		company_website = companyItem.getCompanySite();
 		if(companyItem.getCompanyEmpNo() >0)
@@ -740,9 +744,9 @@ String primary_business_type_search_liv= request.getParameter("primary_business_
  //frmvalidator.addValidation("mail","req");
  frmvalidator.addValidation("mail","email", "Please provide a valid e-mail adress");
  
- frmvalidator.addValidation("telephone","maxlen=50", "Please provide a valid phone number, data entered too long");
+ frmvalidator.addValidation("telephone","maxlen=10", "Please provide a valid phone number, data entered too long");
  frmvalidator.addValidation("telephone","numeric", "Please provide a valid phone number, digits only");
- frmvalidator.addValidation("telefax","maxlen=50", "Please provide a valid fax number, data entered too long");
+ frmvalidator.addValidation("telefax","maxlen=10", "Please provide a valid fax number, data entered too long");
  frmvalidator.addValidation("telefax","numeric", "Please provide a valid phone number, digits only");
 
  frmvalidator.addValidation("channel_partner_since", "numeric", "Please provide a valid 4 digit year");

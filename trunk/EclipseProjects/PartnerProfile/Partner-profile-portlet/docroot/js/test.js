@@ -776,6 +776,92 @@ function VWZ_IsChecked(objcheck,value)
  }
  return false;
 }
+
+function formatTelNo (telNo)
+{
+    // If it's blank, save yourself some trouble by doing nothing.
+    if (telNo.value == "") return;
+
+    
+
+    var phone = new String (telNo.value);
+    
+    phone = phone.substring(0,14);
+
+    /*
+    "." means any character. If you try to use "(" and ")", the regular expression becomes 
+    complicated sice both are reserve characters and escaping them sometimes fails. So just 
+    use "." for any character and replace it later.
+    */
+    if (phone.match (".[0-9]{3}.[0-9]{3}-[0-9]{4}") == null)
+    {
+        /*
+        Following "if" is for user making any changes to the formatted tel. no. If you don't put this 
+        "if" condition, the user can not correct a digit by first deleting it and then entering a 
+        correct one, since this will fire two "onkeyup" events : first one on deleting a 
+        character and second one on entering the correct one. The first "onkeyup" event will fire this 
+        function which will reformatt the tel no before the user gets a chace to correct the digit. This 
+        will surely confuse the user. The "if" condition below eliminates that.
+        */
+        if (phone.match (".[0-9]{2}.[0-9]{3}-[0-9]{4}|" + ".[0-9].[0-9]{3}-[0-9]{4}|" +
+            ".[0-9]{3}.[0-9]{2}-[0-9]{4}|" + ".[0-9]{3}.[0-9]-[0-9]{4}") == null)
+        {
+            /*
+            You will reach here only if the user is still typing the number or if he/she has 
+            messed up already formatted number. 
+            */
+            var phoneNumeric = phoneChar = "", i;
+            // Loop thru what user has entered.
+            for (i=0;i<phone.length;i++)
+            {
+                // Go thru what user has entered one character at a time.
+                phoneChar = phone.substr (i,1);
+    
+                // If that character is not a number or is a White space, ignore it. Only if it is a digit, 
+                // concatinate it with a number string.
+                if (!isNaN (phoneChar) && (phoneChar != " ")) phoneNumeric = phoneNumeric + phoneChar;
+            }
+    
+            phone = "";
+            // At this point, you have picked up only digits from what user has entered. Loop thru it.
+            for (i=0;i<phoneNumeric.length;i++)
+            {
+                // If it's the first digit, throw in "(" before that.
+                if (i == 0) phone = phone + "(";
+                // If you are on the 4th digit, put ") " before that.
+                if (i == 3) phone = phone + ") ";
+                // If you are on the 7th digit, insert "-" before that.
+                if (i == 6) phone = phone + "-";
+                // Add the digit to the phone charatcer string you are building.
+                phone = phone + phoneNumeric.substr (i,1)
+            }
+        }
+    }
+    else
+    { 
+        // This means the tel no is in proper format. Make sure by replacing the 0th, 4th and 8th character.
+        phone = "(" + phone.substring (1,4) + ") " + phone.substring (5,8) + "-" + phone.substring(9,13); 
+    }
+    // So far you are working internally. Refresh the screen with the re-formatted value.
+    if (phone != telNo.value) telNo.value = phone;
+}
+
+/*
+CheckTelNo method takes in current element of the form as input. This method should be 
+fired as the user attempts to leave the current element in the form (by using onBlur method). 
+It checks to see if the format of the phone is "(123) 456-7890".
+Eg. <netui:textBox size="13" maxlength="13" onBlur="javascript:checkTelNo (this);" onKeyUp="javascript:formatTelNo (this);" onKeyDown="javascript:formatTelNo (this);"/>  
+*/      
+function checkTelNo (telNo)
+{
+    if (telNo.value == "") return;
+    if (telNo.value.match (".[0-9]{3}.[0-9]{3}-[0-9]{4}") == null)
+    {
+        if (telNo.value.match ("[0-9]{10}") != null)
+            formatTelNo (telNo)              
+    }
+}
+
 /*
 	Copyright (C) 2003-2008 JavaScript-Coder.com . All rights reserved.
 */
