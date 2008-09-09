@@ -32,7 +32,7 @@ import com.sample.viewallpartners.model.CountryItemDAO;
 import com.sample.viewallpartners.model.AdressItem;
 import com.sample.viewallpartners.model.AdressItemDAO;
 import com.sample.viewallpartners.util.ConnectionPool;
-
+import com.sample.viewallpartners.util.InsertPictureToMySql;
 import java.io.IOException;
 
 import javax.portlet.ActionRequest;
@@ -64,6 +64,10 @@ public class JSPPortlet extends GenericPortlet {
 		super.init(config);
 
 		_log.info("Initializing portlet");
+		/*try{
+		InsertPictureToMySql.AddLogoItem(1, "");}
+		catch(Exception e) {
+		}*/
 	}
 
 	public void processAction(ActionRequest req, ActionResponse res)
