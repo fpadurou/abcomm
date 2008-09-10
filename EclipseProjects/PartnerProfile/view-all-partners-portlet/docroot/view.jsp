@@ -620,10 +620,10 @@ else {
 
 	<table class="lfr-table" border="1" cellpadding="4" cellspacing="2" width="100%">
 	<tr BGCOLOR="#99CCFF">
-		<td >
+		<td width="20%">
 			<b>Company Name</b>
 		</td>
-		<td>
+		<td width="10%">
 			<b>Industry</b>
 		</td>
 		<td>
@@ -660,7 +660,7 @@ else {
 		<% if (even){ 
 		%>
 		<tr>
-			<td>
+			<td class = "fontweightbolder">
 				<%= companyItem.getName() %>
 			</td>
 			<td>
@@ -696,7 +696,7 @@ else {
 		</tr>
 		<%} else  {%>
 		<tr>
-		<TH colspan="9" style="font-size: 8pt; color: navy">
+		<TH colspan="9" style="font-size: 8pt; font-weight: normal; color: navy">
 		<% if(companyItem.getDescription() != null) {%>
 				<%= companyItem.getDescription().substring(0, java.lang.Math.min(200,companyItem.getDescription().length()))+"..." %>
 				<%}else {%>
