@@ -173,6 +173,7 @@ System.out.println("E bine");
 				AdressItem adressItem = null;
 				if(adressId <= 0 )
 				{
+					System.out.println("create new adress!");
 					adressItem = new AdressItem();
 					adressItem.setCompanyId(companyItem.getId());
 					adressItem.setStreet1(street1);
@@ -188,6 +189,7 @@ System.out.println("E bine");
 						adressItem.setCountryId(countryItemTemp.getId());
 					}
 					AdressItemDAO.addAdressItem(adressItem);
+					companyItem.setAdressId(adressItem.getId());
 
 					if(telephone != "")
 						AdressItemDAO.updatePhoneItem(adressItem, telephone, 1);
@@ -195,6 +197,8 @@ System.out.println("E bine");
 						AdressItemDAO.updatePhoneItem(adressItem, telefax, 2);
 					AdressItemDAO.updateAdressItem(adressItem);
 				}
+				// Do update in main table
+				CompanyItemDAO.updateCompanyItem(companyItem);
 
 				//2 . SAP solution focus
 				if(SAPitems != null)
