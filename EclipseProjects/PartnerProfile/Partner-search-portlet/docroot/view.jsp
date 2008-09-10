@@ -51,7 +51,7 @@ List businessTypeItems = BusinesstypeItemDAO.getBusinessTypeItems();
 List businessTypeItems2 = BusinesstypeItemDAO.getBusinessTypeItems(); 
 List sapSolutionItems = SAPSolutionItemDAO.getSAPSolutionItems(); 
 List industryItems = IndustryItemDAO.getIndustryItems(); 
-
+String ANY = "-------------------------Any-------------------------";
 
 
 if ((command != null) && (command.equals("add") || command.equals("edit"))) {
@@ -641,15 +641,15 @@ String primary_business_type_search_liv= request.getParameter("primary_business_
 PrintWriter pout=null;
 pout = response.getWriter();
 pout.write("<BR> Search by: ");
-if((industry_search_liv != null) && !industry_search_liv.equalsIgnoreCase("---------Any---------"))
+if((industry_search_liv != null) && !industry_search_liv.equalsIgnoreCase(ANY))
 	pout.write(" industry --> " + industry_search_liv);
-if((sapsol_search_liv != null) && !sapsol_search_liv.equalsIgnoreCase("---------Any---------"))
+if((sapsol_search_liv != null) && !sapsol_search_liv.equalsIgnoreCase(ANY))
 	pout.write(" sap solution --> " + sapsol_search_liv);
-if((country_search_liv != null) && !country_search_liv.equalsIgnoreCase("---------Any---------"))
+if((country_search_liv != null) && !country_search_liv.equalsIgnoreCase(ANY))
 	pout.write(" country --> " + country_search_liv);
-if((country_coverage_search_liv != null) && !country_coverage_search_liv.equalsIgnoreCase("---------Any---------"))
+if((country_coverage_search_liv != null) && !country_coverage_search_liv.equalsIgnoreCase(ANY))
 	pout.write(" country coverage --> " + country_coverage_search_liv);
-if((primary_business_type_search_liv != null) && !primary_business_type_search_liv.equalsIgnoreCase("---------Any---------"))
+if((primary_business_type_search_liv != null) && !primary_business_type_search_liv.equalsIgnoreCase(ANY))
 	pout.write(" business type --> " + primary_business_type_search_liv);
 
 %>
@@ -668,7 +668,7 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="sap_solution_focus_search" style="width:40" >
-			<OPTION>---------Any---------</OPTION>
+			<OPTION><%=ANY%></OPTION>
 			 <%
 		     for (int j = 0; j< sapSolutionItems.size(); j++ )
 		      {
@@ -700,7 +700,7 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="country_search" >
-			<OPTION>---------Any---------</OPTION>
+			<OPTION><%=ANY%></OPTION>
 			 <%
 			     for (int j = 0; j< countryItems.size(); j++ )
 			      {
@@ -733,7 +733,7 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="country_coverage_search" style="width:40">
-			<OPTION>---------Any---------</OPTION>
+			<OPTION><%=ANY%></OPTION>
 			 <%
 			     for (int j = 0; j< coverageCountryItems.size(); j++ )
 			      {
@@ -765,7 +765,7 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="primary_business_type_search" style="width:40" >
-			<OPTION>---------Any---------</OPTION>
+			<OPTION><%=ANY%></OPTION>
 			 <%
 		     for (int j = 0; j< businessTypeItems.size(); j++ )
 		      {
@@ -797,7 +797,7 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="industry_search" style="width:40" >
-			<OPTION>---------Any---------</OPTION>
+			<OPTION><%=ANY%></OPTION>
 			 <%
 		     for (int j = 0; j< industryItems.size(); j++ )
 		      {
