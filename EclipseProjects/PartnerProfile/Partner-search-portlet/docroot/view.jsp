@@ -654,7 +654,7 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 
 %>
 
-	<br><br>
+	<br>
 	<table class="lfr-table" border="1" cellpadding="4" cellspacing="2" width="50%">
 	<tr BGCOLOR="#99CCFF">
 		<th colspan="4" >
@@ -824,16 +824,18 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 	</table>
 	<br>
 	<input class="portlet-form-button" type="submit" value="Search"> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<input class="portlet-form-button" type="button" value="Reset" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="search" /><portlet:param name="industrySearch" value="${industry_search}" /></portlet:renderURL>';"> 
 	<!-- <input class="portlet-form-button" type="button" value="Search" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="search" /><portlet:param name="industrySearch" value="${industry_search}" /></portlet:renderURL>';"> -->
 		
 		<br><br>
 
 	<table class="lfr-table" border="1" cellpadding="4" cellspacing="2" width="100%">
 	<tr BGCOLOR="#99CCFF">
-		<td >
+		<td width="20%">
 			<b>Company Name</b>
 		</td>
-		<td>
+		<td width="10%">
 			<b>Industry</b>
 		</td>
 		<td>
@@ -882,7 +884,7 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 		<% if (even){ 
 		%>
 		<tr>
-			<td>
+			<td class = "fontweightbolder">
 				<%= companyItem.getName() %>
 			</td>
 			<td>
@@ -918,7 +920,7 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 		</tr>
 		<%} else  {%>
 		<tr>
-		<TH colspan="9" style="font-size: 8pt; color: navy">
+		<TH colspan="9" style="font-size: 8pt; font-weight: normal; color: navy">
 		<% if(companyItem.getDescription() != null) {%>
 				<%= companyItem.getDescription().substring(0, java.lang.Math.min(200,companyItem.getDescription().length()))+"..." %>
 				<%}else {%>
