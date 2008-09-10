@@ -627,11 +627,13 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 <%
 }
 else {
+	int id =0;
 	String industrySearch ="";
 	industrySearch = request.getParameter("industrySearch");
 //search + viewall
 %>
-
+	<input name="command" type="hidden" value="<%= command %>">
+	<input name="id" type="hidden" value="<%= id %>">
 <%
 String industry_search_liv= request.getParameter("industry_search");
 String sapsol_search_liv= request.getParameter("sap_solution_focus_search");
@@ -646,10 +648,10 @@ String primary_business_type_search_liv= request.getParameter("primary_business_
 
 	<table class="lfr-table" border="1" cellpadding="4" cellspacing="2" width="100%">
 	<tr BGCOLOR="#99CCFF">
-		<td >
+		<td width="20%">
 			<b>Company Name</b>
 		</td>
-		<td>
+		<td width="10%">
 			<b>Industry</b>
 		</td>
 		<td>
@@ -680,7 +682,7 @@ String primary_business_type_search_liv= request.getParameter("primary_business_
 		<% if (even){ 
 		%>
 		<tr>
-			<td>
+			<td class = "fontweightbolder">
 				<%= companyItem.getName() %>
 			</td>
 			<td>
@@ -706,11 +708,13 @@ String primary_business_type_search_liv= request.getParameter("primary_business_
 			</td>
 			<td>
 				<input class="portlet-form-button" type="button" value="Edit" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="edit" /><portlet:param name="id" value="<%= String.valueOf(companyItem.getId()) %>" /></portlet:renderURL>';">
+
+				<input class="portlet-form-button" type="button" value="Delete" onClick="document.compprofile.command.value = 'delete'; document.compprofile.id.value = '<%= companyItem.getId() %>'; document.compprofile.submit();">
 			</td>
 		</tr>
 		<%} else  {%>
 		<tr>
-		<TH colspan="6" style="font-size: 8pt; color: navy">
+		<TH colspan="6"  style="font-size: 8pt; font-weight: normal; color: navy">
 		<% if(companyItem.getDescription() != null) {%>
 				<%= companyItem.getDescription().substring(0, java.lang.Math.min(200,companyItem.getDescription().length()))+"..." %>
 				<%}else {%>
@@ -744,10 +748,10 @@ String primary_business_type_search_liv= request.getParameter("primary_business_
  //frmvalidator.addValidation("mail","req");
  frmvalidator.addValidation("mail","email", "Please provide a valid e-mail adress");
  
- frmvalidator.addValidation("telephone","maxlen=10", "Please provide a valid phone number, data entered too long");
- frmvalidator.addValidation("telephone","numeric", "Please provide a valid phone number, digits only");
- frmvalidator.addValidation("telefax","maxlen=10", "Please provide a valid fax number, data entered too long");
- frmvalidator.addValidation("telefax","numeric", "Please provide a valid phone number, digits only");
+ frmvalidator.addValidation("telephone","maxlen=15", "Please provide a valid phone number, data entered too long");
+ //frmvalidator.addValidation("telephone","numeric", "Please provide a valid phone number, digits only");
+ frmvalidator.addValidation("telefax","maxlen=15", "Please provide a valid fax number, data entered too long");
+ //frmvalidator.addValidation("telefax","numeric", "Please provide a valid phone number, digits only");
 
  frmvalidator.addValidation("channel_partner_since", "numeric", "Please provide a valid 4 digit year");
  frmvalidator.addValidation("channel_partner_since", "maxlen=4", "Please provide a valid 4 digit year, data enetered too long");
@@ -757,5 +761,11 @@ String primary_business_type_search_liv= request.getParameter("primary_business_
   
  frmvalidator.addValidation("partnerNumber","numeric", "Please provide a valid number");  
  //frmvalidator.addValidation("Address","maxlen=50");
- //frmvalidator.addValidation("Country","dontselect=0");
+ frmvalidator.addValidation("country","dontselect=0", "Please select one option for country");
+ frmvalidator.addValidation("country_coverage","dontselect=-1", "Please select at least one option for country coverage");
+ frmvalidator.addValidation("country_parent_company","dontselect=0", "Please select one option for parent company country");
+ frmvalidator.addValidation("primary_business_type","dontselect=0", "Please select one option for primary business type");
+ frmvalidator.addValidation("sap_solution_focus","dontselect=-1", "Please select at least one option for SAP solution focus");
+ frmvalidator.addValidation("industry","dontselect=-1", "Please select at least one option for industry");
+ //secondary_business_type
 </script>

@@ -336,7 +336,8 @@ public class AdressItemDAO {
 				{
 					ps = con.prepareStatement(_UPDATE_PHONE);
 					ps.setString(1, phone);
-					ps.setInt(2, adressItem.getPhoneId());		
+					ps.setInt(2, adressItem.getPhoneId());
+					System.out.println("_UPDATE_PHONE with " + phone + " la id-ul " + String.valueOf(adressItem.getPhoneId()));
 					ps.executeUpdate();
 				}
 				else
@@ -367,7 +368,14 @@ public class AdressItemDAO {
 					// throw an exception from here
 						}
 					if(autoIncKeyFromApi > 0)
+					{
 						adressItem.setPhoneId(autoIncKeyFromApi);
+						System.out.println("setPhoneId with " + String.valueOf(autoIncKeyFromApi));
+					}
+					else
+					{
+						System.out.println("wrong phoneId autoincrement value !!! ");
+					}
 						
 					rs.close();
 					rs = null;
