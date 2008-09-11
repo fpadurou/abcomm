@@ -26,9 +26,9 @@ import com.sample.partnerprofile.util.ConnectionPool;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +66,6 @@ public class AdressItemDAO {
 			ps.setString(5, adressItem.getCity());
 			ps.setString(6, adressItem.getZip());
 			ps.setString(7, adressItem.getStateregionname());
-			System.out.println("pune date2!");
 			if(adressItem.getCountryId() > 0)
 				ps.setInt(8, adressItem.getCountryId());
 			else
@@ -80,11 +79,9 @@ public class AdressItemDAO {
 			else
 				ps.setInt(10, -1);
 			ps.setString(11, adressItem.getMail());
-			System.out.println("face add adress!");
 			ps.executeUpdate();
 			// get the primary key;
 			int autoIncKeyFromApi = -1;
-			System.out.println("ps.getGeneratedKeys();");
 			rs = ps.getGeneratedKeys();
 			System.out.println("a facut ps.getGeneratedKeys();");
 		
@@ -261,6 +258,7 @@ public class AdressItemDAO {
 			ps.setString(11, adressItem.getMail());
 			ps.setInt(12, adressItem.getId());
 			ps.executeUpdate();
+			System.out.println("A facut _UPDATE_ADRESS_ITEM" );
 		}
 		finally {
 			ConnectionPool.cleanUp(con, ps);
@@ -324,7 +322,6 @@ public class AdressItemDAO {
 	public static void updatePhoneItem(AdressItem adressItem, String phone, int type ) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		Statement stmt = null;
 		ResultSet rs = null;
 
 		try {
@@ -334,6 +331,8 @@ public class AdressItemDAO {
 			{
 				if(adressItem.getPhoneId() >0) // do update
 				{
+					System.out.println("do _UPDATE_PHONE with " + String.valueOf(adressItem.getPhoneId()));
+
 					ps = con.prepareStatement(_UPDATE_PHONE);
 					ps.setString(1, phone);
 					ps.setInt(2, adressItem.getPhoneId());
@@ -342,25 +341,17 @@ public class AdressItemDAO {
 				}
 				else
 				{
+					ps = con.prepareStatement(_ADD_PHONE, Statement.RETURN_GENERATED_KEYS);
+					ps.setString(1, phone);
+					ps.setInt(2, type);		
+					ps.executeUpdate();
 					//
-					// Insert one row that will generate an AUTO INCREMENT
-					// key in the 'priKey' field
-					//
-					stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
-		                       java.sql.ResultSet.CONCUR_UPDATABLE);
-					stmt.executeUpdate(
-				   "INSERT INTO tbl_phone (number_, typeId) "
-				   + "values (" + phone + ", "+ type +")",
-				   Statement.RETURN_GENERATED_KEYS);
-			
-					//
-					// Example of using Statement.getGeneratedKeys()
-					// to retrieve the value of an auto-increment
-					// value
+					// retrieve the value of an auto-increment
 					//
 					int autoIncKeyFromApi = -1;
 					
-					rs = stmt.getGeneratedKeys();
+					//rs = stmt.getGeneratedKeys();
+					rs = ps.getGeneratedKeys();
 				
 					if (rs.next()) {
 					autoIncKeyFromApi = rs.getInt(1);
@@ -396,20 +387,23 @@ public class AdressItemDAO {
 					// Insert one row that will generate an AUTO INCREMENT
 					// key in the 'priKey' field
 					//
-					stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
-		                       java.sql.ResultSet.CONCUR_UPDATABLE);
-					stmt.executeUpdate(
-				   "INSERT INTO tbl_phone (number_, typeId) "
-				   + "values (" + phone + ", "+ type +")",
-				   Statement.RETURN_GENERATED_KEYS);
+					ps = con.prepareStatement(_ADD_PHONE, Statement.RETURN_GENERATED_KEYS);
 			
 					//
 					// Example of using Statement.getGeneratedKeys()
 					// to retrieve the value of an auto-increment
 					// value
 					//
+					ps.setString(1, phone);
+					ps.setInt(2, type);		
+					ps.executeUpdate();
+					//
+					// retrieve the value of an auto-increment
+					//
 					int autoIncKeyFromApi = -1;
-					rs = stmt.getGeneratedKeys();
+					
+					//rs = stmt.getGeneratedKeys();
+					rs = ps.getGeneratedKeys();
 				
 					if (rs.next()) {
 					autoIncKeyFromApi = rs.getInt(1);
@@ -417,7 +411,14 @@ public class AdressItemDAO {
 					// throw an exception from here
 						}
 					if(autoIncKeyFromApi > 0)
+					{
 						adressItem.setFaxId(autoIncKeyFromApi);
+						System.out.println("setFaxIdId with " + String.valueOf(autoIncKeyFromApi));
+					}
+					else
+					{
+						System.out.println("wrong faxId autoincrement value !!! ");
+					}
 						
 					rs.close();
 					rs = null;
@@ -433,13 +434,6 @@ public class AdressItemDAO {
 		        }
 		    }
 
-		    if (stmt != null) {
-		        try {
-		            stmt.close();
-		        } catch (SQLException ex) {
-		            // ignore
-		        }
-		    }
 			ConnectionPool.cleanUp(con, ps, rs);
 		}
 	}

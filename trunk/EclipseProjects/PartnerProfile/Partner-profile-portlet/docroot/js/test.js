@@ -14,6 +14,11 @@
 	Questions & comments please send to form.val at javascript-coder.com
   -------------------------------------------------------------------------  
 */
+function confirmDelete(delUrl) {
+  if (confirm("Are you sure you want to delete")) {
+    document.location = delUrl;
+  }
+}
 
 function Validator(frmname)
 {
@@ -88,6 +93,11 @@ function form_submit_handler()
 	  eval(str);
     if(!ret) return ret;
 	}
+
+	 if (confirm("Are you sure you want to save changes and exit?")) 
+    	{return true;}
+    else
+    	{return false;}
 	
 	return true;
 }
