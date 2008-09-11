@@ -663,7 +663,7 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 	</tr>
 	<tr>
 		<th colspan="2">
-			SAP solution focus
+			SAP solution
 		</th>
 		<td style="padding-left: 10px;"></td>
 		<td>
@@ -695,7 +695,7 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 	</tr>
 	<tr>
 		<th colspan="2">
-			Country
+			Primary country
 		</th>
 		<td style="padding-left: 10px;"></td>
 		<td>
@@ -728,7 +728,7 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 	<tr>
 	
 		<th colspan= "2">
-			Company geographic coverage
+			Country coverage
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
@@ -920,7 +920,7 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 		</tr>
 		<%} else  {%>
 		<tr>
-		<TH colspan="9" style="font-size: 8pt; font-weight: normal; color: navy">
+		<TH colspan="9" style="font-size: 8pt; font-weight: normal">
 		<% if(companyItem.getDescription() != null) {%>
 				<%= companyItem.getDescription().substring(0, java.lang.Math.min(200,companyItem.getDescription().length()))+"..." %>
 				<%}else {%>
