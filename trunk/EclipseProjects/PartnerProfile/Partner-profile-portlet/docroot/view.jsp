@@ -40,7 +40,8 @@ function submitconfirm(compprofile)
 
 <form action="<portlet:actionURL />" method="post" name="compprofile" onSubmit="return submitconfirm(this)">
 <%
-DateFormat dateFormatDateTime = DateFormat.getDateInstance();
+//DateFormat dateFormatDateTime = DateFormat.getDateInstance(DateFormat.SHORT);
+SimpleDateFormat dateFormatDateTime = new SimpleDateFormat("MM/dd/yyyy");
 String command = request.getParameter("command");
 List countryItems = CountryItemDAO.getCountryItems();
 List userCountryItems = CountryItemDAO.getCountryItems();
@@ -597,7 +598,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="last_review_Date" type="text" value="<%= last_review_Date %>">
+			<input class="form-text" size = 40 maxlength = "10" name="last_review_Date" type="text" value="<%= last_review_Date %>">
 		</td>
 	</tr>	
 	<tr>
@@ -772,5 +773,6 @@ String primary_business_type_search_liv= request.getParameter("primary_business_
  frmvalidator.addValidation("secondary_business_type","dontselect=0", "Please select one option for secondary business type");
  frmvalidator.addValidation("sap_solution_focus","dontselect=-1", "Please select at least one option for SAP solution focus");
  frmvalidator.addValidation("industry","dontselect=-1", "Please select at least one option for industry");
+ frmvalidator.addValidation("last_review_Date","date", "Please enter a valid date");
  //secondary_business_type
 </script>

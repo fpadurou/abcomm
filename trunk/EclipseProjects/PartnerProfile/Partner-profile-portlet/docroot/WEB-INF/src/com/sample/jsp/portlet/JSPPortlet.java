@@ -48,6 +48,7 @@ import org.apache.commons.logging.LogFactory;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.text.ParseException;
 import javax.portlet.PortletConfig;
@@ -73,7 +74,6 @@ public class JSPPortlet extends GenericPortlet {
 
 		int id = 0;
 		int userId = 0;
-System.out.println("E bine");
 		try {
 			id = Integer.parseInt(req.getParameter("id"));
 			//userId = Integer.parseInt(req.getParameter("userId"));
@@ -129,7 +129,9 @@ System.out.println("E bine");
 		String country_search = req.getParameter("country_search");
 		String primary_business_type_search = req.getParameter("primary_business_type_search");
 		try {
-			DateFormat df = DateFormat.getDateInstance();
+			SimpleDateFormat format =
+	            new SimpleDateFormat("MM/dd/yyyy");
+			DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
 			
 			if (command.equals("add")) {
 				// user
@@ -164,7 +166,7 @@ System.out.println("E bine");
 				if(last_review_Date != null && !last_review_Date.isEmpty())
 				{
 					try{
-						tempDate = df.parse(last_review_Date);
+						tempDate = format.parse(last_review_Date);
 						String value = tempDate.toString();
 						companyItem.setDateLastReview(tempDate);
 					} catch (ParseException ex){}
@@ -265,11 +267,13 @@ System.out.println("E bine");
 				}
 
 				Date date = new Date();
-				try {date = df.parse(last_review_Date);
+				try {date = format.parse(last_review_Date);
 				} catch(ParseException ex){
 				}
-				/*companyItem.setDateLastReview(date);
-				try {date = df.parse(profile_added);
+				System.out.println("last_review_Date = ");
+				System.out.println("last_review_Date = " + format.format(date));
+				companyItem.setDateLastReview(date);
+				/*try {date = df.parse(profile_added);
 				}catch (ParseException ex){
 				}
 				companyItem.setDateCreated(date);*/
