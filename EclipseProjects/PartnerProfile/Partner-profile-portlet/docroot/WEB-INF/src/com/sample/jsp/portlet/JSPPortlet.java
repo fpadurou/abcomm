@@ -148,6 +148,13 @@ System.out.println("E bine");
 				companyItem.setParentCompanyName(parent_company_name);
 				if(channel_partner_since != null && !channel_partner_since.isEmpty())
 					companyItem.setYear(Integer.parseInt(channel_partner_since));
+				if (country_parent_company != "")
+				{
+					CountryItem countryItemTemp = CountryItemDAO.getCountryItemByName(country_parent_company);
+					if(countryItemTemp != null)
+						companyItem.setCountryRegistrationId(countryItemTemp.getId());
+				}
+
 				Date tempDate = new Date();
 				
 				companyItem.setDateUpdated(new Date());
@@ -173,7 +180,6 @@ System.out.println("E bine");
 				AdressItem adressItem = null;
 				if(adressId <= 0 )
 				{
-					System.out.println("create new adress!");
 					adressItem = new AdressItem();
 					adressItem.setCompanyId(companyItem.getId());
 					adressItem.setStreet1(street1);
@@ -189,6 +195,9 @@ System.out.println("E bine");
 						adressItem.setCountryId(countryItemTemp.getId());
 					}
 					AdressItemDAO.addAdressItem(adressItem);
+					System.out.println("this is the new adress ID ");
+					System.out.println("this is the new adress ID " +String.valueOf(adressItem.getId()));
+
 					companyItem.setAdressId(adressItem.getId());
 
 					if(telephone != "")
@@ -196,7 +205,9 @@ System.out.println("E bine");
 					if(telefax != "")
 						AdressItemDAO.updatePhoneItem(adressItem, telefax, 2);
 					AdressItemDAO.updateAdressItem(adressItem);
+					System.out.println("dupa update phone");
 				}
+				System.out.println("this is the new adress ID " +String.valueOf(adressItem.getId()));
 				// Do update in main table
 				CompanyItemDAO.updateCompanyItem(companyItem);
 

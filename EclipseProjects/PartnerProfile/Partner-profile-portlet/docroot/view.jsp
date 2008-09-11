@@ -50,7 +50,7 @@ List businessTypeItems = BusinesstypeItemDAO.getBusinessTypeItems();
 List businessTypeItems2 = BusinesstypeItemDAO.getBusinessTypeItems(); 
 List sapSolutionItems = SAPSolutionItemDAO.getSAPSolutionItems(); 
 List industryItems = IndustryItemDAO.getIndustryItems(); 
-
+String pleaseChoose = "---------------Please choose----------------";
 
 
 if ((command != null) && (command.equals("add") || command.equals("edit"))) {
@@ -308,6 +308,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="country" style="width:40">
+			<OPTION><%=pleaseChoose%></OPTION>
 			 <%
 			     for (int j = 0; j< countryItems.size(); j++ )
 			      {
@@ -414,6 +415,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="country_parent_company" style="width:40" >
+			<OPTION><%=pleaseChoose%></OPTION>
 			 <%
 			     for (int j = 0; j< parentCountryItems.size(); j++ )
 			      {
@@ -457,6 +459,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="primary_business_type" style="width:40" >
+			<OPTION><%=pleaseChoose%></OPTION>
 			 <%
 		     for (int j = 0; j< businessTypeItems.size(); j++ )
 		      {
@@ -714,7 +717,7 @@ String primary_business_type_search_liv= request.getParameter("primary_business_
 		</tr>
 		<%} else  {%>
 		<tr>
-		<TH colspan="6"  style="font-size: 8pt; font-weight: normal; color: navy">
+		<TH colspan="6"  style="font-size: 8pt; font-weight: normal">
 		<% if(companyItem.getDescription() != null) {%>
 				<%= companyItem.getDescription().substring(0, java.lang.Math.min(200,companyItem.getDescription().length()))+"..." %>
 				<%}else {%>
