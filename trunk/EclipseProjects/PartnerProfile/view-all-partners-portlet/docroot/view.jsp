@@ -696,7 +696,7 @@ else {
 		</tr>
 		<%} else  {%>
 		<tr>
-		<TH colspan="9" style="font-size: 8pt; font-weight: normal; color: navy">
+		<TH colspan="9" style="font-size: 8pt; font-weight: normal">
 		<% if(companyItem.getDescription() != null) {%>
 				<%= companyItem.getDescription().substring(0, java.lang.Math.min(200,companyItem.getDescription().length()))+"..." %>
 				<%}else {%>
