@@ -176,14 +176,13 @@ System.out.println("E bine");
 				CompanyItemDAO.addCompanyItem(companyItem);
 
 				int adressId = companyItem.getAdressId();
-				int compAddedId = companyItem.getAdressId();
 				AdressItem adressItem = null;
 				if(adressId <= 0 )
 				{
 					adressItem = new AdressItem();
 					adressItem.setCompanyId(companyItem.getId());
 					adressItem.setStreet1(street1);
-					adressItem.setStreet1(street2);
+					adressItem.setStreet2(street2);
 					adressItem.setCity(city);
 					adressItem.setZip(zipcode);
 					adressItem.setStateregionname(state_province);
@@ -204,12 +203,13 @@ System.out.println("E bine");
 						AdressItemDAO.updatePhoneItem(adressItem, telephone, 1);
 					if(telefax != "")
 						AdressItemDAO.updatePhoneItem(adressItem, telefax, 2);
-					AdressItemDAO.updateAdressItem(adressItem);
 					System.out.println("dupa update phone");
+					AdressItemDAO.updateAdressItem(adressItem);
+					System.out.println("dupa update adress");
 				}
-				System.out.println("this is the new adress ID " +String.valueOf(adressItem.getId()));
 				// Do update in main table
 				CompanyItemDAO.updateCompanyItem(companyItem);
+				System.out.println("dupa updateCompanyItem  companyId = " +String.valueOf(companyItem.getId()));
 
 				//2 . SAP solution focus
 				if(SAPitems != null)

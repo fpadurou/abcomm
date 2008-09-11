@@ -235,7 +235,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="telephone" type="text" value="<%= telephone %>">
+			<input class="form-text" size = 40 name="telephone" type="text" value="<%= telephone %>" maxlength="14" onBlur="javascript:checkTelNo (this);" onKeyUp="javascript:formatTelNo (this);" onKeyDown="javascript:formatTelNo (this);">
 		</td>
 	</tr>
 	<tr>
@@ -244,7 +244,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="telefax" type="text" value="<%= telefax %>">
+			<input class="form-text" size = 40 name="telefax" type="text" value="<%= telefax %>" maxlength="14" onBlur="javascript:checkTelNo (this);" onKeyUp="javascript:formatTelNo (this);" onKeyDown="javascript:formatTelNo (this);">
 		</td>
 	</tr>
 	<tr>
@@ -495,6 +495,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="secondary_business_type" style="width:40">
+			<OPTION><%=pleaseChoose%></OPTION>
 			 <%
 		     for (int j = 0; j< businessTypeItems2.size(); j++ )
 		      {
@@ -768,6 +769,7 @@ String primary_business_type_search_liv= request.getParameter("primary_business_
  frmvalidator.addValidation("country_coverage","dontselect=-1", "Please select at least one option for country coverage");
  frmvalidator.addValidation("country_parent_company","dontselect=0", "Please select one option for parent company country");
  frmvalidator.addValidation("primary_business_type","dontselect=0", "Please select one option for primary business type");
+ frmvalidator.addValidation("secondary_business_type","dontselect=0", "Please select one option for secondary business type");
  frmvalidator.addValidation("sap_solution_focus","dontselect=-1", "Please select at least one option for SAP solution focus");
  frmvalidator.addValidation("industry","dontselect=-1", "Please select at least one option for industry");
  //secondary_business_type
