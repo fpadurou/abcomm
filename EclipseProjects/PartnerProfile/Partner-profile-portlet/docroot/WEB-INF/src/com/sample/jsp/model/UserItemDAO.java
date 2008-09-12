@@ -31,6 +31,8 @@ import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.liferay.portal.service.impl.PrincipalBean;
+
 
 /**
  * <a href="UserItemDAO.java.html"><b><i>View Source</i></b></a>
@@ -219,6 +221,18 @@ public class UserItemDAO {
 		finally {
 			ConnectionPool.cleanUp(con, ps);
 		}
+	}
+	
+	public static long getLRUserId()
+	{
+		PrincipalBean princBean = new PrincipalBean();
+		long lrUserId = -1;
+		try {
+			lrUserId = princBean.getGuestOrUserId();
+			System.out.println(String.valueOf(lrUserId));
+		}
+		catch (Exception e){}
+		return  lrUserId ;
 	}
 
 	private static final String _ADD_USER_ITEM =

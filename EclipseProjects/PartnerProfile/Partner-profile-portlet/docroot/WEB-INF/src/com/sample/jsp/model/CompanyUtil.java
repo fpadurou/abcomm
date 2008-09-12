@@ -297,7 +297,6 @@ public class CompanyUtil {
 					}
 				}
 			}
-			System.out.println(querry);
 			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
                     java.sql.ResultSet.CONCUR_UPDATABLE);
 			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
@@ -414,7 +413,6 @@ public class CompanyUtil {
 					querry += "(" + companyId + ", "+ ((BusinesstypeItem)businessItems.get(j)).getId() + ", "+ type + ")";
 				}
 			}
-			System.out.println(querry);
 			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
                     java.sql.ResultSet.CONCUR_UPDATABLE);
 			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
@@ -478,7 +476,6 @@ public class CompanyUtil {
 						}
 					}
 				}
-				System.out.println(querry);
 				stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
 	                    java.sql.ResultSet.CONCUR_UPDATABLE);
 				stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
@@ -598,7 +595,6 @@ public class CompanyUtil {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-			System.out.println("search with " + value);
 		try {
 			con = ConnectionPool.getConnection();
 			

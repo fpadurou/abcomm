@@ -52,6 +52,11 @@ List businessTypeItems2 = BusinesstypeItemDAO.getBusinessTypeItems();
 List sapSolutionItems = SAPSolutionItemDAO.getSAPSolutionItems(); 
 List industryItems = IndustryItemDAO.getIndustryItems(); 
 String pleaseChoose = "---------------Please choose----------------";
+long lrUserId = PortalUtil.getUserId(request); 
+
+PrintWriter pout=null;
+pout = response.getWriter();
+pout.write("<BR> LR userId: " + String.valueOf(lrUserId));
 
 
 if ((command != null) && (command.equals("add") || command.equals("edit"))) {
@@ -74,8 +79,6 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
     String country = ""; 
 	String micrositeAdress = "http://"; 
 	String company_website = "http://";
-	String first_name = "";	
-	String last_name = ""	;
 	String telephone_user = ""; 	
 	String telefax_user = "";	
 	String mail_user= "";	
@@ -103,18 +106,6 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
     
 	if (command.equals("edit")) {
 		id = Integer.parseInt(request.getParameter("id"));
-		UserItem userItem = UserItemDAO.getUserItemByCompanyId(id);
-		AdressItem adressUserItem = null;
-		if(userItem != null)
-		{
-			userId = userItem.getId();
-			first_name = userItem.getName();
-			last_name = userItem.getUserLastName();
-		}
-		else
-		{
-		//alert("User is null!);
-		}		
 		// company part
 		AdressItem adressCompItem = null;
 		CompanyItem companyItem = CompanyItemDAO.getCompanyItem(id);
@@ -674,9 +665,8 @@ String primary_business_type_search_liv= request.getParameter("primary_business_
 	</tr>
 
 	<%
-	List userItems = UserItemDAO.getUserItems();
 	List companyItems = null;
-	companyItems = CompanyItemDAO.getCompanyItems();
+	companyItems = CompanyItemDAO.getCompanyItemsByUserId(lrUserId);
 	
 	int count = companyItems.size();
 	boolean even = false;

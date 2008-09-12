@@ -165,6 +165,15 @@ public class CompanyItem {
 		return _modifiedBy ;
 	}
 	
+	public long getCompanyUserId(){
+		return _userId;
+	}
+
+	public void setCompanyUserId(long id){
+		_userId = id;
+	}
+
+	
 	private int _id;
 	private String _name;
 	private String _description;
@@ -181,4 +190,5 @@ public class CompanyItem {
 	private String _reviewedBy;
 	private String _modifiedBy;
 	private String _web_site;
+	private long  _userId;
 }

@@ -33,7 +33,9 @@ import com.sample.partnerprofile.model.AdressItem;
 import com.sample.partnerprofile.model.AdressItemDAO;
 import com.sample.partnerprofile.util.ConnectionPool;
 
+//import java.awt.List;
 import java.io.IOException;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -52,6 +54,8 @@ import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.text.ParseException;
 import javax.portlet.PortletConfig;
+
+import com.liferay.portal.util.PortalUtil;
 
 /**
  * <a href="JSPPortlet.java.html"><b><i>View Source</i></b></a>
@@ -73,7 +77,10 @@ public class JSPPortlet extends GenericPortlet {
 		String command = req.getParameter("command");
 
 		int id = 0;
-		int userId = 0;
+		long userId = 0;
+		userId = PortalUtil.getUserId(req); 
+		System.out.println("userId in action request este " + String.valueOf(userId));
+		
 		try {
 			id = Integer.parseInt(req.getParameter("id"));
 			//userId = Integer.parseInt(req.getParameter("userId"));
@@ -174,6 +181,7 @@ public class JSPPortlet extends GenericPortlet {
 				
 				companyItem.setReviewedBy(reviewed_by);
 				companyItem.setModifiedBy(modified_by);
+				companyItem.setCompanyUserId(userId);
 
 				CompanyItemDAO.addCompanyItem(companyItem);
 
@@ -196,8 +204,6 @@ public class JSPPortlet extends GenericPortlet {
 						adressItem.setCountryId(countryItemTemp.getId());
 					}
 					AdressItemDAO.addAdressItem(adressItem);
-					System.out.println("this is the new adress ID ");
-					System.out.println("this is the new adress ID " +String.valueOf(adressItem.getId()));
 
 					companyItem.setAdressId(adressItem.getId());
 
@@ -205,29 +211,14 @@ public class JSPPortlet extends GenericPortlet {
 						AdressItemDAO.updatePhoneItem(adressItem, telephone, 1);
 					if(telefax != "")
 						AdressItemDAO.updatePhoneItem(adressItem, telefax, 2);
-					System.out.println("dupa update phone");
 					AdressItemDAO.updateAdressItem(adressItem);
-					System.out.println("dupa update adress");
 				}
 				// Do update in main table
 				CompanyItemDAO.updateCompanyItem(companyItem);
-				System.out.println("dupa updateCompanyItem  companyId = " +String.valueOf(companyItem.getId()));
 
 				//2 . SAP solution focus
-				if(SAPitems != null)
-		        {
-					for(int loopIndex = 0; loopIndex < SAPitems.length; loopIndex++){
-		            System.out.println(SAPitems[loopIndex]);
-		            }
-		        }
 	            CompanyUtil.updateCompanySAPSolutionList(companyItem, SAPitems);
 	            // 3. Industry
-	            if(industry != null)
-		        {
-	            	for(int loopIndex = 0; loopIndex < industry.length; loopIndex++){
-		            System.out.println(industry[loopIndex]);
-		            }
-		        }
 	            CompanyUtil.updateCompanyIndustriesList(companyItem, industry);
 	            //4. primary business type -- primary_business_type
 	            if(primary_business_type != null)
@@ -270,8 +261,6 @@ public class JSPPortlet extends GenericPortlet {
 				try {date = format.parse(last_review_Date);
 				} catch(ParseException ex){
 				}
-				System.out.println("last_review_Date = ");
-				System.out.println("last_review_Date = " + format.format(date));
 				companyItem.setDateLastReview(date);
 				/*try {date = df.parse(profile_added);
 				}catch (ParseException ex){
@@ -326,20 +315,8 @@ public class JSPPortlet extends GenericPortlet {
 				CompanyItemDAO.updateCompanyItem(companyItem);
 
 				//2 . SAP solution focus
-				if(SAPitems != null)
-		        {
-					for(int loopIndex = 0; loopIndex < SAPitems.length; loopIndex++){
-		            System.out.println(SAPitems[loopIndex]);
-		            }
-		        }
 	            CompanyUtil.updateCompanySAPSolutionList(companyItem, SAPitems);
 	            // 3. Industry
-	            if(industry != null)
-		        {
-	            	for(int loopIndex = 0; loopIndex < industry.length; loopIndex++){
-		            System.out.println(industry[loopIndex]);
-		            }
-		        }
 	            CompanyUtil.updateCompanyIndustriesList(companyItem, industry);
 	            //4. primary business type -- primary_business_type
 	            if(primary_business_type != null)
@@ -348,15 +325,7 @@ public class JSPPortlet extends GenericPortlet {
 	            if(secondary_business_type != null)
 	            	CompanyUtil.updateBusinessType(companyItem, secondary_business_type, 2);
 	            //6. country coverage
-
-	            if(countryCoverage != null)
-		        {
-	            	for(int loopIndex = 0; loopIndex < countryCoverage.length; loopIndex++){
-	            		System.out.println(countryCoverage[loopIndex]);
-		            }
-		        }
 	            CompanyUtil.updateCompanyCountryCoverage(companyItem, countryCoverage);
-	            System.out.println("a facut edit");
 			} else if (command.equals("delete")) {
 				CompanyItemDAO.deleteCompanyItem(id);
 			}
@@ -366,7 +335,6 @@ public class JSPPortlet extends GenericPortlet {
 			else if (command.equals("viewall")) {
 				;
 			}
-			System.out.println("iese");
 		} catch (SQLException sqle) {
 			throw new PortletException(sqle);
 		}
@@ -376,8 +344,40 @@ public class JSPPortlet extends GenericPortlet {
 	public void doView(RenderRequest req, RenderResponse res)
 			throws IOException, PortletException {
 
+		long userId = 0;
+		userId = PortalUtil.getUserId(req); 
+		System.out.println("userId in doView este " + String.valueOf(userId));
+		String value = "/view.jsp";
+		String command = req.getParameter("command");
+		if(command == null)
+			System.out.println("E nula comanda");
+		
+		if ((command != null) && (command.equals("add") || command.equals("edit"))) 
+		{;} // do nothing --> comes from user commands ! (hope)
+		else
+		{
+			if(userId > 0) // should be register!!
+			{
+				System.out.println("ce cauta aici?");
+				List list = null;
+				try {list = CompanyItemDAO.getCompanyItemsByUserId(userId);}
+				catch (Exception e){}
+				if(list.size()>1)
+					; // do nothing, nore than one!!
+				else {
+					if(list.size() == 1)  // exactly one -> edit it
+						;//value += "?command=edit" + "&id=" + String.valueOf(((CompanyItem)list.get(0)).getId());
+					else
+						value += "?command=add";
+				}
+			}
+		}
+
 		PortletRequestDispatcher prd = getPortletContext()
-			.getRequestDispatcher("/view.jsp");
+			.getRequestDispatcher(value);
+
+		//PortletRequestDispatcher prd = getPortletContext()
+			//.getRequestDispatcher("/view.jsp");
 
 		if (prd == null) {
 			_log.error("/view.jsp is not a valid include");

@@ -59,7 +59,6 @@ public class AdressItemDAO {
 				ps.setInt(2, adressItem.getUserId());
 			else
 				ps.setInt(2, -1);
-			System.out.println("pune date1!");
 				
 			ps.setString(3, adressItem.getStreet1());
 			ps.setString(4, adressItem.getStreet2());
@@ -83,7 +82,6 @@ public class AdressItemDAO {
 			// get the primary key;
 			int autoIncKeyFromApi = -1;
 			rs = ps.getGeneratedKeys();
-			System.out.println("a facut ps.getGeneratedKeys();");
 		
 			if (rs.next()) {
 			autoIncKeyFromApi = rs.getInt(1);
@@ -258,7 +256,6 @@ public class AdressItemDAO {
 			ps.setString(11, adressItem.getMail());
 			ps.setInt(12, adressItem.getId());
 			ps.executeUpdate();
-			System.out.println("A facut _UPDATE_ADRESS_ITEM" );
 		}
 		finally {
 			ConnectionPool.cleanUp(con, ps);
@@ -331,12 +328,9 @@ public class AdressItemDAO {
 			{
 				if(adressItem.getPhoneId() >0) // do update
 				{
-					System.out.println("do _UPDATE_PHONE with " + String.valueOf(adressItem.getPhoneId()));
-
 					ps = con.prepareStatement(_UPDATE_PHONE);
 					ps.setString(1, phone);
 					ps.setInt(2, adressItem.getPhoneId());
-					System.out.println("_UPDATE_PHONE with " + phone + " la id-ul " + String.valueOf(adressItem.getPhoneId()));
 					ps.executeUpdate();
 				}
 				else
@@ -361,7 +355,6 @@ public class AdressItemDAO {
 					if(autoIncKeyFromApi > 0)
 					{
 						adressItem.setPhoneId(autoIncKeyFromApi);
-						System.out.println("setPhoneId with " + String.valueOf(autoIncKeyFromApi));
 					}
 					else
 					{
@@ -413,7 +406,6 @@ public class AdressItemDAO {
 					if(autoIncKeyFromApi > 0)
 					{
 						adressItem.setFaxId(autoIncKeyFromApi);
-						System.out.println("setFaxIdId with " + String.valueOf(autoIncKeyFromApi));
 					}
 					else
 					{
