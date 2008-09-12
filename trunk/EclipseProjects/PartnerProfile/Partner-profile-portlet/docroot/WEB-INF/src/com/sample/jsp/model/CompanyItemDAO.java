@@ -108,6 +108,7 @@ public class CompanyItemDAO {
 			ps.setString(13, companyItem.getReviewedBy());
 			ps.setString(14, companyItem.getModifiedBy());
 			ps.setString(15, companyItem.getCompanySite());
+			ps.setLong(16, companyItem.getCompanyUserId());
 			ps.executeUpdate();
 			
 			// get the primary key;
@@ -236,6 +237,51 @@ public class CompanyItemDAO {
 		return list;
 	}
 
+	public static List getCompanyItemsByUserId(long userId) throws SQLException {
+		List list = new ArrayList();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_COMPANY_ITEMS_BY_USER_ID);
+			ps.setLong(1, userId);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				CompanyItem companyItem = new CompanyItem();
+
+				companyItem.setId(rs.getInt(1));
+				companyItem.setName(rs.getString(2));
+				companyItem.setDescription(rs.getString(3));
+				companyItem.setParentCompanyName(rs.getString(4));
+				companyItem.setCompanyNo(rs.getInt(5));
+				companyItem.setCompanyFriendlySite(rs.getString(5));
+				companyItem.setAdressId(rs.getInt(7));
+				companyItem.setCompanyEmpNo(rs.getInt(8));
+				companyItem.setCountryRegistrationId(rs.getInt(9));
+				companyItem.setYear(rs.getInt(10));
+				companyItem.setDateLastReview(rs.getDate(11));
+				companyItem.setReviewedBy(rs.getString(12));
+				companyItem.setDateCreated(rs.getDate(13));
+				companyItem.setDateUpdated(rs.getDate(14));
+				companyItem.setModifiedBy(rs.getString(15));				
+				companyItem.setCompanySite(rs.getString(16));				
+				
+				list.add(companyItem);
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
+	}	
+	
 	public static void updateCompanyItem(CompanyItem companyItem) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -285,14 +331,17 @@ public class CompanyItemDAO {
 
 	
 	private static final String _ADD_COMPANY_ITEM =
-	"INSERT INTO tbl_company (companyName, description, parent_companyname, noEmployees, partnerNumber, friendlySAP_site, adressId, countryRegistrationId ,partner_since, date_created, date_updated, last_review_date, reviewed_By, modified_by, web_site) " +
-		"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+	"INSERT INTO tbl_company (companyName, description, parent_companyname, noEmployees, partnerNumber, friendlySAP_site, adressId, countryRegistrationId ,partner_since, date_created, date_updated, last_review_date, reviewed_By, modified_by, web_site, userId) " +
+		"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 
 	private static final String _DELETE_COMPANY_ITEM =
 		"DELETE FROM tbl_company WHERE companyId = ?";
 
 	private static final String _GET_COMPANY_ITEM =
 		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company WHERE companyId = ?";
+
+	private static final String _GET_COMPANY_ITEMS_BY_USER_ID =
+		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company WHERE userId = ?";
 
 	private static final String _GET_COMPANY_ITEMS =
 		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company";
