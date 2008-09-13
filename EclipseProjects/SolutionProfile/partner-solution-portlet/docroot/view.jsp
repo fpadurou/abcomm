@@ -44,7 +44,6 @@ function submitconfirm(solutionprofile)
 DateFormat dateFormatDateTime = DateFormat.getDateInstance();
 String command = request.getParameter("command");
 List countryItems = CountryItemDAO.getCountryItems();
-List userCountryItems = CountryItemDAO.getCountryItems();
 List coverageCountryItems = CountryItemDAO.getCountryItems();
 List parentCountryItems = CountryItemDAO.getCountryItems();
 List businessTypeItems = BusinesstypeItemDAO.getBusinessTypeItems(); 
@@ -53,71 +52,137 @@ List sapSolutionItems = SAPSolutionItemDAO.getSAPSolutionItems();
 List industryItems = IndustryItemDAO.getIndustryItems(); 
 
 
-
 if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	int id = 0;
 	int userId = 0;
-    String userCompanyName = "";
-    String userPositionCompany = "";
-    String userMobilePhone = "";
-    String userWorkPhone = ""; 
-	String partnerDescription = ""; 
-	int partnerNumber = 1; 
-    String telephone = ""; 
-    String telefax = ""; 
-    String mail = ""; 
-    String street1 = ""; 
-    String street2 = ""; 
-    String zipcode = ""; 
-    String city = ""; 
-    String state_province = ""; 
-    String country = ""; 
-	String micrositeAdress = ""; 
-	String company_website = "";
-	String first_name = "";	
-	String last_name = ""	;
-	String telephone_user = ""; 	
-	String telefax_user = "";	
-	String mail_user= "";	
-	String street1_user = "";	
-	String street2_user = "";	
-	String zipcode_user = "";	
-	String city_user = "";	
-	String state_province_user = "";	
-	String country_user = "";
-    String noemployees = "" ;
-    List geographic_coverage = null; 	
-    String parent_company_name = ""; 
-    String country_parent_company = ""; 
-    String channel_partner_since = ""; 
-    String primary_business_type = ""; 	
-    String secondary_business_type	= ""; 
-    List sap_solution_focus = null; 
-    List industry = null; 
-    String industry_micro_vertical_focus = ""; 	
-    String last_review_Date = ""; 	
-    String reviewed_by = ""; 
-    String profile_added = ""; 
-    String date_updated = ""; 
-    String modified_by = ""; 
+	
+	int companyId;
+	long partNumber;	
+	String solName;	
+	String solDesc;	
+	String partComSite	;
+	int solFocus	;
+	int solStatusPartner;
+	int solStatusSAP;
+	Date sapCertSince	;
+	Date lastReviewBySAP;	
+	int averTrainEndUser;
+	int averImplTrainingDays;	
+	int averImplEffort;	
+	int averImplDuration;	
+	int averSizeImplTeam;	
+	int averSaleCycle;	
+	int noCustomers;	
+	int smallImpl;
+	int largeImpl;	
+	int smallImplTime;	
+	int largeImplTime;	
+	int smallImplTeamNo;	
+	int largeImplTeamNo;	
+	String solSite;
+	
+	int countryPriceEuro;
+	
+	String refCustAvailForUse;	
+	int totalAppBaseLinePrice;	
+	int appPriceEur	;
+	int hardwareCost	;
+	int hardwareCostEur;	
+	int averLicensePrice;	
+	int averLicensePriceEur;	
+	int addServiceCost	;
+	int addServicePriceEur;	
+	int implCost	;
+	int implCostEur;	
+	String  sapDiscount	;
+	String dbUsed;	
+	String SAPBusUsed;	
+	String SAPGUIUsed;	
+	String compA1B1Used;	
+	String thirdPartyUsed;	
+	String thirdPartyName ;	
+	String otherIT;	
+	String addRemarks;	
+	String solSAPMicroSite;	
+	
+	Date lastPartRevieDate;	
+	String reviewedBy	;
+	String profileAdded	;
+	Date dateCreated	;
+	String modifiedBy;	
+	Date dateUpdated;	
+	String notificationProc;
+	String notificationText;
     
 	if (command.equals("edit")) {
 		id = Integer.parseInt(request.getParameter("id"));
 		UserItem userItem = UserItemDAO.getUserItemByCompanyId(id);
-		AdressItem adressUserItem = null;
 		if(userItem != null)
 		{
 			userId = userItem.getId();
-			first_name = userItem.getName();
-			last_name = userItem.getUserLastName();
 		}
-		else
-		{
-		//alert("User is null!);
-		}		
 		// company part
-		AdressItem adressCompItem = null;
-		CompanyItem companyItem = CompanyItemDAO.getCompanyItem(id);
+		SolutionItem solutionItem = SolutionItemDAO.getSolutionItem(id);
+
+	int companyId = companyId;
+	long partNumber = partNumber;	
+	String solName = solName;	
+	String solDesc = solDesc;	
+	String partComSite = partComSite ;
+	int solFocus =  solFocus;
+	int solStatusPartner = solStatusPartner;
+	int solStatusSAP = solStatusSAP;
+	Date sapCertSince = String.valueOf(dateFormatDateTime.format(sapCertSince));
+	Date lastReviewBySAP = String.valueOf(dateFormatDateTime.format(lastReviewBySAP));	
+	int averTrainEndUser = averTrainEndUser;
+	int averImplTrainingDays = averImplTrainingDays;	
+	int averImplEffort = averImplEffort;	
+	int averImplDuration = averImplDuration;	
+	int averSizeImplTeam = averSizeImplTeam;	
+	int averSaleCycle = averSaleCycle;	
+	int noCustomers = noCustomers;	
+	int smallImpl =  smallImpl;
+	int largeImpl = largeImpl;	
+	int smallImplTime = smallImplTime;	
+	int largeImplTime = largeImplTime;	
+	int smallImplTeamNo = smallImplTeamNo;	
+	int largeImplTeamNo = largeImplTeamNo;	
+	String solSite = solSite;
+	
+	int countryPriceEuro = countryPriceEuro;
+	
+	String refCustAvailForUse =refCustAvailForUse;	
+	int totalAppBaseLinePrice = totalAppBaseLinePrice;	
+	int appPriceEur	= appPriceEur;
+	int hardwareCost = hardwareCost	;
+	int hardwareCostEur = hardwareCostEur;	
+	int averLicensePrice = averLicensePrice;	
+	int averLicensePriceEur = averLicensePriceEur;	
+	int addServiceCost = addServiceCost	;
+	int addServicePriceEur = addServicePriceEur;	
+	int implCost = implCost	;
+	int implCostEur = implCostEur;	
+	String  sapDiscoun = sapDiscount;
+	String dbUsed = dbUsed;	
+	String SAPBusUsed = SAPBusUsed;	
+	String SAPGUIUsed = SAPGUIUsed;	
+	String compA1B1Used = compA1B1Used ;	
+	String thirdPartyUsed = thirdPartyUsed;	
+	String thirdPartyName = thirdPartyName;	
+	String otherIT = otherIT;	
+	String addRemarks = addRemarks;	
+	String solSAPMicroSite = solSAPMicroSite;	
+	
+	Date lastPartRevieDate;	
+	String reviewedBy = reviewedBy	;
+	String profileAdded = profileAdded	;
+	Date dateCreated	;
+	String modifiedBy = modifiedBy;	
+	Date dateUpdated;	
+	String notificationProc = notificationProc;
+	String notificationText = notificationText;
+
+
 		userCompanyName = companyItem.getName();
 		partnerDescription = companyItem.getDescription();
 		partnerNumber = companyItem.getCompanyNo(); 
@@ -139,37 +204,15 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	    date_updated = String.valueOf(dateFormatDateTime.format(companyItem.getDateUpdated())); 
 	    modified_by = companyItem.getModifiedBy();
 	     		
-// get the adress item
-		AdressItem adressCompanyItem = null;
-		int adressId = companyItem.getAdressId();
-		int countryId = 0;
+// get the childs item
 		int countryParentId = companyItem.getCountryRegistrationId();
-			
-		if(adressId>0)
-		{
-			adressCompanyItem = AdressItemDAO.getAdressItem(adressId);
-			mail = adressCompanyItem.getMail();	
-			street1 = adressCompanyItem.getStreet1();	
-			street2 = adressCompanyItem.getStreet2();	
-			zipcode = adressCompanyItem.getZip();	
-			city = adressCompanyItem.getCity();	
-			state_province = adressCompanyItem.getStateregionname();
-			countryId = adressCompanyItem.getCountryId();
-			telephone = AdressItemDAO.getPhone(adressCompanyItem.getPhoneId());
-			telefax = AdressItemDAO.getFax(adressCompanyItem.getFaxId());
-		}	
-		if(countryId > 0)
-			country = CountryItemDAO.getCountryItem(countryId).getCountryName();
-
 	    if(countryParentId >0)
 	    	country_parent_company = CountryItemDAO.getCountryItem(countryParentId).getCountryName(); 
+
 	    sap_solution_focus = CompanyUtil.getCompanySAPSolutionList(companyItem);
 	    industry = CompanyUtil.getCompanyIndustries(id);
-
 	    geographic_coverage = CompanyUtil.getCompanyCountryCoverage(companyItem);
 	    primary_business_type = CompanyUtil.getCompanyBusinessSolution(id, 1); 	
-	    secondary_business_type	= CompanyUtil.getCompanyBusinessSolution(id, 2);
-	
 	}
 	else  //add
 	{
