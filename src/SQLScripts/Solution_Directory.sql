@@ -7,6 +7,7 @@
 #
 DROP TABLE IF EXISTS tbl_Sol_Directory;
 CREATE TABLE IF NOT EXISTS tbl_Sol_Directory (solId BIGINT(20) NOT NULL auto_increment,
+companyId BIGINT(20) default NULL,
 partNumber varchar(20),
 solName varchar(80) NOT NULL default '',
 solDesc LONGTEXT ,
