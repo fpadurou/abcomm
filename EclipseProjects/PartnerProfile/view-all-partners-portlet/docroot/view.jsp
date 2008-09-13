@@ -627,6 +627,9 @@ else {
 			<b>Industry</b>
 		</td>
 		<td>
+			<b>Company logo</b>
+		</td>
+		<td>
 			<b>Company size</b>
 		</td>
 		<td>
@@ -665,6 +668,9 @@ else {
 			</td>
 			<td>
 				<%= CompanyUtil.getCompanyIndustries(companyItem) %>
+			</td>
+			<td>
+				<img src='showImage?id="<%=i%>"'>
 			</td>
 			<td>
 				<% if (companyItem.getCompanyEmpNo() > 0){ 

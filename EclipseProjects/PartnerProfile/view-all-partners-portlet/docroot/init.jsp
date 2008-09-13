@@ -40,6 +40,7 @@
 <%@ page import="com.sample.viewallpartners.model.IndustryItemDAO" %>
 <%@ page import="com.sample.viewallpartners.util.ConnectionPool" %>
 <%@ page import="com.sample.viewallpartners.model.CompanyUtil" %>
+<%@ page import="com.sample.viewallpartners.ImageUtil.showImage" %>
 
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.DateFormat" %>
