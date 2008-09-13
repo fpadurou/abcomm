@@ -48,66 +48,70 @@ public class SolutionItemDAO {
 
 		try {
 			con = ConnectionPool.getConnection();
-
-			ps = con.prepareStatement(_ADD_SOLUTION_ITEM, Statement.RETURN_GENERATED_KEYS);
-
-			ps.setString(1, companyItem.getName());
-			ps.setString(2, companyItem.getDescription());
-			ps.setString(3, companyItem.getParentCompanyName());
-			if(companyItem.getCompanyEmpNo() > 0)
-				ps.setInt(4, companyItem.getCompanyEmpNo());
-			else
-				ps.setInt(4, -1);
-			if(companyItem.getCompanyNo() >0)
-				ps.setInt(5, companyItem.getCompanyNo());
-			else				
-				ps.setInt(5, -1);
-			ps.setString(6, companyItem.getCompanyFriendlySite());
-			if(companyItem.getAdressId() >0)
-				ps.setInt(7, companyItem.getAdressId());
-			else 
-				ps.setInt(7, -1);
-			if(companyItem.getCountryRegistrationId() >0)
-				ps.setInt(8, companyItem.getCountryRegistrationId());
-			else
-				ps.setInt(8, -1);
-			if(companyItem.getYear() > 0)
-				ps.setInt(9, companyItem.getYear());
-			else 
-				ps.setInt(9, -1);
-
 			java.util.Date date = new java.util.Date();
 			java.sql.Date sqlDate = null ;
-			if(companyItem.getDateCreated() != null)
+			if(solutionItem.sapCertSince != null)
 			{
 				sqlDate =
-					   new java.sql.Date(companyItem.getDateCreated().getTime());
+					   new java.sql.Date(solutionItem.sapCertSince.getTime());
 			}
 			else 
 			{
 				sqlDate =
 					   new java.sql.Date(date.getTime());
 			}
-			ps.setDate(10, sqlDate);
+			ps = con.prepareStatement(_ADD_SOLUTION_ITEM, Statement.RETURN_GENERATED_KEYS);
 
-			if(companyItem.getDateUpdated() != null)
-			{
-				sqlDate = new java.sql.Date(companyItem.getDateUpdated().getTime());
-			}
-			else 
-				sqlDate =
-					   new java.sql.Date(date.getTime());
+			ps.setLong(1, solutionItem.companyId) ;
+			ps.setString(2, solutionItem.solName) ; 
+			ps.setString(3,solutionItem.solDesc );
+			ps.setString(4,solutionItem.partComSite); 
+			ps.setInt(5,solutionItem.solFocus);
+			ps.setDate(6,sqlDate);
+			ps.setDate(7,sqlDate/*solutionItem.lastReviewBySAP*/);
+			ps.setInt(8,solutionItem.averTrainEndUser);
+			ps.setInt(9,solutionItem.averImplTrainingDays);
+			ps.setInt(10,solutionItem.averImplEffort);
+			ps.setInt(11,solutionItem.averImplDuration );
+			ps.setInt(12,solutionItem.averSizeImplTeam );
+			ps.setInt(13,solutionItem.averSaleCycle );
+			ps.setInt(14,solutionItem.noCustomers );
+			ps.setInt(15,solutionItem.smallImpl );
+			ps.setInt(16,solutionItem.largeImpl );
+			ps.setInt(17,solutionItem.smallImplTime );
+			ps.setInt(18,solutionItem.largeImplTime );
+			ps.setInt(19,solutionItem.smallImplTeamNo );
+			ps.setInt(20,solutionItem.largeImplTeamNo );
+			ps.setString(21,solutionItem.solSite );
+			ps.setString(22,solutionItem.refCustAvailForUse);
+			ps.setInt(23,solutionItem.totalAppBaseLinePrice);
+			ps.setInt(24,solutionItem.appPriceEur );
+			ps.setInt(25,solutionItem.hardwareCost );
+			ps.setInt(26,solutionItem.hardwareCostEur );
+			ps.setInt(27,solutionItem.averLicensePrice );
+			ps.setInt(28,solutionItem.averLicensePriceEur );
+			ps.setInt(29,solutionItem.addServiceCost );
+			ps.setInt(30,solutionItem.addServicePriceEur );
+			ps.setInt(31,solutionItem.implCost );
+			ps.setInt(32,solutionItem.implCostEur );
+			ps.setString(33,solutionItem.sapDiscount );
+			ps.setString(34,solutionItem.dbUsed );
+			ps.setString(35,solutionItem.SAPBusUsed);
+			ps.setString(36,solutionItem.SAPGUIUsed);
+			ps.setString(37,solutionItem.compA1B1Used);
+			ps.setString(38,solutionItem.thirdPartyUsed);
+			ps.setString(39,solutionItem.thirdPartyName);
+			ps.setString(40,solutionItem.otherIT);
+			ps.setString(41,solutionItem.addRemarks );
+			ps.setString(42,solutionItem.solSAPMicroSite);
+			ps.setDate(43,sqlDate/*solutionItem.lastPartRevieDate*/);
+			ps.setString(44,solutionItem.reviewedBy );
+			ps.setString(45,solutionItem.profileAdded );
+			ps.setDate(46,sqlDate/*solutionItem.dateCreated */);
+			ps.setString(47,solutionItem.modifiedBy);
+			ps.setDate(48,sqlDate/*solutionItem.dateUpdated */);
+			ps.setString(49,solutionItem.notificationProc);
 
-			ps.setDate(11, sqlDate);
-			if(companyItem.getDateLastReview() != null)
-				sqlDate = new java.sql.Date(companyItem.getDateLastReview().getTime());
-			else
-				sqlDate = new java.sql.Date(date.getTime());
-			
-			ps.setDate(12, sqlDate);
-			ps.setString(13, companyItem.getReviewedBy());
-			ps.setString(14, companyItem.getModifiedBy());
-			ps.setString(15, companyItem.getCompanySite());
 			ps.executeUpdate();
 			
 			// get the primary key;
@@ -121,7 +125,7 @@ public class SolutionItemDAO {
 			// throw an exception from here
 				}
 			if(autoIncKeyFromApi > 0)
-				companyItem.setId(autoIncKeyFromApi);
+				solutionItem.setId(autoIncKeyFromApi);
 			rs.close();
 			rs = null;			
 		}
@@ -168,20 +172,56 @@ public class SolutionItemDAO {
 				solutionItem = new SolutionItem();
 
 				solutionItem.setId(id);
-				solutionItem.setName(rs.getString(2));
-				solutionItem.setDescription(rs.getString(3));
-				solutionItem.setParentCompanyName(rs.getString(4));
-				solutionItem.setCompanyNo(rs.getInt(5));
-				solutionItem.setCompanyFriendlySite(rs.getString(6));
-				solutionItem.setCompanyEmpNo(rs.getInt(8));
-				solutionItem.setCountryRegistrationId(rs.getInt(9));
-				solutionItem.setYear(rs.getInt(10));
-				solutionItem.setDateLastReview(rs.getDate(11));
-				solutionItem.setReviewedBy(rs.getString(12));
-				solutionItem.setDateCreated(rs.getDate(13));
-				solutionItem.setDateUpdated(rs.getDate(14));
-				solutionItem.setModifiedBy(rs.getString(15));				
-				solutionItem.setCompanySite(rs.getString(16));				
+				solutionItem.companyId = rs.getInt(2) ;
+				solutionItem.solName = rs.getString(3) ; 
+				solutionItem.solDesc = rs.getString(4);
+				solutionItem.partComSite= rs.getString(5); 
+				solutionItem.solFocus = rs.getInt(6);
+				solutionItem.sapCertSince = rs.getDate(7);
+				solutionItem.lastReviewBySAP = rs.getDate(8);
+				solutionItem.averTrainEndUser= rs.getInt(9);
+				solutionItem.averImplTrainingDays=rs.getInt(10);
+				solutionItem.averImplEffort =rs.getInt(11);
+				solutionItem.averImplDuration = rs.getInt(12);
+				solutionItem.averSizeImplTeam = rs.getInt(13);
+				solutionItem.averSaleCycle = rs.getInt(14);
+				solutionItem.noCustomers = rs.getInt(15);
+				solutionItem.smallImpl = rs.getInt(16);
+				solutionItem.largeImpl = rs.getInt(17);
+				solutionItem.smallImplTime = rs.getInt(18);
+				solutionItem.largeImplTime = rs.getInt(19);
+				solutionItem.smallImplTeamNo = rs.getInt(20);
+				solutionItem.largeImplTeamNo = rs.getInt(21);
+				solutionItem.solSite = rs.getString(22);
+				solutionItem.refCustAvailForUse = rs.getString(23);
+				solutionItem.totalAppBaseLinePrice = rs.getInt(24);
+				solutionItem.appPriceEur = rs.getInt(25);
+				solutionItem.hardwareCost = rs.getInt(26);
+				solutionItem.hardwareCostEur = rs.getInt(27);
+				solutionItem.averLicensePrice = rs.getInt(28);
+				solutionItem.averLicensePriceEur = rs.getInt(29);
+				solutionItem.addServiceCost = rs.getInt(30);
+				solutionItem.addServicePriceEur = rs.getInt(31);
+				solutionItem.implCost = rs.getInt(32);
+				solutionItem.implCostEur = rs.getInt(33);
+				solutionItem.sapDiscount = rs.getString(34);
+				solutionItem.dbUsed = rs.getString(35);
+				solutionItem.SAPBusUsed = rs.getString(36);
+				solutionItem.SAPGUIUsed = rs.getString(37);
+				solutionItem.compA1B1Used = rs.getString(38);
+				solutionItem.thirdPartyUsed = rs.getString(39);
+				solutionItem.thirdPartyName = rs.getString(40);
+				solutionItem.otherIT = rs.getString(41);
+				solutionItem.addRemarks = rs.getString(42);
+				solutionItem.solSAPMicroSite = rs.getString(43);
+				solutionItem.lastPartRevieDate = rs.getDate(44);
+				solutionItem.reviewedBy = rs.getString(45);
+				solutionItem.profileAdded = rs.getString(46);
+				solutionItem.dateCreated = rs.getDate(47);
+				solutionItem.modifiedBy = rs.getString(48);
+				solutionItem.dateUpdated  = rs.getDate(49);
+				solutionItem.notificationProc = rs.getString(50);
+				
 			}
 		}
 		finally {
@@ -208,22 +248,57 @@ public class SolutionItemDAO {
 			while (rs.next()) {
 				SolutionItem solutionItem = new SolutionItem();
 
-				solutionItem.setId(rs.getInt(1));
-				solutionItem.setName(rs.getString(2));
-				solutionItem.setDescription(rs.getString(3));
-				solutionItem.setParentCompanyName(rs.getString(4));
-				solutionItem.setCompanyNo(rs.getInt(5));
-				solutionItem.setCompanyFriendlySite(rs.getString(5));
-				solutionItem.setAdressId(rs.getInt(7));
-				solutionItem.setCompanyEmpNo(rs.getInt(8));
-				solutionItem.setCountryRegistrationId(rs.getInt(9));
-				solutionItem.setYear(rs.getInt(10));
-				solutionItem.setDateLastReview(rs.getDate(11));
-				solutionItem.setReviewedBy(rs.getString(12));
-				solutionItem.setDateCreated(rs.getDate(13));
-				solutionItem.setDateUpdated(rs.getDate(14));
-				solutionItem.setModifiedBy(rs.getString(15));				
-				solutionItem.setCompanySite(rs.getString(16));				
+				solutionItem.setId(rs.getLong(1));
+				solutionItem.companyId = rs.getInt(2) ;
+				solutionItem.solName = rs.getString(3) ; 
+				solutionItem.solDesc = rs.getString(4);
+				solutionItem.partComSite= rs.getString(5); 
+				solutionItem.solFocus = rs.getInt(6);
+				solutionItem.sapCertSince = rs.getDate(7);
+				solutionItem.lastReviewBySAP = rs.getDate(8);
+				solutionItem.averTrainEndUser= rs.getInt(9);
+				solutionItem.averImplTrainingDays=rs.getInt(10);
+				solutionItem.averImplEffort =rs.getInt(11);
+				solutionItem.averImplDuration = rs.getInt(12);
+				solutionItem.averSizeImplTeam = rs.getInt(13);
+				solutionItem.averSaleCycle = rs.getInt(14);
+				solutionItem.noCustomers = rs.getInt(15);
+				solutionItem.smallImpl = rs.getInt(16);
+				solutionItem.largeImpl = rs.getInt(17);
+				solutionItem.smallImplTime = rs.getInt(18);
+				solutionItem.largeImplTime = rs.getInt(19);
+				solutionItem.smallImplTeamNo = rs.getInt(20);
+				solutionItem.largeImplTeamNo = rs.getInt(21);
+				solutionItem.solSite = rs.getString(22);
+				solutionItem.refCustAvailForUse = rs.getString(23);
+				solutionItem.totalAppBaseLinePrice = rs.getInt(24);
+				solutionItem.appPriceEur = rs.getInt(25);
+				solutionItem.hardwareCost = rs.getInt(26);
+				solutionItem.hardwareCostEur = rs.getInt(27);
+				solutionItem.averLicensePrice = rs.getInt(28);
+				solutionItem.averLicensePriceEur = rs.getInt(29);
+				solutionItem.addServiceCost = rs.getInt(30);
+				solutionItem.addServicePriceEur = rs.getInt(31);
+				solutionItem.implCost = rs.getInt(32);
+				solutionItem.implCostEur = rs.getInt(33);
+				solutionItem.sapDiscount = rs.getString(34);
+				solutionItem.dbUsed = rs.getString(35);
+				solutionItem.SAPBusUsed = rs.getString(36);
+				solutionItem.SAPGUIUsed = rs.getString(37);
+				solutionItem.compA1B1Used = rs.getString(38);
+				solutionItem.thirdPartyUsed = rs.getString(39);
+				solutionItem.thirdPartyName = rs.getString(40);
+				solutionItem.otherIT = rs.getString(41);
+				solutionItem.addRemarks = rs.getString(42);
+				solutionItem.solSAPMicroSite = rs.getString(43);
+				solutionItem.lastPartRevieDate = rs.getDate(44);
+				solutionItem.reviewedBy = rs.getString(45);
+				solutionItem.profileAdded = rs.getString(46);
+				solutionItem.dateCreated = rs.getDate(47);
+				solutionItem.modifiedBy = rs.getString(48);
+				solutionItem.dateUpdated  = rs.getDate(49);
+				solutionItem.notificationProc = rs.getString(50);
+				
 				
 				list.add(solutionItem);
 			}
@@ -244,35 +319,64 @@ public class SolutionItemDAO {
 
 			ps = con.prepareStatement(_UPDATE_SOLUTION_ITEM);
 
-			ps.setString(1, solutionItem.getName());
-			ps.setString(2, solutionItem.getDescription());
-			ps.setString(3, solutionItem.getParentCompanyName());
-			ps.setInt(4, solutionItem.getCompanyEmpNo());
-			ps.setInt(5, solutionItem.getCompanyNo());
-			ps.setString(6, solutionItem.getCompanyFriendlySite());
-			ps.setInt(7, solutionItem.getAdressId());
-			ps.setInt(8, solutionItem.getCountryRegistrationId());
-			ps.setInt(9, solutionItem.getYear());
 			java.util.Date date = new java.util.Date();
-			if(solutionItem.getDateCreated() != null)
-				ps.setDate(10, new java.sql.Date(solutionItem.getDateCreated().getTime()));
+			java.sql.Date sqlDate = null;
+			if(solutionItem.sapCertSince != null)
+				sqlDate = new java.sql.Date(solutionItem.sapCertSince.getTime());
 			else
-				ps.setDate(10, new java.sql.Date(date.getTime()));
+				sqlDate = new java.sql.Date(date.getTime());
 
-			if(solutionItem.getDateUpdated() != null)
-				ps.setDate(11, new java.sql.Date(solutionItem.getDateUpdated().getTime()));
-			else
-				ps.setDate(11, new java.sql.Date(date.getTime()));
-					
-			if(solutionItem.getDateLastReview() != null)
-				ps.setDate(12, new java.sql.Date(solutionItem.getDateLastReview().getTime()));
-			else
-				ps.setDate(12, new java.sql.Date(date.getTime()));
-
-			ps.setString(13, solutionItem.getReviewedBy());
-			ps.setString(14, solutionItem.getModifiedBy());
-			ps.setString(15, solutionItem.getCompanySite());				
-			ps.setInt(16, solutionItem.getId());
+			ps.setLong(1, solutionItem.companyId) ;
+			ps.setString(2, solutionItem.solName) ; 
+			ps.setString(3,solutionItem.solDesc );
+			ps.setString(4,solutionItem.partComSite); 
+			ps.setInt(5,solutionItem.solFocus);
+			ps.setDate(6,sqlDate);
+			ps.setDate(7,sqlDate/*solutionItem.lastReviewBySAP*/);
+			ps.setInt(8,solutionItem.averTrainEndUser);
+			ps.setInt(9,solutionItem.averImplTrainingDays);
+			ps.setInt(10,solutionItem.averImplEffort);
+			ps.setInt(11,solutionItem.averImplDuration );
+			ps.setInt(12,solutionItem.averSizeImplTeam );
+			ps.setInt(13,solutionItem.averSaleCycle );
+			ps.setInt(14,solutionItem.noCustomers );
+			ps.setInt(15,solutionItem.smallImpl );
+			ps.setInt(16,solutionItem.largeImpl );
+			ps.setInt(17,solutionItem.smallImplTime );
+			ps.setInt(18,solutionItem.largeImplTime );
+			ps.setInt(19,solutionItem.smallImplTeamNo );
+			ps.setInt(20,solutionItem.largeImplTeamNo );
+			ps.setString(21,solutionItem.solSite );
+			ps.setString(22,solutionItem.refCustAvailForUse);
+			ps.setInt(23,solutionItem.totalAppBaseLinePrice);
+			ps.setInt(24,solutionItem.appPriceEur );
+			ps.setInt(25,solutionItem.hardwareCost );
+			ps.setInt(26,solutionItem.hardwareCostEur );
+			ps.setInt(27,solutionItem.averLicensePrice );
+			ps.setInt(28,solutionItem.averLicensePriceEur );
+			ps.setInt(29,solutionItem.addServiceCost );
+			ps.setInt(30,solutionItem.addServicePriceEur );
+			ps.setInt(31,solutionItem.implCost );
+			ps.setInt(32,solutionItem.implCostEur );
+			ps.setString(33,solutionItem.sapDiscount );
+			ps.setString(34,solutionItem.dbUsed );
+			ps.setString(35,solutionItem.SAPBusUsed);
+			ps.setString(36,solutionItem.SAPGUIUsed);
+			ps.setString(37,solutionItem.compA1B1Used);
+			ps.setString(38,solutionItem.thirdPartyUsed);
+			ps.setString(39,solutionItem.thirdPartyName);
+			ps.setString(40,solutionItem.otherIT);
+			ps.setString(41,solutionItem.addRemarks );
+			ps.setString(42,solutionItem.solSAPMicroSite);
+			ps.setDate(43,sqlDate/*solutionItem.lastPartRevieDate*/);
+			ps.setString(44,solutionItem.reviewedBy );
+			ps.setString(45,solutionItem.profileAdded );
+			ps.setDate(46,sqlDate/*solutionItem.dateCreated */);
+			ps.setString(47,solutionItem.modifiedBy);
+			ps.setDate(48,sqlDate/*solutionItem.dateUpdated */);
+			ps.setString(49,solutionItem.notificationProc);
+			
+			ps.setLong(50, solutionItem.getId());
 
 			ps.executeUpdate();
 		}
@@ -284,19 +388,72 @@ public class SolutionItemDAO {
 
 	
 	private static final String _ADD_SOLUTION_ITEM =
-	"INSERT INTO tbl_sol_directory (companyName, description, parent_companyname, noEmployees, partnerNumber, friendlySAP_site, adressId, countryRegistrationId ,partner_since, date_created, date_updated, last_review_date, reviewed_By, modified_by, web_site) " +
-		"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+	"INSERT INTO tbl_sol_directory " +
+	"(companyId, partNumber, solName, solDesc, partComSite, solFocus, " +
+	"sapCertSince, lastReviewBySAP, averTrainEndUser, averImplTrainingDays, " +
+	"averImplEffort, averImplDuration, averSizeImplTeam, " +
+	"averSaleCycle, noCustomers, smallImpl, largeImpl, smallImplTime, largeImplTime, " +
+	"smallImplTeamNo, largeImplTeamNo, solSite, refCustAvailForUse, totalAppBaseLinePrice, " +
+	"appPriceEur, hardwareCost, hardwareCostEur, averLicensePrice, averLicensePriceEur, " +
+	"addServiceCost, addServicePriceEur, implCost, implCostEur, sapDiscount, dbUsed, " +
+	"SAPBusUsed, SAPGUIUsed, compA1B1Used, thirdPartyUsed, thirdPartyName, otherIT, " +
+	"addRemarks, solSAPMicroSite, lastPartRevieDate, reviewedBy, profileAdded, " +
+	"dateCreated, modifiedBy, dateUpdated, notificationProc) " +
+	"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " +
+	"?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " +
+	"?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 
 	private static final String _DELETE_SOLUTION_ITEM =
 		"DELETE FROM tbl_sol_directory WHERE solId = ?";
 
 	private static final String _GET_SOLUTION_ITEM =
-		"SELECT solId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_sol_directory WHERE solId = ?";
+	"SELECT solId, companyId, partNumber, solName, solDesc, partComSite, solFocus, sapCertSince, lastReviewBySAP, averTrainEndUser, averImplTrainingDays, " +
+	"averImplEffort, averImplDuration, averSizeImplTeam, " +
+	"averSaleCycle, noCustomers, smallImpl, largeImpl, smallImplTime, largeImplTime, " +
+	"smallImplTeamNo, largeImplTeamNo, solSite, refCustAvailForUse, totalAppBaseLinePrice, " +
+	"appPriceEur, hardwareCost, hardwareCostEur, averLicensePrice, averLicensePriceEur, " +
+	"addServiceCost, addServicePriceEur, implCost, implCostEur, sapDiscount, dbUsed, " +
+	"SAPBusUsed, SAPGUIUsed, compA1B1Used, thirdPartyUsed, thirdPartyName, otherIT, " +
+	"addRemarks, solSAPMicroSite, lastPartRevieDate, reviewedBy, profileAdded, " +
+	"dateCreated, modifiedBy, dateUpdated, notificationProc " +
+	"FROM tbl_sol_directory WHERE solId = ?";
 
 	private static final String _GET_SOLUTION_ITEMS =
-		"SELECT solId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_sol_directory";
+		"SELECT solId, companyId, partNumber, solName, solDesc, partComSite, solFocus, sapCertSince, lastReviewBySAP, averTrainEndUser, averImplTrainingDays, " +
+		"averImplEffort, averImplDuration, averSizeImplTeam, " +
+		"averSaleCycle, noCustomers, smallImpl, largeImpl, smallImplTime, largeImplTime, " +
+		"smallImplTeamNo, largeImplTeamNo, solSite, refCustAvailForUse, totalAppBaseLinePrice, " +
+		"appPriceEur, hardwareCost, hardwareCostEur, averLicensePrice, averLicensePriceEur, " +
+		"addServiceCost, addServicePriceEur, implCost, implCostEur, sapDiscount, dbUsed, " +
+		"SAPBusUsed, SAPGUIUsed, compA1B1Used, thirdPartyUsed, thirdPartyName, otherIT, " +
+		"addRemarks, solSAPMicroSite, lastPartRevieDate, reviewedBy, profileAdded, " +
+		"dateCreated, modifiedBy, dateUpdated, notificationProc " +
+		"FROM tbl_sol_directory";
 
+	private static final String _GET_SOLUTION_ITEMS_BY_COMP_ID =
+		"SELECT solId, companyId, partNumber, solName, solDesc, partComSite, solFocus, sapCertSince, lastReviewBySAP, averTrainEndUser, averImplTrainingDays, " +
+		"averImplEffort, averImplDuration, averSizeImplTeam, " +
+		"averSaleCycle, noCustomers, smallImpl, largeImpl, smallImplTime, largeImplTime, " +
+		"smallImplTeamNo, largeImplTeamNo, solSite, refCustAvailForUse, totalAppBaseLinePrice, " +
+		"appPriceEur, hardwareCost, hardwareCostEur, averLicensePrice, averLicensePriceEur, " +
+		"addServiceCost, addServicePriceEur, implCost, implCostEur, sapDiscount, dbUsed, " +
+		"SAPBusUsed, SAPGUIUsed, compA1B1Used, thirdPartyUsed, thirdPartyName, otherIT, " +
+		"addRemarks, solSAPMicroSite, lastPartRevieDate, reviewedBy, profileAdded, " +
+		"dateCreated, modifiedBy, dateUpdated, notificationProc " +
+		"FROM tbl_sol_directory WHERE companyId = ?";
+
+	
 	private static final String _UPDATE_SOLUTION_ITEM =
-		"UPDATE tbl_sol_directory SET companyName = ?, description = ?, parent_companyname = ?, noEmployees = ?, partnerNumber = ?, friendlySAP_site = ?, adressId = ?, countryRegistrationId = ?, partner_since = ?, date_created = ?, date_updated = ?, last_review_date = ?, reviewed_By = ?, modified_by = ?, web_site = ? WHERE solId = ?";
+		"UPDATE tbl_sol_directory SET companyId = ?, partNumber = ?, solName = ?, solDesc = ?, partComSite = ?, solFocus = ?, " +
+		"sapCertSince = ?, lastReviewBySAP = ?, averTrainEndUser = ?, averImplTrainingDays = ?, " +
+		"averImplEffort = ?, averImplDuration = ?, averSizeImplTeam = ?, " +
+		"averSaleCycle = ?, noCustomers = ?, smallImpl = ?, largeImpl = ?, smallImplTime = ?, largeImplTime = ?, " +
+		"smallImplTeamNo = ?, largeImplTeamNo = ?, solSite = ?, refCustAvailForUse = ?, totalAppBaseLinePrice = ?, " +
+		"appPriceEur = ?, hardwareCost = ?, hardwareCostEur = ?, averLicensePrice = ?, averLicensePriceEur = ?, " +
+		"addServiceCost = ?, addServicePriceEur = ?, implCost = ?, implCostEur = ?, sapDiscount = ?, dbUsed = ?, " +
+		"SAPBusUsed = ?, SAPGUIUsed = ?, compA1B1Used = ?, thirdPartyUsed = ?, thirdPartyName = ?, otherIT = ?, " +
+		"addRemarks = ?, solSAPMicroSite = ?, lastPartRevieDate = ?, reviewedBy = ?, profileAdded = ?, " +
+		"dateCreated = ?, modifiedBy = ?, dateUpdated = ?, notificationProc = ?) " +
+		"WHERE solId = ?";
 	
 }

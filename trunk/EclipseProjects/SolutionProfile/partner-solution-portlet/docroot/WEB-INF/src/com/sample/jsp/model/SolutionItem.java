@@ -32,153 +32,75 @@ import java.util.Date;
 public class SolutionItem {
 
 	public SolutionItem() {
-		_date_created = null;
-		_date_updated = null;
-		_date_lastreviewdate = null;
+		lastPartRevieDate = null;	
+		dateCreated	= null;
+		dateUpdated = null;	
 	}
 
-	public int getId() {
+	public long getId() {
 		return _id;
 	}
 
-	protected void setId(int id) {
+	protected void setId(long id) {
 		_id = id;
 	}
 
-	public String getName() {
-		return _name;
-	}
-
-	public void setName(String name) {
-		_name = name;
-	}
-
-	public String getDescription() {
-		return _description;
-	}
-
-	public void setDescription(String name) {
-		_description = name;
-	}
-
-	public String getParentCompanyName() {
-		return _parentCompany;
-	}
-
-	public void setParentCompanyName(String name) {
-		_parentCompany = name;
-	}
-
-	public int getCompanyEmpNo() {
-		return _companyEmpNo;
-	}
-
-	public void setCompanyEmpNo(int id) {
-		_companyEmpNo = id;
-	}
-
-	public int getCompanyNo() {
-		return _companyNo;
-	}
-
-	public void setCompanyNo(int id) {
-		_companyNo = id;
-	}
-
-	public String getCompanyFriendlySite() {
-		return _friendlySAP_site;
-	}
-
-	public void setCompanyFriendlySite(String name) {
-		_friendlySAP_site = name;
-	}
-
-	public String getCompanySite() {
-		return _web_site;
-	}
-
-	public void setCompanySite(String name) {
-		_web_site = name;
-	}
+	public long _id;	
+	public int companyId;
+	public long partNumber;	
+	public String solName;	
+	public String solDesc;	
+	public String partComSite	;
+	public int solFocus	;
+	public int solStatusPartner;
+	public int solStatusSAP;
+	public Date sapCertSince	;
+	public Date lastReviewBySAP;	
+	public int averTrainEndUser;
+	public int averImplTrainingDays;	
+	public int averImplEffort;	
+	public int averImplDuration;	
+	public int averSizeImplTeam;	
+	public int averSaleCycle;	
+	public int noCustomers;	
+	public int smallImpl;
+	public int largeImpl;	
+	public int smallImplTime;	
+	public int largeImplTime;	
+	public int smallImplTeamNo;	
+	public int largeImplTeamNo;	
+	public String solSite;
 	
-	public void setAdressId(int id) {
-		_adressId = id;
-	}
-
-	public int getAdressId() {
-		return _adressId ;
-	}
+	public int countryPriceEuro;
 	
-	public void setCountryRegistrationId(int id) {
-		_countryRegistrationId = id;
-	}
-
-	public int getCountryRegistrationId() {
-		return _countryRegistrationId ;
-	}
+	public String refCustAvailForUse;	
+	public int totalAppBaseLinePrice;	
+	public int appPriceEur	;
+	public int hardwareCost	;
+	public int hardwareCostEur;	
+	public int averLicensePrice;	
+	public int averLicensePriceEur;	
+	public int addServiceCost	;
+	public int addServicePriceEur;	
+	public int implCost	;
+	public int implCostEur;	
+	public String  sapDiscount	;
+	public String dbUsed;	
+	public String SAPBusUsed;	
+	public String SAPGUIUsed;	
+	public String compA1B1Used;	
+	public String thirdPartyUsed;	
+	public String thirdPartyName ;	
+	public String otherIT;	
+	public String addRemarks;	
+	public String solSAPMicroSite;	
 	
-	public void setYear(int id) {
-		_year = id;
-	}
-
-	public int getYear() {
-		return _year ;
-	}
-
-	public void setDateCreated(Date  dateCreated) {
-		_date_created = dateCreated;
-	}
-	
-	public Date getDateCreated() {
-		return _date_created ;
-	}
-
-	public void setDateUpdated(Date  dateUpdated) {
-		_date_updated = dateUpdated;
-	}
-	
-	public Date getDateUpdated() {
-		return _date_updated ;
-	}
-
-	public void setDateLastReview(Date  date) {
-		_date_lastreviewdate = date;
-	}
-	
-	public Date getDateLastReview() {
-		return _date_lastreviewdate ;
-	}
-
-	public void setReviewedBy(String  name) {
-		_reviewedBy = name;
-	}
-	
-	public String getReviewedBy() {
-		return _reviewedBy ;
-	}
-
-	public void setModifiedBy(String  name) {
-		_modifiedBy = name;
-	}
-	
-	public String getModifiedBy() {
-		return _modifiedBy ;
-	}
-	
-	private int _id;
-	private String _name;
-	private String _description;
-	private int _companyNo;
-	private String _friendlySAP_site;
-	private int _adressId;
-	private int _companyEmpNo;
-	private String _parentCompany;
-	private int _countryRegistrationId;
-	private int _year;
-	private Date _date_created;
-	private Date _date_updated;
-	private Date _date_lastreviewdate;
-	private String _reviewedBy;
-	private String _modifiedBy;
-	private String _web_site;
+	public Date lastPartRevieDate;	
+	public String reviewedBy	;
+	public String profileAdded	;
+	public Date dateCreated	;
+	public String modifiedBy;	
+	public Date dateUpdated;	
+	public String notificationProc;
+	public String notificationText;
 }
