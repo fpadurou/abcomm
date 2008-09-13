@@ -1,4 +1,4 @@
--- MySQL Administrator dump 1.4
+﻿-- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
 -- Server version	5.0.51b-community-nt
@@ -28,6 +28,7 @@ USE lr_test;
 DROP TABLE IF EXISTS `tbl_sol_directory`;
 CREATE TABLE `tbl_sol_directory` (
   `solId` bigint(20) NOT NULL auto_increment,
+  `companyId` bigint(20) default NULL,
   `partNumber` varchar(20) default NULL,
   `solName` varchar(80) NOT NULL default '',
   `solDesc` longtext,
