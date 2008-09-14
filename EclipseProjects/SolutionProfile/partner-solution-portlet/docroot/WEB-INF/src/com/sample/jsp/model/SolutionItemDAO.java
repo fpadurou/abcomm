@@ -389,7 +389,7 @@ public class SolutionItemDAO {
 	
 	private static final String _ADD_SOLUTION_ITEM =
 	"INSERT INTO tbl_sol_directory " +
-	"(companyId, partNumber, solName, solDesc, partComSite, solFocus, " +
+	"(companyId, solName, solDesc, partComSite, solFocus, " +
 	"sapCertSince, lastReviewBySAP, averTrainEndUser, averImplTrainingDays, " +
 	"averImplEffort, averImplDuration, averSizeImplTeam, " +
 	"averSaleCycle, noCustomers, smallImpl, largeImpl, smallImplTime, largeImplTime, " +
@@ -407,7 +407,7 @@ public class SolutionItemDAO {
 		"DELETE FROM tbl_sol_directory WHERE solId = ?";
 
 	private static final String _GET_SOLUTION_ITEM =
-	"SELECT solId, companyId, partNumber, solName, solDesc, partComSite, solFocus, sapCertSince, lastReviewBySAP, averTrainEndUser, averImplTrainingDays, " +
+	"SELECT solId, companyId, solName, solDesc, partComSite, solFocus, sapCertSince, lastReviewBySAP, averTrainEndUser, averImplTrainingDays, " +
 	"averImplEffort, averImplDuration, averSizeImplTeam, " +
 	"averSaleCycle, noCustomers, smallImpl, largeImpl, smallImplTime, largeImplTime, " +
 	"smallImplTeamNo, largeImplTeamNo, solSite, refCustAvailForUse, totalAppBaseLinePrice, " +
@@ -419,7 +419,7 @@ public class SolutionItemDAO {
 	"FROM tbl_sol_directory WHERE solId = ?";
 
 	private static final String _GET_SOLUTION_ITEMS =
-		"SELECT solId, companyId, partNumber, solName, solDesc, partComSite, solFocus, sapCertSince, lastReviewBySAP, averTrainEndUser, averImplTrainingDays, " +
+		"SELECT solId, companyId, solName, solDesc, partComSite, solFocus, sapCertSince, lastReviewBySAP, averTrainEndUser, averImplTrainingDays, " +
 		"averImplEffort, averImplDuration, averSizeImplTeam, " +
 		"averSaleCycle, noCustomers, smallImpl, largeImpl, smallImplTime, largeImplTime, " +
 		"smallImplTeamNo, largeImplTeamNo, solSite, refCustAvailForUse, totalAppBaseLinePrice, " +
@@ -431,7 +431,7 @@ public class SolutionItemDAO {
 		"FROM tbl_sol_directory";
 
 	private static final String _GET_SOLUTION_ITEMS_BY_COMP_ID =
-		"SELECT solId, companyId, partNumber, solName, solDesc, partComSite, solFocus, sapCertSince, lastReviewBySAP, averTrainEndUser, averImplTrainingDays, " +
+		"SELECT solId, companyId, solName, solDesc, partComSite, solFocus, sapCertSince, lastReviewBySAP, averTrainEndUser, averImplTrainingDays, " +
 		"averImplEffort, averImplDuration, averSizeImplTeam, " +
 		"averSaleCycle, noCustomers, smallImpl, largeImpl, smallImplTime, largeImplTime, " +
 		"smallImplTeamNo, largeImplTeamNo, solSite, refCustAvailForUse, totalAppBaseLinePrice, " +
@@ -444,7 +444,7 @@ public class SolutionItemDAO {
 
 	
 	private static final String _UPDATE_SOLUTION_ITEM =
-		"UPDATE tbl_sol_directory SET companyId = ?, partNumber = ?, solName = ?, solDesc = ?, partComSite = ?, solFocus = ?, " +
+		"UPDATE tbl_sol_directory SET companyId = ?, solName = ?, solDesc = ?, partComSite = ?, solFocus = ?, " +
 		"sapCertSince = ?, lastReviewBySAP = ?, averTrainEndUser = ?, averImplTrainingDays = ?, " +
 		"averImplEffort = ?, averImplDuration = ?, averSizeImplTeam = ?, " +
 		"averSaleCycle = ?, noCustomers = ?, smallImpl = ?, largeImpl = ?, smallImplTime = ?, largeImplTime = ?, " +

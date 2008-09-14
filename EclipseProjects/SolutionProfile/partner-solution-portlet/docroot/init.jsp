@@ -40,6 +40,9 @@
 <%@ page import="com.sample.solutionprofile.model.IndustryItemDAO" %>
 <%@ page import="com.sample.solutionprofile.util.ConnectionPool" %>
 <%@ page import="com.sample.solutionprofile.model.CompanyUtil" %>
+<%@ page import="com.sample.solutionprofile.model.SolutionItem" %>
+<%@ page import="com.sample.solutionprofile.model.SolutionItemDAO" %>
+<%@ page import="com.sample.solutionprofile.model.SolutionUtil" %>
 
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.DateFormat" %>

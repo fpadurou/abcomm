@@ -1,5 +1,4 @@
 /**
- * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -42,13 +41,44 @@ import java.util.Date;
  *
  */
 public class SolutionUtil {
+
+	public static String getSolutionPartnerName(SolutionItem solutionItem) throws SQLException {
+		List list = new ArrayList();
+		String value = "";
+		int id = 0;
+		if(solutionItem != null)
+			id = solutionItem.companyId;
+			
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String querry = "SELECT companyName FROM tbl_company WHERE companyId = ?";
+
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(querry);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				value = rs.getString(1);
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return value;
+	}
 	
 	public static String getSolutionSolFocus(SolutionItem solutionItem) throws SQLException {
 		List list = new ArrayList();
 		String solutionSapSolutions = "";
-		long solutionId = 0;
+		int id = 0;
 		if(solutionItem != null)
-			solutionId = solutionItem.getId();
+			id = solutionItem.solFocus;
 			
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -58,11 +88,11 @@ public class SolutionUtil {
 			con = ConnectionPool.getConnection();
 
 			ps = con.prepareStatement(_GET_SOLUTION_SOL_FOCUS);
-			ps.setLong(1, solutionId);
+			ps.setInt(1, id);
 			rs = ps.executeQuery();
 
-			while (rs.next()) {
-				solutionSapSolutions = solutionSapSolutions + rs.getString(1) + ", ";
+			if (rs.next()) {
+				solutionSapSolutions = rs.getString(1);
 			}
 		}
 		finally {
@@ -171,7 +201,7 @@ public class SolutionUtil {
 		try {
 			con = ConnectionPool.getConnection();
 
-			ps = con.prepareStatement(_GET_SOL_INDUSTRY);
+			ps = con.prepareStatement(_GET_SOLUTION_INDUSTRIES);
 			ps.setLong(1, solutionId);
 			rs = ps.executeQuery();
 
@@ -184,6 +214,35 @@ public class SolutionUtil {
 		}
 
 		return list;
+
+	}	
+
+	public static String getSolutionIndustriesString(SolutionItem solutionItem) throws SQLException {
+		String value = "";
+		long solutionId = 0;
+		if(solutionItem != null)
+			solutionId = solutionItem.getId();
+			
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_SOLUTION_INDUSTRIES);
+			ps.setLong(1, solutionId);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				value = value + rs.getString(1) + ", ";
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return value;
 
 	}	
 	
@@ -273,6 +332,35 @@ public class SolutionUtil {
 		return strCoverage;
 
 	}		
+
+	public static List getSolutionCountryCoverage(SolutionItem solutionItem) throws SQLException {
+		List list = new ArrayList();
+		long solutionId = 0;
+		if(solutionItem != null)
+			solutionId = solutionItem.getId();
+			
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_SOLUTION_COVERAGE);
+			ps.setLong(1, solutionId);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
+
+	}			
 	
 	public static String getTargetCompanySizeString(SolutionItem solutionItem) throws SQLException {
 		List list = new ArrayList();
@@ -1078,9 +1166,6 @@ public class SolutionUtil {
 	private static final String _GET_COMPANY_ITEMS_BY_SEARCH_COMP_COUNTRY =
 		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company t1 join tbl_adress t2 USING ( adressId, companyId ) WHERE t2.countryId = ?";
 
-	private static final String _GET_COMPANY_INDUSTRIES =
-		"SELECT industry_name FROM tbl_companies_industries t1 join tbl_industry_microvertical t2 WHERE (t1.industryId = t2.industryId) AND  t1.companyId = ?";
-
 	private static final String _GET_COMPANY_SAP_SOLUTIONS =
 		"SELECT SAPSolution_name FROM tbl_companies_sapsolution t1 join tbl_sapsolutions t2 WHERE (t1.sapsolutionId = t2.sapsolutionId) AND  t1.companyId = ?";
 
@@ -1107,14 +1192,16 @@ public class SolutionUtil {
 	
 /// solution string
 	private static final String _GET_SOLUTION_SOL_FOCUS = 
-		"";
+		"SELECT solSolFocus FROM tbl_sol_solfocus WHERE (tbl_sol_solfocus.id = ?) ";
 	private static final String _GET_SOL_MYSAPALLINONE_VERISON = "";
 	private static final String _GET_SOL_SAPONEPRODUCT_VERISON = "";
 	private static final String _GET_SOL_MATURITY = "";
-	private static final String _GET_SOL_INDUSTRY = "";
+	private static final String _GET_SOLUTION_INDUSTRIES =
+		"SELECT industry_name FROM tbl_solution_industries t1 join tbl_industry_microvertical t2 WHERE (t1.industryId = t2.industryId) AND  t1.solutionId = ?";
 	private static final String _GET_SOL_STATUS_BY_PROVIDER = "";
 	private static final String _GET_SOL_STATUS_BY_SAP = "";
-	private static final String _GET_SOLUTION_COVERAGE = "";
+	private static final String _GET_SOLUTION_COVERAGE = 		
+		"SELECT country_name FROM tbl_solution_coverage t1 join tbl_countries t2 WHERE (t1.countryId = t2.countryId) AND  t1.solutionId = ?";
 	private static final String _GET_TARGET_COMP_SIZE = "";
 	private static final String _GET_SOL_COUNTRY_EUR = "";
 	private static final String _GET_SOLUTION_PROG_LANG = "";
