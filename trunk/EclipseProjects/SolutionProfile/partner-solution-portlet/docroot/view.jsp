@@ -56,64 +56,70 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	int id = 0;
 	int userId = 0;
 	
-	int companyId;
-	long partNumber;	
-	String solName;	
-	String solDesc;	
-	String partComSite	;
-	int solFocus ;
-	int solStatusPartner;
-	int solStatusSAP;
-	String sapCertSince	;
-	String lastReviewBySAP;	
-	int averTrainEndUser;
-	int averImplTrainingDays;	
-	int averImplEffort;	
-	int averImplDuration;	
-	int averSizeImplTeam;	
-	int averSaleCycle;	
-	int noCustomers;	
-	int smallImpl;
-	int largeImpl;	
-	int smallImplTime;	
-	int largeImplTime;	
-	int smallImplTeamNo;	
-	int largeImplTeamNo;	
-	String solSite;
+	int companyId = 0;
+	long partNumber  = 0;	
+	String solName = "";	
+	String solDesc = "";	
+	String partComSite	= "";
+	int solFocus  = 0;
+	int solStatusPartner = 0;
+	int solStatusSAP = 0;
+	String sapCertSince	= "";;
+	String lastReviewBySAP = "";	
+	int averTrainEndUser = 0;
+	int averImplTrainingDays = 0;	
+	int averImplEffort = 0;	
+	int averImplDuration = 0;	
+	int averSizeImplTeam = 0;	
+	int averSaleCycle = 0;	
+	int noCustomers = 0;	
+	int smallImpl = 0;
+	int largeImpl = 0;	
+	int smallImplTime = 0;	
+	int largeImplTime = 0;	
+	int smallImplTeamNo = 0;	
+	int largeImplTeamNo = 0;	
+	String solSite = "";
 	
-	int countryPriceEuro;
+	int countryPriceEuro = 0;
 	
-	String refCustAvailForUse;	
-	int totalAppBaseLinePrice;	
-	int appPriceEur	;
-	int hardwareCost	;
-	int hardwareCostEur;	
-	int averLicensePrice;	
-	int averLicensePriceEur;	
-	int addServiceCost	;
-	int addServicePriceEur;	
-	int implCost	;
-	int implCostEur;	
-	String  sapDiscount	;
-	String dbUsed;	
-	String SAPBusUsed;	
-	String SAPGUIUsed;	
-	String compA1B1Used;	
-	String thirdPartyUsed;	
-	String thirdPartyName ;	
-	String otherIT;	
-	String addRemarks;	
-	String solSAPMicroSite;	
+	String refCustAvailForUse = "";	
+	int totalAppBaseLinePrice = 0;	
+	int appPriceEur	 = 0;
+	int hardwareCost = 0;
+	int hardwareCostEur = 0;	
+	int averLicensePrice = 0;	
+	int averLicensePriceEur = 0;	
+	int addServiceCost = 0;
+	int addServicePriceEur = 0;	
+	int implCost	 = 0;
+	int implCostEur = 0;	
+	String  sapDiscount	 = "";
+	String dbUsed = "";	
+	String SAPBusUsed = "";	
+	String SAPGUIUsed = "";	
+	String compA1B1Used = "";	
+	String thirdPartyUsed = "";	
+	String thirdPartyName  = "";	
+	String otherIT = "";	
+	String addRemarks = "";	
+	String solSAPMicroSite = "";	
 	
-	String lastPartRevieDate;	
-	String reviewedBy	;
-	String profileAdded	;
-	String dateCreated	;
-	String modifiedBy;	
-	String dateUpdated;	
-	String notificationProc;
-	String notificationText;
-    
+	String lastPartRevieDate = "";	
+	String reviewedBy	 = "";
+	String profileAdded	 = "";
+	String dateCreated	 = "";
+	String modifiedBy = "";	
+	String dateUpdated = "";	
+	String notificationProc = "";
+	String notificationText = "";
+	
+	// childs
+	String countryPriceEuroStr = "";
+	String solFocusStr = "";
+    List industry = null; 
+    List geographic_coverage = null;
+        
 	if (command.equals("edit")) {
 		id = Integer.parseInt(request.getParameter("id"));
 		UserItem userItem = UserItemDAO.getUserItemByCompanyId(id);
@@ -124,8 +130,8 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		// company part
 		SolutionItem solutionItem = SolutionItemDAO.getSolutionItem(id);
 
-	int companyId = solutionItem.companyId;
-	longpartNumber = solutionItem.partNumber;	
+	companyId = solutionItem.companyId;
+	partNumber = solutionItem.partNumber;	
 	solName = solutionItem.solName;	
 	solDesc = solutionItem.solDesc;	
 	partComSite = solutionItem.partComSite ;
@@ -162,7 +168,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	addServicePriceEur = solutionItem.addServicePriceEur;	
 	implCost = solutionItem.implCost	;
 	implCostEur = solutionItem.implCostEur;	
-	sapDiscoun = solutionItem.sapDiscount;
+	sapDiscount = solutionItem.sapDiscount;
 	dbUsed = solutionItem.dbUsed;	
 	SAPBusUsed = solutionItem.SAPBusUsed;	
 	SAPGUIUsed = solutionItem.SAPGUIUsed;	
@@ -181,7 +187,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	dateUpdated = String.valueOf(dateFormatDateTime.format(solutionItem.dateUpdated));	
 	notificationProc = solutionItem.notificationProc;
 	notificationText = solutionItem.notificationText;
-
+	
 /*		userCompanyName = companyItem.getName();
 		partnerNumber = companyItem.getCompanyNo(); 
 	    parent_company_name = companyItem.getParentCompanyName(); 
@@ -202,15 +208,16 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	    modified_by = companyItem.getModifiedBy();
 */	     		
 // get the childs item
-/*		int countryParentId = companyItem.getCountryRegistrationId();
-	    if(countryParentId >0)
-	    	country_parent_company = CountryItemDAO.getCountryItem(countryParentId).getCountryName(); 
+	    if(countryPriceEuro >0)
+	    	countryPriceEuroStr = CountryItemDAO.getCountryItem(countryPriceEuro).getCountryName(); 
 
-	    sap_solution_focus = CompanyUtil.getCompanySAPSolutionList(companyItem);
-	    industry = CompanyUtil.getCompanyIndustries(id);
-	    geographic_coverage = CompanyUtil.getCompanyCountryCoverage(companyItem);
-	    primary_business_type = CompanyUtil.getCompanyBusinessSolution(id, 1);
-	*/ 	
+	    if(solFocus >0)
+		    solFocusStr = SolutionUtil.getSolutionSolFocus(solutionItem);
+		    
+	    industry = SolutionUtil.getSolutionIndustries(solutionItem);
+	    geographic_coverage = SolutionUtil.getSolutionCountryCoverage(solutionItem);
+	    //primary_business_type = CompanyUtil.getCompanyBusinessSolution(id, 1);
+	 	
 	}
 	else  //add
 	{
@@ -246,7 +253,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="userCompanyName" type="text" value="<%= userCompanyName %>">
+			<input class="form-text" size = 40 name="solName" type="text" value="<%= solName %>">
 		</td>
 	</tr>
 	<tr>
@@ -255,8 +262,8 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<TEXTAREA rows="4" cols= "60" input class="form-text" name="partnerDescription" align = left>
-			<%= partnerDescription.trim() %>
+			<TEXTAREA rows="4" cols= "60" input class="form-text" name="solDesc" align = left>
+			<%= solDesc.trim() %>
 			</TEXTAREA>
 		</td>
 	</tr>
@@ -311,8 +318,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="industry_search" style="width:40" >
-			<OPTION>---------Any---------</OPTION>
+			<SELECT NAME="industry" style="width:40" MULTIPLE SIZE: 10>
 			 <%
 		     for (int j = 0; j< industryItems.size(); j++ )
 		      {
@@ -323,12 +329,18 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                 //Construct the option tag in a String variable
                 String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
+                if(industry != null && industry.contains(optionCategoryValue))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
+                    
                 //close the option tag
                 optionTag += ">" + optionCategoryValue + "</OPTION>";
                     
                 //printout the option tag
                 out.println(optionTag);
 		      }			 
+            //Close the result set and statment to free up resoures
 			%>
 		</td>
 	</tr>	
@@ -374,7 +386,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="country" style="width:40">
+			<SELECT NAME="geographic_coverage" style="width:40">
 			 <%
 			     for (int j = 0; j< countryItems.size(); j++ )
 			      {
@@ -384,23 +396,20 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
  
                     //Construct the option tag in a String variable
                     String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
-                    
-                    if(optionCategoryValue.equals(country))
-                    {
-                        optionTag += " selected=\"selected\"";
-                    }
+	                if(geographic_coverage != null && geographic_coverage.contains(optionCategoryValue))
+	                {
+	                    optionTag += " selected=\"selected\"";
+	                }
                     
                     //close the option tag
                     optionTag += ">" + optionCategoryValue + "</OPTION>";
                     
                     //printout the option tag
                     out.println(optionTag);
-			        //System.out.print(i.next()); 
 			      }			 
                 //Close the result set and statment to free up resoures
 			%>
 			</SELECT>
-			<!-- <input class="form-text" name="country" type="text" value="<%= country %>"> -->
 		</td>
 	</tr>	
 	<tr>
@@ -573,7 +582,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                     //Construct the option tag in a String variable
                     String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                    if(optionCategoryValue.equals(country))
+                    if(optionCategoryValue.equals(countryPriceEuroStr))
                     {
                         optionTag += " selected=\"selected\"";
                     }
@@ -588,7 +597,6 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                 //Close the result set and statment to free up resoures
 			%>
 			</SELECT>
-			<!-- <input class="form-text" name="country" type="text" value="<%= country %>"> -->
 		</td>
 	</tr>	
 	<tr>
@@ -821,37 +829,37 @@ else {
 	int count = solutionItems.size();
 	boolean even = false;
 	for (int i = 0; i < 2*solutionItems.size(); i++) {
-		SolutionItem solutionItem = (CompanyItem)solutionItems.get(i/2);
+		SolutionItem solutionItem = (SolutionItem)solutionItems.get(i/2);
 		even = (i%2 == 0);
 	%>
 		<% if (even){ 
 		%>
 		<tr>
 			<td class = "fontweightbolder">
-				<%= solutionItem.solName %>
-			</td>
-			<td>
 				<%= SolutionUtil.getSolutionPartnerName(solutionItem) %>
 			</td>
 			<td>
-				<%= SolutionUtil.getSolutionFocus(solutionItem) %>
+				<%= solutionItem.solName %>
 			</td>
 			<td>
-				<%= SolutionUtil.getSolutionIndustry(solutionItem) %>
+				<%= SolutionUtil.getSolutionSolFocus(solutionItem) %>
 			</td>
 			<td>
-				<%= SolutionUtil.getSolutionCoverage(solutionItem) %>
+				<%= SolutionUtil.getSolutionIndustriesString(solutionItem) %>
+			</td>
+			<td>
+				<%= SolutionUtil.getSolutionCountryCoverageString(solutionItem) %>
 			</td>
 			<td>
 				<input class="portlet-form-button" type="button" value="Edit" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="edit" /><portlet:param name="id" value="<%= String.valueOf(solutionItem.getId()) %>" /></portlet:renderURL>';">
 
-				<input class="portlet-form-button" type="button" value="Delete" onClick="document.solutionprofile.command.value = 'delete'; document.solutionprofile.id.value = '<%= companyItem.getId() %>'; document.solutionprofile.submit();">
+				<input class="portlet-form-button" type="button" value="Delete" onClick="document.solutionprofile.command.value = 'delete'; document.solutionprofile.id.value = '<%= solutionItem.getId() %>'; document.solutionprofile.submit();">
 			</td>
 		</tr>
 		<%} else  {%>
 		<tr>
 		<TH colspan="6"  style="font-size: 8pt; font-weight: normal">
-		<% if(solutionItem.getDescription() != null) {%>
+		<% if(solutionItem.solDesc != null) {%>
 				<%= solutionItem.solDesc.substring(0, java.lang.Math.min(200,solutionItem.solDesc.length()))+"..." %>
 				<%}else {%>
 				<b></b>
@@ -875,7 +883,7 @@ else {
 </form>
 
 <script language="JavaScript" type="text/javascript">
- var frmvalidator = new Validator("compprofile");
+ var frmvalidator = new Validator("solutionprofile");
  frmvalidator.addValidation("userCompanyName","req","Please enter the Company Name");
  //frmvalidator.addValidation("userCompanyName","alpha");
  
