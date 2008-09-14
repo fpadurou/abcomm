@@ -71,7 +71,7 @@ CREATE TABLE `tbl_adress` (
   PRIMARY KEY  (`adressId`),
   KEY `IX_93D5AD4E` (`companyId`),
   KEY `IX_5BC8B0D4` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=131 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_adress`
@@ -79,26 +79,78 @@ CREATE TABLE `tbl_adress` (
 
 /*!40000 ALTER TABLE `tbl_adress` DISABLE KEYS */;
 INSERT INTO `tbl_adress` (`adressId`,`companyId`,`userId`,`userName`,`mail`,`createDate`,`modifiedDate`,`street1`,`street2`,`city`,`zip`,`stateregionname`,`countryId`,`phoneId`,`faxId`) VALUES 
- (1,1,0,NULL,'gigi@yahoo.com',NULL,NULL,'Street Av','Street Av','Brasov','70000','Valea Prahovei 2',218,3,7),
- (60,2,0,NULL,'',NULL,NULL,'','','','','',210,12,11),
- (61,13,0,NULL,'',NULL,NULL,'',NULL,'','','',1,0,0),
- (62,13,0,NULL,'',NULL,NULL,'','','','','',5,21,0),
- (63,14,0,NULL,'',NULL,NULL,'',NULL,'','','',1,0,0),
- (64,14,0,NULL,'',NULL,NULL,'','','','','',3,13,0),
- (65,15,0,NULL,'',NULL,NULL,'',NULL,'','','',1,0,0),
- (66,15,0,NULL,'',NULL,NULL,'','','','','',3,14,0),
- (67,16,0,NULL,'123213@yahoo.com',NULL,NULL,'',NULL,'','','',1,15,16),
- (68,17,0,NULL,'',NULL,NULL,'',NULL,'','','',1,17,0),
- (69,17,0,NULL,'',NULL,NULL,'','','','','',4,18,0),
- (70,18,0,NULL,'',NULL,NULL,'','null','','','',2,19,20),
- (71,19,0,NULL,'',NULL,NULL,'','null','','','',19,0,0),
- (72,20,-1,NULL,'',NULL,NULL,'',NULL,'','','',9,-1,-1),
- (73,21,-1,NULL,'',NULL,NULL,'',NULL,'','','',9,-1,-1),
- (74,21,0,NULL,'',NULL,NULL,'','','','','',7,22,0),
- (75,22,0,NULL,'',NULL,NULL,'','null','','','',5,23,0),
- (76,23,0,NULL,'',NULL,NULL,'','null','','','',37,24,0),
- (77,24,0,NULL,'123213@yahoo.com',NULL,NULL,'','null1212321312','','','',2,25,0),
- (78,25,0,NULL,'',NULL,NULL,'','null','','','',1,0,0);
+ (1,1,0,NULL,'gigi@yahoo.com',NULL,NULL,'Street Av','Street Av 2','Brasov','70000','Valea Prahovei',165,3,7),
+ (60,2,0,NULL,'',NULL,NULL,'','','','','Ottawa',38,69,11),
+ (61,3,-1,NULL,'',NULL,NULL,'',NULL,'','','',165,-1,-1),
+ (62,3,0,NULL,'',NULL,NULL,'','Street Av 2','','','',165,12,17),
+ (63,4,0,NULL,'',NULL,NULL,'',NULL,'','','',1,0,0),
+ (64,5,-1,NULL,'',NULL,NULL,'',NULL,'','','',38,-1,-1),
+ (65,5,0,NULL,'wqeqw@as.com',NULL,NULL,'sdsadas dad','','','','',38,29,0),
+ (66,6,0,NULL,'',NULL,NULL,'',NULL,'','','',1,0,0),
+ (67,6,0,NULL,'jimb@jim.com',NULL,NULL,'','','','','Ont',38,48,0),
+ (68,4,0,NULL,'',NULL,NULL,'','','','','',1,0,0),
+ (69,7,0,NULL,'',NULL,NULL,'',NULL,'','','',1,0,0),
+ (70,7,0,NULL,'',NULL,NULL,'','','','','',6,13,70),
+ (71,8,0,NULL,'',NULL,NULL,'',NULL,'','','',1,0,0),
+ (72,8,0,NULL,'',NULL,NULL,'wqee vqweqw','','','','',1,0,0),
+ (73,9,0,NULL,'',NULL,NULL,'',NULL,'','','',1,0,0),
+ (74,10,0,NULL,'',NULL,NULL,'',NULL,'','','',1,0,0),
+ (75,11,-1,NULL,'',NULL,NULL,'',NULL,'','','',1,-1,-1),
+ (76,12,-1,NULL,'',NULL,NULL,'',NULL,'','','',1,-1,-1),
+ (77,13,-1,NULL,'',NULL,NULL,'',NULL,'','','',1,-1,-1),
+ (78,10,0,NULL,'',NULL,NULL,'','','','','',1,0,0),
+ (79,11,-1,NULL,'',NULL,NULL,'','','','','',1,-1,-1),
+ (80,14,0,NULL,'',NULL,NULL,'',NULL,'','','',1,14,0),
+ (81,14,0,NULL,'',NULL,NULL,'','','','','',1,15,16),
+ (82,15,0,NULL,'',NULL,NULL,'',NULL,'','','',1,18,19),
+ (83,15,0,NULL,'',NULL,NULL,'','','','','',7,21,0),
+ (84,13,0,NULL,'',NULL,NULL,'','','','','',1,22,0),
+ (85,16,0,NULL,'liv@fff.tt',NULL,NULL,'888888888888',NULL,'yyy','888888888888888','on',11,23,24),
+ (86,16,0,NULL,'ABC@IBM.CA',NULL,NULL,'777','777','888','777','UN',1,25,26),
+ (87,17,0,NULL,'ericflawrence@gmail.com',NULL,NULL,'',NULL,'','','',1,27,28),
+ (88,18,0,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'','','',1,30,31),
+ (89,19,0,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'','','',1,32,33),
+ (90,20,0,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'','','',1,34,35),
+ (91,21,0,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'','K0A 1T0','',1,36,37),
+ (92,22,0,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'','K0A 1T0','',1,38,39),
+ (93,23,0,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'Dunrobin','K0A 1T0','Ontario',38,40,41),
+ (94,24,0,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'Dunrobin','K0A 1T0','Ontario',38,42,43),
+ (95,25,0,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'Dunrobin','K0A 1T0','Ontario',38,44,45),
+ (96,17,0,NULL,'',NULL,NULL,'','','','','',1,0,0),
+ (97,26,0,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'Dunrobin','K0A 1T0','Ontario',38,46,47),
+ (98,27,0,NULL,'',NULL,NULL,'',NULL,'','','',1,0,0),
+ (99,27,0,NULL,'3432@asdas.com',NULL,NULL,'Street 1 av','','','','',1,49,50),
+ (100,19,0,NULL,'',NULL,NULL,'','','','','',12,0,0),
+ (101,26,0,NULL,'',NULL,NULL,'','','','','',9,0,0),
+ (102,28,-1,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'Ottawa','K0A 1T0','Ontario',38,-1,-1),
+ (103,29,-1,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'Ottawa','K0A 1T0','Ontario',38,-1,-1),
+ (104,30,-1,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'Ottawa','K0A 1T0','Ontario',38,-1,-1),
+ (105,31,-1,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'Ottawa','K0A 1T0','Ontario',38,-1,-1),
+ (106,32,-1,NULL,'jimtest@vennware.com',NULL,NULL,'',NULL,'almonte','','Ont.',38,-1,-1),
+ (107,33,-1,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'Ottawa','K0A 1T0','Ontario',38,-1,-1),
+ (108,34,-1,NULL,'jimtest@vennware.com',NULL,NULL,'',NULL,'almonte','','Ont.',38,-1,-1),
+ (109,35,-1,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'Ottawa','K0A 1T0','Ontario',38,-1,-1),
+ (110,36,-1,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'Ottawa','K0A 1T0','Ontario',38,-1,-1),
+ (111,34,0,NULL,'',NULL,NULL,'','','','','',38,0,0),
+ (112,37,-1,NULL,'ericflawrence@gmail.com',NULL,NULL,'Suite 2',NULL,'Ottawa','K0A 1T0','Ontario',38,-1,-1),
+ (113,36,0,NULL,'',NULL,NULL,'','','','','',18,0,0),
+ (114,37,0,NULL,'ericflawrence@gmail.com',NULL,NULL,'1234','1234','1234','1234','1234',38,59,60),
+ (115,38,0,NULL,'',NULL,NULL,'',NULL,'','','',2,61,0),
+ (116,39,0,NULL,'',NULL,NULL,'',NULL,'','','',2,62,0),
+ (117,40,-1,NULL,'',NULL,NULL,'',NULL,'','','',20,-1,-1),
+ (118,41,-1,NULL,'',NULL,NULL,'',NULL,'','','',24,-1,-1),
+ (119,42,0,NULL,'',NULL,NULL,'',NULL,'','','',27,0,0),
+ (120,43,0,NULL,'',NULL,NULL,'','null','','','',28,0,0),
+ (121,44,0,NULL,'',NULL,NULL,'asda','asda','','','',27,63,64),
+ (122,45,0,NULL,'fpadurou@yahoo.com',NULL,NULL,'Street 1 av','Street Av 2','MAmaia','7000','Ottawa',27,65,66),
+ (123,46,0,NULL,'',NULL,NULL,'','','','','',4,67,68),
+ (124,12,0,NULL,'rererre@yahoo.com',NULL,NULL,'32324 dfsdfsdfsdfsd','','','','',5,71,72),
+ (125,11,0,NULL,'',NULL,NULL,'','','','','',6,0,0),
+ (126,37,0,NULL,'',NULL,NULL,'','','','','',6,73,74),
+ (127,37,0,NULL,'',NULL,NULL,'','','','','',25,0,0),
+ (128,38,0,NULL,'',NULL,NULL,'','','','','',1,0,0),
+ (129,39,0,NULL,'',NULL,NULL,'','','','','',1,0,0),
+ (130,40,0,NULL,'',NULL,NULL,'','','','','',10,0,0);
 /*!40000 ALTER TABLE `tbl_adress` ENABLE KEYS */;
 
 
@@ -146,42 +198,82 @@ CREATE TABLE `tbl_companies_businesstype` (
 
 /*!40000 ALTER TABLE `tbl_companies_businesstype` DISABLE KEYS */;
 INSERT INTO `tbl_companies_businesstype` (`companyId`,`businesstypeId`,`type_`) VALUES 
+ (1,3,1),
  (1,4,2),
- (1,6,1),
  (2,1,2),
  (2,3,1),
- (9,3,2),
- (9,6,1),
+ (3,1,2),
+ (3,3,1),
+ (4,1,1),
+ (4,2,2),
+ (5,1,1),
+ (5,1,2),
+ (6,1,1),
+ (6,2,2),
+ (7,1,2),
+ (7,3,1),
+ (8,1,1),
+ (8,1,2),
+ (9,1,1),
+ (9,1,2),
+ (10,1,1),
  (10,1,2),
- (10,4,1),
  (11,1,1),
  (11,1,2),
  (12,1,1),
  (12,1,2),
+ (13,1,1),
  (13,1,2),
- (13,3,1),
- (14,3,1),
- (14,3,2),
+ (14,1,1),
+ (14,1,2),
  (15,1,2),
- (15,4,1),
- (16,1,1),
- (16,1,2),
+ (15,2,1),
+ (16,2,1),
+ (16,2,2),
  (17,1,1),
  (17,1,2),
+ (18,1,1),
  (18,1,2),
- (18,4,1),
  (19,1,2),
  (19,4,1),
+ (20,1,1),
+ (20,1,2),
+ (21,1,1),
  (21,1,2),
- (21,4,1),
+ (22,1,1),
  (22,1,2),
- (22,4,1),
- (23,3,2),
- (23,5,1),
- (24,1,1),
- (24,1,2),
- (25,1,1),
- (25,1,2);
+ (23,2,1),
+ (23,4,2),
+ (24,2,1),
+ (24,4,2),
+ (25,2,1),
+ (25,4,2),
+ (26,2,1),
+ (26,4,2),
+ (27,1,1),
+ (27,1,2),
+ (34,2,1),
+ (34,2,2),
+ (36,2,1),
+ (36,5,2),
+ (37,2,2),
+ (37,3,1),
+ (38,3,1),
+ (38,4,2),
+ (39,3,1),
+ (39,4,2),
+ (40,3,1),
+ (40,4,2),
+ (42,2,1),
+ (42,3,2),
+ (43,1,1),
+ (43,6,2),
+ (44,2,2),
+ (44,3,1),
+ (45,2,1),
+ (45,3,2),
+ (46,2,2),
+ (46,3,1);
 /*!40000 ALTER TABLE `tbl_companies_businesstype` ENABLE KEYS */;
 
 
@@ -207,29 +299,38 @@ INSERT INTO `tbl_companies_coverage` (`companyId`,`countryId`,`regionId`) VALUES
  (1,2,0),
  (1,3,0),
  (1,4,0),
- (2,1,0),
- (2,2,0),
- (2,3,0),
- (9,1,0),
- (9,2,0),
- (9,3,0),
- (10,4,0),
- (10,5,0),
- (10,6,0),
+ (2,210,0),
+ (3,2,0),
+ (3,3,0),
+ (5,1,0),
+ (6,38,0),
+ (7,1,0),
+ (7,2,0),
  (11,10,0),
  (11,11,0),
  (11,12,0),
- (13,3,0),
- (14,2,0),
- (17,1,0),
- (21,1,0),
- (21,2,0),
- (22,2,0),
- (22,3,0),
- (23,2,0),
- (23,3,0),
- (24,1,0),
- (25,1,0);
+ (12,3,0),
+ (15,2,0),
+ (15,3,0),
+ (16,138,0),
+ (19,2,0),
+ (23,158,0),
+ (24,158,0),
+ (25,158,0),
+ (26,158,0),
+ (34,38,0),
+ (36,1,0),
+ (37,3,0),
+ (38,2,0),
+ (39,2,0),
+ (40,2,0),
+ (42,2,0),
+ (43,3,0),
+ (44,2,0),
+ (45,2,0),
+ (45,3,0),
+ (45,4,0),
+ (46,3,0);
 /*!40000 ALTER TABLE `tbl_companies_coverage` ENABLE KEYS */;
 
 
@@ -261,28 +362,55 @@ INSERT INTO `tbl_companies_industries` (`companyId`,`industryId`) VALUES
  (2,27),
  (2,28),
  (2,29),
- (9,1),
- (9,2),
- (10,1),
- (10,2),
- (10,3),
+ (3,3),
+ (3,4),
+ (3,5),
+ (3,6),
+ (3,7),
+ (3,8),
+ (3,9),
+ (3,10),
+ (3,11),
+ (3,12),
+ (3,13),
+ (3,14),
+ (3,15),
+ (3,16),
+ (3,17),
+ (3,18),
+ (3,19),
+ (4,2),
+ (4,3),
+ (4,4),
+ (5,3),
+ (6,3),
+ (7,1),
  (11,1),
  (11,2),
  (12,1),
  (12,2),
  (12,3),
- (13,3),
- (14,3),
- (14,9),
- (18,7),
- (21,2),
- (22,1),
- (22,2),
- (22,4),
- (23,2),
- (23,3),
- (24,3),
- (25,3);
+ (15,5),
+ (15,6),
+ (16,4),
+ (19,3),
+ (26,2),
+ (34,3),
+ (36,3),
+ (37,2),
+ (38,3),
+ (39,3),
+ (40,3),
+ (42,1),
+ (43,1),
+ (43,2),
+ (43,3),
+ (44,3),
+ (45,1),
+ (45,3),
+ (45,6),
+ (45,7),
+ (46,3);
 /*!40000 ALTER TABLE `tbl_companies_industries` ENABLE KEYS */;
 
 
@@ -304,24 +432,37 @@ CREATE TABLE `tbl_companies_sapsolution` (
 /*!40000 ALTER TABLE `tbl_companies_sapsolution` DISABLE KEYS */;
 INSERT INTO `tbl_companies_sapsolution` (`companyId`,`sapsolutionId`) VALUES 
  (1,1),
+ (1,2),
+ (1,3),
  (2,2),
- (4,4),
- (4,6),
- (4,7),
- (9,3),
+ (3,1),
+ (4,3),
+ (5,1),
+ (6,2),
+ (7,2),
+ (7,3),
  (11,1),
  (12,2),
- (13,2),
- (14,3),
- (17,1),
- (21,2),
- (21,3),
- (22,2),
- (22,3),
+ (15,1),
+ (15,3),
+ (16,3),
+ (19,2),
  (23,2),
- (23,3),
  (24,2),
- (25,2);
+ (25,2),
+ (26,2),
+ (34,2),
+ (36,3),
+ (37,2),
+ (38,1),
+ (39,1),
+ (40,1),
+ (42,2),
+ (43,2),
+ (44,3),
+ (45,2),
+ (46,2),
+ (46,3);
 /*!40000 ALTER TABLE `tbl_companies_sapsolution` ENABLE KEYS */;
 
 
@@ -349,7 +490,7 @@ CREATE TABLE `tbl_company` (
   `modified_by` varchar(75) default NULL,
   `userId` bigint(20) default NULL,
   PRIMARY KEY  (`companyId`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_company`
@@ -357,12 +498,23 @@ CREATE TABLE `tbl_company` (
 
 /*!40000 ALTER TABLE `tbl_company` DISABLE KEYS */;
 INSERT INTO `tbl_company` (`companyId`,`companyName`,`description`,`partnerNumber`,`friendlySAP_site`,`web_site`,`adressId`,`noEmployees`,`parent_companyname`,`countryRegistrationId`,`partner_since`,`last_review_date`,`reviewed_By`,`date_created`,`date_updated`,`modified_by`,`userId`) VALUES 
- (1,'Cunningham Blythe','			Cunningham Blythe is a consultancy organisationthat advises small and medium enterprises on business management and technology best practise. We specialise in enabling fast growing companies to make best use of SAP solutions in support of their growth strategy and business aspirations.\r\n			',810449,'http://cpsn-channel.sap.com/','',1,8,'SAP',2,2006,'2008-08-06 00:00:00','Andy Cunningham','2008-08-06 00:00:00','2008-09-05 00:00:00',NULL,NULL),
- (2,'The Createch Group','Dedicated in improving business performance, The Createch Group is a leader in supply chain optimization and information technology integration. The consulting firm offers services in manufacturing and logistics performance, process reengineering, asset management optimization, change management, ERP and information technology solution implementation. The Createch Group helps customers configure and implement their SAP business solution to match their unique requirements. With their extensive SAP knowledge, the Group?s consultants (who are all certified by the SAP Solution Academy) can also apply industry best practices to help customers maximize their performance across the enterprise.',318473,'http://cpsn-channel.sap.com/','',60,200,'',30,1998,'2008-08-05 00:00:00','Helene Gamache','2008-08-05 00:00:00','2008-09-11 00:00:00',NULL,NULL),
- (13,'12312','this is a test company',1,'','',62,-1,'',4,-1,'2008-09-05 00:00:00','','2008-09-05 00:00:00','2008-09-10 00:00:00',NULL,NULL),
- (14,'test 2','',1,'','',64,-1,'',30,-1,'2008-09-05 00:00:00','','2008-09-05 00:00:00','2008-09-10 00:00:00',NULL,NULL),
- (24,'213123','',1,'http://123212312','http://',77,123,'',30,0,'2008-09-11 00:00:00','','2008-09-11 00:00:00','2008-09-11 00:00:00',NULL,NULL),
- (25,'123','',1,'http://','http://',78,0,'',1,0,'2008-09-11 00:00:00','','2008-09-11 00:00:00','2008-09-11 00:00:00',NULL,NULL);
+ (1,'Cunningham Blythe','Cunningham Blythe is a consultancy organisationthat advises small and medium enterprises on business management and technology best practise. We specialise in enabling fast growing companies to make best use of SAP solutions in support of their growth strategy and business aspirations.',810449,'http://cpsn-channel.sap.com/','',1,8,'SAP',38,2006,'2008-08-06 00:00:00','A. Cunningham','2008-08-06 00:00:00','2008-09-12 00:00:00',NULL,0),
+ (2,'The Createch Group','Dedicated in improving business performance, The Createch Group is a leader in supply chain optimization and information technology integration. The consulting firm offers services in manufacturing and logistics performance, process reengineering, asset management optimization, change management, ERP and information technology solution implementation. The Createch Group helps customers configure and implement their SAP business solution to match their unique requirements. With their extensive SAP knowledge, the Group?s consultants (who are all certified by the SAP Solution Academy) can also apply industry best practices to help customers maximize their performance across the enterprise.',318473,'http://cpsn-channel.sap.com/','',60,200,'',30,1998,'2008-08-05 00:00:00','Helene Gamache','2008-08-05 00:00:00','2008-09-11 00:00:00',NULL,0),
+ (7,'11 Comp','',1,'http://','http://',70,-1,'',8,1990,'2008-09-07 00:00:00','','2008-09-07 00:00:00','2008-09-12 00:00:00',NULL,NULL),
+ (8,'asdsadasd','',1,'http://','http://',72,-1,'',1,1990,'2008-09-07 00:00:00','','2008-09-07 00:00:00','2008-09-09 00:00:00',NULL,NULL),
+ (11,'Adriatica','',1,'http://','http://',125,-1,'',27,-1,'2008-09-09 00:00:00','','2008-09-09 00:00:00','2008-09-11 00:00:00',NULL,NULL),
+ (12,'RestoreMe','',1,'http://','http://',124,-1,'',5,-1,'2008-09-09 00:00:00','','2008-09-09 00:00:00','2008-09-11 00:00:00',NULL,NULL),
+ (14,'LivCis','',1,'http://','http://',81,-1,'',1,1190,'2008-09-09 00:00:00','','2008-09-09 00:00:00','2008-09-09 00:00:00',NULL,NULL),
+ (15,'Florin666','nana',133,'http://www.ibm.ca','http://www.oracle.ar',83,-1,'',7,2333,'2008-09-09 00:00:00','Mr Shoro','2008-09-09 00:00:00','2008-09-10 00:00:00',NULL,NULL),
+ (16,'Emilia Popescu','emilia\'s descr',199,'http://aruba.cuba','http://aruba.mexic',86,88,'parent',1,8889,'2008-09-09 00:00:00','gogo','2008-09-09 00:00:00','2008-09-09 00:00:00',NULL,NULL),
+ (19,'Vennware','Ecosystem Software Platform and Service',654321,'http://','http://',100,-1,'',8,-1,'2008-09-09 00:00:00','','2008-09-09 00:00:00','2008-09-10 00:00:00',NULL,NULL),
+ (26,'Vennware 3','Ecosystem Software Platform and Service',654321,'http://pcn.com/vennware','http://www.vennware.com',101,23,'General Motors',8,2004,'2008-10-02 00:00:00','Eric Lawrence','2008-09-09 00:00:00','2008-09-10 00:00:00',NULL,NULL),
+ (34,'JimTest Inc','Test partner discription',123456,'http://tobebuilt.com','http://',111,-1,'',38,2001,'2009-09-10 00:00:00','','2008-09-10 00:00:00','2008-09-11 00:00:00',NULL,NULL),
+ (36,'Vennware','Software developer for EcoSystem Platform',1234,'http://pcn.com/vennware','http://www.vennware.com',113,23,'General Motors',6,2004,'2011-12-30 00:00:00','Eric Lawrence','2008-09-10 00:00:00','2008-09-11 00:00:00',NULL,NULL),
+ (37,'ddddd','',1,'http://','http://',127,0,'',28,0,'2008-09-12 00:00:00','','2008-09-12 00:00:00','2008-09-12 00:00:00',NULL,0),
+ (38,'Administartotr company','this was been added by test test',1111,'http://','http://',128,0,'',3,12,'2008-09-12 00:00:00','','2008-09-12 00:00:00','2008-09-12 00:00:00',NULL,0),
+ (39,'Administartotr company','this was been added by test test',1111,'http://','http://',129,0,'',3,12,'2008-09-12 00:00:00','','2008-09-12 00:00:00','2008-09-12 00:00:00',NULL,0),
+ (40,'eeeee','',1,'http://','http://',130,0,'',6,0,'2008-09-12 00:00:00','','2008-09-12 00:00:00','2008-09-12 00:00:00',NULL,2);
 /*!40000 ALTER TABLE `tbl_company` ENABLE KEYS */;
 
 
@@ -862,6 +1014,58 @@ INSERT INTO `tbl_industry_microvertical` (`industry_name`,`microvertical_name`,`
 
 
 --
+-- Definition of table `tbl_lang_available`
+--
+
+DROP TABLE IF EXISTS `tbl_lang_available`;
+CREATE TABLE `tbl_lang_available` (
+  `id` int(10) NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_lang_available`
+--
+
+/*!40000 ALTER TABLE `tbl_lang_available` DISABLE KEYS */;
+INSERT INTO `tbl_lang_available` (`id`,`name`) VALUES 
+ (1,'Arabic '),
+ (2,'Chinese (Traditional)'),
+ (3,'Chinese (Mandarin)'),
+ (4,'Chinese (Simplified)'),
+ (5,'Croatian'),
+ (6,'Danish'),
+ (7,'Dutch'),
+ (8,'English'),
+ (9,'Finnish'),
+ (10,'French'),
+ (11,'German'),
+ (12,'Greek'),
+ (13,'Hebrew'),
+ (14,'Hindi'),
+ (15,'Icelandic'),
+ (16,'Italian'),
+ (17,'Japanese          '),
+ (18,'Korean'),
+ (19,'Norwegian'),
+ (20,'Polish'),
+ (21,'Portuguese (Brazilian)'),
+ (22,'Portuguese (European)'),
+ (23,'Russian'),
+ (24,'Serbian'),
+ (25,'Slovak'),
+ (26,'Spanish (European)'),
+ (27,'Spanish (Latin American)'),
+ (28,'Swedish'),
+ (29,'Thai'),
+ (30,'Turkish'),
+ (31,'Vietnamese'),
+ (32,'Other');
+/*!40000 ALTER TABLE `tbl_lang_available` ENABLE KEYS */;
+
+
+--
 -- Definition of table `tbl_logo`
 --
 
@@ -894,6 +1098,37 @@ INSERT INTO `tbl_logo` (`id`,`description`,`bin_data`,`filename`,`filesize`,`fil
 
 
 --
+-- Definition of table `tbl_os`
+--
+
+DROP TABLE IF EXISTS `tbl_os`;
+CREATE TABLE `tbl_os` (
+  `id` int(10) NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_os`
+--
+
+/*!40000 ALTER TABLE `tbl_os` DISABLE KEYS */;
+INSERT INTO `tbl_os` (`id`,`name`) VALUES 
+ (1,'Windows XP/200X'),
+ (2,'Windows Server'),
+ (3,'Solaris'),
+ (4,'Linux-Server'),
+ (5,'Linux-Desktop'),
+ (6,'FreeBSD '),
+ (7,'Mac OS X'),
+ (8,'HP-UX'),
+ (9,'IBM AIX'),
+ (10,'SGI Irix'),
+ (11,'Unix Freeform Version');
+/*!40000 ALTER TABLE `tbl_os` ENABLE KEYS */;
+
+
+--
 -- Definition of table `tbl_phone`
 --
 
@@ -911,7 +1146,7 @@ CREATE TABLE `tbl_phone` (
   PRIMARY KEY  (`phoneId`),
   KEY `IX_9F704A14` (`companyId`),
   KEY `IX_F202B9CE` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_phone`
@@ -921,30 +1156,109 @@ CREATE TABLE `tbl_phone` (
 INSERT INTO `tbl_phone` (`phoneId`,`companyId`,`userId`,`userName`,`createDate`,`modifiedDate`,`number_`,`extension`,`typeId`) VALUES 
  (1,1,NULL,NULL,NULL,NULL,'123233 3231','122',NULL),
  (2,1,NULL,NULL,NULL,NULL,'444 4324 2423','22',NULL),
- (3,NULL,NULL,NULL,NULL,NULL,'123123123 2','23',NULL),
+ (3,NULL,NULL,NULL,NULL,NULL,'1231231232','23',NULL),
  (4,NULL,NULL,NULL,NULL,NULL,'213 2133 ','11',NULL),
  (5,NULL,NULL,NULL,NULL,NULL,'123 321',NULL,1),
  (6,NULL,NULL,NULL,NULL,NULL,'111111111',NULL,2),
- (7,NULL,NULL,NULL,NULL,NULL,'12121212',NULL,2),
+ (7,NULL,NULL,NULL,NULL,NULL,'11111',NULL,2),
  (8,NULL,NULL,NULL,NULL,NULL,'121212',NULL,1),
  (9,NULL,NULL,NULL,NULL,NULL,'222222',NULL,1),
  (10,NULL,NULL,NULL,NULL,NULL,'2122',NULL,2),
- (11,NULL,NULL,NULL,NULL,NULL,'1212333',NULL,2),
- (12,NULL,NULL,NULL,NULL,NULL,'123123123',NULL,1),
- (13,NULL,NULL,NULL,NULL,NULL,'343242',NULL,1),
- (14,NULL,NULL,NULL,NULL,NULL,'123123',NULL,1),
- (15,NULL,NULL,NULL,NULL,NULL,'123123123',NULL,1),
- (16,NULL,NULL,NULL,NULL,NULL,'123123',NULL,2),
- (17,NULL,NULL,NULL,NULL,NULL,'121211',NULL,1),
- (18,NULL,NULL,NULL,NULL,NULL,'213123',NULL,1),
- (19,NULL,NULL,NULL,NULL,NULL,'1111',NULL,1),
- (20,NULL,NULL,NULL,NULL,NULL,'2222',NULL,2),
- (21,NULL,NULL,NULL,NULL,NULL,'1231233123',NULL,1),
- (22,NULL,NULL,NULL,NULL,NULL,'23',NULL,1),
- (23,NULL,NULL,NULL,NULL,NULL,'123',NULL,1),
- (24,NULL,NULL,NULL,NULL,NULL,'33434 dafdd',NULL,1),
- (25,NULL,NULL,NULL,NULL,NULL,'121',NULL,1);
+ (11,NULL,NULL,NULL,NULL,NULL,'(121) 2',NULL,2),
+ (12,NULL,NULL,NULL,NULL,NULL,'(222) 1212-121',NULL,1),
+ (13,NULL,NULL,NULL,NULL,NULL,'(123) 122-1312',NULL,1),
+ (14,NULL,NULL,NULL,NULL,NULL,'-77777',NULL,1),
+ (15,NULL,NULL,NULL,NULL,NULL,'-77777',NULL,1),
+ (16,NULL,NULL,NULL,NULL,NULL,'-55555',NULL,2),
+ (17,NULL,NULL,NULL,NULL,NULL,'111-111-11111',NULL,2),
+ (18,NULL,NULL,NULL,NULL,NULL,'-66666',NULL,1),
+ (19,NULL,NULL,NULL,NULL,NULL,'-77777',NULL,2),
+ (20,NULL,NULL,NULL,NULL,NULL,'-12312',NULL,1),
+ (21,NULL,NULL,NULL,NULL,NULL,'6132610249',NULL,1),
+ (22,NULL,NULL,NULL,NULL,NULL,'23213211',NULL,1),
+ (23,NULL,NULL,NULL,NULL,NULL,'8888888888',NULL,1),
+ (24,NULL,NULL,NULL,NULL,NULL,'1234567890',NULL,2),
+ (25,NULL,NULL,NULL,NULL,NULL,'9987654321',NULL,1),
+ (26,NULL,NULL,NULL,NULL,NULL,'1234567890',NULL,2),
+ (27,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (28,NULL,NULL,NULL,NULL,NULL,'6138324432',NULL,2),
+ (29,NULL,NULL,NULL,NULL,NULL,'1234567',NULL,1),
+ (30,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (31,NULL,NULL,NULL,NULL,NULL,'6138324432',NULL,2),
+ (32,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (33,NULL,NULL,NULL,NULL,NULL,'6138324432',NULL,2),
+ (34,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (35,NULL,NULL,NULL,NULL,NULL,'6138324432',NULL,2),
+ (36,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (37,NULL,NULL,NULL,NULL,NULL,'6138324432',NULL,2),
+ (38,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (39,NULL,NULL,NULL,NULL,NULL,'6138324432',NULL,2),
+ (40,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (41,NULL,NULL,NULL,NULL,NULL,'6138324432',NULL,2),
+ (42,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (43,NULL,NULL,NULL,NULL,NULL,'6138324432',NULL,2),
+ (44,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (45,NULL,NULL,NULL,NULL,NULL,'6138324432',NULL,2),
+ (46,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (47,NULL,NULL,NULL,NULL,NULL,'6138324432',NULL,2),
+ (48,NULL,NULL,NULL,NULL,NULL,'1234567890',NULL,1),
+ (49,NULL,NULL,NULL,NULL,NULL,'342432412',NULL,1),
+ (50,NULL,NULL,NULL,NULL,NULL,'32432',NULL,2),
+ (51,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (52,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (53,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (54,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (55,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (56,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (57,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (58,NULL,NULL,NULL,NULL,NULL,'6138329249',NULL,1),
+ (59,NULL,NULL,NULL,NULL,NULL,'1234',NULL,1),
+ (60,NULL,NULL,NULL,NULL,NULL,'1234',NULL,2),
+ (61,NULL,NULL,NULL,NULL,NULL,'12345678901234',NULL,1),
+ (62,NULL,NULL,NULL,NULL,NULL,'12345678901234',NULL,1),
+ (63,NULL,NULL,NULL,NULL,NULL,'(123) 122-1312',NULL,1),
+ (64,NULL,NULL,NULL,NULL,NULL,'(213) 213-2132',NULL,2),
+ (65,NULL,NULL,NULL,NULL,NULL,'(213) 213-2132',NULL,1),
+ (66,NULL,NULL,NULL,NULL,NULL,'(231) 332-3123',NULL,2),
+ (67,NULL,NULL,NULL,NULL,NULL,'(212) 323-1312',NULL,1),
+ (68,NULL,NULL,NULL,NULL,NULL,'(213) 322-1332',NULL,2),
+ (69,NULL,NULL,NULL,NULL,NULL,'(232) 313-1211',NULL,1),
+ (70,NULL,NULL,NULL,NULL,NULL,'(123) 123-2112',NULL,2),
+ (71,NULL,NULL,NULL,NULL,NULL,'(123) 213-1231',NULL,1),
+ (72,NULL,NULL,NULL,NULL,NULL,'(213) 123-2121',NULL,2),
+ (73,NULL,NULL,NULL,NULL,NULL,'(324) 242-3423',NULL,1),
+ (74,NULL,NULL,NULL,NULL,NULL,'(234) 324-3242',NULL,2);
 /*!40000 ALTER TABLE `tbl_phone` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_prog_lang`
+--
+
+DROP TABLE IF EXISTS `tbl_prog_lang`;
+CREATE TABLE `tbl_prog_lang` (
+  `id` int(10) NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_prog_lang`
+--
+
+/*!40000 ALTER TABLE `tbl_prog_lang` DISABLE KEYS */;
+INSERT INTO `tbl_prog_lang` (`id`,`name`) VALUES 
+ (1,'SAP ABAP'),
+ (2,'Java'),
+ (3,'C++'),
+ (4,'C#'),
+ (5,'C'),
+ (6,'Visual Basic'),
+ (7,'Delphi'),
+ (8,'.Net'),
+ (9,'PowerBuilder'),
+ (10,'Other');
+/*!40000 ALTER TABLE `tbl_prog_lang` ENABLE KEYS */;
 
 
 --
@@ -993,6 +1307,396 @@ INSERT INTO `tbl_sapsolutions` (`SAPSolution_name`,`sapsolutionId`) VALUES
  ('SAP Business One',2),
  ('SAP ByDesign',3);
 /*!40000 ALTER TABLE `tbl_sapsolutions` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_sol_aio_based`
+--
+
+DROP TABLE IF EXISTS `tbl_sol_aio_based`;
+CREATE TABLE `tbl_sol_aio_based` (
+  `id` int(10) NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_sol_aio_based`
+--
+
+/*!40000 ALTER TABLE `tbl_sol_aio_based` DISABLE KEYS */;
+INSERT INTO `tbl_sol_aio_based` (`id`,`name`) VALUES 
+ (1,'Not Applicable'),
+ (2,'Best Practices Baseline Package'),
+ (3,'Best Practices Industry Package'),
+ (4,'GUI XT'),
+ (5,'Transaction Variants'),
+ (6,'User Exits'),
+ (7,'Smart Forms'),
+ (8,'Additional ADD On functionality'),
+ (9,'Modules'),
+ (10,'Solution Networking (existing solution from an other partner has been adapted)');
+/*!40000 ALTER TABLE `tbl_sol_aio_based` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_sol_categ_target`
+--
+
+DROP TABLE IF EXISTS `tbl_sol_categ_target`;
+CREATE TABLE `tbl_sol_categ_target` (
+  `id` int(10) NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_sol_categ_target`
+--
+
+/*!40000 ALTER TABLE `tbl_sol_categ_target` DISABLE KEYS */;
+INSERT INTO `tbl_sol_categ_target` (`id`,`name`) VALUES 
+ (1,'Not Applicable'),
+ (2,'Customer Relationship Management – Activities Management'),
+ (3,'Customer Relationship Management – Calendar'),
+ (4,'Customer Relationship Management – Opportunity Management'),
+ (5,'Customer Relationship Management – Service Management'),
+ (6,'Customization – Analysis Tools'),
+ (7,'Customization – Extension & Personalization'),
+ (8,'Customization – Formatted Search'),
+ (9,'Customization – Migration'),
+ (10,'Customization – Support Tools'),
+ (11,'Customization – User Defined Object'),
+ (12,'Financials – Banking'),
+ (13,'Financials – Basel II'),
+ (14,'Financials – Cost Accounting'),
+ (15,'Financials – General Ledger'),
+ (16,'Financials – Tax'),
+ (17,'Human Resources – Employee Data Management'),
+ (18,'Human Resources – Payroll'),
+ (19,'Implementation – Alert & Workflow Management'),
+ (20,'Implementation – Application Integration'),
+ (21,'Implementation – Financial Initialization'),
+ (22,'Implementation – General Settings'),
+ (23,'Implementation – Getting Started'),
+ (24,'Logistics – Internet Sales'),
+ (25,'Logistics – Inventory Management'),
+ (26,'Logistics – Procurement'),
+ (27,'Logistics – Production'),
+ (28,'Logistics – Sales'),
+ (29,'Software Development Kit – Data Interface API'),
+ (30,'Software Development Kit – Data Interface Server'),
+ (31,'Software Development Kit – User Interface API');
+/*!40000 ALTER TABLE `tbl_sol_categ_target` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_sol_directory`
+--
+
+DROP TABLE IF EXISTS `tbl_sol_directory`;
+CREATE TABLE `tbl_sol_directory` (
+  `solId` bigint(20) NOT NULL auto_increment,
+  `partNumber` varchar(20) default NULL,
+  `solName` varchar(80) NOT NULL default '',
+  `solDesc` longtext,
+  `partComSite` varchar(80) default '',
+  `solFocus` varchar(212) default '',
+  `sapCertSince` datetime default NULL,
+  `lastReviewBySAP` datetime default NULL,
+  `averTrainEndUser` int(10) default NULL,
+  `averImplTrainingDays` int(10) default NULL,
+  `averImplEffort` int(10) default NULL,
+  `averImplDuration` int(10) default NULL,
+  `averSizeImplTeam` int(10) default NULL,
+  `averSaleCycle` int(10) default NULL,
+  `noCustomers` int(10) default NULL,
+  `smallImpl` int(10) default NULL,
+  `largeImpl` int(10) default NULL,
+  `smallImplTime` int(10) default NULL,
+  `largeImplTime` int(10) default NULL,
+  `smallImplTeamNo` int(10) default NULL,
+  `largeImplTeamNo` int(10) default NULL,
+  `solSite` varchar(80) default '',
+  `refCustAvailForUse` char(7) NOT NULL default '',
+  `totalAppBaseLinePrice` bigint(20) default NULL,
+  `appPriceEur` bigint(20) default NULL,
+  `hardwareCost` bigint(20) default NULL,
+  `hardwareCostEur` bigint(20) default NULL,
+  `averLicensePrice` bigint(20) default NULL,
+  `averLicensePriceEur` bigint(20) default NULL,
+  `addServiceCost` bigint(20) default NULL,
+  `addServicePriceEur` bigint(20) default NULL,
+  `implCost` bigint(20) default NULL,
+  `implCostEur` bigint(20) default NULL,
+  `sapDiscount` char(7) NOT NULL default '',
+  `dbUsed` varchar(80) NOT NULL default '',
+  `SAPBusUsed` char(3) NOT NULL default '',
+  `SAPGUIUsed` char(3) NOT NULL default '',
+  `compA1B1Used` varchar(125) NOT NULL default '',
+  `thirdPartyUsed` char(10) NOT NULL default '',
+  `thirdPartyName` varchar(80) NOT NULL default '',
+  `otherIT` varchar(80) NOT NULL default '',
+  `addRemarks` longtext,
+  `solSAPMicroSite` varchar(80) NOT NULL default '',
+  `lastPartRevieDate` datetime default NULL,
+  `reviewedBy` varchar(80) NOT NULL default '',
+  `profileAdded` varchar(80) NOT NULL default '',
+  `dateCreated` datetime default NULL,
+  `modifiedBy` varchar(80) NOT NULL default '',
+  `dateUpdated` datetime default NULL,
+  `notificationProc` char(3) NOT NULL default '',
+  `companyId` bigint(20) default NULL,
+  PRIMARY KEY  (`solId`)
+) ENGINE=InnoDB AUTO_INCREMENT=8783 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_sol_directory`
+--
+
+/*!40000 ALTER TABLE `tbl_sol_directory` DISABLE KEYS */;
+INSERT INTO `tbl_sol_directory` (`solId`,`partNumber`,`solName`,`solDesc`,`partComSite`,`solFocus`,`sapCertSince`,`lastReviewBySAP`,`averTrainEndUser`,`averImplTrainingDays`,`averImplEffort`,`averImplDuration`,`averSizeImplTeam`,`averSaleCycle`,`noCustomers`,`smallImpl`,`largeImpl`,`smallImplTime`,`largeImplTime`,`smallImplTeamNo`,`largeImplTeamNo`,`solSite`,`refCustAvailForUse`,`totalAppBaseLinePrice`,`appPriceEur`,`hardwareCost`,`hardwareCostEur`,`averLicensePrice`,`averLicensePriceEur`,`addServiceCost`,`addServicePriceEur`,`implCost`,`implCostEur`,`sapDiscount`,`dbUsed`,`SAPBusUsed`,`SAPGUIUsed`,`compA1B1Used`,`thirdPartyUsed`,`thirdPartyName`,`otherIT`,`addRemarks`,`solSAPMicroSite`,`lastPartRevieDate`,`reviewedBy`,`profileAdded`,`dateCreated`,`modifiedBy`,`dateUpdated`,`notificationProc`,`companyId`) VALUES 
+ (7330,'','Mobile Field Solutions - Sales','Mobile Sales With more time spent away from the office, sales professionals need direct, instant access to accurate business information at the point of customer interaction. Mobile Sales extends your enterprise by delivering key sales tools to the field force on their handheld devices, for fast and complete automation of the entire sales cycle, in connected and disconnected environments. Mobile Sales has a full range of solutions for the retail, distribution, and supply industries that streamline the sales process and help sales professionals perform their daily routines with ease and efficiency. Mobile Sales enables companies to manage their field force more effectively, cut operational costs, increase productivity and generate new revenues through advanced selling tools. Mobile Sales provides the most comprehensive PDA sales functionality in the industry. KEY FEATURES BENEFITS -------------------------------------------------------------------------------- Comprehensive data management Create, view and update orders and accounts User-defined synchronization profiles Synchronizes only updated data Speed of information improves productivity and workflow Flexibility of information flow -------------------------------------------------------------------------------- Access to key sales tools Accounts Contacts Route Planner Electronic Order Generator Order History Inventory Products Pricing and Discounts Invoice Status and Collection Sales Statistics Shortened sales and billing cycles Higher revenues from sales opportunities Reduced cost of sales Faster, informed decision-making Improved customer service and retention Automation minimizes errors High quality data for sales analysis and forecasting -------------------------------------------------------------------------------- Enhanced sales features Mobile Form & Survey Mobile Manager Advanced Messaging Auto Fax Electronic Signature Improved data collection from the field Monitor ongoing sales performance Better communication More wins from the field -------------------------------------------------------------------------------- User friendly interface Easy-to-use Client Desktop and modules Multiple search and view options Expand and contract fields for better navigation Smooth adoption and use by sales reps -------------------------------------------------------------------------------- Secure, high quality information Secure access and data encryption Multiple information sources Management control over critical data Channeled information flow All data is fully protected Increased relevant data Accurate and timely information Maximizes data integrity -------------------------------------------------------------------------------- Industry-leading technology Palm OS and Pocket PC platforms Online/Offline connection Integrates to existing enterprise software and infrastructure Data compression for fast synchronization More choice of handhelds Works in connected and disconnected environments Rapid implementation Maximizes ROI of existing software','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',1,3,3,NULL,NULL,NULL,50,NULL,NULL,NULL,NULL,NULL,NULL,'','Yes',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','No','','','','','2006-03-31 00:00:00','','F. Robben','2005-09-08 03:47:00','CPSN Administrator','2005-09-08 03:47:00','Yes',NULL),
+ (7331,'','Mobile Field Solutions - CRM','Mobile CRM To make the most of your enterprise CRM, sales and marketing professionals need direct, instant access to key account information on their handhelds in connected and disconnected environments. Whatever your business strategy, Mobile CRM extends the power of your CRM to the field, directing efforts better, finding the most profitable opportunities and maximizing your investment. Mobile CRM is the exciting lead and contact management application that keeps mobile sales and marketing professionals completely connected to their company\'s Customer Relationship Management software on their handhelds. Mobile CRM enables reps to manage their accounts, contacts, activities and opportunities, and to collect, update and store important client information from the field. With Mobile CRM, sales and marketing professionals have a powerful tool for increasing customer retention, enhancing customer satisfaction, and creating new leads and referrals. KEY FEATURES BENEFITS -------------------------------------------------------------------------------- Comprehensive data management Create, view and update leads and accounts User-defined synchronization profiles Synchronizes only updated data Speed of information improves productivity and workflow Flexibility of information flow -------------------------------------------------------------------------------- Access to key CRM tools Accounts Contacts Activities Opportunities Forecasting Probability Products Pricing Faster response time to customers Reduced cost of sales Improved customer service and retention High quality data for sales analysis and forecasting -------------------------------------------------------------------------------- Enhanced features Mobile Form & Survey Advanced Messaging Improved data collection from the field Better communication -------------------------------------------------------------------------------- User friendly interface Easy-to-use Client Desktop and modules Multiple search and view options Expand and contract fields for better navigation Smooth adoption and use by reps -------------------------------------------------------------------------------- Secure, high quality information Secure access and data encryption Multiple information sources Management control over critical data Channeled information flow All data is fully protected Increased relevant data Accurate and timely information Maximizes data integrity -------------------------------------------------------------------------------- Industry-leading technology Palm OS and Pocket PC platforms Online/Offline connection Integrates to existing enterprise software and infrastructure Data compression for fast synchronization More choice of handhelds Works in connected and disconnected environments Rapid implementation Maximizes ROI of existing software','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',1,3,3,NULL,NULL,NULL,50,NULL,NULL,NULL,NULL,NULL,NULL,'','Yes',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','No','','','','','2006-03-31 00:00:00','','F. Robben','2005-09-08 03:54:00','CPSN Administrator','2005-09-08 03:54:00','Yes',NULL),
+ (7332,'','Mobile Field Solutions - Field Service','Mobile Field Solutions High quality and timely service drives the field service industry, so field service professionals need direct, instant access to accurate information at the point of service. Mobile Field Service extends the service supply chain by delivering key service functions to the field force on their handheld devices, for fast and complete automation of the entire service cycle, in connected and disconnected environments. Mobile Field Service has a full range of solutions for service-providing industries. Mobile Field Service raises the bar for customer support and takes field service to the next level, enabling the field service organization to better manage performance, streamline operations, allocate resources, disseminate knowledge, and improve inventory management. Mobile Field Service provides the most comprehensive PDA service functionality in the industry. KEY FEATURES BENEFITS -------------------------------------------------------------------------------- Comprehensive data management Create, view and update service accounts User-defined synchronization profiles Synchronizes only updated data Speed of information improves productivity and workflow Flexibility of information flow -------------------------------------------------------------------------------- Access to key service functions Accounts Contacts Route Planner Service Call History Service Call Duration Equipment History Field Inventory Management Service reps are better informed and prepared for calls Optimal dispatching and problem resolution Shortened service cycles Reduced cost of service and inventory Improved customer service and relations -------------------------------------------------------------------------------- Enhanced service features Mobile Form & Survey Advanced Messaging Auto Fax and Mail Electronic Signature Improved data collection from the field Better communication Customer can authorize the call -------------------------------------------------------------------------------- User friendly interface Easy-to-use Client Desktop and modules Multiple search and view options Expand and contract fields for better navigation Smooth adoption and use by service reps -------------------------------------------------------------------------------- Secure, high quality information Secure access and data encryption Multiple information sources Management control over critical data Channeled information flow All data is fully protected Increased relevant data Accurate and timely information Maximizes data integrity -------------------------------------------------------------------------------- Industry-leading technology Palm OS and Pocket PC platforms Online/Offline connection Integrates to existing enterprise software and infrastructure Data compression for fast synchronization More choice of handhelds Works in connected and disconnected environments Rapid implementation Maximizes ROI of existing software','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',1,3,3,NULL,NULL,NULL,50,NULL,NULL,NULL,NULL,NULL,NULL,'','Yes',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','No','','','','','2006-03-31 00:00:00','','F. Robben','2005-09-08 03:58:00','CPSN Administrator','2005-09-08 03:58:00','Yes',NULL),
+ (7333,'','Mobile Field Solutions - Form&Survey','Mobile Form & Survey Mobile Form & Survey is an easy-to-use, enhanced Application Module that enables the mobile workers to collect and synchronize important information not previously linked to the enterprise back-office database, such as on-site customer satisfaction surveys, new account leads, marketing surveys, opinion polls, and so on. With Mobile Form & Survey, anyone in the back-office can create within minutes customized forms and questionnaires and transfer them to the field force to complete and send back via a PDA. The information gathered can be exported to standard analysis programs such as Microsoft Excel. Mobile Form & Survey can be used as a stand-alone application or as an add-on module to Client Applications.','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',1,3,3,NULL,NULL,NULL,50,NULL,NULL,NULL,NULL,NULL,NULL,'','Yes',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','No','','','','','2006-03-31 00:00:00','','F. Robben','2005-09-08 04:01:00','CPSN Administrator','2005-09-08 04:01:00','Yes',NULL),
+ (7335,'','Mobile Field Solutions - Sales','Mobile Sales Der Verk?er im Au?ndienst verbringt die meiste Zeit drau?n beim Kunden oder am Weg, ben??t gleichzeitig aber jederzeit Zugriff auf zuverl?ige, aktuelle Information, oft auch w?end des Treffens mit dem Kunden. Mobile Sales erweitert Ihr Unternehmen, indem es Ihre Verkaufs- und Businessmanagement Tools bis zum PDA des Mitarbeiters vor Ort bringt und so eine schnelle und vollst?ige Automatisierung des gesamten Verkaufszyklus gew?leistet. Dies funktioniert in jeder Umgebung, auch wenn kein Zugang zum Internet m??ch ist. Mobile Sales bietet eine vollst?ige Palette praxiserprobter L??gen fr den Einzelhandel, Distribution, und alle Wirtschaftsbereiche, die Au?ndienst-Mitarbeiter fr den Verkauf, Service oder Auslieferung besch?igen. Mit Mobile Sales vereinfachen Sie die Prozesse und erm??chen ihren Mitarbeitern, die t?iche Routine einfach, effizient und kosteneffektiv abzuwickeln. All dies erreichen Sie mit Mobile Sales ? Sie senken Ihre Kosten, erh?? ihre Produktivit?und verbessern ihre Marktpr?nz und Servicequalit? Mobile Sales bietet die umfassendsten PDA-Funktionalit?n am Markt. Mit Mobile Sales geben Sie ihren Mitarbeitern keine Gelegenheit, Gelegenheiten zu vers?en! DIE WICHTIGSTEN MERKMALE IHRE VORTEILE -------------------------------------------------------------------------------- Umfassendes Datenmanagement Auftr? und Gesch?spartner erstellen, einsehen und aktualisieren Benutzerspezifische Synchronisationsprofile Synchronisiert nur ge?erte Datens?e Schnelle, verl?liche und aktuelle Information Volle Kontrolle ber den Informationsfluss Schnelle Synchronisation, Datensicherheit -------------------------------------------------------------------------------- Zugriff auf verkaufsrelevante Daten Gesch?spartner Kontakte Terminplaner Auftrags-Generator Auftrags-Historie Lagerstand Artikel Preise und Rabatte Aktueller Rechnungs- und Inkasso-Status Umsatzstatistiken Verkrzte Verkaufs- und Rechnungszyklen Bessere Realisierung von Opportunities Reduzierte Kosten des Verkaufs Schnellere Entscheidungsfindung aufgrund aktueller Information Besserer Kundenservice Automatische Datenbernahme vom Backoffice verhindert Fehler Verl?liche Daten fr Analysen und Budgetierung -------------------------------------------------------------------------------- Erweiterte M??chkeiten Mobile Form & Survey Mobile Manager Advanced Messaging Auto Fax Elektronische Unterschrift Verbesserter Information-Aufnahme vom Feld Kontrolle aktueller Verkaufsaktivit?n Bessere Kommunikation Sofortige Reaktion ? Angebote, Rechnungen, Quittungen -------------------------------------------------------------------------------- Benutzerfreundliche Bedienung Einfacher Client Desktop und Module Vielfache Such- und Ansichtoptionen Aufklappbare Felder vereinfachen die Navigation Schnelle Anpassung und intensive Anwendung durch Au?ndienst-Mitarbeiter. -------------------------------------------------------------------------------- Sichere und verl?liche Information Gesicherter Zugriff, Verschlsselung der bertragenen Daten Anbindung an verschieden Datenquellen Management-Kontrolle ber kritische Daten Kanalisierter Informationsfluss Optimaler Datenschutz Einfacher Zugriff auf relevante Daten Zuverl?ige und aktuelle Information Maximale Datenintegrit? -------------------------------------------------------------------------------- Fhrende Technologie Palm und PC Betriebssysteme Online/Offline Betriebsweise Volle Einbindung in bestehende Unternehmens-Software und -Infrastruktur Datenkomprimierung fr schnelles Synchronisieren Sie verwenden Ihren bevorzugten PDA Unbeeintr?tigtes Arbeiten auch ohne Internet-Anbindung Schnelle Integration ROI-Maximierung bestehender Software','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',1,3,3,NULL,NULL,NULL,50,NULL,NULL,NULL,NULL,NULL,NULL,'','Yes',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','No','','','','','2006-03-31 00:00:00','','F. Robben','2005-09-08 04:26:00','CPSN Administrator','2005-09-08 04:26:00','Yes',NULL),
+ (7336,'','Mobile Field Solutions - CRM','Mobile CRM Um Ihr CRM (Customer Relation Management) optimal einzusetzen, ben??en Ihre Marketing- und Verkaufsmitarbeiter direkten und schnellen Zugriff auf relevante Kundeninformation ber ihren PDA ? immer und von berall, auch wenn sie keine direkte Verbindung zum Internet herstellen k??n. Was immer Ihr Gesch?sumfeld auch ist ? mit Mobile CRM bringen Sie die vollen F?gkeiten Ihres Unternehmens-CRM zum PDA jedes Mitarbeiters ?drau?n im Feld?: Sie verbessern seine Effizienz, behalten die notwendig ?ersicht ? Sie sind immer voll informiert und auf dem aktuellsten Stand und k??n so sicherstellen, dass keine Gelegenheiten vers?t werden und die wertvolle Zeit Ihrer Mitarbeiter optimal eingesetzt wird. Mobile CRM ist eine aufregende CRM-Anwendung, das die Information am PDA der Au?ndienst-Mitarbeiter immer und automatisch auf dem Letztstand h?; sie erlaubt ihnen, Gesch?spartner, Kontakte, Aktivit?n, Opportunities, zu verwalten, als ob sie im Bro vor ihrem PC s?n; sie k??n Daten aktualisieren, neue Information erstellen und dem Backoffice bergeben, Angebote erstellen, Rechnungen schreiben und sogar Zahlungen kassieren. Mit Mobile CRM wird der PDA das bevorzugte Werkzeug Ihrer Mitarbeiter, die die Effizienz, einfache Anwendung und jederzeitige Verfgbarkeit schnell sch?en und als unverzichtbares Werkzeug lieben lernen. DIE WICHTIGSTEN MERKMALE IHRE VORTEILE -------------------------------------------------------------------------------- Umfassendes Datenmanagement Auftr?, Gesch?spartner, Kontakte erstellen, einsehen und aktualisieren Benutzerspezifische Synchronisationsprofile Synchronisiert nur ge?erte Datens?e Schnelle, verl?liche und aktuelle Information Volle Kontrolle ber den Informationsfluss Schnelle Synchronisation, Datensicherheit Zugriff auf die wichtigsten CRM-Tools Gesch?spartner Kontakte Aktivit?n Opportunities Verkaufsbudgets Abschluss-Wahrscheinlichkeit Artikel Preise und Rabatte Schnellere Reaktion bei Kunden Reduzierte Cost of Sales Bessere Kundenbindung Verl?liche Daten fr Analysen und Budgetierung Erweiterte M??chkeiten Mobile Form & Survey Mobile Manager Advanced Messaging Auto Fax Elektronische Unterschrift Verbesserte Informations-Erfassung vor Ort. Kontrolle aktueller Verkaufsaktivit?n Bessere Kommunikation Sofortige Reaktion ? Angebote, Rechnungen, Quittungen Benutzerfreundliche Bedienung Einfacher Client Desktop und Module Vielfache Such- und Ansichtoptionen Aufklappbare Felder vereinfachen die Navigation Schnelle Anpassung und intensive Anwendung durch Au?ndienst-Mitarbeiter. Sichere und verl?liche Information Gesicherter Zugriff, Verschlsselung der bertragenen Daten Anbindung an verschieden Datenquellen Management-Kontrolle ber kritische Daten Kanalisierter Informationsfluss Optimaler Datenschutz Einfacher Zugriff auf relevante Daten Zuverl?ige und aktuelle Information Maximale Datenintegrit? Fhrende Technologie Palm und PC Betriebssysteme Online/Offline Betriebsweise Volle Einbindung in bestehende Unternehmens-Software und -Infrastruktur Datenkomprimierung fr schnelles Synchronisieren Sie verwenden Ihren bevorzugten PDA Unbeeintr?tigtes Arbeiten auch ohne Internet-Anbindung Schnelle Integration ROI-Maximierung bestehender Software','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',1,3,3,NULL,NULL,NULL,50,NULL,NULL,NULL,NULL,NULL,NULL,'','Yes',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','No','','','','','2006-03-31 00:00:00','','F. Robben','2005-09-08 04:29:00','CPSN Administrator','2005-09-08 04:29:00','Yes',NULL),
+ (7337,'','Mobile Field Solutions - Field Service','Mobile Field Solutions Zuverl?iger Kundendienst und Wartung technischer Anlagen ist eine unabdingbare Voraussetzung, im heutigen Gesch?sumfeld erfolgreich zu bestehen. Um dies zu gew?leisten, ben??en Ihre Techniker direkten, verz??ungsfreien Zugriff auf zuverl?ige Information ? immer und von berall! Mobile Field Service bringt die Daten und wichtigsten Funktionen Ihre Backoffice-Systems zum PDA Ihres Mitarbeiters drau?n im Feld ? Online und Offline, auch wenn keine Verbindung zum Internet besteht. Mobile Field Service bietet komplette L??gen fr den Servicebereich und stellt einen neuen Qualit?standard fr alle Service-relevante Aktivit?n dar. Ihr Serviceteam arbeitet wirkungsvoller, kann die Ressourcen besser planen, Information besser verteilen, Ersatzteile und Lagerst?e besser verwalten und Fehler in der Informations-Erfassung und weiteren Bearbeitung weitestgehend vermeiden. Amodat Mobile Field Service bietet insgesamt die umfassendste PDA-Funktionalit?fr Service und Wartung, die heute erh?lich ist. DIE WICHTIGSTEN MERKMALE IHRE VORTEILE -------------------------------------------------------------------------------- Umfassendes Daten-Management Serviceauftr? erstellen, einsehen und aktualisieren Benutzerspezifische Synchronisationsprofile Synchronisiert nur ge?erte Datens?e Schnelle, verl?liche und aktuelle Information Volle Kontrolle ber den Informationsfluss Schnelle Synchronisation -------------------------------------------------------------------------------- Zugriff auf die wichtigsten Service-Funktionen GP Kontakte Terminplaner Servicehistorie Belegerstellung mit Unterschrifterfassung (Rechnung) Ger?-Historie Verwaltung mitgefhrter Erstatzteile Ihre Servicetechniker haben die gesamte Information ber den Serviceanruf zur Verfgung. Optimierung der Arbeits- und Reisezeiten der Mitarbeiter. Vermeidung von Irrtmern und Missverst?nissen. Kostenreduzierung fr Service und Wartung. Effiziente Ersatzteilverwaltung, besserer Service am Kunden -------------------------------------------------------------------------------- Erweiterte M??chkeiten Mobile Form & Survey Fortgeschrittenes Messaging Auto Fax and Mail Electronic Signature Bessere und zuverl?igere Datenerfassung Bessere Kommunikation und Kontrolle Sofortige Best?gung durch den Kunden vor Ort. -------------------------------------------------------------------------------- Benutzerfreundliche Bedienung Einfacher Client Desktop und Module Vielfache Such- und Ansichtoptionen Aufklappbare Felder vereinfachen die Navigation Schnelle Anpassung und intensive Anwendung durch Service-Mitarbeiter. -------------------------------------------------------------------------------- Sichere und zuverl?ige Information Gesicherter Zugriff, Verschlsselung der bertragenen Daten Anbindung an verschieden Datenquellen Management-Kontrolle ber kritische Daten Optimaler Datenschutz Einfacher Zugriff auf relevante Daten Zuverl?ige und aktuelle Information Maximale Datenintegrit? -------------------------------------------------------------------------------- Fhrende Technologie Palm und PC Betriebssysteme Online/Offline Betriebsweise Volle Einbindung in bestehende Unternehmens-Software und -Infrastruktur Datenkomprimierung fr schnelles Synchronisieren Sie verwenden Ihren bevorzugten PDA Unbeeintr?tigtes Arbeiten auch ohne Internet-Anbindung Schnelle Integration ROI-Maximierung bestehender Software','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',1,3,3,NULL,NULL,NULL,50,NULL,NULL,NULL,NULL,NULL,NULL,'','Yes',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','No','','','','','2006-03-31 00:00:00','','F. Robben','2005-09-08 04:33:00','CPSN Administrator','2005-09-08 04:33:00','Yes',NULL),
+ (7338,'','Mobile Field Solutions - Form & Survey','Mobile Form & Survey Mobile Form & Survey ist ein einfach anwendbares Applikationsmodul, mit dem Ihre mobilen Mitarbeiter beliebige Information drau?n im Feld erfassen und diese direkt an Datenerfassungsanwendungen bertragen k??n. Erstellen Sie auf einfachste Weise im Backoffice verschiedene Frageb?? und Formulare um damit Daten im vorgegebenen Format zuverl?ig erfassen. Diese Anwendung versetzt Sie auf bisher unerreichte Weise in die Lage, auf Anforderungen und Herausforderungen des Marktes ohne Inanspruchnahme externer Fachleute ? also ohne Verz??ung und zu minimalen Kosten ? zu reagieren. Beispiele: neue Leads, Meinungsumfragen, Kundenzufriedenheit, Kundendaten, etc. Die im Backoffice innerhalb von Minuten erstellten Vorlagen bermitteln Sie an die PDAs Ihrer mobilen Mitarbeiter. Die im Feld erfassten Daten werden mit der jeder Synchronisation wieder ans Backoffice bermittelt und direkt von Standardprogrammen wie MS Excel zur weiteren Auswertung bernommen. Mobile Form & Survey kann auch als Stand-Alone Anwendung eingesetzt werden. Mobile Form & Survey ist ein hervorragendes Beispiel, wie wir unser Know-How und langj?ige Praxiserfahrung zum Vorteil unserer Kunden einsetzen!','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',1,3,3,NULL,NULL,NULL,50,NULL,NULL,NULL,NULL,NULL,NULL,'','Yes',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','No','','','','','2006-03-31 00:00:00','','F. Robben','2005-09-08 04:36:00','CPSN Administrator','2005-09-08 04:36:00','Yes',NULL),
+ (7339,'','Productiebesturing met SBO','BEHEERS UW PRODUCTIEPROCES MET BEHULP VAN EEN GEAVANCEERDE EN VOLLEDIG IN SAP BUSINESS ONE GE?TEGREERDE MODULE C-PPS One is een krachtig en flexibel gereedschap om u te helpen bij het plannen, optimaliseren en beheren van het productieproces. Een complete productiemodule speciaal ontwikkeld voor SAP Business One. Het pakket biedt naadloze integratie met de volgende modules van SAP Business One: Verkoop, Inkoop, Artikelen- en Voorraadbeheer, Productie, en Grootboek. Een oplossing die gebruikersvriendelijk, compleet en goed betaalbaar is. En heel belangrijk: een oplossing met een zeer korte inleer- en implementatietijd. Speciaal bedoeld voor het Midden- en Kleinbedrijf. Inzetbaar voor o.a. metaal- en kunststofverwerkende bedrijven, machinefabrieken, gereedschapmakerijen, voedingsindustrie, elektronische industrie, proces industrie, cosmetica etc. MET C-PPS ONE KUNT U ? Geld en tijd besparen door optimale ondersteuning van uw administratie rond het productieproces ? Op tijd reageren op uitzonderingen, tekorten en overschotten etc. ? Effici? en kosteneffectief personeel en middelen inzetten ? Nauwkeurig de hoeveelheid ?timing van uw materiaalbehoeften bepalen ? Aan de geplande vraag voldoen door rekening te houden met alle relevante gegevens in SAP Business One zoals: productie-, doorloop- en levertijden, stuklijsten op meerdere niveaus, lot groottes, relevante magazijnen etc. ? Beschikken over voor- en nacalculatie-gegevens voor het bewaken van de kosten C-PPS ONE IN EEN OOGOPSLAG ? Voor- en nacalculatie (man- en machine-uren, materialen, uitbestedingen en eenmalige kosten) ? Werkvoorbereiding ? Tijdsregistratie, handmatig of via koppeling met tijdregistratiesysteem (aan- en afwezigheid, ordertijd, directe en indirecte uren, diverse roosters, normale uren en overuren etc.) ? Capaciteitsplanning ? Detailplanning, routing ? Intelligent planbord voor automatisch en handmatig plannen ? Planlijsten ? Calculeren en in productie geven van samenstellingen (stuklijsten) ? Inkooplijsten ? Productiedocumenten ? Flexibele ordervrijgavemogelijkheden ? Controlemogelijkheden op beschikbaarheid van benodigde middelen en materialen ? Flexibele bepaling van de sorteervolgorde van productieorders ? Voortgangsregistratie en- bewaking gedurende de productie ? Serienummer- en batchbeheer i.v.m. traceerbaarheid ? Dynamische koppelingen naar Microsoft Office ? Directe doorzoom mogelijkheden ? Krachtige rapportagemogelijkheden ? Volledig ge?egreerd met financi? administratie','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',1,3,5,NULL,NULL,NULL,50,NULL,NULL,NULL,NULL,NULL,NULL,'','Yes',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','Yes','Yes','','No','','','','','2006-03-31 00:00:00','','F. Robben','2005-09-08 04:42:00','CPSN Administrator','2005-09-08 04:42:00','Yes',NULL),
+ (7462,'','Voucher module for Taiwan Area','VAT calculation electronic voucher multi company assignable','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',0,0,2,2,1,2,8,3,58,0,2,0,1,'www.dwins.com','Yes',1000,NULL,0,NULL,350,NULL,0,NULL,0,NULL,'Yes','SQL','Yes','Yes','B1','No','','','','','2006-03-31 00:00:00','','Lenny Chen','2005-09-19 19:37:00','CPSN Administrator','2005-09-19 19:37:00','Yes',NULL),
+ (7463,'','Tax module for Taiwan Area','Taiwan area tax module National Tax Bureau e-form embedded 401K claim form','','SAP Business One','2005-09-20 00:00:00','2005-09-20 00:00:00',0,1,2,2,1,2,8,3,58,1,3,1,3,'','Yes',1000,NULL,0,NULL,350,NULL,0,NULL,0,NULL,'Yes','SQL','Yes','Yes','B1','No','','','','','2006-03-31 00:00:00','','Lenny Chen','2005-09-19 19:44:00','CPSN Administrator','2005-09-19 19:44:00','Yes',NULL),
+ (7464,'','Web POS Great China Area','Almost real time web POS system. Minimize transaction loading guranteed. Spesific business rule enabled for department store in China, Hong Knog and Taiwan. Over 100+ report enabled. Off-line back up machnisium.','','SAP Business One','2005-09-20 00:00:00','2005-09-20 00:00:00',3,10,8,2,2,2,3,5,80,5,10,1,2,'','Yes',75000,NULL,2500,NULL,2500,NULL,5000,NULL,100000,NULL,'Yes','SQL','Yes','No','B1','','','','','','2006-03-31 00:00:00','','Lenny Chen','2005-09-19 20:04:00','CPSN Administrator','2005-09-19 20:04:00','Yes',NULL),
+ (7482,'','R1 Rentals','R1 Rental provides the total solution for rental reservations, orders, tracking, services, billing and repairs of all types of fixed and mobile assets, equipments and inventory items. It is fully integrated with SAP Business One and Ceecom?s M1 Maintenance Add-on with identical SBO look and feel. Enables extensive drill downs and queries. Reports are provided throughout the system. R1 has a similar look and feel to SAP Business One and uses all native SAP Business One features.','http://cpsn-channel.sap.com/ceecom','SAP Business One','2005-09-27 00:00:00','2005-09-27 00:00:00',5,5,10,1,3,2,1,NULL,NULL,NULL,NULL,NULL,NULL,'','Yes',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','MS SQL Server','Yes','Yes','','No','','','','','2005-10-25 00:00:00','','James Looseley','2005-09-20 14:29:00','CPSN Administrator','2005-09-20 14:29:00','Yes',NULL),
+ (7487,'','OneEnterprise Portals','- Information sharing within the organization ? for Sales Executives, employees & Senior Executives and with its associates ? Vendors, Customers - Return merchandize authorization - Request a service call - Information on Best Selling - Products and new p','http://cpsn-channel.sap.com/citixsys','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',5,7,7,1,5,2,18,5,20,7,14,2,5,'www.oneenterprise.com','Yes',4000,NULL,0,NULL,NULL,NULL,NULL,NULL,1200,NULL,'Yes','SQL Server 2000','Yes','No','','No','','','','http://cpsn-channel.sap.com/citixsys','2006-03-31 00:00:00','','Sarnath Mukherjee','2005-09-21 06:03:00','CPSN Administrator','2005-09-21 06:03:00','Yes',NULL),
+ (7491,'','Web Shop','A fully intergrated, dynamic e-commerce solution. Allowing the sale of items through a web site. Data is exhanged between SAP B1 and the web site, ensuring a real time update of new stock details entered in SAP B1 are then loaded on to the web pages. All sales information entered on the site goes straight in to the SOP of SAP B1. Credit card payment feature is also linked back to SAP B1. This solution is live!!!','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',2,2,50,2,2,3,1,NULL,2,NULL,10,NULL,2,'www.intelligent-solutions-ltd.co.uk','Yes',5000,NULL,NULL,NULL,NULL,NULL,3000,NULL,8000,NULL,'Yes','MS SQL','Yes','No','','Yes','EIKO','','','','2006-03-31 00:00:00','','Alan McGregor','2005-09-22 04:32:00','CPSN Administrator','2005-09-22 04:32:00','Yes',NULL),
+ (7496,'','businessControl for Vending','businessControl is fully integrated Add-On on German language for SAP Business One, mit dem die Betreiber von Verkaufsautomaten eine passgenaue Branchenl??g erwerben k??n.','www.dresearch.de','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',1,2,1,NULL,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,'http://www.dresearch.de/products/sap/businesscontrol_de.html','No',5000,NULL,NULL,NULL,5000,NULL,NULL,NULL,NULL,NULL,'Yes','MS SQL','Yes','Yes','','Yes','vendingControl','','','http://cpsn-channel.sap.com/dresearch','2006-03-31 00:00:00','','Roland Zerbe','2005-09-23 08:38:00','CPSN Administrator','2005-09-23 08:38:00','Yes',NULL),
+ (7498,'','Microshop Build to Order Manufacturing','Microshop BTO offers a complete ERP environment for small to mid-sized make-to-order manufacturing environments. A few key benefits are that it is a seamless interface to Business One, it runs on a single database, and it\'s 100% embedded into Business One. The components consist of all the Business One modules plus Job Costing, Quoting and Estimating, Bar Coding, and Scheduling. The business processes supported are: Manufacturing Control, Job Costing, Work-in-Process Inventory, Quoting & Estimating, Capacity Requirements Planning, Shop Floor Scheduling.','http://cpsn-channel.sap.com/cdia','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',10,40,40,4,1,5,10,10,25,40,60,1,1,'www.cdi-usa.com','Yes',20808,NULL,0,NULL,1665,NULL,0,NULL,20808,NULL,'Yes','SQL','Yes','Yes','All Business One modules, Job Costing, Quoting & Estimating, Bar Coding, Scheduling','No','','','','http://cpsn-channel.sap.com/cdia','2006-03-31 00:00:00','','Sandy DeAngelis','2005-09-23 10:25:00','CPSN Administrator','2005-09-23 10:25:00','Yes',NULL),
+ (8509,'','2B Exact','Conversion tool to import Exact installations into the SBO Database. Works for all Exact installations from DOS (Btrieve) to Exact Globe 2003. Uses an ACCESS database to be able to cleanup data and convert numbering schemes.','http://cpsn-channel.sap.com/2borbrix','SAP Business One','2005-09-27 00:00:00','2005-09-27 00:00:00',1,1,2,0,1,0,5,1,50,1,1,1,1,'www.2borbrix.nl','Yes',500,NULL,0,NULL,0,NULL,500,NULL,500,NULL,'No','MS-SQL, MS_ACCESS','No','No','','No','','','','http://cpsn-channel.sap.com/2Borbrix/Exact','2006-03-31 00:00:00','','M. R??ers','2005-09-26 03:29:00','CPSN Administrator','2005-09-26 03:29:00','Yes',NULL),
+ (8514,'','MCG.evolve','MCG.evolve provides process industry functionality in a browser. It utilises both its own and a SBO database to provide a full integrated solution covering New Product Development to Advanced Warehousing (including hazardous chemicals) and all business functions in between.','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,'','Yes',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','Microsoft SQL 2000 / 2005','','','','No','','','','','2006-03-31 00:00:00','','Ernie Dewhirst','2005-09-26 14:38:00','CPSN Administrator','2005-09-26 14:38:00','Yes',NULL),
+ (8516,'','Microshop Hardwoods','Microshop Hardwoods offers a complete ERP environment for Distributors that process raw lumber into finished hardwood. The components of Microshop Hardwoods are all of Business One modules, Job Costing, Planer Scheduling, Bar Coding, Mobile computing. The business processes supported are: Inventory Control, Material Movement, Product Costing, Manifest Management, Shipment Processing.','http://cpsn-channel.sap.com/cdi-usa','SAP Business One','2005-09-27 00:00:00','2005-09-27 00:00:00',10,10,40,4,1,6,1,70,70,40,40,1,1,'www.cdi-usa.com','Yes',20811,NULL,0,NULL,1665,NULL,0,NULL,20811,NULL,'Yes','SQL','Yes','Yes','All Business One modules, Job Costing, Planer Scheduling, Bar Coding, Mobile computing','No','','','','http://cpsn-channel.sap.com/cdi-usa','2006-03-31 00:00:00','','Sandy DeAngelis','2005-09-26 15:16:00','CPSN Administrator','2005-09-26 15:16:00','Yes',NULL),
+ (8517,'','Microshop Project Costing','Microshop Project Costing offers a complete ERP environment for companies who need to trade labor, inventory and misc. expenses for specific projects. The components included in Microshop Project Costing are all Business One modules and the Project Costing system. The major business processes supported are project tracking and costing, expense tracking and time and material billing.','http://cpsn-channel.sap.com/cdi-usa','SAP Business One','2005-09-27 00:00:00','2005-09-27 00:00:00',3,3,10,1,1,2,1,50,50,30,30,NULL,1,'http://www.cdi-usa.com','Yes',4159,NULL,0,NULL,415,NULL,0,NULL,4161,NULL,'Yes','SQL','Yes','Yes','All Business One modules and the Project Costing system','No','','','','http://cpsn-channel.sap.com/cdi-usa','2006-03-31 00:00:00','','Sandy DeAngelis','2005-09-26 15:23:00','CPSN Administrator','2005-09-26 15:23:00','Yes',NULL),
+ (8519,'','UPS Wordship Interface','UPS Worldship Interface offers NO redundant entry into the shipping system. It has a seamless interface to Business One and is 100% imbedded into Business One. The business process supported is shipping integration to UPS Worldship automated manifest system. The components include all the Business One modules and the shipping interface.','http://cpsn-channel.sap.com/cdi-usa','SAP Business One','2005-09-27 00:00:00','2005-09-27 00:00:00',0,0,1,1,1,0,6,7,70,1,1,1,1,'www.cdi-usa.com','Yes',830,NULL,0,NULL,0,NULL,0,NULL,415,NULL,'Yes','SQL','Yes','Yes','All Business One modules and Shipping Interface','Yes','UPS Worldship','','','http://cpsn-channel.sap.com/cdi-usa','2006-03-31 00:00:00','','Sandy DeAngelis','2005-09-26 15:59:00','CPSN Administrator','2005-09-26 15:59:00','Yes',NULL),
+ (8520,'','EDI Trusted Link Interface','The key benefits of the EDI Trusted Link Interface is that it allows for automated entry of EDI transactions into Business One when transmitted fro Trusted Link. It has a seamless interface to Business One, a single database and is 100% imbedded into Business One. The business processes supported are EDI transmissions for sales and billing, integrated into Business One MRP, and outputs shipment notifications from delivery orders. The components are all Business One modules, Trusted Link EDI feed and EDI Interface.','http://cpsn-channel.sap.com/cdi-usa','SAP Business One','2005-09-27 00:00:00','2005-09-27 00:00:00',1,1,1,1,1,1,3,10,50,1,1,1,1,'www.cdi-usa.com','Yes',2079,NULL,0,NULL,166,NULL,830,NULL,830,NULL,'Yes','SQL','Yes','Yes','All Business One modules, Trusted Link EDI and EDI Interface','Yes','Trusted Link by Innovis','','','http://cpsn-channel.sap.com/cdi-usa','2006-03-31 00:00:00','','Sandy DeAngelis','2005-09-26 16:09:00','CPSN Administrator','2005-09-26 16:09:00','Yes',NULL),
+ (8526,'','Intercompany Solution','Intercompany Postings provides the mechanism to post between different companies within SAP Business One Any posting performed through the General Ledger can be trapped, with the transactions being transferred to a destination company. The Intercompany from/to accounts is set up in the system (COA) and this provides transparent inter-company posting for the user. As all the trigger and posting accounts are pre-defined, the operator simply has to choose the right accounts numbers. These companies are identified as part of a segment in the Chart of accounts definition. The user can select the posting periods and the Intercompany From/To accounts to trigger the posting.','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',3,3,4,0,4,1,1,10,NULL,5,NULL,NULL,NULL,'','No',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Yes','SQL Server 2000','Yes','Yes','','No','','','#NAME?','','2006-03-31 00:00:00','','Sarnath Mukherjee','2005-09-27 03:37:00','CPSN Administrator','2005-09-27 03:37:00','Yes',NULL),
+ (8609,'','Congo','Fully B1 integrated Business-to-Business and/or Business-to-consumer website.','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',3,3,10,1,2,3,2,30,60,10,10,2,2,'','Yes',32000,NULL,7500,NULL,1000,NULL,NULL,NULL,12000,NULL,'Yes','SQL Server','Yes','No','B1 DI SDK','No','','','','','2006-03-31 00:00:00','','John Friebel','2005-10-02 22:42:00','CPSN Administrator','2005-10-02 22:42:00','Yes',NULL),
+ (8622,'','SelfRating','SelfRating according to BASEL II with hardfact directly form B1 and a list of questions for softfacts.','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',0,0,1,NULL,1,3,3,2,5,1,1,1,1,'','Yes',1200,NULL,0,NULL,1200,NULL,0,NULL,400,NULL,'Yes','MS-SQL Server','Yes','Yes','B1','Yes','','','','','2006-03-31 00:00:00','','Fred Grneberg','2005-10-04 13:49:00','CPSN Administrator','2005-10-04 13:49:00','Yes',NULL),
+ (8628,'26949','bob Controlling Suite - bcs','Addon modul for more controlling functionality. bcs is integrated in SAP Business One and supplies SMEs with highly informative data that provides an important basis for future market success. Transparent Planning and reporting. Intercompany Business. Geomarketing.','http://cpsn-channel.sap.com/bobsys','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',1,2,10,1,3,3,30,3,75,2,25,2,5,'http://www.bobsys.com/bcs.htm','Yes',NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Yes','SQL-Server, Oracle, Access, MSDE, DB2, AS/400','Yes','No','','No','','','','','2006-01-02 00:00:00','','Gavin Stollenwerk','2005-10-06 07:49:00','CPSN Administrator','2005-10-06 08:05:00','Yes',NULL),
+ (8648,'','R2p?atnikSBO','R2p?atnikSBO provides all the functionality required to human resources management, payroll counting in compliance with current regulations in Poland. R2p?atnikSBO is integrated with SAP Business One. Payrols are automatically booked in the accounting module of Business One and personal data of employees can be updated. Solution can be suited to company of every profile.','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',5,5,5,1,1,3,6,1,10,1,10,1,1,'http://www.reset2.pl/sap','Yes',2000,NULL,NULL,NULL,1000,NULL,NULL,NULL,1500,NULL,'Yes','Microsoft SQL Server','Yes','Yes','','No','','','','','2006-03-31 00:00:00','','Jerzy Szczesnik','2005-10-11 11:26:00','CPSN Administrator','2005-10-11 11:26:00','Yes',NULL),
+ (8686,'','ASS.TEC BOne WIN','The main functionality of the ASS.TEC MSWord-Interface is to create single letters and mass mailing to business partners directly from SAP Business One. During this process you can choose to create activities automatically. Starting with Version 2004 2.0 which is available since 1st May 2005 you also can create the follow-up action with certain criteria, as well as mark the origin activity as opened or closed. A special highlight: With the integration of the SAP Business One query generator or wizard into the mass mailing creation all relevant SAP Business One ? data may be selected and printed in the mass mailing. Details about the functionality and technical procedure for licensing you will find in the documentation: www2.asstec.com/BOne-WIN','','SAP Business One','2005-12-20 00:00:00','2005-12-20 00:00:00',0,0,0,NULL,1,0,8,1,10,0,0,NULL,NULL,'www2.asstec.com/BOne-WIN','Yes',NULL,NULL,NULL,NULL,NULL,80,NULL,NULL,NULL,NULL,'Yes','Microsoft SQL Server','Yes','Yes','','Yes','Microsoft','','','','2005-12-20 00:00:00','','Martina Kohler','2005-10-17 06:35:00','CPSN Administrator','2005-10-17 06:35:00','Yes',NULL),
+ (8747,'','Alliance Distribution Edition for SAP Business One','The Alliance Distribution Edition for SAP Business One is a seamlessly integrated business solution, designed for small and midsized businesses and divisions and subsidiaries of large organizations, specially developed to enable wholesale distributors to streamline critical business processes, make fast decisions based on real-time information and maintain a competitive advantage in the global market. With built-in tools to streamline managerial processes, a wireless warehouse management system with a ?pick, pack and ship? state of mind, document management and electronic data interchange capabilities that will help make your business truly paperless, and powerful financial management modules such as credit card authorization, the solution makes it easy for everyone in your company to obtain the operational and decision support they need. The Alliance Distribution Edition for SAP Business One was designed specifically for small and midsized businesses and divisions and subsidiaries of global enterprises. It is easy to purchase, easy to implement, easy to use and easy to maintain with assistance from one business advisor and one call for technical support.','http://cpsn-channel.sap.com/alliance','SAP Business One','2005-12-20 00:00:00','2005-12-20 00:00:00',10,20,30,2,5,5,100,5,75,14,35,3,5,'www.rsmmcgladrey.com/allianceeditions','Yes',80000,66,30000,25,5000,4,10000,8,50000,41,'Yes','SQL','Yes','Yes','','Yes','','','','','2005-12-20 00:00:00','','Manu Khanna','2005-10-20 12:14:00','CPSN Administrator','2005-10-20 12:14:00','Yes',NULL),
+ (8748,'','Alliance POS Edition for SAP business One','Whether you are a one-store retailer or you are planning to open a second, third, or even fourth store, you know sales opportunities are limited and that the competition is waiting around the corner with new offerings, grabbing even your most loyal of customers. Customers today want more SKUs, more personalized services and connected convenience. Retailers are finding new ways to streamline inventory management, purchasing and pricing with customers, suppliers and other business partners. These are the days of powerful customers -- are you reaching out to them? Built with SAP Business One as its foundation, Alliance Point-of-Sale Edition provides you with the ultimate solution for managing the front and back end of your stores. The solution?s main strength lies in the integration between SAP Business One and your stores? point-of-sale registers. Through ongoing communication between the point-of-sale and accounting systems, the accounting and register functionalities simultaneously pull necessary information such as inventory levels or pricing and make updates automatically throughout the day. By eliminating the need to manually enter or update data from the functional areas of your stores into the accounting system, the solution makes it easy for everyone in your company to obtain the operational and decision support they need. Whether you have 1 or 100 point-of-sale registers, Alliance Point-of-Sale Edition will help you retain your profitable customers and identify new opportunities while allowing you to focus on expanding your retail business.','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,15,NULL,NULL,NULL,NULL,NULL,NULL,'','Yes',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','','','','Yes','','','','','2006-03-31 00:00:00','','Manu Khanna','2005-10-20 12:28:00','CPSN Administrator','2005-10-20 12:28:00','Yes',NULL),
+ (8752,'','Mekorma Electronic Funds Transfer (EFT)','Electronic Banking reduces the time spent processing payments and has the potential to reduce paperwork and mailing costs. Mekorma EFT is for any company using SAP Business One that wants to do bank transfers with their business partners. It is particularly helpful to businesses who would like to take payments over the phone or over the web using a customer?s bank information. As electronic banking becomes increasingly popular, Mekorma EFT is a necessary part of this solution.','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',1,1,4,1,1,6,4,NULL,NULL,NULL,NULL,NULL,NULL,'','No',1500,1252,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Yes','','','','','No','','','If you are an authorized reseller of SAP Business One, then you\'re eligible to become a Mekorma reseller. Simply make a sale and you join the ranks of countless other respected SAP Business One resellers that use our products to solve customer problems and generate add-on revenue. Please contact sales@mekorma.com for pricing information.','','2006-02-09 00:00:00','','Stephanie Rasmussen','2005-10-20 13:10:00','CPSN Administrator','2005-10-20 13:10:00','Yes',NULL),
+ (8754,'','CPM Advanced Financial Reporting','Multi-company organizations can quickly and efficiently consolidate financial statements from the individual entities into a single, accurate and up-to-date report. CPM AFR provides the detailed data needed for better reporting, increased audit trail capabilities and improved corporate governance (e.g., Sarbanes-Oxley).','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',1,2,2,0,1,3,12,8,80,2,12,1,1,'http://www.channelpathmarketing.com/cpm_afr.htm','Yes',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','Microsoft SQL 2000','Yes','Yes','B1','No','','','','','2006-03-31 00:00:00','','Brian Jamieson','2005-10-20 18:27:00','CPSN Administrator','2005-10-20 18:27:00','Yes',NULL),
+ (8760,'','e-commerce sales&service','e-commerce sales&service AddOn for SAP Business One Some of the highlights are: Product-categories, current availabilities, article details, additional information, product recommendations, numerous marketing- and communications-functions: inquiries about status, delivery times, etc. , RMA completion, article FAQs, as well as flexible forms adjusted to the Corporate Design. A central element is SAP Business One. It is here where the process which makes the e-commerce platform so efficiant, originates. 24 hrs, 7 weekdays, 365 days per year: updated information about delivery times, availabilities, communications with customers, suppliers and dealers. A virtual market place with SAP business one at its center.','http://cpsn-channel.sap.com/rs','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,6,NULL,NULL,NULL,NULL,NULL,NULL,'','Yes',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','','Yes','Yes','','No','','','','','2006-03-31 00:00:00','','Florian Richter','2005-10-21 01:55:00','CPSN Administrator','2005-10-21 01:55:00','Yes',NULL),
+ (8778,'','Bank Statement Import','It allows importing statement bank files automatically. It dynamically set up different bank files format.','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',1,1,1,NULL,1,1,3,3,10,1,1,1,1,'www.apollocon.com','Yes',500,413,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'','SQL Server','Yes','Yes','','No','','','','','2005-10-24 00:00:00','Hector Ritondale','Scott.McMahon','2005-10-24 15:30:00','CPSN Administrator','2005-10-24 15:30:00','Yes',NULL),
+ (8782,'','iRequest - Purchase Requisitioning','iRequest is a web based purchase requistioning system developed for SAP Business One that allows to enter a purchase request for items or services, follow it to an approval process and post it in SAP Business One as a purchase order. It includes RFQs, XML punchout and a very flexible workflow creation module. You can also follow the flow of the requisition, from PO cration to Invoicing , etc','','SAP Business One','2006-03-31 00:00:00','2006-03-31 00:00:00',1,1,2,NULL,1,1,1,3,100,1,3,NULL,NULL,'www.apollocon.com','Yes',3000,2500,0,0,150,125,NULL,NULL,NULL,NULL,'Yes','SQL Server','Yes','No','','No','','','','','2006-02-06 00:00:00','Scott McMahon','Scott.McMahon','2005-10-25 13:19:00','Scott.McMahon','2006-02-06 15:28:00','Yes',NULL);
+/*!40000 ALTER TABLE `tbl_sol_directory` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_sol_maturity`
+--
+
+DROP TABLE IF EXISTS `tbl_sol_maturity`;
+CREATE TABLE `tbl_sol_maturity` (
+  `id` int(10) NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_sol_maturity`
+--
+
+/*!40000 ALTER TABLE `tbl_sol_maturity` DISABLE KEYS */;
+INSERT INTO `tbl_sol_maturity` (`id`,`name`) VALUES 
+ (1,'Customer development'),
+ (2,'Sold to more than one customer'),
+ (3,'3+ reference customers');
+/*!40000 ALTER TABLE `tbl_sol_maturity` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_sol_sapallinone`
+--
+
+DROP TABLE IF EXISTS `tbl_sol_sapallinone`;
+CREATE TABLE `tbl_sol_sapallinone` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_sol_sapallinone`
+--
+
+/*!40000 ALTER TABLE `tbl_sol_sapallinone` DISABLE KEYS */;
+INSERT INTO `tbl_sol_sapallinone` (`id`,`name`) VALUES 
+ (1,'Not applicable'),
+ (2,'4'),
+ (3,'4.0B'),
+ (4,'4.5'),
+ (5,'4.5B'),
+ (6,'4.6'),
+ (7,'4.6B'),
+ (8,'4.6C'),
+ (9,'4.7'),
+ (10,'4.7C');
+/*!40000 ALTER TABLE `tbl_sol_sapallinone` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_sol_saponeproduct`
+--
+
+DROP TABLE IF EXISTS `tbl_sol_saponeproduct`;
+CREATE TABLE `tbl_sol_saponeproduct` (
+  `id` int(10) NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_sol_saponeproduct`
+--
+
+/*!40000 ALTER TABLE `tbl_sol_saponeproduct` DISABLE KEYS */;
+INSERT INTO `tbl_sol_saponeproduct` (`id`,`name`) VALUES 
+ (1,'Not applicable'),
+ (2,'2004 A'),
+ (3,'2005 A'),
+ (4,'6.5'),
+ (5,'2004 B'),
+ (6,'7'),
+ (7,'7.1'),
+ (8,'2004 C'),
+ (9,'7.5'),
+ (10,'7.6');
+/*!40000 ALTER TABLE `tbl_sol_saponeproduct` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_sol_solfocus`
+--
+
+DROP TABLE IF EXISTS `tbl_sol_solfocus`;
+CREATE TABLE `tbl_sol_solfocus` (
+  `id` int(10) NOT NULL auto_increment,
+  `solSolFocus` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_sol_solfocus`
+--
+
+/*!40000 ALTER TABLE `tbl_sol_solfocus` DISABLE KEYS */;
+INSERT INTO `tbl_sol_solfocus` (`id`,`solSolFocus`) VALUES 
+ (1,'mySAP All-in-One '),
+ (2,'SAP Business One ');
+/*!40000 ALTER TABLE `tbl_sol_solfocus` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_sol_status_by_partner`
+--
+
+DROP TABLE IF EXISTS `tbl_sol_status_by_partner`;
+CREATE TABLE `tbl_sol_status_by_partner` (
+  `id` int(10) NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_sol_status_by_partner`
+--
+
+/*!40000 ALTER TABLE `tbl_sol_status_by_partner` DISABLE KEYS */;
+INSERT INTO `tbl_sol_status_by_partner` (`id`,`name`) VALUES 
+ (1,'Planned'),
+ (2,'In development'),
+ (3,'Development complete'),
+ (4,'Development complete and in the process of being reviewed by SAP'),
+ (5,'mySAP All-in-One Qualified / SAP Business One Certified / Reviewed'),
+ (6,'Solution was canceled');
+/*!40000 ALTER TABLE `tbl_sol_status_by_partner` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_sol_status_by_sap`
+--
+
+DROP TABLE IF EXISTS `tbl_sol_status_by_sap`;
+CREATE TABLE `tbl_sol_status_by_sap` (
+  `id` int(10) NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_sol_status_by_sap`
+--
+
+/*!40000 ALTER TABLE `tbl_sol_status_by_sap` DISABLE KEYS */;
+INSERT INTO `tbl_sol_status_by_sap` (`id`,`name`) VALUES 
+ (1,'Planned'),
+ (2,'In development'),
+ (3,'In process of being reviewed by SAP'),
+ (4,'mySAP All-in-One Qualified / SAP Business One Certified / Reviewed'),
+ (5,'Solution was reviewed by SAP but did not meet Qualified or Certified status by SAP'),
+ (6,'Solution was canceled');
+/*!40000 ALTER TABLE `tbl_sol_status_by_sap` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_target_comp_size`
+--
+
+DROP TABLE IF EXISTS `tbl_target_comp_size`;
+CREATE TABLE `tbl_target_comp_size` (
+  `id` int(10) NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_target_comp_size`
+--
+
+/*!40000 ALTER TABLE `tbl_target_comp_size` DISABLE KEYS */;
+INSERT INTO `tbl_target_comp_size` (`id`,`name`) VALUES 
+ (1,'Under 50 employees'),
+ (2,'50 to 100 employees'),
+ (3,'100 to 250 employees'),
+ (4,'250 to 500 employees'),
+ (5,'Over 500 employees');
+/*!40000 ALTER TABLE `tbl_target_comp_size` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tbl_user_type`
+--
+
+DROP TABLE IF EXISTS `tbl_user_type`;
+CREATE TABLE `tbl_user_type` (
+  `id` int(10) NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_user_type`
+--
+
+/*!40000 ALTER TABLE `tbl_user_type` DISABLE KEYS */;
+INSERT INTO `tbl_user_type` (`id`,`name`) VALUES 
+ (1,'Concurrent'),
+ (2,'Named');
+/*!40000 ALTER TABLE `tbl_user_type` ENABLE KEYS */;
 
 
 
