@@ -61,11 +61,11 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	String solName;	
 	String solDesc;	
 	String partComSite	;
-	int solFocus	;
+	int solFocus ;
 	int solStatusPartner;
 	int solStatusSAP;
-	Date sapCertSince	;
-	Date lastReviewBySAP;	
+	String sapCertSince	;
+	String lastReviewBySAP;	
 	int averTrainEndUser;
 	int averImplTrainingDays;	
 	int averImplEffort;	
@@ -105,12 +105,12 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	String addRemarks;	
 	String solSAPMicroSite;	
 	
-	Date lastPartRevieDate;	
+	String lastPartRevieDate;	
 	String reviewedBy	;
 	String profileAdded	;
-	Date dateCreated	;
+	String dateCreated	;
 	String modifiedBy;	
-	Date dateUpdated;	
+	String dateUpdated;	
 	String notificationProc;
 	String notificationText;
     
@@ -124,70 +124,67 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		// company part
 		SolutionItem solutionItem = SolutionItemDAO.getSolutionItem(id);
 
-	int companyId = companyId;
-	long partNumber = partNumber;	
-	String solName = solName;	
-	String solDesc = solDesc;	
-	String partComSite = partComSite ;
-	int solFocus =  solFocus;
-	int solStatusPartner = solStatusPartner;
-	int solStatusSAP = solStatusSAP;
-	Date sapCertSince = String.valueOf(dateFormatDateTime.format(sapCertSince));
-	Date lastReviewBySAP = String.valueOf(dateFormatDateTime.format(lastReviewBySAP));	
-	int averTrainEndUser = averTrainEndUser;
-	int averImplTrainingDays = averImplTrainingDays;	
-	int averImplEffort = averImplEffort;	
-	int averImplDuration = averImplDuration;	
-	int averSizeImplTeam = averSizeImplTeam;	
-	int averSaleCycle = averSaleCycle;	
-	int noCustomers = noCustomers;	
-	int smallImpl =  smallImpl;
-	int largeImpl = largeImpl;	
-	int smallImplTime = smallImplTime;	
-	int largeImplTime = largeImplTime;	
-	int smallImplTeamNo = smallImplTeamNo;	
-	int largeImplTeamNo = largeImplTeamNo;	
-	String solSite = solSite;
+	int companyId = solutionItem.companyId;
+	longpartNumber = solutionItem.partNumber;	
+	solName = solutionItem.solName;	
+	solDesc = solutionItem.solDesc;	
+	partComSite = solutionItem.partComSite ;
+	solFocus =  solutionItem.solFocus;
+	solStatusPartner = solutionItem.solStatusPartner;
+	solStatusSAP = solutionItem.solStatusSAP;
+	sapCertSince = String.valueOf(dateFormatDateTime.format(solutionItem.sapCertSince));
+	lastReviewBySAP = String.valueOf(dateFormatDateTime.format(solutionItem.lastReviewBySAP));	
+	averTrainEndUser = solutionItem.averTrainEndUser;
+	averImplTrainingDays = solutionItem.averImplTrainingDays;	
+	averImplEffort = solutionItem.averImplEffort;	
+	averImplDuration = solutionItem.averImplDuration;	
+	averSizeImplTeam = solutionItem.averSizeImplTeam;	
+	averSaleCycle = solutionItem.averSaleCycle;	
+	noCustomers = solutionItem.noCustomers;	
+	smallImpl =  solutionItem.smallImpl;
+	largeImpl = solutionItem.largeImpl;	
+	smallImplTime = solutionItem.smallImplTime;	
+	largeImplTime = solutionItem.largeImplTime;	
+	smallImplTeamNo = solutionItem.smallImplTeamNo;	
+	largeImplTeamNo = solutionItem.largeImplTeamNo;	
+	solSite = solutionItem.solSite;
 	
-	int countryPriceEuro = countryPriceEuro;
+	countryPriceEuro = solutionItem.countryPriceEuro;
 	
-	String refCustAvailForUse =refCustAvailForUse;	
-	int totalAppBaseLinePrice = totalAppBaseLinePrice;	
-	int appPriceEur	= appPriceEur;
-	int hardwareCost = hardwareCost	;
-	int hardwareCostEur = hardwareCostEur;	
-	int averLicensePrice = averLicensePrice;	
-	int averLicensePriceEur = averLicensePriceEur;	
-	int addServiceCost = addServiceCost	;
-	int addServicePriceEur = addServicePriceEur;	
-	int implCost = implCost	;
-	int implCostEur = implCostEur;	
-	String  sapDiscoun = sapDiscount;
-	String dbUsed = dbUsed;	
-	String SAPBusUsed = SAPBusUsed;	
-	String SAPGUIUsed = SAPGUIUsed;	
-	String compA1B1Used = compA1B1Used ;	
-	String thirdPartyUsed = thirdPartyUsed;	
-	String thirdPartyName = thirdPartyName;	
-	String otherIT = otherIT;	
-	String addRemarks = addRemarks;	
-	String solSAPMicroSite = solSAPMicroSite;	
+	refCustAvailForUse =solutionItem.refCustAvailForUse;	
+	totalAppBaseLinePrice = solutionItem.totalAppBaseLinePrice;	
+	appPriceEur	= solutionItem.appPriceEur;
+	hardwareCost = solutionItem.hardwareCost	;
+	hardwareCostEur = solutionItem.hardwareCostEur;	
+	averLicensePrice = solutionItem.averLicensePrice;	
+	averLicensePriceEur = solutionItem.averLicensePriceEur;	
+	addServiceCost = solutionItem.addServiceCost	;
+	addServicePriceEur = solutionItem.addServicePriceEur;	
+	implCost = solutionItem.implCost	;
+	implCostEur = solutionItem.implCostEur;	
+	sapDiscoun = solutionItem.sapDiscount;
+	dbUsed = solutionItem.dbUsed;	
+	SAPBusUsed = solutionItem.SAPBusUsed;	
+	SAPGUIUsed = solutionItem.SAPGUIUsed;	
+	compA1B1Used = solutionItem.compA1B1Used ;	
+	thirdPartyUsed = solutionItem.thirdPartyUsed;	
+	thirdPartyName = solutionItem.thirdPartyName;	
+	otherIT = solutionItem.otherIT;	
+	addRemarks = solutionItem.addRemarks;	
+	solSAPMicroSite = solutionItem.solSAPMicroSite;	
 	
-	Date lastPartRevieDate;	
-	String reviewedBy = reviewedBy	;
-	String profileAdded = profileAdded	;
-	Date dateCreated	;
-	String modifiedBy = modifiedBy;	
-	Date dateUpdated;	
-	String notificationProc = notificationProc;
-	String notificationText = notificationText;
+	lastPartRevieDate = String.valueOf(dateFormatDateTime.format(solutionItem.lastPartRevieDate));	
+	reviewedBy = solutionItem.reviewedBy	;
+	profileAdded = solutionItem.profileAdded	;
+	dateCreated= String.valueOf(dateFormatDateTime.format(solutionItem.dateCreated));
+	modifiedBy = solutionItem.modifiedBy;	
+	dateUpdated = String.valueOf(dateFormatDateTime.format(solutionItem.dateUpdated));	
+	notificationProc = solutionItem.notificationProc;
+	notificationText = solutionItem.notificationText;
 
-
-		userCompanyName = companyItem.getName();
-		partnerDescription = companyItem.getDescription();
+/*		userCompanyName = companyItem.getName();
 		partnerNumber = companyItem.getCompanyNo(); 
 	    parent_company_name = companyItem.getParentCompanyName(); 
-	    channel_partner_since = String.valueOf(companyItem.getYear()); 
 		micrositeAdress = companyItem.getCompanyFriendlySite();
 		company_website = companyItem.getCompanySite();
 		if(companyItem.getCompanyEmpNo() >0)
@@ -203,16 +200,17 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	    profile_added = String.valueOf(dateFormatDateTime.format(companyItem.getDateCreated())); 
 	    date_updated = String.valueOf(dateFormatDateTime.format(companyItem.getDateUpdated())); 
 	    modified_by = companyItem.getModifiedBy();
-	     		
+*/	     		
 // get the childs item
-		int countryParentId = companyItem.getCountryRegistrationId();
+/*		int countryParentId = companyItem.getCountryRegistrationId();
 	    if(countryParentId >0)
 	    	country_parent_company = CountryItemDAO.getCountryItem(countryParentId).getCountryName(); 
 
 	    sap_solution_focus = CompanyUtil.getCompanySAPSolutionList(companyItem);
 	    industry = CompanyUtil.getCompanyIndustries(id);
 	    geographic_coverage = CompanyUtil.getCompanyCountryCoverage(companyItem);
-	    primary_business_type = CompanyUtil.getCompanyBusinessSolution(id, 1); 	
+	    primary_business_type = CompanyUtil.getCompanyBusinessSolution(id, 1);
+	*/ 	
 	}
 	else  //add
 	{
@@ -244,7 +242,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	%>
 	<tr>
 		<td>
-			Company Name
+			Solution Name
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
@@ -253,7 +251,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	</tr>
 	<tr>
 		<td>
-			Partner description
+			Solution description
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
@@ -264,88 +262,115 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	</tr>
 	<tr>
 		<td>
-			Partner number
+			CPSN Partner Community/Microsite Address
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="partnerNumber" type="text" value="<%= partnerNumber %>">
+			<input class="form-text" size = 40 name="partComSite" type="text" value="<%= partComSite %>">
 		</td>
-	</tr>
+	</tr>	
 	<tr>
 		<td>
-			Telephone
+			Solution Focus
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="telephone" type="text" value="<%= telephone %>">
+			<input class="form-text" size = 40 name="solFocus" type="text" value="<%= solFocus %>">
 		</td>
-	</tr>
+	</tr>	
 	<tr>
 		<td>
-			Telefax
+			Applicable mySAP All-in-One versions
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="telefax" type="text" value="<%= telefax %>">
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
-	</tr>
+	</tr>	
 	<tr>
 		<td>
-			E-mail
+			Applicable SAP Business One product versions
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="mail" type="text" value="<%= mail %>">
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
-	</tr>
+	</tr>	
 	<tr>
 		<td>
-			Street 1
+			Solution Maturity
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="street1" type="text" value="<%= street1 %>">
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
-	</tr>
+	</tr>	
 	<tr>
 		<td>
-			Street 2
+			Industry
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="street2" type="text" value="<%= street2 %>">
+			<SELECT NAME="industry_search" style="width:40" >
+			<OPTION>---------Any---------</OPTION>
+			 <%
+		     for (int j = 0; j< industryItems.size(); j++ )
+		      {
+				IndustryItem industryItem = (IndustryItem)industryItems.get(j);			 
+                //This is a category from the database
+                String optionCategoryValue = industryItem.getIndustryName();
+ 
+                //Construct the option tag in a String variable
+                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                    
+                //close the option tag
+                optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                //printout the option tag
+                out.println(optionTag);
+		      }			 
+			%>
 		</td>
-	</tr>
+	</tr>	
 	<tr>
 		<td>
-			Postal/ZIP code
+			Solution Status (provided by Partner)
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="zipcode" type="text" value="<%= zipcode %>">
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
-	</tr>
+	</tr>	
 	<tr>
 		<td>
-			City
+			Solution Status (provided by SAP)
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="city" type="text" value="<%= city %>">
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
-	</tr>
+	</tr>	
 	<tr>
 		<td>
-			State/Province
+			mySAP All-in-One Qualified / SAP Business One Certified since
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="state_province" type="text" value="<%= state_province %>">
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
-	</tr>
+	</tr>	
 	<tr>
 		<td>
-			Country
+			Solution Last Reviewed by SAP
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Geographic Coverage
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
@@ -377,52 +402,178 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 			</SELECT>
 			<!-- <input class="form-text" name="country" type="text" value="<%= country %>"> -->
 		</td>
-	</tr>
+	</tr>	
 	<tr>
 		<td>
-			CPSN Partner Community/Microsite Address
+			Target Company Size
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="micrositeAdress" type="url" value="<%= micrositeAdress %>">
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
-	</tr>
+	</tr>	
 	<tr>
 		<td>
-			Company Website
+			Solution Category Target (SAP Business One Solutions Only)
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="company_website" type="url" value="<%= company_website %>">
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
-	</tr>
+	</tr>	
 	<tr>
 		<td>
-			Total number of employees in your organization/company
+			Languages available
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="noemployees" type="int" value="<%= noemployees %>">
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
-	</tr>		
+	</tr>	
 	<tr>
 		<td>
-			Company geographic coverage
+			Average training for end user (days)
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="country_coverage" style="width:40" MULTIPLE>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Average implementation training for partner (days)
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Average implementation time (person-days)
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Average implementation duration (months)
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Average size of implementation team (number of people)
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Average sales cycle (months)
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Number of Customers using this solution
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Smallest implementation (number of individual users)
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Largest implementation (number of individual users)
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Small implementation time (days)
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Large implementation (days)
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Small implementation: number of team members needed
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Large implementation: number of team members needed
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Solution webpage/site
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Main Country that pricing is based on (expressed in EUR)
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<SELECT NAME="country" style="width:40">
 			 <%
-			     for (int j = 0; j< coverageCountryItems.size(); j++ )
+			     for (int j = 0; j< countryItems.size(); j++ )
 			      {
-					CountryItem countryItem = (CountryItem)coverageCountryItems.get(j);			 
+					CountryItem countryItem = (CountryItem)countryItems.get(j);			 
                     //This is a category from the database
                     String optionCategoryValue = countryItem.getCountryName();
  
                     //Construct the option tag in a String variable
                     String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                    if((geographic_coverage != null) && (geographic_coverage.contains(optionCategoryValue)))
+                    if(optionCategoryValue.equals(country))
                     {
                         optionTag += " selected=\"selected\"";
                     }
@@ -437,217 +588,180 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                 //Close the result set and statment to free up resoures
 			%>
 			</SELECT>
-			<!--	<input class="form-text" name="geographic_coverage" type="text" value="<%= geographic_coverage %>"> -->
-		</td>
-	</tr>		
-	<tr>
-		<td>
-			Parent company name (Headquarters)
-		</td>
-		<td style="padding-left: 10px;"></td>
-		<td>
-			<input class="form-text" size = 40 name="parent_company_name" type="text" value="<%= parent_company_name %>">
+			<!-- <input class="form-text" name="country" type="text" value="<%= country %>"> -->
 		</td>
 	</tr>	
 	<tr>
 		<td>
-			Country of registration of parent company
+			Total application baseline price
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="country_parent_company" style="width:40" >
-			 <%
-			     for (int j = 0; j< parentCountryItems.size(); j++ )
-			      {
-					CountryItem countryItem = (CountryItem)parentCountryItems.get(j);			 
-                    //This is a category from the database
-                    String optionCategoryValue = countryItem.getCountryName();
- 
-                    //Construct the option tag in a String variable
-                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
-                    
-                    if(optionCategoryValue.equals(country_parent_company))
-                    {
-                        optionTag += " selected=\"selected\"";
-                    }
-                    
-                    //close the option tag
-                    optionTag += ">" + optionCategoryValue + "</OPTION>";
-                    
-                    //printout the option tag
-                    out.println(optionTag);
-			        //System.out.print(i.next()); 
-			      }			 
-                //Close the result set and statment to free up resoures
-			%>
-			</SELECT>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
 	</tr>	
 	<tr>
 		<td>
-			SAP SME/Channel partner since (year)
+			Hardware cost (average)
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="channel_partner_since" type="text" value="<%= channel_partner_since %>">
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
 	</tr>	
 	<tr>
 		<td>
-			What is your primary business type?
+			Average per-user license price
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="primary_business_type" style="width:40" >
-			 <%
-		     for (int j = 0; j< businessTypeItems.size(); j++ )
-		      {
-				BusinesstypeItem businessItem = (BusinesstypeItem)businessTypeItems.get(j);			 
-                //This is a category from the database
-                String optionCategoryValue = businessItem.getBusinessName();
- 
-                //Construct the option tag in a String variable
-                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
-                    
-                if(optionCategoryValue.equals(primary_business_type))
-                {
-                    optionTag += " selected=\"selected\"";
-                }
-                    
-                //close the option tag
-                optionTag += ">" + optionCategoryValue + "</OPTION>";
-                    
-                //printout the option tag
-                out.println(optionTag);
-		        //System.out.print(i.next()); 
-		      }			 
-            //Close the result set and statment to free up resoures
-			%>
-			</SELECT>		
-			<!-- <input class="form-text" name="primary_business_type" type="text" value="<%= primary_business_type %>"> -->
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
 	</tr>	
 	<tr>
 		<td>
-			What is your secondary business type?
+			Additional services costs (average)
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="secondary_business_type" style="width:40">
-			 <%
-		     for (int j = 0; j< businessTypeItems2.size(); j++ )
-		      {
-				BusinesstypeItem businessItem = (BusinesstypeItem)businessTypeItems2.get(j);			 
-                //This is a category from the database
-                String optionCategoryValue = businessItem.getBusinessName();
- 
-                //Construct the option tag in a String variable
-                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
-                    
-                if(optionCategoryValue.equals(secondary_business_type))
-                {
-                    optionTag += " selected=\"selected\"";
-                }
-                    
-                //close the option tag
-                optionTag += ">" + optionCategoryValue + "</OPTION>";
-                    
-                //printout the option tag
-                out.println(optionTag);
-		        //System.out.print(i.next()); 
-		      }			 
-            //Close the result set and statment to free up resoures
-			%>
-			 <!-- <input class="form-text" name="secondary_business_type" type="text" value="<%= secondary_business_type %>"> -->
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
 	</tr>	
 	<tr>
 		<td>
-			SAP solution focus
+			Implementation cost (average)
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="sap_solution_focus" style="width:40" MULTIPLE SIZE: 3 >
-			 <%
-		     for (int j = 0; j< sapSolutionItems.size(); j++ )
-		      {
-				SAPSolutionItem sapsolutionItem = (SAPSolutionItem)sapSolutionItems.get(j);			 
-                //This is a category from the database
-                String optionCategoryValue = sapsolutionItem.getSAPSolutionName();
- 
-                //Construct the option tag in a String variable
-                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
-                    
-                if((sap_solution_focus != null) &&  (sap_solution_focus.contains(optionCategoryValue)))
-                {
-                    optionTag += " selected=\"selected\"";
-                }
-                    
-                //close the option tag
-                optionTag += ">" + optionCategoryValue + "</OPTION>";
-                    
-                //printout the option tag
-                out.println(optionTag);
-		        //System.out.print(i.next()); 
-		      }			 
-            //Close the result set and statment to free up resoures
-			%>
-			<!-- <input class="form-text" name="sap_solution_focus" type="text" value="<%= sap_solution_focus %>"> -->
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
 	</tr>	
 	<tr>
 		<td>
-			Industry
+			User type
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="industry" style="width:40" MULTIPLE SIZE: 10>
-			 <%
-		     for (int j = 0; j< industryItems.size(); j++ )
-		      {
-				IndustryItem industryItem = (IndustryItem)industryItems.get(j);			 
-                //This is a category from the database
-                String optionCategoryValue = industryItem.getIndustryName();
- 
-                //Construct the option tag in a String variable
-                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
-                    
-                if(industry != null && industry.contains(optionCategoryValue))
-                {
-                    optionTag += " selected=\"selected\"";
-                }
-                    
-                //close the option tag
-                optionTag += ">" + optionCategoryValue + "</OPTION>";
-                    
-                //printout the option tag
-                out.println(optionTag);
-		        //System.out.print(i.next()); 
-		      }			 
-            //Close the result set and statment to free up resoures
-			%>
-			<!-- <input class="form-text" name="industry" type="text" value="<%= industry %>"> -->
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
 	</tr>	
 	<tr>
 		<td>
-			Last Review Date
+			SAP Channel Partner discount or special pricing offered?
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="last_review_Date" type="text" value="<%= last_review_Date %>">
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
 	</tr>	
 	<tr>
 		<td>
-			Reviewed By
+			Programming language
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="reviewed_by" type="text" value="<%= reviewed_by %>">
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 		</td>
 	</tr>	
-
+	<tr>
+		<td>
+			Operating system/platform
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Databases
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Is there a connection via SDK: SAP Business One used?
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Is the SAP Business One GUI used?
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Components used (A1/B1)
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Is your mySAP All-in-One Solution based on:
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Do you also use another third-party product or partner to implement your solution?
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			What is the name of the third party partner?
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Other technology information
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Additional Remarks
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
+	<tr>
+		<td>
+			Solution information on SAP Channel Partner Micro-site on the SAP CPSN
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+		</td>
+	</tr>	
 
 	</table>
 
@@ -669,205 +783,31 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 <%
 }
 else {
-	String industrySearch ="";
-	industrySearch = request.getParameter("industrySearch");
+	int id =0;
 //search + viewall
 %>
-
-<%
-String industry_search_liv= request.getParameter("industry_search");
-String sapsol_search_liv= request.getParameter("sap_solution_focus_search");
-String country_search_liv= request.getParameter("country_search");
-String country_coverage_search_liv= request.getParameter("country_coverage_search");
-String primary_business_type_search_liv= request.getParameter("primary_business_type_search");
-
-PrintWriter pout=null;
-pout = response.getWriter();
-pout.write("<BR> Search by: ");
-if((industry_search_liv != null) && !industry_search_liv.equalsIgnoreCase("---------Any---------"))
-	pout.write(" industry --> " + industry_search_liv);
-if((sapsol_search_liv != null) && !sapsol_search_liv.equalsIgnoreCase("---------Any---------"))
-	pout.write(" sap solution --> " + sapsol_search_liv);
-if((country_search_liv != null) && !country_search_liv.equalsIgnoreCase("---------Any---------"))
-	pout.write(" country --> " + country_search_liv);
-if((country_coverage_search_liv != null) && !country_coverage_search_liv.equalsIgnoreCase("---------Any---------"))
-	pout.write(" country coverage --> " + country_coverage_search_liv);
-if((primary_business_type_search_liv != null) && !primary_business_type_search_liv.equalsIgnoreCase("---------Any---------"))
-	pout.write(" business type --> " + primary_business_type_search_liv);
-
-%>
+	<input name="command" type="hidden" value="<%= command %>">
+	<input name="id" type="hidden" value="<%= id %>">
 	<input class="portlet-form-button" type="button" value="Add" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="add" /></portlet:renderURL>';">
 
-	<br><br>
-	<table class="lfr-table" border="1" cellpadding="4" cellspacing="2" width="50%">
-	<tr BGCOLOR="#99CCFF">
-		<th colspan="4" >
-			Search By
-		</th>
-	</tr>
-	<tr>
-		<th colspan="2">
-			SAP solution focus
-		</th>
-		<td style="padding-left: 10px;"></td>
-		<td>
-			<SELECT NAME="sap_solution_focus_search" style="width:40" >
-			<OPTION>---------Any---------</OPTION>
-			 <%
-		     for (int j = 0; j< sapSolutionItems.size(); j++ )
-		      {
-				SAPSolutionItem sapsolutionItem = (SAPSolutionItem)sapSolutionItems.get(j);			 
-                //This is a category from the database
-                String optionCategoryValue = sapsolutionItem.getSAPSolutionName();
- 
-                //Construct the option tag in a String variable
-                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
-                    
-                //close the option tag
-                optionTag += ">" + optionCategoryValue + "</OPTION>";
-                    
-                //printout the option tag
-                out.println(optionTag);
-		      }			 
-            	//Close the result set and statment to free up resoures
-			%>
-		</td>
-	</tr>
-	<tr>
-		<th colspan="2">
-			Country
-		</th>
-		<td style="padding-left: 10px;"></td>
-		<td>
-			<SELECT NAME="country_search" >
-			<OPTION>---------Any---------</OPTION>
-			 <%
-			     for (int j = 0; j< countryItems.size(); j++ )
-			      {
-					CountryItem countryItem = (CountryItem)countryItems.get(j);			 
-                    //This is a category from the database
-                    String optionCategoryValue = countryItem.getCountryName();
- 
-                    //Construct the option tag in a String variable
-                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
-                    
-                    //close the option tag
-                    optionTag += ">" + optionCategoryValue + "</OPTION>";
-                    
-                    //printout the option tag
-                    out.println(optionTag);
-			      }			 
-			%>
-			</SELECT>
-		</td>
-	</tr>
-	<tr>
-	
-		<th colspan= "2">
-			Company geographic coverage
-		</td>
-		<td style="padding-left: 10px;"></td>
-		<td>
-			<SELECT NAME="country_coverage_search" style="width:40">
-			<OPTION>---------Any---------</OPTION>
-			 <%
-			     for (int j = 0; j< coverageCountryItems.size(); j++ )
-			      {
-					CountryItem countryItem = (CountryItem)coverageCountryItems.get(j);			 
-                    //This is a category from the database
-                    String optionCategoryValue = countryItem.getCountryName();
- 
-                    //Construct the option tag in a String variable
-                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
-                    
-                    //close the option tag
-                    optionTag += ">" + optionCategoryValue + "</OPTION>";
-                    
-                    //printout the option tag
-                    out.println(optionTag);
-			      }			 
-			%>
-			</SELECT>
-		</td>
-	</tr>
-	<tr>
-		<th colspan = "2">
-			Primary business type
-		</th>
-		<td style="padding-left: 10px;"></td>
-		<td>
-			<SELECT NAME="primary_business_type_search" style="width:40" >
-			<OPTION>---------Any---------</OPTION>
-			 <%
-		     for (int j = 0; j< businessTypeItems.size(); j++ )
-		      {
-				BusinesstypeItem businessItem = (BusinesstypeItem)businessTypeItems.get(j);			 
-                //This is a category from the database
-                String optionCategoryValue = businessItem.getBusinessName();
- 
-                //Construct the option tag in a String variable
-                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
-                    
-                //close the option tag
-                optionTag += ">" + optionCategoryValue + "</OPTION>";
-                    
-                //printout the option tag
-                out.println(optionTag);
-		      }			 
-			%>
-			</SELECT>		
-		</td>
-	</tr>	
-	<tr>
-		<th colspan = "2" >
-			Industry
-		</th>
-		<td style="padding-left: 10px;"></td>
-		<td>
-			<SELECT NAME="industry_search" style="width:40" >
-			<OPTION>---------Any---------</OPTION>
-			 <%
-		     for (int j = 0; j< industryItems.size(); j++ )
-		      {
-				IndustryItem industryItem = (IndustryItem)industryItems.get(j);			 
-                //This is a category from the database
-                String optionCategoryValue = industryItem.getIndustryName();
- 
-                //Construct the option tag in a String variable
-                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
-                    
-                //close the option tag
-                optionTag += ">" + optionCategoryValue + "</OPTION>";
-                    
-                //printout the option tag
-                out.println(optionTag);
-		      }			 
-			%>
-		</td>
-	</tr>
-	</table>
-	<br>
-	<input class="portlet-form-button" type="submit" value="Search"> 
-	<!-- <input class="portlet-form-button" type="button" value="Search" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="search" /><portlet:param name="industrySearch" value="${industry_search}" /></portlet:renderURL>';"> -->
-		
 		<br><br>
 
 	<table class="lfr-table" border="1" cellpadding="4" cellspacing="2" width="100%">
 	<tr BGCOLOR="#99CCFF">
-		<td >
-			<b>Company Name</b>
+		<td width="20%">
+			<b>Partner Name</b>
+		</td>
+		<td width="10%">
+			<b>Solution Name</b>
+		</td>
+		<td>
+			<b>Solution Focus</b>
 		</td>
 		<td>
 			<b>Industry</b>
 		</td>
 		<td>
-			<b>Company size</b>
-		</td>
-		<td>
-			<b>Primary country</b>
-		</td>
-		<td>
-			<b>Primary region</b>
+			<b>Geographic Coverage</b>
 		</td>
 		<td>
 			<b>Action</b>
@@ -875,64 +815,44 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 	</tr>
 
 	<%
-	List userItems = UserItemDAO.getUserItems();
-	List companyItems = null;
-	boolean cond = industry_search_liv != null ||  
-				   sapsol_search_liv != null ||
-				   country_search_liv!= null ||
-				   country_coverage_search_liv != null ||
-				   primary_business_type_search_liv != null ;
-				   
-	if(!cond)
-		{
-		companyItems = CompanyItemDAO.getCompanyItems();
-		}
-	else {
-		companyItems = CompanyUtil.getCompanyItemsBySearch(industry_search_liv, sapsol_search_liv, country_search_liv, country_coverage_search_liv, primary_business_type_search_liv);
-		}
+	List solutionItems = null;
+	solutionItems = SolutionItemDAO.getSolutionItems();
 	
-	int count = companyItems.size();
+	int count = solutionItems.size();
 	boolean even = false;
-	for (int i = 0; i < 2*companyItems.size(); i++) {
-		CompanyItem companyItem = (CompanyItem)companyItems.get(i/2);
+	for (int i = 0; i < 2*solutionItems.size(); i++) {
+		SolutionItem solutionItem = (CompanyItem)solutionItems.get(i/2);
 		even = (i%2 == 0);
 	%>
 		<% if (even){ 
 		%>
 		<tr>
-			<td>
-				<%= companyItem.getName() %>
+			<td class = "fontweightbolder">
+				<%= solutionItem.solName %>
 			</td>
 			<td>
-				<%= CompanyUtil.getCompanyIndustries(companyItem) %>
+				<%= SolutionUtil.getSolutionPartnerName(solutionItem) %>
 			</td>
 			<td>
-				<% if (companyItem.getCompanyEmpNo() > 0){ 
-				%>
-				<%= companyItem.getCompanyEmpNo() %>
-				<%} else  {%>
-				<b></b>
-				<% 
-				} 
-				%>
-				
+				<%= SolutionUtil.getSolutionFocus(solutionItem) %>
 			</td>
 			<td>
-				<%= CompanyUtil.getCompanyCountryName(companyItem) %>
+				<%= SolutionUtil.getSolutionIndustry(solutionItem) %>
 			</td>
 			<td>
-				<%= CompanyUtil.getCompanyRegionName(companyItem) %>
-				<!--  -->
+				<%= SolutionUtil.getSolutionCoverage(solutionItem) %>
 			</td>
 			<td>
-				<input class="portlet-form-button" type="button" value="Edit" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="edit" /><portlet:param name="id" value="<%= String.valueOf(companyItem.getId()) %>" /></portlet:renderURL>';">
+				<input class="portlet-form-button" type="button" value="Edit" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="edit" /><portlet:param name="id" value="<%= String.valueOf(solutionItem.getId()) %>" /></portlet:renderURL>';">
+
+				<input class="portlet-form-button" type="button" value="Delete" onClick="document.solutionprofile.command.value = 'delete'; document.solutionprofile.id.value = '<%= companyItem.getId() %>'; document.solutionprofile.submit();">
 			</td>
 		</tr>
 		<%} else  {%>
 		<tr>
-		<TH colspan="6" style="font-size: 8pt; color: navy">
-		<% if(companyItem.getDescription() != null) {%>
-				<%= companyItem.getDescription().substring(0, java.lang.Math.min(200,companyItem.getDescription().length()))+"..." %>
+		<TH colspan="6"  style="font-size: 8pt; font-weight: normal">
+		<% if(solutionItem.getDescription() != null) {%>
+				<%= solutionItem.solDesc.substring(0, java.lang.Math.min(200,solutionItem.solDesc.length()))+"..." %>
 				<%}else {%>
 				<b></b>
 				<%}%>
@@ -953,3 +873,37 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 %>
 
 </form>
+
+<script language="JavaScript" type="text/javascript">
+ var frmvalidator = new Validator("compprofile");
+ frmvalidator.addValidation("userCompanyName","req","Please enter the Company Name");
+ //frmvalidator.addValidation("userCompanyName","alpha");
+ 
+
+ frmvalidator.addValidation("mail","maxlen=50", "Please provide a valid e-mail adress");
+ //frmvalidator.addValidation("mail","req");
+ frmvalidator.addValidation("mail","email", "Please provide a valid e-mail adress");
+ 
+ frmvalidator.addValidation("telephone","maxlen=15", "Please provide a valid phone number, data entered too long");
+ //frmvalidator.addValidation("telephone","numeric", "Please provide a valid phone number, digits only");
+ frmvalidator.addValidation("telefax","maxlen=15", "Please provide a valid fax number, data entered too long");
+ //frmvalidator.addValidation("telefax","numeric", "Please provide a valid phone number, digits only");
+
+ frmvalidator.addValidation("channel_partner_since", "numeric", "Please provide a valid 4 digit year");
+ frmvalidator.addValidation("channel_partner_since", "maxlen=4", "Please provide a valid 4 digit year, data enetered too long");
+// frmvalidator.addValidation("channel_partner_since", "minlen=4", "Please provide a valid 4 digit year, data enetered too short");
+
+ frmvalidator.addValidation("noemployees", "numeric", "Please provide a valid digit number");
+  
+ frmvalidator.addValidation("partnerNumber","numeric", "Please provide a valid number");  
+ //frmvalidator.addValidation("Address","maxlen=50");
+ frmvalidator.addValidation("country","dontselect=0", "Please select one option for country");
+ frmvalidator.addValidation("country_coverage","dontselect=-1", "Please select at least one option for country coverage");
+ frmvalidator.addValidation("country_parent_company","dontselect=0", "Please select one option for parent company country");
+ frmvalidator.addValidation("primary_business_type","dontselect=0", "Please select one option for primary business type");
+ frmvalidator.addValidation("secondary_business_type","dontselect=0", "Please select one option for secondary business type");
+ frmvalidator.addValidation("sap_solution_focus","dontselect=-1", "Please select at least one option for SAP solution focus");
+ frmvalidator.addValidation("industry","dontselect=-1", "Please select at least one option for industry");
+ frmvalidator.addValidation("last_review_Date","date", "Please enter a valid date");
+ //secondary_business_type
+</script>
