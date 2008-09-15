@@ -54,6 +54,11 @@ public class SolutionItem {
 	public int solFocus	;
 	public int solStatusPartner;
 	public int solStatusSAP;
+	public int solMaturity;
+	public int statusByProvider;
+	public int statusBySAP;
+	public int solUserType;
+
 	public Date sapCertSince	;
 	public Date lastReviewBySAP;	
 	public int averTrainEndUser;
