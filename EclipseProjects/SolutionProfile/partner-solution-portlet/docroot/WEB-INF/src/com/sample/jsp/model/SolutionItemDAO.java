@@ -111,6 +111,10 @@ public class SolutionItemDAO {
 			ps.setString(47,solutionItem.modifiedBy);
 			ps.setDate(48,sqlDate/*solutionItem.dateUpdated */);
 			ps.setString(49,solutionItem.notificationProc);
+			ps.setInt(50,solutionItem.solMaturity);
+			ps.setInt(51,solutionItem.statusByProvider);
+			ps.setInt(52,solutionItem.statusBySAP);
+			ps.setInt(53,solutionItem.solUserType);
 
 			ps.executeUpdate();
 			
@@ -221,6 +225,9 @@ public class SolutionItemDAO {
 				solutionItem.modifiedBy = rs.getString(48);
 				solutionItem.dateUpdated  = rs.getDate(49);
 				solutionItem.notificationProc = rs.getString(50);
+				solutionItem.solMaturity = rs.getInt(51);
+				solutionItem.statusByProvider = rs.getInt(52);
+				solutionItem.statusBySAP = rs.getInt(53);
 				
 			}
 		}
@@ -298,6 +305,10 @@ public class SolutionItemDAO {
 				solutionItem.modifiedBy = rs.getString(48);
 				solutionItem.dateUpdated  = rs.getDate(49);
 				solutionItem.notificationProc = rs.getString(50);
+				solutionItem.solMaturity = rs.getInt(51);
+				solutionItem.statusByProvider = rs.getInt(52);
+				solutionItem.statusBySAP = rs.getInt(53);
+				solutionItem.solUserType = rs.getInt(54);
 				
 				
 				list.add(solutionItem);
@@ -375,8 +386,12 @@ public class SolutionItemDAO {
 			ps.setString(47,solutionItem.modifiedBy);
 			ps.setDate(48,sqlDate/*solutionItem.dateUpdated */);
 			ps.setString(49,solutionItem.notificationProc);
-			
-			ps.setLong(50, solutionItem.getId());
+			ps.setInt(50,solutionItem.solMaturity);
+			ps.setInt(51,solutionItem.statusByProvider);
+			ps.setInt(52,solutionItem.statusBySAP);
+			ps.setInt(53,solutionItem.solUserType);
+					
+			ps.setLong(54, solutionItem.getId());
 
 			ps.executeUpdate();
 		}
@@ -398,10 +413,10 @@ public class SolutionItemDAO {
 	"addServiceCost, addServicePriceEur, implCost, implCostEur, sapDiscount, dbUsed, " +
 	"SAPBusUsed, SAPGUIUsed, compA1B1Used, thirdPartyUsed, thirdPartyName, otherIT, " +
 	"addRemarks, solSAPMicroSite, lastPartRevieDate, reviewedBy, profileAdded, " +
-	"dateCreated, modifiedBy, dateUpdated, notificationProc) " +
+	"dateCreated, modifiedBy, dateUpdated, notificationProc, solMaturity, statusByProvider, statusBySAP, solUserType) " +
 	"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " +
 	"?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " +
-	"?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+	"?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 
 	private static final String _DELETE_SOLUTION_ITEM =
 		"DELETE FROM tbl_sol_directory WHERE solId = ?";
@@ -415,7 +430,7 @@ public class SolutionItemDAO {
 	"addServiceCost, addServicePriceEur, implCost, implCostEur, sapDiscount, dbUsed, " +
 	"SAPBusUsed, SAPGUIUsed, compA1B1Used, thirdPartyUsed, thirdPartyName, otherIT, " +
 	"addRemarks, solSAPMicroSite, lastPartRevieDate, reviewedBy, profileAdded, " +
-	"dateCreated, modifiedBy, dateUpdated, notificationProc " +
+	"dateCreated, modifiedBy, dateUpdated, notificationProc, solMaturity, statusByProvider, statusBySAP, solUserType " +
 	"FROM tbl_sol_directory WHERE solId = ?";
 
 	private static final String _GET_SOLUTION_ITEMS =
@@ -427,7 +442,7 @@ public class SolutionItemDAO {
 		"addServiceCost, addServicePriceEur, implCost, implCostEur, sapDiscount, dbUsed, " +
 		"SAPBusUsed, SAPGUIUsed, compA1B1Used, thirdPartyUsed, thirdPartyName, otherIT, " +
 		"addRemarks, solSAPMicroSite, lastPartRevieDate, reviewedBy, profileAdded, " +
-		"dateCreated, modifiedBy, dateUpdated, notificationProc " +
+		"dateCreated, modifiedBy, dateUpdated, notificationProc, solMaturity, statusByProvider, statusBySAP, solUserType " +
 		"FROM tbl_sol_directory";
 
 	private static final String _GET_SOLUTION_ITEMS_BY_COMP_ID =
@@ -439,7 +454,7 @@ public class SolutionItemDAO {
 		"addServiceCost, addServicePriceEur, implCost, implCostEur, sapDiscount, dbUsed, " +
 		"SAPBusUsed, SAPGUIUsed, compA1B1Used, thirdPartyUsed, thirdPartyName, otherIT, " +
 		"addRemarks, solSAPMicroSite, lastPartRevieDate, reviewedBy, profileAdded, " +
-		"dateCreated, modifiedBy, dateUpdated, notificationProc " +
+		"dateCreated, modifiedBy, dateUpdated, notificationProc, solMaturity, statusByProvider, statusBySAP, solUserType " +
 		"FROM tbl_sol_directory WHERE companyId = ?";
 
 	
@@ -453,7 +468,7 @@ public class SolutionItemDAO {
 		"addServiceCost = ?, addServicePriceEur = ?, implCost = ?, implCostEur = ?, sapDiscount = ?, dbUsed = ?, " +
 		"SAPBusUsed = ?, SAPGUIUsed = ?, compA1B1Used = ?, thirdPartyUsed = ?, thirdPartyName = ?, otherIT = ?, " +
 		"addRemarks = ?, solSAPMicroSite = ?, lastPartRevieDate = ?, reviewedBy = ?, profileAdded = ?, " +
-		"dateCreated = ?, modifiedBy = ?, dateUpdated = ?, notificationProc = ?) " +
+		"dateCreated = ?, modifiedBy = ?, dateUpdated = ?, notificationProc = ?, solMaturity = ?, statusByProvider = ?, statusBySAP = ?, solUserType = ?) " +
 		"WHERE solId = ?";
 	
 }

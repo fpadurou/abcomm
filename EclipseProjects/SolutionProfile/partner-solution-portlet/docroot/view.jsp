@@ -50,6 +50,7 @@ List businessTypeItems = BusinesstypeItemDAO.getBusinessTypeItems();
 List businessTypeItems2 = BusinesstypeItemDAO.getBusinessTypeItems(); 
 List sapSolutionItems = SAPSolutionItemDAO.getSAPSolutionItems(); 
 List industryItems = IndustryItemDAO.getIndustryItems(); 
+List sapSolFocusItems = SolutionItemDAO.getSolSapSol(); 
 
 
 if ((command != null) && (command.equals("add") || command.equals("edit"))) {
@@ -282,7 +283,28 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solFocus" type="text" value="<%= solFocus %>">
+			<SELECT NAME="solFocus" style="width:40" >
+			 <%
+		     for (int j = 0; j< sapSolFocusItems.size(); j++ )
+		      {
+                String optionCategoryValue = industryItem.get(j);
+
+                //Construct the option tag in a String variable
+                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                    
+                if(solFocusStr != null && solFocusStr.equals(optionCategoryValue))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
+                    
+                //close the option tag
+                optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                //printout the option tag
+                out.println(optionTag);
+		      }			 
+            //Close the result set and statment to free up resoures
+			%>		
 		</td>
 	</tr>	
 	<tr>
@@ -291,8 +313,31 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
+		<td>
+			<SELECT NAME="solStatusPartner" style="width:40" >
+			 <%
+		     for (int j = 0; j< sapSolFocusItems.size(); j++ )
+		      {
+                String optionCategoryValue = industryItem.get(j);
+
+                //Construct the option tag in a String variable
+                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                    
+                if(solFocusStr != null && solFocusStr.equals(optionCategoryValue))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
+                    
+                //close the option tag
+                optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                //printout the option tag
+                out.println(optionTag);
+		      }			 
+            //Close the result set and statment to free up resoures
+			%>		
+		</td>		
 			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
-		</td>
 	</tr>	
 	<tr>
 		<td>

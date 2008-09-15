@@ -42,6 +42,30 @@ import java.util.Date;
  */
 public class SolutionUtil {
 
+	public static List getSolSapSol()throws SQLException {
+		List list = new ArrayList();
+			
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+			String _GET_SOL_SOLFOCUS = "SELECT solSolFocus FROM tbl_sol_solfocus) ";
+			ps = con.prepareStatement(_GET_SOL_SOLFOCUS);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;	
+	}
+	
 	public static String getSolutionPartnerName(SolutionItem solutionItem) throws SQLException {
 		List list = new ArrayList();
 		String value = "";
@@ -102,6 +126,32 @@ public class SolutionUtil {
 		return solutionSapSolutions;
 	}	
 
+	public static List getMySAPAllInOneVersions() throws SQLException {
+		List list = new ArrayList();
+			
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			String _GET_MYSAPALLINONE_VERISON ="SELECT name FROM tbl_sol_sapallinone ";
+			ps = con.prepareStatement(_GET_MYSAPALLINONE_VERISON);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
+
+	}
+	
 	public static List getSolutionMySAPAllInOneVersions(SolutionItem solutionItem) throws SQLException {
 		List list = new ArrayList();
 		long solutionId = 0;
@@ -115,7 +165,7 @@ public class SolutionUtil {
 		try {
 			con = ConnectionPool.getConnection();
 
-			ps = con.prepareStatement(_GET_SOL_MYSAPALLINONE_VERISON);
+			ps = con.prepareStatement(_GET_SOL_MYSAPALLINONE_VERSION);
 			ps.setLong(1, solutionId);
 			rs = ps.executeQuery();
 
@@ -131,6 +181,32 @@ public class SolutionUtil {
 
 	}	
 
+	public static List getMySAPOneProductVersions() throws SQLException {
+		List list = new ArrayList();
+			
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			String _GET_MYSAPONEPRODUCT_VERISON ="SELECT name FROM tbl_sol_saponeproduct ";
+			ps = con.prepareStatement(_GET_MYSAPONEPRODUCT_VERISON);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
+
+	}
+
 	public static List getSolutionSAPOneProductVersions(SolutionItem solutionItem) throws SQLException {
 		List list = new ArrayList();
 		long solutionId = 0;
@@ -144,7 +220,7 @@ public class SolutionUtil {
 		try {
 			con = ConnectionPool.getConnection();
 
-			ps = con.prepareStatement(_GET_SOL_SAPONEPRODUCT_VERISON);
+			ps = con.prepareStatement(_GET_SOL_SAPONEPRODUCT_VERSION);
 			ps.setLong(1, solutionId);
 			rs = ps.executeQuery();
 
@@ -160,9 +236,32 @@ public class SolutionUtil {
 
 	}	
 	
+	public static List getMaturity() throws SQLException {
+		List list = new ArrayList();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+			String _GET_MATURITY = "SELECT name FROM tbl_sol_maturity ";	
+			ps = con.prepareStatement(_GET_MATURITY);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
+	}	
+	
 	public static String getSolMaturity(SolutionItem solutionItem) throws SQLException {
 		String value = "";
-		long id = solutionItem.getId();
+		int id = solutionItem.solMaturity ;
 		if(id <=0 )
 			return value;
 
@@ -246,6 +345,31 @@ public class SolutionUtil {
 
 	}	
 	
+	public static List getStatusByProvider() throws SQLException {
+		List list = new ArrayList();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+			String _GET_STATUS_BY_PROVIDER = "SELECT name FROM tbl_sol_status_by_partner";
+			ps = con.prepareStatement(_GET_SOL_STATUS_BY_PROVIDER);
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
+	}
+
+	
 	public static String getSolStatusByProvider(SolutionItem solutionItem) throws SQLException {
 		String value = "";
 		long id = solutionItem.getId();
@@ -272,6 +396,30 @@ public class SolutionUtil {
 		}
 
 		return value;
+	}
+	
+	public static List getStatusBySAP() throws SQLException {
+		List list = new ArrayList();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+			String _GET_STATUS_BY_SAP = "SELECT name FROM tbl_sol_status_by_SAP ";
+			ps = con.prepareStatement(_GET_SOL_STATUS_BY_PROVIDER);
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
 	}
 
 	public static String getSolStatusBySAP(SolutionItem solutionItem) throws SQLException {
@@ -363,7 +511,6 @@ public class SolutionUtil {
 	}			
 	
 	public static String getTargetCompanySizeString(SolutionItem solutionItem) throws SQLException {
-		List list = new ArrayList();
 		String strCoverage = "";
 		long solutionId = 0;
 		if(solutionItem != null)
@@ -391,6 +538,86 @@ public class SolutionUtil {
 		return strCoverage;
 
 	}		
+	
+	public static List getTargetCompanySize() throws SQLException {
+		List list = new ArrayList();
+			
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			String _GET_TARGET_COMP_SIZE_ALL = "Select name FROM tbl_target_comp_size ";
+			ps = con.prepareStatement(_GET_TARGET_COMP_SIZE_ALL);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
+
+	}		
+
+	public static List getSolTargetCompanySize(SolutionItem solutionItem) throws SQLException {
+		List list = new ArrayList();
+		long solutionId = 0;
+		if(solutionItem != null)
+			solutionId = solutionItem.getId();
+			
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_TARGET_COMP_SIZE);
+			ps.setLong(1, solutionId);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
+
+	}		
+
+	public static List getCategTarget() throws SQLException {
+		List list = new ArrayList();
+			
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+			String _GET_CATEG_TARGET_ALL = "SELECT name FORM tbl_sol_categ_target ";
+			ps = con.prepareStatement(_GET_CATEG_TARGET_ALL);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
+
+	}			
 	
 	public static String getSolutionCategTargetString(SolutionItem solutionItem) throws SQLException {
 		List list = new ArrayList();
@@ -420,6 +647,30 @@ public class SolutionUtil {
 
 		return strCoverage;
 
+	}		
+
+	public static List getLangAvailable() throws SQLException {
+		List list = new ArrayList();
+			
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+			String _GET_SOLUTION_LANG_AVAILABLE_ALL = "SELECT name FROM tbl_lang_available ";
+			ps = con.prepareStatement(_GET_SOLUTION_LANG_AVAILABLE_ALL);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
 	}		
 
 	public static String getSolutionLangAvailableString(SolutionItem solutionItem) throws SQLException {
@@ -452,9 +703,38 @@ public class SolutionUtil {
 
 	}		
 
+	public static List getSolutionLangAvailable(SolutionItem solutionItem) throws SQLException {
+		List list = new ArrayList();
+		long solutionId = 0;
+		if(solutionItem != null)
+			solutionId = solutionItem.getId();
+			
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_SOLUTION_LANG_AVAILABLE);
+			ps.setLong(1, solutionId);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
+
+	}		
+	
 	public static String getSolUserType(SolutionItem solutionItem) throws SQLException {
 		String value = "";
-		long id = solutionItem.getId();
+		long id = solutionItem.solUserType;
 		if(id <=0 )
 			return value;
 
@@ -1193,21 +1473,32 @@ public class SolutionUtil {
 /// solution string
 	private static final String _GET_SOLUTION_SOL_FOCUS = 
 		"SELECT solSolFocus FROM tbl_sol_solfocus WHERE (tbl_sol_solfocus.id = ?) ";
-	private static final String _GET_SOL_MYSAPALLINONE_VERISON = "";
-	private static final String _GET_SOL_SAPONEPRODUCT_VERISON = "";
-	private static final String _GET_SOL_MATURITY = "";
+	private static final String _GET_SOL_MYSAPALLINONE_VERSION = 
+		"SELECT name FROM tbl_sol_to_solsapallinone t1 join tbl_sol_sapallinone t2 WHERE (t1.id = t2.id) AND  t1.solutionId = ?";
+	private static final String _GET_SOL_SAPONEPRODUCT_VERSION = 
+		"SELECT name FROM tbl_sol_to_soloneproduct t1 join tbl_sol_saponeproduct t2 WHERE (t1.id = t2.id) AND  t1.solutionId = ?";
+	private static final String _GET_SOL_MATURITY = 
+		"SELECT name FROM tbl_sol_maturity WHERE (id = ?) ";
 	private static final String _GET_SOLUTION_INDUSTRIES =
 		"SELECT industry_name FROM tbl_solution_industries t1 join tbl_industry_microvertical t2 WHERE (t1.industryId = t2.industryId) AND  t1.solutionId = ?";
-	private static final String _GET_SOL_STATUS_BY_PROVIDER = "";
-	private static final String _GET_SOL_STATUS_BY_SAP = "";
+	private static final String _GET_SOL_STATUS_BY_PROVIDER = 
+		"SELECT name FROM tbl_sol_status_by_partner WHERE (tbl_sol_status_by_partner.id = ?) ";
+	private static final String _GET_SOL_STATUS_BY_SAP =
+		"SELECT name FROM tbl_sol_status_by_sap WHERE (tbl_sol_status_by_sap.id = ?) ";
+
 	private static final String _GET_SOLUTION_COVERAGE = 		
 		"SELECT country_name FROM tbl_solution_coverage t1 join tbl_countries t2 WHERE (t1.countryId = t2.countryId) AND  t1.solutionId = ?";
-	private static final String _GET_TARGET_COMP_SIZE = "";
+	private static final String _GET_TARGET_COMP_SIZE =
+		"SELECT name FROM tbl_sol_to_targetcompsize t1 join tbl_target_comp_size t2 WHERE (t1.id = t2.id) AND  t1.solutionId = ?";
+	private static final String _GET_SOLUTION_CATEG_TARGET =
+		"SELECT name FROM tbl_sol_to_solcategtarget t1 join tbl_sol_categ_target t2 WHERE (t1.id = t2.id) AND  t1.solutionId = ?";
+	
+	private static final String _GET_SOLUTION_LANG_AVAILABLE = 
+		"SELECT name FROM tbl_sol_to_langavailable t1 join tbl_lang_available t2 WHERE (t1.id = t2.id) AND  t1.solutionId = ?";
+
 	private static final String _GET_SOL_COUNTRY_EUR = "";
 	private static final String _GET_SOLUTION_PROG_LANG = "";
 	private static final String _GET_SOLUTION_OS = "";
 	private static final String _GET_SOLUTION_SAP_ALLINONE = "";
-	private static final String _GET_SOLUTION_CATEG_TARGET = "";
-	private static final String _GET_SOLUTION_LANG_AVAILABLE = "";
 	private static final String _GET_SOL_USER_TYPE = "";
 }
