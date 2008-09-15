@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>view-all-solutions</portlet-name>
 		<display-name>View all solutions</display-name>
-		<portlet-class>com.sample.jsp.portlet.JSPPortlet</portlet-class>
+		<portlet-class>com.sample.viewallsolutions.portlet.JSPPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
 			<value>/view.jsp</value>
