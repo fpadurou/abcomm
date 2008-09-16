@@ -43,14 +43,26 @@ function submitconfirm(solutionprofile)
 <%
 DateFormat dateFormatDateTime = DateFormat.getDateInstance();
 String command = request.getParameter("command");
+
 List countryItems = CountryItemDAO.getCountryItems();
 List coverageCountryItems = CountryItemDAO.getCountryItems();
-List parentCountryItems = CountryItemDAO.getCountryItems();
-List businessTypeItems = BusinesstypeItemDAO.getBusinessTypeItems(); 
-List businessTypeItems2 = BusinesstypeItemDAO.getBusinessTypeItems(); 
-List sapSolutionItems = SAPSolutionItemDAO.getSAPSolutionItems(); 
+List sapSolutionItems = SAPSolutionItemDAO.getSAPSolutionItems();
 List industryItems = IndustryItemDAO.getIndustryItems(); 
-List sapSolFocusItems = SolutionItemDAO.getSolSapSol(); 
+List sapSolFocusItems = SolutionUtil.getSolSapSol(); 
+List mySAPAllInOneVers = SolutionUtil.getMySAPAllInOneVersions(); 
+List mySAPOneProductVers = SolutionUtil.getMySAPOneProductVersions(); 
+List maturity = SolutionUtil.getMaturity(); 
+List statusByProvider = SolutionUtil.getStatusByProvider(); 
+List statusBySAP = SolutionUtil.getStatusBySAP(); 
+List targetCompSize = SolutionUtil.getTargetCompanySize(); 
+List categTarget = SolutionUtil.getCategTarget(); 
+List langAvailable = SolutionUtil.getLangAvailable(); 
+List userType = SolutionUtil.getSolUserType(); 
+List progLang = SolutionUtil.getProgLang(); 
+List os = SolutionUtil.getOS(); 
+List aioBased = SolutionUtil.getMySAPAllInOneBased(); 
+
+List YN = SolutionUtil.YesNoList();
 
 
 if ((command != null) && (command.equals("add") || command.equals("edit"))) {
@@ -65,6 +77,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	int solFocus  = 0;
 	int solStatusPartner = 0;
 	int solStatusSAP = 0;
+	
 	String sapCertSince	= "";;
 	String lastReviewBySAP = "";	
 	int averTrainEndUser = 0;
@@ -116,10 +129,23 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	String notificationText = "";
 	
 	// childs
-	String countryPriceEuroStr = "";
-	String solFocusStr = "";
-    List industry = null; 
-    List geographic_coverage = null;
+	String sol_countryPriceEuro = "";
+	String sol_solFocusStr = "";
+    List sol_geographic_coverage = null;
+	List sol_industry = null; 
+	List sol_sapSolFocusItems = null; 
+	List sol_mySAPAllInOneVers = null; 
+	List sol_mySAPOneProductVers  = null; 
+	String sol_maturity  = ""; 
+	String sol_statusByProvider  = null; 
+	String sol_statusBySAP  = null; 
+	List sol_targetCompSize  = null; 
+	List sol_categTarget  = null; 
+	List sol_langAvailable  = null; 
+	String sol_userType  = null; 
+	List sol_progLang  = null; 
+	List sol_os  = null; 
+	List sol_aioBased  = null;     
         
 	if (command.equals("edit")) {
 		id = Integer.parseInt(request.getParameter("id"));
@@ -209,16 +235,29 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	    modified_by = companyItem.getModifiedBy();
 */	     		
 // get the childs item
-	    if(countryPriceEuro >0)
-	    	countryPriceEuroStr = CountryItemDAO.getCountryItem(countryPriceEuro).getCountryName(); 
 
 	    if(solFocus >0)
-		    solFocusStr = SolutionUtil.getSolutionSolFocus(solutionItem);
+		    sol_solFocusStr = SolutionUtil.getSolutionSolFocus(solutionItem);
 		    
-	    industry = SolutionUtil.getSolutionIndustries(solutionItem);
-	    geographic_coverage = SolutionUtil.getSolutionCountryCoverage(solutionItem);
-	    //primary_business_type = CompanyUtil.getCompanyBusinessSolution(id, 1);
-	 	
+		sol_mySAPAllInOneVers = SolutionUtil.getSolutionMySAPAllInOneVersions(solutionItem);
+		sol_mySAPOneProductVers  = SolutionUtil.getSolutionSAPOneProductVersions(solutionItem);
+		sol_maturity  = SolutionUtil.getSolMaturity(solutionItem); 
+		sol_industry = SolutionUtil.getSolutionIndustries(solutionItem); 
+		sol_statusByProvider  = SolutionUtil.getSolStatusByProvider(solutionItem); 
+		sol_statusBySAP  = SolutionUtil.getSolStatusBySAP(solutionItem); 
+	    sol_geographic_coverage = SolutionUtil.getSolutionCountryCoverage(solutionItem);
+		sol_targetCompSize = SolutionUtil.getSolTargetCompanySize(solutionItem);
+		sol_categTarget  = SolutionUtil.getSolutionCategTarget(solutionItem);
+		sol_langAvailable  = SolutionUtil.getSolutionLangAvailable(solutionItem);
+	    
+	    if(countryPriceEuro >0)
+	    	sol_countryPriceEuro = SolutionUtil.getSolCountryEur(solutionItem); 
+
+		sol_userType  = SolutionUtil.getSolUserType(solutionItem);
+		sol_progLang  = SolutionUtil.getSolutionProgLang(solutionItem); 
+		sol_os  = SolutionUtil.getSolutionOS(solutionItem);
+		sol_aioBased  = SolutionUtil.getSolutionMySAPAllInOneBased(solutionItem);
+		 	
 	}
 	else  //add
 	{
@@ -287,12 +326,12 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 			 <%
 		     for (int j = 0; j< sapSolFocusItems.size(); j++ )
 		      {
-                String optionCategoryValue = industryItem.get(j);
+                String optionCategoryValue = (String)sapSolFocusItems.get(j);
 
                 //Construct the option tag in a String variable
                 String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                if(solFocusStr != null && solFocusStr.equals(optionCategoryValue))
+                if(sol_solFocusStr != null && sol_solFocusStr.equals(optionCategoryValue))
                 {
                     optionTag += " selected=\"selected\"";
                 }
@@ -313,17 +352,16 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-		<td>
-			<SELECT NAME="solStatusPartner" style="width:40" >
+			<SELECT NAME="mySAPAllInOneVers" style="width:40" MULTIPLE SIZE: 4 >
 			 <%
-		     for (int j = 0; j< sapSolFocusItems.size(); j++ )
+		     for (int j = 0; j< mySAPAllInOneVers.size(); j++ )
 		      {
-                String optionCategoryValue = industryItem.get(j);
+                String optionCategoryValue = (String)mySAPAllInOneVers.get(j);
 
                 //Construct the option tag in a String variable
                 String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                if(solFocusStr != null && solFocusStr.equals(optionCategoryValue))
+                if(sol_mySAPAllInOneVers != null && sol_mySAPAllInOneVers.contains(optionCategoryValue))
                 {
                     optionTag += " selected=\"selected\"";
                 }
@@ -337,7 +375,6 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
             //Close the result set and statment to free up resoures
 			%>		
 		</td>		
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
 	</tr>	
 	<tr>
 		<td>
@@ -345,8 +382,29 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
-		</td>
+			<SELECT NAME="mySAPOneProductVers" style="width:40" MULTIPLE SIZE: 4 >
+			 <%
+		     for (int j = 0; j< mySAPOneProductVers.size(); j++ )
+		      {
+                String optionCategoryValue = (String)mySAPOneProductVers.get(j);
+
+                //Construct the option tag in a String variable
+                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                    
+                if(sol_mySAPOneProductVers != null && sol_mySAPOneProductVers.contains(optionCategoryValue))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
+                    
+                //close the option tag
+                optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                //printout the option tag
+                out.println(optionTag);
+		      }			 
+            //Close the result set and statment to free up resoures
+			%>		
+		</td>		
 	</tr>	
 	<tr>
 		<td>
@@ -354,7 +412,28 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<SELECT NAME="maturity" style="width:40" >
+			 <%
+		     for (int j = 0; j< maturity.size(); j++ )
+		      {
+                String optionCategoryValue = (String)maturity.get(j);
+
+                //Construct the option tag in a String variable
+                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                    
+                if(sol_maturity != null && sol_maturity.equals(optionCategoryValue))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
+                    
+                //close the option tag
+                optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                //printout the option tag
+                out.println(optionTag);
+		      }			 
+            //Close the result set and statment to free up resoures
+			%>		
 		</td>
 	</tr>	
 	<tr>
@@ -374,7 +453,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                 //Construct the option tag in a String variable
                 String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                if(industry != null && industry.contains(optionCategoryValue))
+                if(sol_industry != null && sol_industry.contains(optionCategoryValue))
                 {
                     optionTag += " selected=\"selected\"";
                 }
@@ -395,7 +474,29 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<SELECT NAME="statusByProvider" style="width:40" >
+			 <%
+		     for (int j = 0; j< statusByProvider.size(); j++ )
+		      {
+                //This is a category from the database
+                String optionCategoryValue = (String)statusByProvider.get(j);
+ 
+                //Construct the option tag in a String variable
+                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                    
+                if(sol_statusByProvider != null && sol_statusByProvider.contains(optionCategoryValue))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
+                    
+                //close the option tag
+                optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                //printout the option tag
+                out.println(optionTag);
+		      }			 
+            //Close the result set and statment to free up resoures
+			%>
 		</td>
 	</tr>	
 	<tr>
@@ -404,7 +505,29 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<SELECT NAME="statusBySAP" style="width:40" >
+			 <%
+		     for (int j = 0; j< statusBySAP.size(); j++ )
+		      {
+                //This is a category from the database
+                String optionCategoryValue = (String)statusBySAP.get(j);
+ 
+                //Construct the option tag in a String variable
+                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                    
+                if(sol_statusBySAP != null && sol_statusBySAP.contains(optionCategoryValue))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
+                    
+                //close the option tag
+                optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                //printout the option tag
+                out.println(optionTag);
+		      }			 
+            //Close the result set and statment to free up resoures
+			%>
 		</td>
 	</tr>	
 	<tr>
@@ -431,7 +554,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="geographic_coverage" style="width:40">
+			<SELECT NAME="geographic_coverage" style="width:40" MULTIPLE SIZE:10>
 			 <%
 			     for (int j = 0; j< countryItems.size(); j++ )
 			      {
@@ -441,7 +564,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
  
                     //Construct the option tag in a String variable
                     String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
-	                if(geographic_coverage != null && geographic_coverage.contains(optionCategoryValue))
+	                if(sol_geographic_coverage != null && sol_geographic_coverage.contains(optionCategoryValue))
 	                {
 	                    optionTag += " selected=\"selected\"";
 	                }
@@ -463,7 +586,29 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<SELECT NAME="sol_targetCompSize" style="width:40" MULTIPLE SIZE :10>
+			 <%
+			     for (int j = 0; j< targetCompSize.size(); j++ )
+			      {
+                    //This is a category from the database
+                    String optionCategoryValue = (String)targetCompSize.get(j);
+ 
+                    //Construct the option tag in a String variable
+                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+	                if(sol_targetCompSize != null && sol_targetCompSize.contains(optionCategoryValue))
+	                {
+	                    optionTag += " selected=\"selected\"";
+	                }
+                    
+                    //close the option tag
+                    optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                    //printout the option tag
+                    out.println(optionTag);
+			      }			 
+                //Close the result set and statment to free up resoures
+			%>
+			</SELECT>
 		</td>
 	</tr>	
 	<tr>
@@ -472,7 +617,29 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<SELECT NAME="categTarget" style="width:40" MULTIPLE SIZE :10>
+			 <%
+			     for (int j = 0; j< categTarget.size(); j++ )
+			      {
+                    //This is a category from the database
+                    String optionCategoryValue = (String)categTarget.get(j);
+ 
+                    //Construct the option tag in a String variable
+                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+	                if(sol_categTarget != null && sol_categTarget.contains(optionCategoryValue))
+	                {
+	                    optionTag += " selected=\"selected\"";
+	                }
+                    
+                    //close the option tag
+                    optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                    //printout the option tag
+                    out.println(optionTag);
+			      }			 
+                //Close the result set and statment to free up resoures
+			%>
+			</SELECT>
 		</td>
 	</tr>	
 	<tr>
@@ -481,7 +648,29 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<SELECT NAME="langAvailable" style="width:40" MULTIPLE SIZE :10>
+			 <%
+			     for (int j = 0; j< langAvailable.size(); j++ )
+			      {
+                    //This is a category from the database
+                    String optionCategoryValue = (String)langAvailable.get(j);
+ 
+                    //Construct the option tag in a String variable
+                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+	                if(sol_langAvailable != null && sol_langAvailable.contains(optionCategoryValue))
+	                {
+	                    optionTag += " selected=\"selected\"";
+	                }
+                    
+                    //close the option tag
+                    optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                    //printout the option tag
+                    out.println(optionTag);
+			      }			 
+                //Close the result set and statment to free up resoures
+			%>
+			</SELECT>		
 		</td>
 	</tr>	
 	<tr>
@@ -490,7 +679,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="averTrainEndUser" type="text" value="<%= averTrainEndUser %>">
 		</td>
 	</tr>	
 	<tr>
@@ -499,7 +688,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="averImplTrainingDays" type="text" value="<%= averImplTrainingDays %>">
 		</td>
 	</tr>	
 	<tr>
@@ -508,7 +697,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="averImplEffort" type="text" value="<%= averImplEffort %>">
 		</td>
 	</tr>	
 	<tr>
@@ -517,7 +706,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="averImplDuration" type="text" value="<%= averImplDuration %>">
 		</td>
 	</tr>	
 	<tr>
@@ -526,7 +715,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="averSizeImplTeam" type="text" value="<%= averSizeImplTeam %>">
 		</td>
 	</tr>	
 	<tr>
@@ -535,7 +724,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="averSaleCycle" type="text" value="<%= averSaleCycle %>">
 		</td>
 	</tr>	
 	<tr>
@@ -544,7 +733,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="noCustomers" type="text" value="<%= noCustomers %>">
 		</td>
 	</tr>	
 	<tr>
@@ -553,7 +742,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="smallImpl" type="text" value="<%= smallImpl %>">
 		</td>
 	</tr>	
 	<tr>
@@ -562,7 +751,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="largeImpl" type="text" value="<%= largeImpl %>">
 		</td>
 	</tr>	
 	<tr>
@@ -571,7 +760,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="smallImplTime" type="text" value="<%= smallImplTime %>">
 		</td>
 	</tr>	
 	<tr>
@@ -580,7 +769,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="largeImplTime" type="text" value="<%= largeImplTime %>">
 		</td>
 	</tr>	
 	<tr>
@@ -589,7 +778,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="smallImplTeamNo" type="text" value="<%= smallImplTeamNo %>">
 		</td>
 	</tr>	
 	<tr>
@@ -598,7 +787,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="largeImplTeamNo" type="text" value="<%= largeImplTeamNo %>">
 		</td>
 	</tr>	
 	<tr>
@@ -607,7 +796,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="solSite" type="text" value="<%= solSite %>">
 		</td>
 	</tr>	
 	<tr>
@@ -627,7 +816,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                     //Construct the option tag in a String variable
                     String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                    if(optionCategoryValue.equals(countryPriceEuroStr))
+                    if(optionCategoryValue.equals(sol_countryPriceEuro))
                     {
                         optionTag += " selected=\"selected\"";
                     }
@@ -650,7 +839,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="totalAppBaseLinePrice" type="text" value="<%= totalAppBaseLinePrice %>">
 		</td>
 	</tr>	
 	<tr>
@@ -659,7 +848,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="hardwareCost" type="text" value="<%= hardwareCost %>">
 		</td>
 	</tr>	
 	<tr>
@@ -668,7 +857,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="averLicensePrice" type="text" value="<%= averLicensePrice %>">
 		</td>
 	</tr>	
 	<tr>
@@ -677,7 +866,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="addServiceCost" type="text" value="<%= addServiceCost %>">
 		</td>
 	</tr>	
 	<tr>
@@ -686,7 +875,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="implCost" type="text" value="<%= implCost %>">
 		</td>
 	</tr>	
 	<tr>
@@ -695,8 +884,30 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
-		</td>
+			<SELECT NAME="userType" style="width:40" MULTIPLE SIZE :10>
+			 <%
+			     for (int j = 0; j< userType.size(); j++ )
+			      {
+                    //This is a category from the database
+                    String optionCategoryValue = (String)userType.get(j);
+ 
+                    //Construct the option tag in a String variable
+                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+	                if(sol_userType != null && sol_userType.equals(optionCategoryValue))
+	                {
+	                    optionTag += " selected=\"selected\"";
+	                }
+                    
+                    //close the option tag
+                    optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                    //printout the option tag
+                    out.println(optionTag);
+			      }			 
+                //Close the result set and statment to free up resoures
+			%>
+			</SELECT>	
+		</td>	
 	</tr>	
 	<tr>
 		<td>
@@ -704,7 +915,29 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<SELECT NAME="sapDiscount" style="width:40">
+			 <%
+			     for (int j = 0; j< YN.size(); j++ )
+			      {
+                    //This is a category from the database
+                    String optionCategoryValue = (String)YN.get(j);
+ 
+                    //Construct the option tag in a String variable
+                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+	                if(sapDiscount != null && sapDiscount.equals(optionCategoryValue))
+	                {
+	                    optionTag += " selected=\"selected\"";
+	                }
+                    
+                    //close the option tag
+                    optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                    //printout the option tag
+                    out.println(optionTag);
+			      }			 
+                //Close the result set and statment to free up resoures
+			%>
+			</SELECT>	
 		</td>
 	</tr>	
 	<tr>
@@ -713,7 +946,29 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<SELECT NAME="progLang" style="width:40" MULTIPLE SIAZE:4>
+			 <%
+			     for (int j = 0; j< progLang.size(); j++ )
+			      {
+                    //This is a category from the database
+                    String optionCategoryValue = (String)progLang.get(j);
+ 
+                    //Construct the option tag in a String variable
+                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+	                if(sol_progLang != null && sol_progLang.contains(optionCategoryValue))
+	                {
+	                    optionTag += " selected=\"selected\"";
+	                }
+                    
+                    //close the option tag
+                    optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                    //printout the option tag
+                    out.println(optionTag);
+			      }			 
+                //Close the result set and statment to free up resoures
+			%>
+			</SELECT>	
 		</td>
 	</tr>	
 	<tr>
@@ -722,7 +977,29 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<SELECT NAME="os" style="width:40" MULTIPLE SIZE :4>
+			 <%
+			     for (int j = 0; j< os.size(); j++ )
+			      {
+                    //This is a category from the database
+                    String optionCategoryValue = (String)os.get(j);
+ 
+                    //Construct the option tag in a String variable
+                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+	                if(sol_os != null && sol_os.contains(optionCategoryValue))
+	                {
+	                    optionTag += " selected=\"selected\"";
+	                }
+                    
+                    //close the option tag
+                    optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                    //printout the option tag
+                    out.println(optionTag);
+			      }			 
+                //Close the result set and statment to free up resoures
+			%>
+			</SELECT>
 		</td>
 	</tr>	
 	<tr>
@@ -731,7 +1008,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="dbUsed" type="text" value="<%= dbUsed %>">
 		</td>
 	</tr>	
 	<tr>
@@ -740,7 +1017,29 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<SELECT NAME="SAPBusUsed" style="width:40">
+			 <%
+			     for (int j = 0; j< YN.size(); j++ )
+			      {
+                    //This is a category from the database
+                    String optionCategoryValue = (String)YN.get(j);
+ 
+                    //Construct the option tag in a String variable
+                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+	                if(SAPBusUsed != null && SAPBusUsed.equals(optionCategoryValue))
+	                {
+	                    optionTag += " selected=\"selected\"";
+	                }
+                    
+                    //close the option tag
+                    optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                    //printout the option tag
+                    out.println(optionTag);
+			      }			 
+                //Close the result set and statment to free up resoures
+			%>
+			</SELECT>			
 		</td>
 	</tr>	
 	<tr>
@@ -749,7 +1048,29 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<SELECT NAME="SAPGUIUsed" style="width:40">
+			 <%
+			     for (int j = 0; j< YN.size(); j++ )
+			      {
+                    //This is a category from the database
+                    String optionCategoryValue = (String)YN.get(j);
+ 
+                    //Construct the option tag in a String variable
+                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+	                if(SAPGUIUsed != null && SAPGUIUsed.equals(optionCategoryValue))
+	                {
+	                    optionTag += " selected=\"selected\"";
+	                }
+                    
+                    //close the option tag
+                    optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                    //printout the option tag
+                    out.println(optionTag);
+			      }			 
+                //Close the result set and statment to free up resoures
+			%>
+			</SELECT>			
 		</td>
 	</tr>	
 	<tr>
@@ -758,7 +1079,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="compA1B1Used" type="text" value="<%= compA1B1Used %>">
 		</td>
 	</tr>	
 	<tr>
@@ -767,7 +1088,29 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<SELECT NAME="aioBased" style="width:40" MULTIPLE SIZE : 4>
+			 <%
+			     for (int j = 0; j< aioBased.size(); j++ )
+			      {
+                    //This is a category from the database
+                    String optionCategoryValue = (String)aioBased.get(j);
+ 
+                    //Construct the option tag in a String variable
+                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+	                if(sol_aioBased != null && sol_aioBased.contains(optionCategoryValue))
+	                {
+	                    optionTag += " selected=\"selected\"";
+	                }
+                    
+                    //close the option tag
+                    optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                    //printout the option tag
+                    out.println(optionTag);
+			      }			 
+                //Close the result set and statment to free up resoures
+			%>
+			</SELECT>		
 		</td>
 	</tr>	
 	<tr>
@@ -776,7 +1119,29 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<SELECT NAME="thirdPartyUsed" style="width:40">
+			 <%
+			     for (int j = 0; j< YN.size(); j++ )
+			      {
+                    //This is a category from the database
+                    String optionCategoryValue = (String)YN.get(j);
+ 
+                    //Construct the option tag in a String variable
+                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+	                if(thirdPartyUsed != null && thirdPartyUsed.equals(optionCategoryValue))
+	                {
+	                    optionTag += " selected=\"selected\"";
+	                }
+                    
+                    //close the option tag
+                    optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                    //printout the option tag
+                    out.println(optionTag);
+			      }			 
+                //Close the result set and statment to free up resoures
+			%>
+			</SELECT>			
 		</td>
 	</tr>	
 	<tr>
@@ -785,7 +1150,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="thirdPartyName" type="text" value="<%= thirdPartyName %>">
 		</td>
 	</tr>	
 	<tr>
@@ -794,7 +1159,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="otherIT" type="text" value="<%= otherIT %>">
 		</td>
 	</tr>	
 	<tr>
@@ -803,7 +1168,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="addRemarks" type="text" value="<%= addRemarks %>">
 		</td>
 	</tr>	
 	<tr>
@@ -812,7 +1177,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="solSAPMicroSitev" type="text" value="<%= solSAPMicroSite %>">
 		</td>
 	</tr>	
 
