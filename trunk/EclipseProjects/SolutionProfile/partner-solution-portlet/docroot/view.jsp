@@ -27,9 +27,9 @@
 <!--
 function submitconfirm(solutionprofile)
 {
-	if(""==document.forms.solutionprofile.userCompanyName.value)
+	if(""==document.forms.solutionprofile.solName.value)
 	{
-	alert("Please enter a company name.");
+	alert("Please enter a solution name.");
 	return false;
 	}
 	return true;
@@ -41,7 +41,7 @@ function submitconfirm(solutionprofile)
 <form action="<portlet:actionURL />" method="post" name="solutionprofile" onSubmit="return submitconfirm(this)">
 
 <%
-DateFormat dateFormatDateTime = DateFormat.getDateInstance();
+SimpleDateFormat dateFormatDateTime = new SimpleDateFormat("MM/dd/yyyy");
 String command = request.getParameter("command");
 
 List countryItems = CountryItemDAO.getCountryItems();
@@ -61,6 +61,7 @@ List userType = SolutionUtil.getSolUserType();
 List progLang = SolutionUtil.getProgLang(); 
 List os = SolutionUtil.getOS(); 
 List aioBased = SolutionUtil.getMySAPAllInOneBased(); 
+String pleaseChoose = "---------------Please choose----------------";
 
 List YN = SolutionUtil.YesNoList();
 
@@ -302,7 +303,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<TEXTAREA rows="4" cols= "60" input class="form-text" name="solDesc" align = left>
+			<TEXTAREA style="text-align: left" rows="4" cols= "60" name="solDesc" align = left>
 			<%= solDesc.trim() %>
 			</TEXTAREA>
 		</td>
@@ -323,6 +324,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="solFocus" style="width:40" >
+			<OPTION><%=pleaseChoose%></OPTION>
 			 <%
 		     for (int j = 0; j< sapSolFocusItems.size(); j++ )
 		      {
@@ -413,6 +415,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="maturity" style="width:40" >
+			<OPTION><%=pleaseChoose%></OPTION>
 			 <%
 		     for (int j = 0; j< maturity.size(); j++ )
 		      {
@@ -475,6 +478,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="statusByProvider" style="width:40" >
+			<OPTION><%=pleaseChoose%></OPTION>
 			 <%
 		     for (int j = 0; j< statusByProvider.size(); j++ )
 		      {
@@ -806,6 +810,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="country" style="width:40">
+			<OPTION><%=pleaseChoose%></OPTION>
 			 <%
 			     for (int j = 0; j< countryItems.size(); j++ )
 			      {
@@ -946,7 +951,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="progLang" style="width:40" MULTIPLE SIAZE:4>
+			<SELECT NAME="progLang" style="width:40" MULTIPLE SIZE:4>
 			 <%
 			     for (int j = 0; j< progLang.size(); j++ )
 			      {
@@ -1120,6 +1125,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<SELECT NAME="thirdPartyUsed" style="width:40">
+			<OPTION><%=pleaseChoose%></OPTION>
 			 <%
 			     for (int j = 0; j< YN.size(); j++ )
 			      {
@@ -1186,6 +1192,8 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	<br>
 
 	<input class="portlet-form-button" type="submit" value="Save">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input class="portlet-form-button" type="button" value="Cancel" onClick="self.location = '<portlet:renderURL></portlet:renderURL>';"> 
 
 	<%
 	if (renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
@@ -1201,7 +1209,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 <%
 }
 else {
-	int id =0;
+	long id =0;
 //search + viewall
 %>
 	<input name="command" type="hidden" value="<%= command %>">
@@ -1294,34 +1302,45 @@ else {
 
 <script language="JavaScript" type="text/javascript">
  var frmvalidator = new Validator("solutionprofile");
- frmvalidator.addValidation("userCompanyName","req","Please enter the Company Name");
- //frmvalidator.addValidation("userCompanyName","alpha");
  
+ frmvalidator.addValidation("solName ","req","Please enter the Solution Name");
+ frmvalidator.addValidation("solDesc ","req","Please enter the Solution Description");
+ frmvalidator.addValidation("solFocus","dontselect=0", "Please select one option for solution focus");
+ frmvalidator.addValidation("mySAPAllInOneVers","dontselect=-1", "Please select at least one option for mySAP All-in-One versions");
+ frmvalidator.addValidation("mySAPOneProductVer","dontselect=-1", "Please select at least one option for SAP Business One product versions");
+ frmvalidator.addValidation("maturity","dontselect=0", "Please select one option for Solution Maturity");
+ frmvalidator.addValidation("industry","dontselect=-1", "Please select at least one option for Industry");
+ frmvalidator.addValidation("statusByProvider","dontselect=0", "Please select one option for Solution Status (provided by SAP)");
+ frmvalidator.addValidation("geographic_coverage","dontselect=-1", "Please select at least one option for country coverage");
+ frmvalidator.addValidation("targetCompSize","dontselect=-1", "Please select at least one option for Target Company Size");
 
- frmvalidator.addValidation("mail","maxlen=50", "Please provide a valid e-mail adress");
- //frmvalidator.addValidation("mail","req");
- frmvalidator.addValidation("mail","email", "Please provide a valid e-mail adress");
- 
- frmvalidator.addValidation("telephone","maxlen=15", "Please provide a valid phone number, data entered too long");
- //frmvalidator.addValidation("telephone","numeric", "Please provide a valid phone number, digits only");
- frmvalidator.addValidation("telefax","maxlen=15", "Please provide a valid fax number, data entered too long");
- //frmvalidator.addValidation("telefax","numeric", "Please provide a valid phone number, digits only");
+ frmvalidator.addValidation("noCustomers","req","Please enter the Number of Customers using this solution");
+ frmvalidator.addValidation("refCustAvailForUse","dontselect=0", "Please select one option for customers available");
+ frmvalidator.addValidation("progLang","dontselect=-1", "Please select at least one option for Programming language");
+ frmvalidator.addValidation("os","dontselect=-1", "Please select at least one option for Operating system/platform");
+ frmvalidator.addValidation("thirdPartyUsed","dontselect=0", "Please specify if use another third-party product or partner to implement your solution");
 
- frmvalidator.addValidation("channel_partner_since", "numeric", "Please provide a valid 4 digit year");
- frmvalidator.addValidation("channel_partner_since", "maxlen=4", "Please provide a valid 4 digit year, data enetered too long");
-// frmvalidator.addValidation("channel_partner_since", "minlen=4", "Please provide a valid 4 digit year, data enetered too short");
+ frmvalidator.addValidation("averTrainEndUser", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("averImplTrainingDays", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("averImplEffort", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("averImplDuration", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("averSizeImplTeam", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("averSaleCycle", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("noCustomers", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("smallImpl", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("largeImpl", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("smallImplTime", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("largeImplTime", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("smallImplTeamNo", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("largeImplTeamNo", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("totalAppBaseLinePrice", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("appPriceEur", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("hardwareCost", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("averLicensePrice", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("addServiceCost", "numeric", "Please provide a valid digit number");
+ frmvalidator.addValidation("implCost", "numeric", "Please provide a valid digit number");
 
- frmvalidator.addValidation("noemployees", "numeric", "Please provide a valid digit number");
-  
- frmvalidator.addValidation("partnerNumber","numeric", "Please provide a valid number");  
- //frmvalidator.addValidation("Address","maxlen=50");
- frmvalidator.addValidation("country","dontselect=0", "Please select one option for country");
- frmvalidator.addValidation("country_coverage","dontselect=-1", "Please select at least one option for country coverage");
- frmvalidator.addValidation("country_parent_company","dontselect=0", "Please select one option for parent company country");
- frmvalidator.addValidation("primary_business_type","dontselect=0", "Please select one option for primary business type");
- frmvalidator.addValidation("secondary_business_type","dontselect=0", "Please select one option for secondary business type");
- frmvalidator.addValidation("sap_solution_focus","dontselect=-1", "Please select at least one option for SAP solution focus");
- frmvalidator.addValidation("industry","dontselect=-1", "Please select at least one option for industry");
- frmvalidator.addValidation("last_review_Date","date", "Please enter a valid date");
+ frmvalidator.addValidation("lastReviewBySAP","date", "Please enter a valid date");
+ frmvalidator.addValidation("sapCertSince","date", "Please enter a valid date");
  //secondary_business_type
 </script>

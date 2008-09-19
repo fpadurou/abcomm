@@ -51,15 +51,10 @@ public class SolutionItemDAO {
 			java.util.Date date = new java.util.Date();
 			java.sql.Date sqlDate = null ;
 			if(solutionItem.sapCertSince != null)
-			{
-				sqlDate =
-					   new java.sql.Date(solutionItem.sapCertSince.getTime());
-			}
+				sqlDate = new java.sql.Date(solutionItem.sapCertSince.getTime());
 			else 
-			{
-				sqlDate =
-					   new java.sql.Date(date.getTime());
-			}
+				sqlDate = new java.sql.Date(date.getTime());
+
 			ps = con.prepareStatement(_ADD_SOLUTION_ITEM, Statement.RETURN_GENERATED_KEYS);
 
 			ps.setLong(1, solutionItem.companyId) ;
@@ -68,7 +63,12 @@ public class SolutionItemDAO {
 			ps.setString(4,solutionItem.partComSite); 
 			ps.setInt(5,solutionItem.solFocus);
 			ps.setDate(6,sqlDate);
-			ps.setDate(7,sqlDate/*solutionItem.lastReviewBySAP*/);
+			if(solutionItem.lastReviewBySAP != null)
+				sqlDate = new java.sql.Date(solutionItem.lastReviewBySAP.getTime());
+			else 
+				sqlDate = new java.sql.Date(date.getTime());
+			
+			ps.setDate(7,sqlDate);
 			ps.setInt(8,solutionItem.averTrainEndUser);
 			ps.setInt(9,solutionItem.averImplTrainingDays);
 			ps.setInt(10,solutionItem.averImplEffort);
@@ -104,12 +104,22 @@ public class SolutionItemDAO {
 			ps.setString(40,solutionItem.otherIT);
 			ps.setString(41,solutionItem.addRemarks );
 			ps.setString(42,solutionItem.solSAPMicroSite);
-			ps.setDate(43,sqlDate/*solutionItem.lastPartRevieDate*/);
+			if(solutionItem.lastPartRevieDate != null)
+				sqlDate = new java.sql.Date(solutionItem.lastPartRevieDate.getTime());
+			else 
+				sqlDate = new java.sql.Date(date.getTime());
+
+			ps.setDate(43,sqlDate);
 			ps.setString(44,solutionItem.reviewedBy );
 			ps.setString(45,solutionItem.profileAdded );
-			ps.setDate(46,sqlDate/*solutionItem.dateCreated */);
+			
+			sqlDate = new java.sql.Date(date.getTime());
+			ps.setDate(46,sqlDate);
 			ps.setString(47,solutionItem.modifiedBy);
-			ps.setDate(48,sqlDate/*solutionItem.dateUpdated */);
+
+
+			sqlDate = new java.sql.Date(date.getTime());
+			ps.setDate(48,sqlDate);
 			ps.setString(49,solutionItem.notificationProc);
 			ps.setInt(50,solutionItem.solMaturity);
 			ps.setInt(51,solutionItem.statusByProvider);
@@ -343,7 +353,12 @@ public class SolutionItemDAO {
 			ps.setString(4,solutionItem.partComSite); 
 			ps.setInt(5,solutionItem.solFocus);
 			ps.setDate(6,sqlDate);
-			ps.setDate(7,sqlDate/*solutionItem.lastReviewBySAP*/);
+			if(solutionItem.lastReviewBySAP != null)
+				sqlDate = new java.sql.Date(solutionItem.lastReviewBySAP.getTime());
+			else
+				sqlDate = new java.sql.Date(date.getTime());
+
+			ps.setDate(7,sqlDate);
 			ps.setInt(8,solutionItem.averTrainEndUser);
 			ps.setInt(9,solutionItem.averImplTrainingDays);
 			ps.setInt(10,solutionItem.averImplEffort);
@@ -379,12 +394,27 @@ public class SolutionItemDAO {
 			ps.setString(40,solutionItem.otherIT);
 			ps.setString(41,solutionItem.addRemarks );
 			ps.setString(42,solutionItem.solSAPMicroSite);
-			ps.setDate(43,sqlDate/*solutionItem.lastPartRevieDate*/);
+
+			if(solutionItem.lastPartRevieDate != null)
+				sqlDate = new java.sql.Date(solutionItem.lastPartRevieDate.getTime());
+			else
+				sqlDate = new java.sql.Date(date.getTime());
+			ps.setDate(43,sqlDate);
 			ps.setString(44,solutionItem.reviewedBy );
 			ps.setString(45,solutionItem.profileAdded );
-			ps.setDate(46,sqlDate/*solutionItem.dateCreated */);
+			if(solutionItem.dateCreated != null)
+				sqlDate = new java.sql.Date(solutionItem.dateCreated.getTime());
+			else
+				sqlDate = new java.sql.Date(date.getTime());
+
+			ps.setDate(46,sqlDate);
 			ps.setString(47,solutionItem.modifiedBy);
-			ps.setDate(48,sqlDate/*solutionItem.dateUpdated */);
+
+			if(solutionItem.dateUpdated != null)
+				sqlDate = new java.sql.Date(solutionItem.dateUpdated.getTime());
+			else
+				sqlDate = new java.sql.Date(date.getTime());
+			ps.setDate(48,sqlDate);
 			ps.setString(49,solutionItem.notificationProc);
 			ps.setInt(50,solutionItem.solMaturity);
 			ps.setInt(51,solutionItem.statusByProvider);
