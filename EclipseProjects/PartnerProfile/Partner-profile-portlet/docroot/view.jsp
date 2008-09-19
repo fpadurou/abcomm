@@ -54,10 +54,11 @@ List industryItems = IndustryItemDAO.getIndustryItems();
 String pleaseChoose = "---------------Please choose----------------";
 long lrUserId = PortalUtil.getUserId(request); 
 
+/*
 PrintWriter pout=null;
 pout = response.getWriter();
 pout.write("<BR> LR userId: " + String.valueOf(lrUserId));
-
+*/
 
 if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	int id = 0;
@@ -608,6 +609,8 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	<br>
 
 	<input class="portlet-form-button" type="submit" value="Save">
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<input class="portlet-form-button" type="button" value="Cancel" onClick="self.location = '<portlet:renderURL></portlet:renderURL>';"> 
 
 	<%
 	if (renderRequest.getWindowState().equals(WindowState.MAXIMIZED)) {
