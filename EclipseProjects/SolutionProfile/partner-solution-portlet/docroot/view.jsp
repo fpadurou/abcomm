@@ -1177,7 +1177,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solSAPMicroSitev" type="text" value="<%= solSAPMicroSite %>">
+			<input class="form-text" size = 40 name="solSAPMicroSite" type="text" value="<%= solSAPMicroSite %>">
 		</td>
 	</tr>	
 
