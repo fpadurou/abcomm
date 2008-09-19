@@ -91,9 +91,9 @@ public class JSPPortlet extends GenericPortlet {
 		String solName = req.getParameter("solName");	
 		String solDesc = req.getParameter("solDesc");	
 		String partComSite	= req.getParameter("partComSite");
-		int solFocus  = Integer.parseInt(req.getParameter("solFocus"));
-		int solStatusPartner = Integer.parseInt(req.getParameter("solStatusPartner"));;
-		int solStatusSAP = Integer.parseInt(req.getParameter("solStatusSAP"));
+		//int solFocus  = Integer.parseInt(req.getParameter("solFocus"));
+		//int solStatusPartner = Integer.parseInt(req.getParameter("solStatusPartner"));;
+		//int solStatusSAP = Integer.parseInt(req.getParameter("solStatusSAP"));
 		
 		String sapCertSince	= req.getParameter("sapCertSince");
 		String lastReviewBySAP = req.getParameter("lastReviewBySAP");	
