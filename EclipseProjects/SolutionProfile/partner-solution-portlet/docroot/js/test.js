@@ -14,6 +14,100 @@
 	Questions & comments please send to form.val at javascript-coder.com
   -------------------------------------------------------------------------  
 */
+<!-- Begin
+function isValidDate(dateStr) {
+// Date validation function courtesty of 
+// Sandeep V. Tamhankar (stamhankar@hotmail.com) -->
+
+// Checks for the following valid date formats:
+// MM/DD/YY   MM/DD/YYYY   MM-DD-YY   MM-DD-YYYY
+
+var datePat = /^(\d{1,2})(\/|-)(\d{1,2})\2(\d{4})$/; // requires 4 digit year
+
+var matchArray = dateStr.match(datePat); // is the format ok?
+if (matchArray == null) {
+alert(dateStr + " Date is not in a valid format.")
+return false;
+}
+month = matchArray[1]; // parse date into variables
+day = matchArray[3];
+year = matchArray[4];
+if (month < 1 || month > 12) { // check month range
+alert("Month must be between 1 and 12.");
+return false;
+}
+if (day < 1 || day > 31) {
+alert("Day must be between 1 and 31.");
+return false;
+}
+if ((month==4 || month==6 || month==9 || month==11) && day==31) {
+alert("Month "+month+" doesn't have 31 days!")
+return false;
+}
+if (month == 2) { // check for february 29th
+var isleap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+if (day>29 || (day==29 && !isleap)) {
+alert("February " + year + " doesn't have " + day + " days!");
+return false;
+   }
+}
+return true;
+}
+
+function isValidTime(timeStr) {
+// Time validation function courtesty of 
+// Sandeep V. Tamhankar (stamhankar@hotmail.com) -->
+
+// Checks if time is in HH:MM:SS AM/PM format.
+// The seconds and AM/PM are optional.
+
+var timePat = /^(\d{1,2}):(\d{2})(:(\d{2}))?(\s?(AM|am|PM|pm))?$/;
+
+var matchArray = timeStr.match(timePat);
+if (matchArray == null) {
+alert("Time is not in a valid format.");
+return false;
+}
+hour = matchArray[1];
+minute = matchArray[2];
+second = matchArray[4];
+ampm = matchArray[6];
+
+if (second=="") { second = null; }
+if (ampm=="") { ampm = null }
+
+if (hour < 0  || hour > 23) {
+alert("Hour must be between 1 and 12. (or 0 and 23 for military time)");
+return false;
+}
+if (hour <= 12 && ampm == null) {
+if (confirm("Please indicate which time format you are using.  OK = Standard Time, CANCEL = Military Time")) {
+alert("You must specify AM or PM.");
+return false;
+   }
+}
+if  (hour > 12 && ampm != null) {
+alert("You can't specify AM or PM for military time.");
+return false;
+}
+if (minute < 0 || minute > 59) {
+alert ("Minute must be between 0 and 59.");
+return false;
+}
+if (second != null && (second < 0 || second > 59)) {
+alert ("Second must be between 0 and 59.");
+return false;
+}
+return true;
+}
+
+
+
+function confirmDelete(delUrl) {
+  if (confirm("Are you sure you want to delete")) {
+    document.location = delUrl;
+  }
+}
 
 function Validator(frmname)
 {
@@ -88,6 +182,11 @@ function form_submit_handler()
 	  eval(str);
     if(!ret) return ret;
 	}
+
+	 if (confirm("Are you sure you want to save changes and exit?")) 
+    	{return true;}
+    else
+    	{return false;}
 	
 	return true;
 }
@@ -509,6 +608,22 @@ function TestInputType(objValue,strRegExp,strError,strDefaultError)
     }//if 
  return ret;
 }
+
+function TestDate(objValue,strError)
+{
+var ret = true;
+     if(objValue.value.length > 0 && !isValidDate(objValue.value)	 ) 
+     { 
+       if(!strError || strError.length ==0) 
+       { 
+          strError = objValue.name+": Enter a valid Date "; 
+       }//if                                               
+       sfm_show_error_msg(strError,objValue); 
+       ret = false; 
+     }//if 
+return ret;
+}
+
 function TestEmail(objValue,strError)
 {
 var ret = true;
@@ -739,6 +854,11 @@ function validateInput(strValidateStr,objValue,strError)
 			ret = TestSelectOneRadio(objValue,strError);
 		    break;
 		}		 
+		case "date":
+		{
+			ret = TestDate(objValue,strError);
+		    break;
+		}		 
     }//switch 
 	return ret;
 }
@@ -776,6 +896,92 @@ function VWZ_IsChecked(objcheck,value)
  }
  return false;
 }
+
+function formatTelNo (telNo)
+{
+    // If it's blank, save yourself some trouble by doing nothing.
+    if (telNo.value == "") return;
+
+    
+
+    var phone = new String (telNo.value);
+    
+    phone = phone.substring(0,14);
+
+    /*
+    "." means any character. If you try to use "(" and ")", the regular expression becomes 
+    complicated sice both are reserve characters and escaping them sometimes fails. So just 
+    use "." for any character and replace it later.
+    */
+    if (phone.match (".[0-9]{3}.[0-9]{3}-[0-9]{4}") == null)
+    {
+        /*
+        Following "if" is for user making any changes to the formatted tel. no. If you don't put this 
+        "if" condition, the user can not correct a digit by first deleting it and then entering a 
+        correct one, since this will fire two "onkeyup" events : first one on deleting a 
+        character and second one on entering the correct one. The first "onkeyup" event will fire this 
+        function which will reformatt the tel no before the user gets a chace to correct the digit. This 
+        will surely confuse the user. The "if" condition below eliminates that.
+        */
+        if (phone.match (".[0-9]{2}.[0-9]{3}-[0-9]{4}|" + ".[0-9].[0-9]{3}-[0-9]{4}|" +
+            ".[0-9]{3}.[0-9]{2}-[0-9]{4}|" + ".[0-9]{3}.[0-9]-[0-9]{4}") == null)
+        {
+            /*
+            You will reach here only if the user is still typing the number or if he/she has 
+            messed up already formatted number. 
+            */
+            var phoneNumeric = phoneChar = "", i;
+            // Loop thru what user has entered.
+            for (i=0;i<phone.length;i++)
+            {
+                // Go thru what user has entered one character at a time.
+                phoneChar = phone.substr (i,1);
+    
+                // If that character is not a number or is a White space, ignore it. Only if it is a digit, 
+                // concatinate it with a number string.
+                if (!isNaN (phoneChar) && (phoneChar != " ")) phoneNumeric = phoneNumeric + phoneChar;
+            }
+    
+            phone = "";
+            // At this point, you have picked up only digits from what user has entered. Loop thru it.
+            for (i=0;i<phoneNumeric.length;i++)
+            {
+                // If it's the first digit, throw in "(" before that.
+                if (i == 0) phone = phone + "(";
+                // If you are on the 4th digit, put ") " before that.
+                if (i == 3) phone = phone + ") ";
+                // If you are on the 7th digit, insert "-" before that.
+                if (i == 6) phone = phone + "-";
+                // Add the digit to the phone charatcer string you are building.
+                phone = phone + phoneNumeric.substr (i,1)
+            }
+        }
+    }
+    else
+    { 
+        // This means the tel no is in proper format. Make sure by replacing the 0th, 4th and 8th character.
+        phone = "(" + phone.substring (1,4) + ") " + phone.substring (5,8) + "-" + phone.substring(9,13); 
+    }
+    // So far you are working internally. Refresh the screen with the re-formatted value.
+    if (phone != telNo.value) telNo.value = phone;
+}
+
+/*
+CheckTelNo method takes in current element of the form as input. This method should be 
+fired as the user attempts to leave the current element in the form (by using onBlur method). 
+It checks to see if the format of the phone is "(123) 456-7890".
+Eg. <netui:textBox size="13" maxlength="13" onBlur="javascript:checkTelNo (this);" onKeyUp="javascript:formatTelNo (this);" onKeyDown="javascript:formatTelNo (this);"/>  
+*/      
+function checkTelNo (telNo)
+{
+    if (telNo.value == "") return;
+    if (telNo.value.match (".[0-9]{3}.[0-9]{3}-[0-9]{4}") == null)
+    {
+        if (telNo.value.match ("[0-9]{10}") != null)
+            formatTelNo (telNo)              
+    }
+}
+
 /*
 	Copyright (C) 2003-2008 JavaScript-Coder.com . All rights reserved.
 */

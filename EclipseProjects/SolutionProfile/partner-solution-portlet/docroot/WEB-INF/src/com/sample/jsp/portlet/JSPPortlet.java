@@ -96,27 +96,58 @@ public class JSPPortlet extends GenericPortlet {
 		//int solFocus  = Integer.parseInt(req.getParameter("solFocus"));
 		//int solStatusPartner = Integer.parseInt(req.getParameter("solStatusPartner"));;
 		//int solStatusSAP = Integer.parseInt(req.getParameter("solStatusSAP"));
-		System.out.println("Bzz3");
 
 		String sapCertSince	= req.getParameter("sapCertSince");
-		String lastReviewBySAP = req.getParameter("lastReviewBySAP");	
-		int averTrainEndUser = Integer.parseInt(req.getParameter("averTrainEndUser"));
-		int averImplTrainingDays = Integer.parseInt(req.getParameter("averImplTrainingDays"));
-		System.out.println("Bzz4");
+		String lastReviewBySAP = req.getParameter("lastReviewBySAP");
+		int averTrainEndUser = 0;
+		if(req.getParameter("averTrainEndUser") != null)
+			averTrainEndUser = Integer.parseInt(req.getParameter("averTrainEndUser"));
+		int averImplTrainingDays  = 0;
+		if(req.getParameter("averImplTrainingDays") != null)
+			averImplTrainingDays = Integer.parseInt(req.getParameter("averImplTrainingDays"));
 
-		int averImplEffort = Integer.parseInt(req.getParameter("averImplEffort"));
-		int averImplDuration = Integer.parseInt(req.getParameter("averImplDuration"));
-		int averSizeImplTeam = Integer.parseInt(req.getParameter("averSizeImplTeam"));
-		int averSaleCycle = Integer.parseInt(req.getParameter("averSaleCycle"));
-		int noCustomers = Integer.parseInt(req.getParameter("noCustomers"));
-		int smallImpl = Integer.parseInt(req.getParameter("smallImpl"));
-		int largeImpl = Integer.parseInt(req.getParameter("largeImpl"));	
-		int smallImplTime = Integer.parseInt(req.getParameter("smallImplTime"));	
-		System.out.println("Bzz5");
+		int averImplEffort = 0;
+		if(req.getParameter("averImplEffort") != null)
+			averImplEffort = Integer.parseInt(req.getParameter("averImplEffort"));
+		int averImplDuration = 0;
+		if(req.getParameter("averImplDuration") != null)
+			averImplDuration = Integer.parseInt(req.getParameter("averImplDuration"));
+		
+		int averSizeImplTeam = 0;
+		if(req.getParameter("averSizeImplTeam") != null)
+			averSizeImplTeam = Integer.parseInt(req.getParameter("averSizeImplTeam"));
 
-		int largeImplTime = Integer.parseInt(req.getParameter("largeImplTime"));
-		int smallImplTeamNo = Integer.parseInt(req.getParameter("smallImplTeamNo"));	
-		int largeImplTeamNo = Integer.parseInt(req.getParameter("largeImplTeamNo"));
+		int averSaleCycle = 0;
+		if(req.getParameter("averSaleCycle") != null)
+			averSaleCycle = Integer.parseInt(req.getParameter("averSaleCycle"));
+		
+		int noCustomers = 0;
+		if(req.getParameter("noCustomers") != null)
+			noCustomers = Integer.parseInt(req.getParameter("noCustomers"));
+		
+		int smallImpl = 0;
+		if(req.getParameter("smallImpl") != null)
+			smallImpl = Integer.parseInt(req.getParameter("smallImpl"));
+
+		int largeImpl = 0;
+		if(req.getParameter("largeImpl") != null)
+			largeImpl = Integer.parseInt(req.getParameter("largeImpl"));
+		
+		int smallImplTime = 0;
+		if(req.getParameter("smallImplTime") != null)	
+			smallImplTime = Integer.parseInt(req.getParameter("smallImplTime"));
+		
+		int largeImplTime = 0;
+		if(req.getParameter("largeImplTime") != null)
+			largeImplTime = Integer.parseInt(req.getParameter("largeImplTime"));
+		
+		int smallImplTeamNo = 0;
+		if(req.getParameter("smallImplTeamNo") != null)
+			smallImplTeamNo = Integer.parseInt(req.getParameter("smallImplTeamNo"));
+		int largeImplTeamNo = 0;
+		if(req.getParameter("largeImplTeamNo") != null)
+			largeImplTeamNo = Integer.parseInt(req.getParameter("largeImplTeamNo"));
+		
 		String solSite = req.getParameter("solSite");
 		
 		//int countryPriceEuro = Integer.parseInt(req.getParameter("countryPriceEuro"));
@@ -125,17 +156,33 @@ public class JSPPortlet extends GenericPortlet {
 		if(refCustAvailForUse == null) //?WHY
 			refCustAvailForUse ="No";
 			
-		int totalAppBaseLinePrice = Integer.parseInt(req.getParameter("totalAppBaseLinePrice"));	
+		int totalAppBaseLinePrice = 0;
+		if(req.getParameter("totalAppBaseLinePrice") != null)
+			totalAppBaseLinePrice = Integer.parseInt(req.getParameter("totalAppBaseLinePrice"));
+		
 		int appPriceEur	 = 0;//Integer.parseInt(req.getParameter("appPriceEur"));
-		int hardwareCost = Integer.parseInt(req.getParameter("hardwareCost"));
+		int hardwareCost = 0;
+		if(req.getParameter("hardwareCost") != null)
+			hardwareCost = Integer.parseInt(req.getParameter("hardwareCost"));
+		
 		int hardwareCostEur = 0;//Integer.parseInt(req.getParameter("hardwareCostEur"));
-		int averLicensePrice = Integer.parseInt(req.getParameter("averLicensePrice"));
+		int averLicensePrice = 0;
+		if(req.getParameter("averLicensePrice") != null)
+			averLicensePrice = Integer.parseInt(req.getParameter("averLicensePrice"));
+		
 		int averLicensePriceEur = 0;//Integer.parseInt(req.getParameter("averLicensePriceEur"));
-		int addServiceCost = Integer.parseInt(req.getParameter("addServiceCost"));
+		int addServiceCost = 0; 
+		if(req.getParameter("addServiceCost") != null)
+			addServiceCost = Integer.parseInt(req.getParameter("addServiceCost"));
+		
 		int addServicePriceEur = 0;//Integer.parseInt(req.getParameter("addServicePriceEur"));
-		int implCost	 = Integer.parseInt(req.getParameter("implCost"));
+		int implCost = 0;
+		if(req.getParameter("implCost") != null)
+			implCost = Integer.parseInt(req.getParameter("implCost"));
+		
 		int implCostEur = 0;//Integer.parseInt(req.getParameter("implCostEur"));	
 		System.out.println("Bzz5");
+
 		String  sapDiscount	 = req.getParameter("sapDiscount");
 		String dbUsed = req.getParameter("dbUsed");	
 		String SAPBusUsed = req.getParameter("SAPBusUsed");	
@@ -221,6 +268,7 @@ public class JSPPortlet extends GenericPortlet {
 					try{
 						tempDate = format.parse(sapCertSince);
 						String value = tempDate.toString();
+						System.out.println("date since = " + value);
 						solutionItem.sapCertSince = tempDate;
 					} catch (ParseException ex){}
 				}				
@@ -378,6 +426,7 @@ public class JSPPortlet extends GenericPortlet {
 					try{
 						tempDate = format.parse(sapCertSince);
 						String value = tempDate.toString();
+						System.out.println("date since = " + value);
 						solutionItem.sapCertSince = tempDate;
 					} catch (ParseException ex){}
 				}				
@@ -488,6 +537,9 @@ public class JSPPortlet extends GenericPortlet {
 	            CompanyUtil.updateCompanyCountryCoverage(companyItem, countryCoverage);
 	            System.out.println("a facut edit");*/
 			} else if (command.equals("delete")) {
+				System.out.println("a facut delete ");
+	            System.out.println("a facut delete cu " + String.valueOf(id));
+				
 				SolutionItemDAO.deleteSolutionItem(id);
 			}
 
