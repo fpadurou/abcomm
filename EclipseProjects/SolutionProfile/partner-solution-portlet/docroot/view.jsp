@@ -536,7 +536,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="sapCertSince" type="text" value="<%= sapCertSince %>">
 		</td>
 	</tr>	
 	<tr>
@@ -545,7 +545,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="solStatusPartner" type="text" value="<%= solStatusPartner %>">
+			<input class="form-text" size = 40 name="lastReviewBySAP" type="text" value="<%= lastReviewBySAP %>">
 		</td>
 	</tr>	
 	<tr>
