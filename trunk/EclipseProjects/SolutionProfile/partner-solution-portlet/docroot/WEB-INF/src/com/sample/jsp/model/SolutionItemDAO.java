@@ -468,7 +468,7 @@ public class SolutionItemDAO {
 		"addServiceCost = ?, addServicePriceEur = ?, implCost = ?, implCostEur = ?, sapDiscount = ?, dbUsed = ?, " +
 		"SAPBusUsed = ?, SAPGUIUsed = ?, compA1B1Used = ?, thirdPartyUsed = ?, thirdPartyName = ?, otherIT = ?, " +
 		"addRemarks = ?, solSAPMicroSite = ?, lastPartRevieDate = ?, reviewedBy = ?, profileAdded = ?, " +
-		"dateCreated = ?, modifiedBy = ?, dateUpdated = ?, notificationProc = ?, solMaturity = ?, statusByProvider = ?, statusBySAP = ?, solUserType = ?) " +
+		"dateCreated = ?, modifiedBy = ?, dateUpdated = ?, notificationProc = ?, solMaturity = ?, statusByProvider = ?, statusBySAP = ?, solUserType = ? " +
 		"WHERE solId = ?";
 	
 }

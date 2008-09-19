@@ -78,15 +78,17 @@ public class JSPPortlet extends GenericPortlet {
 		try {
 			id = Integer.parseInt(req.getParameter("id"));
 		} catch (Exception e) {
+			System.out.println("Bzz");
 		}
 		//int companyId = 0;
 		String partNumberStr  = req.getParameter("partNumber");
 		long partNumber = 0; 
-		try {
+		/*try {
 			partNumber  = Integer.parseInt(partNumberStr);
 		}catch (Exception e) {
+			System.out.println("Bzz2");
 			// TODO: handle exception
-		}
+		}*/
 		
 		String solName = req.getParameter("solName");	
 		String solDesc = req.getParameter("solDesc");	
@@ -94,11 +96,14 @@ public class JSPPortlet extends GenericPortlet {
 		//int solFocus  = Integer.parseInt(req.getParameter("solFocus"));
 		//int solStatusPartner = Integer.parseInt(req.getParameter("solStatusPartner"));;
 		//int solStatusSAP = Integer.parseInt(req.getParameter("solStatusSAP"));
-		
+		System.out.println("Bzz3");
+
 		String sapCertSince	= req.getParameter("sapCertSince");
 		String lastReviewBySAP = req.getParameter("lastReviewBySAP");	
 		int averTrainEndUser = Integer.parseInt(req.getParameter("averTrainEndUser"));
 		int averImplTrainingDays = Integer.parseInt(req.getParameter("averImplTrainingDays"));
+		System.out.println("Bzz4");
+
 		int averImplEffort = Integer.parseInt(req.getParameter("averImplEffort"));
 		int averImplDuration = Integer.parseInt(req.getParameter("averImplDuration"));
 		int averSizeImplTeam = Integer.parseInt(req.getParameter("averSizeImplTeam"));
@@ -107,6 +112,8 @@ public class JSPPortlet extends GenericPortlet {
 		int smallImpl = Integer.parseInt(req.getParameter("smallImpl"));
 		int largeImpl = Integer.parseInt(req.getParameter("largeImpl"));	
 		int smallImplTime = Integer.parseInt(req.getParameter("smallImplTime"));	
+		System.out.println("Bzz5");
+
 		int largeImplTime = Integer.parseInt(req.getParameter("largeImplTime"));
 		int smallImplTeamNo = Integer.parseInt(req.getParameter("smallImplTeamNo"));	
 		int largeImplTeamNo = Integer.parseInt(req.getParameter("largeImplTeamNo"));
@@ -114,17 +121,21 @@ public class JSPPortlet extends GenericPortlet {
 		
 		//int countryPriceEuro = Integer.parseInt(req.getParameter("countryPriceEuro"));
 		
-		String refCustAvailForUse = req.getParameter("refCustAvailForUse");;	
+		String refCustAvailForUse = req.getParameter("refCustAvailForUse");
+		if(refCustAvailForUse == null) //?WHY
+			refCustAvailForUse ="No";
+			
 		int totalAppBaseLinePrice = Integer.parseInt(req.getParameter("totalAppBaseLinePrice"));	
-		int appPriceEur	 = Integer.parseInt(req.getParameter("appPriceEur"));
+		int appPriceEur	 = 0;//Integer.parseInt(req.getParameter("appPriceEur"));
 		int hardwareCost = Integer.parseInt(req.getParameter("hardwareCost"));
-		int hardwareCostEur = Integer.parseInt(req.getParameter("hardwareCostEur"));
+		int hardwareCostEur = 0;//Integer.parseInt(req.getParameter("hardwareCostEur"));
 		int averLicensePrice = Integer.parseInt(req.getParameter("averLicensePrice"));
-		int averLicensePriceEur = Integer.parseInt(req.getParameter("averLicensePriceEur"));
+		int averLicensePriceEur = 0;//Integer.parseInt(req.getParameter("averLicensePriceEur"));
 		int addServiceCost = Integer.parseInt(req.getParameter("addServiceCost"));
-		int addServicePriceEur = Integer.parseInt(req.getParameter("addServicePriceEur"));
+		int addServicePriceEur = 0;//Integer.parseInt(req.getParameter("addServicePriceEur"));
 		int implCost	 = Integer.parseInt(req.getParameter("implCost"));
-		int implCostEur = Integer.parseInt(req.getParameter("implCostEur"));	
+		int implCostEur = 0;//Integer.parseInt(req.getParameter("implCostEur"));	
+		System.out.println("Bzz5");
 		String  sapDiscount	 = req.getParameter("sapDiscount");
 		String dbUsed = req.getParameter("dbUsed");	
 		String SAPBusUsed = req.getParameter("SAPBusUsed");	
@@ -138,12 +149,22 @@ public class JSPPortlet extends GenericPortlet {
 		
 		String lastPartRevieDate = req.getParameter("solSAPMicroSite");	
 		String reviewedBy	 = req.getParameter("reviewedBy");
+		if(reviewedBy == null) // WHY?
+			reviewedBy = "";
 		String profileAdded	 = req.getParameter("profileAdded");
+		if(profileAdded == null) // WHY?
+			profileAdded = "";
 		String dateCreated	 = req.getParameter("dateCreated");
 		String modifiedBy = req.getParameter("modifiedBy");	
+		if(modifiedBy == null) // WHY?
+			modifiedBy = "";
 		String dateUpdated = req.getParameter("dateUpdated");	
 		String notificationProc = req.getParameter("notificationProc");
+		if(notificationProc == null) // WHY?
+			notificationProc = "";
 		String notificationText = req.getParameter("notificationText");
+		if(notificationText == null) // WHY?
+			notificationText = "";
 		
 		// childs
 		String sol_countryPriceEuro = req.getParameter("country");
@@ -335,82 +356,105 @@ public class JSPPortlet extends GenericPortlet {
 		        }
 	            CompanyUtil.updateCompanyCountryCoverage(companyItem, countryCoverage);	*/			
 				
-			} else if (command.equals("edit")) {;}
+			} else if (command.equals("edit")) {
 				//user
-/*				CompanyItem companyItem = CompanyItemDAO.getCompanyItem(id);
+				SolutionItem solutionItem = SolutionItemDAO.getSolutionItem(id);
+				//public int companyId;
+				//solutionItem.partNumber;	
+				solutionItem.solName = solName  ;	
+				solutionItem.solDesc = solDesc ;	
+				solutionItem.partComSite = partComSite	;
+				//solutionItem.solFocus = 	;
+				//solutionItem.solStatusPartner;
+				//solutionItem.solStatusSAP;
+				//solutionItem.solMaturity;
+				//solutionItem.statusByProvider;
+				//solutionItem.statusBySAP;
+				//solutionItem.solUserType;
 
-				companyItem.setName(userCompanyName);
-				companyItem.setDescription(partnerDescription);
-				companyItem.setCompanyNo(partnerNumber);
-				companyItem.setCompanyFriendlySite(micrositeAdress);
-				companyItem.setCompanySite(company_website);
-				if(noemployees != null && !noemployees.isEmpty())
-					companyItem.setCompanyEmpNo(Integer.parseInt(noemployees));
-				companyItem.setParentCompanyName(parent_company_name);
-				if(channel_partner_since != null && !channel_partner_since.isEmpty())
-					companyItem.setYear(Integer.parseInt(channel_partner_since));
-				if (country_parent_company != "")
+				//date
+				if(sapCertSince != null && !sapCertSince.isEmpty())
 				{
-					CountryItem countryItemTemp = CountryItemDAO.getCountryItemByName(country_parent_company);
-					if(countryItemTemp != null)
-						companyItem.setCountryRegistrationId(countryItemTemp.getId());
-				}
+					try{
+						tempDate = format.parse(sapCertSince);
+						String value = tempDate.toString();
+						solutionItem.sapCertSince = tempDate;
+					} catch (ParseException ex){}
+				}				
 
-				Date date = new Date();
-				try {date = format.parse(last_review_Date);
-				} catch(ParseException ex){
-				}
-				System.out.println("last_review_Date = ");
-				System.out.println("last_review_Date = " + format.format(date));
-				companyItem.setDateLastReview(date);
-				companyItem.setDateUpdated(new Date());
-				companyItem.setReviewedBy(reviewed_by);
-				companyItem.setModifiedBy(modified_by);
-	            
-				// update childs
-				//1 . adress + phone
-				int adressId = companyItem.getAdressId();
-				AdressItem adressItem = null;
-				boolean bIsNew = false;  
-				if(adressId > 0 )
+				if(lastReviewBySAP != null && !lastReviewBySAP.isEmpty())
 				{
-					adressItem = AdressItemDAO.getAdressItem(adressId);
-				}
-				else
+					try{
+						tempDate = format.parse(lastReviewBySAP);
+						String value = tempDate.toString();
+						solutionItem.lastReviewBySAP = tempDate;
+					} catch (ParseException ex){}
+				}				
+				
+				solutionItem.averTrainEndUser = averTrainEndUser  ;
+				solutionItem.averImplTrainingDays = averImplTrainingDays;	
+				solutionItem.averImplEffort = averImplEffort;	
+				solutionItem.averImplDuration = averImplDuration;	
+				solutionItem.averSizeImplTeam = averSizeImplTeam;	
+				solutionItem.averSaleCycle = averSaleCycle;	
+				solutionItem.noCustomers = noCustomers;	
+				solutionItem.smallImpl = smallImpl;
+				solutionItem.largeImpl = largeImpl;	
+				solutionItem.smallImplTime = smallImplTime;	
+				solutionItem.largeImplTime = largeImplTime;	
+				solutionItem.smallImplTeamNo = smallImplTeamNo;	
+				solutionItem.largeImplTeamNo = largeImplTeamNo;
+				
+				solutionItem.solSite = solSite;
+				
+				//solutionItem.countryPriceEuro;
+				
+				solutionItem.refCustAvailForUse = refCustAvailForUse;	
+				solutionItem.totalAppBaseLinePrice = totalAppBaseLinePrice ;	
+				solutionItem.appPriceEur = appPriceEur;
+				solutionItem.hardwareCost = hardwareCost;
+				solutionItem.hardwareCostEur = hardwareCostEur;	
+				solutionItem.averLicensePrice = averLicensePrice;	
+				solutionItem.averLicensePriceEur = averLicensePriceEur;	
+				solutionItem.addServiceCost = addServiceCost	;
+				solutionItem.addServicePriceEur = addServicePriceEur;	
+				solutionItem.implCost = implCost ;
+				solutionItem.implCostEur = implCostEur;	
+				solutionItem.sapDiscount = sapDiscount	;
+				solutionItem.dbUsed = dbUsed;	
+				solutionItem.SAPBusUsed = SAPBusUsed;	
+				solutionItem.SAPGUIUsed = SAPGUIUsed;	
+				solutionItem.compA1B1Used = compA1B1Used;	
+				solutionItem.thirdPartyUsed = thirdPartyUsed;	
+				solutionItem.thirdPartyName = thirdPartyName ;	
+				solutionItem.otherIT = otherIT ;	
+				solutionItem.addRemarks = addRemarks ;	
+				solutionItem.solSAPMicroSite = solSAPMicroSite;	
+				
+				// date
+				if(lastPartRevieDate != null && !lastPartRevieDate.isEmpty())
 				{
-					adressItem = new AdressItem();
-					bIsNew = true;
-				}
-				if(adressItem != null)
-				{
-					adressItem.setCompanyId(id);
-					adressItem.setStreet1(street1);
-					adressItem.setStreet2(street2);
-					adressItem.setCity(city);
-					adressItem.setZip(zipcode);
-					adressItem.setStateregionname(state_province);
-					adressItem.setMail(mail);
-					// countryId
-					if (country != "")
-					{
-						CountryItem countryItemTemp = CountryItemDAO.getCountryItemByName(country);
-						adressItem.setCountryId(countryItemTemp.getId());
-					}
-						
-					if(bIsNew)
-					{
-						AdressItemDAO.addAdressItem(adressItem);
-						companyItem.setAdressId(adressItem.getId());
-					}
-					if(telephone != "")
-						AdressItemDAO.updatePhoneItem(adressItem, telephone, 1);
-					if(telefax != "")
-						AdressItemDAO.updatePhoneItem(adressItem, telefax, 2);
-					AdressItemDAO.updateAdressItem(adressItem);
-				}
+					try{
+						tempDate = format.parse(lastPartRevieDate);
+						String value = tempDate.toString();
+						solutionItem.lastPartRevieDate = tempDate;
+					} catch (ParseException ex){}
+				}	
+				
+				solutionItem.reviewedBy	= reviewedBy ;
+				solutionItem.profileAdded = profileAdded;
+				//date
+				solutionItem.dateCreated = new Date();
+				
+				solutionItem.modifiedBy = modifiedBy;
+				
+				//date
+				solutionItem.dateUpdated = new Date();	
+				solutionItem.notificationProc = notificationProc;
+				solutionItem.notificationText = notificationText;
 				// Do update in main table
-				CompanyItemDAO.updateCompanyItem(companyItem);
-
+				SolutionItemDAO.updateSolutionItem(solutionItem);
+/*
 				//2 . SAP solution focus
 				if(SAPitems != null)
 		        {
@@ -442,16 +486,11 @@ public class JSPPortlet extends GenericPortlet {
 		            }
 		        }
 	            CompanyUtil.updateCompanyCountryCoverage(companyItem, countryCoverage);
-	            System.out.println("a facut edit");
+	            System.out.println("a facut edit");*/
 			} else if (command.equals("delete")) {
-				CompanyItemDAO.deleteCompanyItem(id);
+				SolutionItemDAO.deleteSolutionItem(id);
 			}
-			else if (command.equals("search")) {
-				;
-			}		
-			else if (command.equals("viewall")) {
-				;
-			}*/
+
 		} catch (SQLException sqle) {
 			throw new PortletException(sqle);
 		}
