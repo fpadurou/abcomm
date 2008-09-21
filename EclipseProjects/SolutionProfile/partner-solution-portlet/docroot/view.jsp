@@ -134,7 +134,6 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	String sol_solFocusStr = "";
     List sol_geographic_coverage = null;
 	List sol_industry = null; 
-	List sol_sapSolFocusItems = null; 
 	List sol_mySAPAllInOneVers = null; 
 	List sol_mySAPOneProductVers  = null; 
 	String sol_maturity  = ""; 
@@ -303,7 +302,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<TEXTAREA style="text-align: left" rows="4" cols= "60" name="solDesc" align = left>
+			<TEXTAREA style="text-align: left" rows="4" cols= "60" name="solDesc">
 			<%= solDesc.trim() %>
 			</TEXTAREA>
 		</td>
@@ -488,7 +487,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                 //Construct the option tag in a String variable
                 String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                if(sol_statusByProvider != null && sol_statusByProvider.contains(optionCategoryValue))
+                if(sol_statusByProvider != null && sol_statusByProvider.equals(optionCategoryValue))
                 {
                     optionTag += " selected=\"selected\"";
                 }
@@ -519,7 +518,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
                 //Construct the option tag in a String variable
                 String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
                     
-                if(sol_statusBySAP != null && sol_statusBySAP.contains(optionCategoryValue))
+                if(sol_statusBySAP != null && sol_statusBySAP.equals(optionCategoryValue))
                 {
                     optionTag += " selected=\"selected\"";
                 }
@@ -590,7 +589,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="sol_targetCompSize" style="width:40" MULTIPLE SIZE :10>
+			<SELECT NAME="targetCompSize" style="width:40" MULTIPLE SIZE :10>
 			 <%
 			     for (int j = 0; j< targetCompSize.size(); j++ )
 			      {
@@ -805,6 +804,38 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	</tr>	
 	<tr>
 		<td>
+			Are reference customers available for use?
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<SELECT NAME="refCustAvailForUse" style="width:40">
+			<OPTION><%=pleaseChoose%></OPTION>
+			 <%
+			     for (int j = 0; j< YN.size(); j++ )
+			      {
+                    //This is a category from the database
+                    String optionCategoryValue = (String)YN.get(j);
+ 
+                    //Construct the option tag in a String variable
+                    String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+	                if(refCustAvailForUse != null && refCustAvailForUse.equals(optionCategoryValue))
+	                {
+	                    optionTag += " selected=\"selected\"";
+	                }
+                    
+                    //close the option tag
+                    optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                    //printout the option tag
+                    out.println(optionTag);
+			      }			 
+                //Close the result set and statment to free up resoures
+			%>
+			</SELECT>	
+		</td>
+	</tr>	
+	<tr>
+		<td>
 			Main Country that pricing is based on (expressed in EUR)
 		</td>
 		<td style="padding-left: 10px;"></td>
@@ -889,7 +920,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<SELECT NAME="userType" style="width:40" MULTIPLE SIZE :10>
+			<SELECT NAME="userType" style="width:40" >
 			 <%
 			     for (int j = 0; j< userType.size(); j++ )
 			      {
@@ -1200,7 +1231,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	%>
 
 		<script type="text/javascript">
-			document.solutionprofile.userCompanyName.focus();
+			document.solutionprofile.solName.focus();
 		</script>
 	<%
 	}
@@ -1303,14 +1334,17 @@ else {
 <script language="JavaScript" type="text/javascript">
  var frmvalidator = new Validator("solutionprofile");
  
- frmvalidator.addValidation("solName ","req","Please enter the Solution Name");
- frmvalidator.addValidation("solDesc ","req","Please enter the Solution Description");
+ frmvalidator.addValidation("solName","req","Please enter the Solution Name");
+ frmvalidator.addValidation("solDesc","req","Please enter the Solution Description");
+
  frmvalidator.addValidation("solFocus","dontselect=0", "Please select one option for solution focus");
+ frmvalidator.addValidation("refCustAvailForUse","dontselect=0", "Please specify if there are reference customers available for use");
+
  frmvalidator.addValidation("mySAPAllInOneVers","dontselect=-1", "Please select at least one option for mySAP All-in-One versions");
- frmvalidator.addValidation("mySAPOneProductVer","dontselect=-1", "Please select at least one option for SAP Business One product versions");
+ frmvalidator.addValidation("mySAPOneProductVers","dontselect=-1", "Please select at least one option for SAP Business One product versions");
  frmvalidator.addValidation("maturity","dontselect=0", "Please select one option for Solution Maturity");
  frmvalidator.addValidation("industry","dontselect=-1", "Please select at least one option for Industry");
- frmvalidator.addValidation("statusByProvider","dontselect=0", "Please select one option for Solution Status (provided by SAP)");
+ frmvalidator.addValidation("statusByProvider","dontselect=0", "Please select one option for Solution Status (provided by partner)");
  frmvalidator.addValidation("geographic_coverage","dontselect=-1", "Please select at least one option for country coverage");
  frmvalidator.addValidation("targetCompSize","dontselect=-1", "Please select at least one option for Target Company Size");
 
@@ -1334,13 +1368,13 @@ else {
  frmvalidator.addValidation("smallImplTeamNo", "numeric", "Please provide a valid digit number");
  frmvalidator.addValidation("largeImplTeamNo", "numeric", "Please provide a valid digit number");
  frmvalidator.addValidation("totalAppBaseLinePrice", "numeric", "Please provide a valid digit number");
- frmvalidator.addValidation("appPriceEur", "numeric", "Please provide a valid digit number");
  frmvalidator.addValidation("hardwareCost", "numeric", "Please provide a valid digit number");
  frmvalidator.addValidation("averLicensePrice", "numeric", "Please provide a valid digit number");
  frmvalidator.addValidation("addServiceCost", "numeric", "Please provide a valid digit number");
  frmvalidator.addValidation("implCost", "numeric", "Please provide a valid digit number");
 
- frmvalidator.addValidation("lastReviewBySAP","date", "Please enter a valid date");
- frmvalidator.addValidation("sapCertSince","date", "Please enter a valid date");
+ frmvalidator.addValidation("lastReviewBySAP","date", "Please enter a valid date, format MM/DD/YYYY");
+ frmvalidator.addValidation("sapCertSince","date", "Please enter a valid date, format MM/DD/YYYY");
+ 
  //secondary_business_type
 </script>

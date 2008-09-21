@@ -238,6 +238,7 @@ public class SolutionItemDAO {
 				solutionItem.solMaturity = rs.getInt(51);
 				solutionItem.statusByProvider = rs.getInt(52);
 				solutionItem.statusBySAP = rs.getInt(53);
+				solutionItem.solUserType = rs.getInt(54);
 				
 			}
 		}
