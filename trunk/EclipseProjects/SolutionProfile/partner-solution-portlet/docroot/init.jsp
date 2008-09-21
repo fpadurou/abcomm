@@ -51,6 +51,7 @@
 <%@ page import="java.lang.Math" %>
 
 <%@ page import="javax.portlet.WindowState" %>
+<%@ page import="com.liferay.portal.util.PortalUtil" %>
 
 <portlet:defineObjects />
 

@@ -24,6 +24,7 @@ package com.sample.solutionprofile.portlet;
 
 import com.sample.solutionprofile.model.SolutionItem;
 import com.sample.solutionprofile.model.SolutionItemDAO;
+import com.sample.solutionprofile.model.SolutionUtil;
 import com.sample.solutionprofile.model.UserItem;
 import com.sample.solutionprofile.model.UserItemDAO;
 import com.sample.solutionprofile.model.CompanyItem;
@@ -100,52 +101,52 @@ public class JSPPortlet extends GenericPortlet {
 		String sapCertSince	= req.getParameter("sapCertSince");
 		String lastReviewBySAP = req.getParameter("lastReviewBySAP");
 		int averTrainEndUser = 0;
-		if(req.getParameter("averTrainEndUser") != null)
+		if(req.getParameter("averTrainEndUser") != null && !req.getParameter("averTrainEndUser").isEmpty())
 			averTrainEndUser = Integer.parseInt(req.getParameter("averTrainEndUser"));
 		int averImplTrainingDays  = 0;
-		if(req.getParameter("averImplTrainingDays") != null)
+		if(req.getParameter("averImplTrainingDays") != null && !req.getParameter("averImplTrainingDays").isEmpty())
 			averImplTrainingDays = Integer.parseInt(req.getParameter("averImplTrainingDays"));
 
 		int averImplEffort = 0;
-		if(req.getParameter("averImplEffort") != null)
+		if(req.getParameter("averImplEffort") != null && !req.getParameter("averImplEffort").isEmpty())
 			averImplEffort = Integer.parseInt(req.getParameter("averImplEffort"));
 		int averImplDuration = 0;
-		if(req.getParameter("averImplDuration") != null)
+		if(req.getParameter("averImplDuration") != null && !req.getParameter("averImplDuration").isEmpty())
 			averImplDuration = Integer.parseInt(req.getParameter("averImplDuration"));
 		
 		int averSizeImplTeam = 0;
-		if(req.getParameter("averSizeImplTeam") != null)
+		if(req.getParameter("averSizeImplTeam") != null && !req.getParameter("averSizeImplTeam").isEmpty())
 			averSizeImplTeam = Integer.parseInt(req.getParameter("averSizeImplTeam"));
 
 		int averSaleCycle = 0;
-		if(req.getParameter("averSaleCycle") != null)
+		if(req.getParameter("averSaleCycle") != null && !req.getParameter("averSaleCycle").isEmpty())
 			averSaleCycle = Integer.parseInt(req.getParameter("averSaleCycle"));
 		
 		int noCustomers = 0;
-		if(req.getParameter("noCustomers") != null)
+		if(req.getParameter("noCustomers") != null && !req.getParameter("noCustomers").isEmpty())
 			noCustomers = Integer.parseInt(req.getParameter("noCustomers"));
 		
 		int smallImpl = 0;
-		if(req.getParameter("smallImpl") != null)
+		if(req.getParameter("smallImpl") != null && !req.getParameter("smallImpl").isEmpty())
 			smallImpl = Integer.parseInt(req.getParameter("smallImpl"));
 
 		int largeImpl = 0;
-		if(req.getParameter("largeImpl") != null)
+		if(req.getParameter("largeImpl") != null && !req.getParameter("largeImpl").isEmpty())
 			largeImpl = Integer.parseInt(req.getParameter("largeImpl"));
 		
 		int smallImplTime = 0;
-		if(req.getParameter("smallImplTime") != null)	
+		if(req.getParameter("smallImplTime") != null && !req.getParameter("smallImplTime").isEmpty())	
 			smallImplTime = Integer.parseInt(req.getParameter("smallImplTime"));
 		
 		int largeImplTime = 0;
-		if(req.getParameter("largeImplTime") != null)
+		if(req.getParameter("largeImplTime") != null && !req.getParameter("largeImplTime").isEmpty())
 			largeImplTime = Integer.parseInt(req.getParameter("largeImplTime"));
 		
 		int smallImplTeamNo = 0;
-		if(req.getParameter("smallImplTeamNo") != null)
+		if(req.getParameter("smallImplTeamNo") != null && !req.getParameter("smallImplTeamNo").isEmpty())
 			smallImplTeamNo = Integer.parseInt(req.getParameter("smallImplTeamNo"));
 		int largeImplTeamNo = 0;
-		if(req.getParameter("largeImplTeamNo") != null)
+		if(req.getParameter("largeImplTeamNo") != null &&  !req.getParameter("largeImplTeamNo").isEmpty())
 			largeImplTeamNo = Integer.parseInt(req.getParameter("largeImplTeamNo"));
 		
 		String solSite = req.getParameter("solSite");
@@ -157,31 +158,30 @@ public class JSPPortlet extends GenericPortlet {
 			refCustAvailForUse ="No";
 			
 		int totalAppBaseLinePrice = 0;
-		if(req.getParameter("totalAppBaseLinePrice") != null)
+		if(req.getParameter("totalAppBaseLinePrice") != null && !req.getParameter("totalAppBaseLinePrice").isEmpty())
 			totalAppBaseLinePrice = Integer.parseInt(req.getParameter("totalAppBaseLinePrice"));
 		
 		int appPriceEur	 = 0;//Integer.parseInt(req.getParameter("appPriceEur"));
 		int hardwareCost = 0;
-		if(req.getParameter("hardwareCost") != null)
+		if(req.getParameter("hardwareCost") != null && !req.getParameter("hardwareCost").isEmpty())
 			hardwareCost = Integer.parseInt(req.getParameter("hardwareCost"));
 		
 		int hardwareCostEur = 0;//Integer.parseInt(req.getParameter("hardwareCostEur"));
 		int averLicensePrice = 0;
-		if(req.getParameter("averLicensePrice") != null)
+		if(req.getParameter("averLicensePrice") != null && !req.getParameter("averLicensePrice").isEmpty())
 			averLicensePrice = Integer.parseInt(req.getParameter("averLicensePrice"));
 		
 		int averLicensePriceEur = 0;//Integer.parseInt(req.getParameter("averLicensePriceEur"));
 		int addServiceCost = 0; 
-		if(req.getParameter("addServiceCost") != null)
+		if(req.getParameter("addServiceCost") != null && !req.getParameter("addServiceCost").isEmpty())
 			addServiceCost = Integer.parseInt(req.getParameter("addServiceCost"));
 		
 		int addServicePriceEur = 0;//Integer.parseInt(req.getParameter("addServicePriceEur"));
 		int implCost = 0;
-		if(req.getParameter("implCost") != null)
+		if(req.getParameter("implCost") != null && !req.getParameter("implCost").isEmpty())
 			implCost = Integer.parseInt(req.getParameter("implCost"));
 		
 		int implCostEur = 0;//Integer.parseInt(req.getParameter("implCostEur"));	
-		System.out.println("Bzz5");
 
 		String  sapDiscount	 = req.getParameter("sapDiscount");
 		String dbUsed = req.getParameter("dbUsed");	
@@ -215,10 +215,9 @@ public class JSPPortlet extends GenericPortlet {
 		
 		// childs
 		String sol_countryPriceEuro = req.getParameter("country");
-		String sol_solFocusStr = req.getParameter("solFocusStr");
-		String[] sol_geographic_coverage = req.getParameterValues("country");
+		String sol_solFocusStr = req.getParameter("solFocus");
+		String[] sol_geographic_coverage = req.getParameterValues("geographic_coverage");
 		String[] sol_industry = req.getParameterValues("industry");
-		String[] sol_sapSolFocusItems = req.getParameterValues("sapSolFocusItems");
 		String[] sol_mySAPAllInOneVers = req.getParameterValues("mySAPAllInOneVers");
 		String[] sol_mySAPOneProductVers = req.getParameterValues("mySAPOneProductVers");
 		
@@ -346,63 +345,23 @@ public class JSPPortlet extends GenericPortlet {
 				
 				SolutionItemDAO.addSolutionItem(solutionItem);
 				// childs
-				/*
-				
-				if (country_parent_company != "")
-				{
-					CountryItem countryItemTemp = CountryItemDAO.getCountryItemByName(country_parent_company);
-					if(countryItemTemp != null)
-						companyItem.setCountryRegistrationId(countryItemTemp.getId());
-				}
-
-				Date tempDate = new Date();
-				
-				companyItem.setDateUpdated(new Date());
-				companyItem.setDateLastReview(new Date());
-				companyItem.setDateUpdated(new Date());
-
-				if(last_review_Date != null && !last_review_Date.isEmpty())
-				{
-					try{
-						tempDate = format.parse(last_review_Date);
-						String value = tempDate.toString();
-						companyItem.setDateLastReview(tempDate);
-					} catch (ParseException ex){}
-				}
-
-				SolutionItemDAO.addSolutionItem(solutionItem);
-
-				//2 . SAP solution focus
-				/*if(SAPitems != null)
-		        {
-					for(int loopIndex = 0; loopIndex < SAPitems.length; loopIndex++){
-		            System.out.println(SAPitems[loopIndex]);
-		            }
-		        }
-	            CompanyUtil.updateCompanySAPSolutionList(companyItem, SAPitems);
-	            // 3. Industry
-	            if(industry != null)
-		        {
-	            	for(int loopIndex = 0; loopIndex < industry.length; loopIndex++){
-		            System.out.println(industry[loopIndex]);
-		            }
-		        }
-	            CompanyUtil.updateCompanyIndustriesList(companyItem, industry);
-	            //4. primary business type -- primary_business_type
-	            if(primary_business_type != null)
-	            	CompanyUtil.updateBusinessType(companyItem, primary_business_type, 1);
-	            //5. secondary business type - secondary_business_type
-	            if(secondary_business_type != null)
-	            	CompanyUtil.updateBusinessType(companyItem, secondary_business_type, 2);
-	            //6. country coverage
-
-	            if(countryCoverage != null)
-		        {
-	            	for(int loopIndex = 0; loopIndex < countryCoverage.length; loopIndex++){
-	            		System.out.println(countryCoverage[loopIndex]);
-		            }
-		        }
-	            CompanyUtil.updateCompanyCountryCoverage(companyItem, countryCoverage);	*/			
+				SolutionUtil.updateSolutionSolFocus(solutionItem, sol_solFocusStr);
+				SolutionUtil.updateSolutionCountryPriceEuro(solutionItem, sol_countryPriceEuro);
+				SolutionUtil.updateSolutionGeographicCoverage(solutionItem, sol_geographic_coverage);
+				SolutionUtil.updateSolutionIndustry(solutionItem, sol_industry);
+				SolutionUtil.updateMySAPAllInOneVers(solutionItem, sol_mySAPAllInOneVers);
+				SolutionUtil.updateMySAPOneProductVers(solutionItem, sol_mySAPOneProductVers);
+				SolutionUtil.updateMaturity(solutionItem, sol_maturity);
+				SolutionUtil.updateSolStatusByProvider(solutionItem, sol_statusByProvider);
+				SolutionUtil.updateSolStatusBySAP(solutionItem, sol_statusBySAP);
+				SolutionUtil.updateSolTargetCompSize(solutionItem, sol_targetCompSize);
+				SolutionUtil.updateSolCategTarget(solutionItem, sol_categTarget);
+				SolutionUtil.updateSolUserType(solutionItem, sol_userType);
+				SolutionUtil.updateSolProgLang(solutionItem, sol_progLang);
+				SolutionUtil.updateSolOS(solutionItem, sol_os);
+				SolutionUtil.updateSolAioBased(solutionItem, sol_aioBased);
+				//perform extra update
+				SolutionItemDAO.updateSolutionItem(solutionItem);
 				
 			} else if (command.equals("edit")) {
 				//user
@@ -502,40 +461,24 @@ public class JSPPortlet extends GenericPortlet {
 				solutionItem.notificationProc = notificationProc;
 				solutionItem.notificationText = notificationText;
 				// Do update in main table
-				SolutionItemDAO.updateSolutionItem(solutionItem);
-/*
-				//2 . SAP solution focus
-				if(SAPitems != null)
-		        {
-					for(int loopIndex = 0; loopIndex < SAPitems.length; loopIndex++){
-		            System.out.println(SAPitems[loopIndex]);
-		            }
-		        }
-	            CompanyUtil.updateCompanySAPSolutionList(companyItem, SAPitems);
-	            // 3. Industry
-	            if(industry != null)
-		        {
-	            	for(int loopIndex = 0; loopIndex < industry.length; loopIndex++){
-		            System.out.println(industry[loopIndex]);
-		            }
-		        }
-	            CompanyUtil.updateCompanyIndustriesList(companyItem, industry);
-	            //4. primary business type -- primary_business_type
-	            if(primary_business_type != null)
-	            	CompanyUtil.updateBusinessType(companyItem, primary_business_type, 1);
-	            //5. secondary business type - secondary_business_type
-	            if(secondary_business_type != null)
-	            	CompanyUtil.updateBusinessType(companyItem, secondary_business_type, 2);
-	            //6. country coverage
+				SolutionUtil.updateSolutionSolFocus(solutionItem, sol_solFocusStr);
+				SolutionUtil.updateSolutionCountryPriceEuro(solutionItem, sol_countryPriceEuro);
+				SolutionUtil.updateSolutionGeographicCoverage(solutionItem, sol_geographic_coverage);
+				SolutionUtil.updateSolutionIndustry(solutionItem, sol_industry);
+				SolutionUtil.updateMySAPAllInOneVers(solutionItem, sol_mySAPAllInOneVers);
+				SolutionUtil.updateMySAPOneProductVers(solutionItem, sol_mySAPOneProductVers);
+				SolutionUtil.updateMaturity(solutionItem, sol_maturity);
+				SolutionUtil.updateSolStatusByProvider(solutionItem, sol_statusByProvider);
+				SolutionUtil.updateSolStatusBySAP(solutionItem, sol_statusBySAP);
+				SolutionUtil.updateSolTargetCompSize(solutionItem, sol_targetCompSize);
+				SolutionUtil.updateSolCategTarget(solutionItem, sol_categTarget);
+				SolutionUtil.updateSolUserType(solutionItem, sol_userType);
+				SolutionUtil.updateSolProgLang(solutionItem, sol_progLang);
+				SolutionUtil.updateSolOS(solutionItem, sol_os);
+				SolutionUtil.updateSolAioBased(solutionItem, sol_aioBased);
 
-	            if(countryCoverage != null)
-		        {
-	            	for(int loopIndex = 0; loopIndex < countryCoverage.length; loopIndex++){
-	            		System.out.println(countryCoverage[loopIndex]);
-		            }
-		        }
-	            CompanyUtil.updateCompanyCountryCoverage(companyItem, countryCoverage);
-	            System.out.println("a facut edit");*/
+				SolutionItemDAO.updateSolutionItem(solutionItem);
+
 			} else if (command.equals("delete")) {
 				System.out.println("a facut delete ");
 	            System.out.println("a facut delete cu " + String.valueOf(id));

@@ -49,6 +49,33 @@ public class SolutionUtil {
 		return YN;
 	}
 	
+	public static int getSolFocusIdByName(String name)throws SQLException 
+	{
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int id = 0;
+		if((name == null) || (name.isEmpty()))
+			return id;
+				
+		try {
+			con = ConnectionPool.getConnection();
+			String _GET_SOLSOLFOCUS_ID = "SELECT id FROM tbl_sol_solfocus WHERE solSolFocus = ?";
+			ps = con.prepareStatement(_GET_SOLSOLFOCUS_ID);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				id = rs.getInt(1);
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return id;
+	}
+	
 	public static List getSolSapSol()throws SQLException {
 		List list = new ArrayList();
 			
@@ -243,6 +270,32 @@ public class SolutionUtil {
 
 	}	
 	
+	public static int getMaturityIdByName(String name) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int id = 0;
+		if((name == null) || (name.isEmpty()))
+			return id;
+				
+		try {
+			con = ConnectionPool.getConnection();
+			String _GET_MATURITY_ID = "SELECT id FROM tbl_sol_maturity WHERE name = ?";
+			ps = con.prepareStatement(_GET_MATURITY_ID);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				id = rs.getInt(1);
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return id;
+	}	
+
 	public static List getMaturity() throws SQLException {
 		List list = new ArrayList();
 		Connection con = null;
@@ -352,6 +405,33 @@ public class SolutionUtil {
 
 	}	
 	
+	public static int getStatusByProviderIdByName(String name)throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int id = 0;
+		if((name == null) || (name.isEmpty()))
+			return id;
+				
+		try {
+			con = ConnectionPool.getConnection();
+			String _GET_STATUS_BY_PROVIDER_ID = "SELECT id FROM tbl_sol_status_by_partner WHERE name = ?";
+			ps = con.prepareStatement(_GET_STATUS_BY_PROVIDER_ID);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				id = rs.getInt(1);
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return id;
+	}
+	
+	
 	public static List getStatusByProvider() throws SQLException {
 		List list = new ArrayList();
 
@@ -379,7 +459,7 @@ public class SolutionUtil {
 	
 	public static String getSolStatusByProvider(SolutionItem solutionItem) throws SQLException {
 		String value = "";
-		long id = solutionItem.getId();
+		int id = solutionItem.statusByProvider;
 		if(id <=0 )
 			return value;
 
@@ -391,7 +471,7 @@ public class SolutionUtil {
 			con = ConnectionPool.getConnection();
 
 			ps = con.prepareStatement(_GET_SOL_STATUS_BY_PROVIDER);
-			ps.setLong(1, id);
+			ps.setInt(1, id);
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
@@ -403,6 +483,32 @@ public class SolutionUtil {
 		}
 
 		return value;
+	}
+	
+	public static int getStatusBySAPIdByName(String name)	 throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int id = 0;
+		if((name == null) || (name.isEmpty()))
+			return id;
+				
+		try {
+			con = ConnectionPool.getConnection();
+			String _GET_STATUS_BY_SAP_ID = "SELECT id FROM tbl_sol_status_by_SAP WHERE name = ?";
+			ps = con.prepareStatement(_GET_STATUS_BY_SAP_ID);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				id = rs.getInt(1);
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return id;
 	}
 	
 	public static List getStatusBySAP() throws SQLException {
@@ -431,7 +537,7 @@ public class SolutionUtil {
 
 	public static String getSolStatusBySAP(SolutionItem solutionItem) throws SQLException {
 		String value = "";
-		long id = solutionItem.getId();
+		int id = solutionItem.statusBySAP;
 		if(id <=0 )
 			return value;
 
@@ -443,7 +549,7 @@ public class SolutionUtil {
 			con = ConnectionPool.getConnection();
 
 			ps = con.prepareStatement(_GET_SOL_STATUS_BY_SAP);
-			ps.setLong(1, id);
+			ps.setInt(1, id);
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
@@ -487,7 +593,35 @@ public class SolutionUtil {
 		return strCoverage;
 
 	}		
+	
+	public static int getCountryIdByName(String name)throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int id = 0;
+		if((name == null) || (name.isEmpty()))
+			return id;
+				
+		try {
+			con = ConnectionPool.getConnection();
+			String _GET_COUNTRY_ID_BY_NAME = "SELECT countryId FROM tbl_countries WHERE country_name = ?";
+			ps = con.prepareStatement(_GET_COUNTRY_ID_BY_NAME);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
 
+			if (rs.next()) {
+				id = rs.getInt(1);
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return id;
+		
+	}
+
+	
 	public static List getSolutionCountryCoverage(SolutionItem solutionItem) throws SQLException {
 		List list = new ArrayList();
 		long solutionId = 0;
@@ -767,6 +901,33 @@ public class SolutionUtil {
 		return list;
 
 	}		
+	
+	public static int getUserTypeIdByName(String name)throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int id = 0;
+		if((name == null) || (name.isEmpty()))
+			return id;
+				
+		try {
+			con = ConnectionPool.getConnection();
+			String _GET_USER_TYPE_ID = "SELECT id FROM tbl_user_type WHERE name = ?";
+			ps = con.prepareStatement(_GET_USER_TYPE_ID);
+			ps.setString(1, name);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				id = rs.getInt(1);
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return id;
+		
+	}
 	
 	public static List getSolUserType() throws SQLException {
 		List list = new ArrayList();
@@ -1102,196 +1263,22 @@ public class SolutionUtil {
 	}		
 	
 ///////////////////////// update -//////////////////////////////////////////	
-
-	public static List updateCompanySAPSolutionList(CompanyItem companyItem, String[] selectedArray) throws SQLException {
-		
-		List sapSolutions = SAPSolutionItemDAO.getSAPSolutionItems();
-		List list = new ArrayList();
-		String companySapSolutions = "";
-		int companyId = 0;
-		if(companyItem != null)
-			companyId = companyItem.getId();
-			
-		Connection con = null;
-		Statement stmt = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		try {
-			// first delete all the company previous sap solutions links
-			con = ConnectionPool.getConnection();
-
-			ps = con.prepareStatement(_DELETE_COMPANY_SAP_SOLUTIONS);
-			ps.setInt(1, companyId);
-			ps.executeUpdate();
-			if(selectedArray != null)
-			{
-			// add new values
-			String querry = "INSERT INTO tbl_companies_sapsolution (companyId, sapsolutionId) values ";
-				
-			boolean bFirst = true;
-			for(int i = 0; i<selectedArray.length; i++ )
-			{
-				String value = (String)selectedArray[i];
-				for(int j = 0; j<sapSolutions.size();j++)
-				{
-					if(value.equalsIgnoreCase(((SAPSolutionItem)sapSolutions.get(j)).getSAPSolutionName()))
-					{
-						if(!bFirst)
-						{
-							querry +=", ";
-						}
-						querry += "(" + companyId + ", "+ ((SAPSolutionItem)sapSolutions.get(j)).getId() +")";
-						if(bFirst)
-						{
-							bFirst = false;
-						}
-					}
-				}
-			}
-			System.out.println(querry);
-			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
-                    java.sql.ResultSet.CONCUR_UPDATABLE);
-			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
-			}
-		}
-		finally {
-		    if (stmt != null) {
-		        try {
-		            stmt.close();
-		        } catch (SQLException ex) {
-		            // ignore
-		        }
-		    }
-			ConnectionPool.cleanUp(con, ps, rs);
-		}
-
-		return list;
-	}	
-
-	public static List updateCompanyIndustriesList(CompanyItem companyItem, String[] selectedArray) throws SQLException {
-		
-		List industryItems = IndustryItemDAO.getIndustryItems();
-		List list = new ArrayList();
-		int companyId = 0;
-		if(companyItem != null)
-			companyId = companyItem.getId();
-			
-		Connection con = null;
-		Statement stmt = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		try {
-			// first delete all the company previous sap solutions links
-			con = ConnectionPool.getConnection();
-
-			ps = con.prepareStatement(_DELETE_COMPANY_INDUSTRIES);
-			ps.setInt(1, companyId);
-			ps.executeUpdate();
-			if(selectedArray != null)
-			{
-			// add new values
-			String querry = "INSERT INTO tbl_companies_industries (companyId, industryId) values ";
-				
-			boolean bFirst = true;
-			for(int i = 0; i<selectedArray.length; i++ )
-			{
-				String value = (String)selectedArray[i];
-				for(int j = 0; j<industryItems.size();j++)
-				{
-					if(value.equalsIgnoreCase(((IndustryItem)industryItems.get(j)).getIndustryName()))
-					{
-						if(!bFirst)
-						{
-							querry +=", ";
-						}
-						querry += "(" + companyId + ", "+ ((IndustryItem)industryItems.get(j)).getId() +")";
-						if(bFirst)
-						{
-							bFirst = false;
-						}
-					}
-				}
-			}
-			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
-                    java.sql.ResultSet.CONCUR_UPDATABLE);
-			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
-			}
-		}
-		finally {
-		    if (stmt != null) {
-		        try {
-		            stmt.close();
-		        } catch (SQLException ex) {
-		            // ignore
-		        }
-		    }
-			ConnectionPool.cleanUp(con, ps, rs);
-		}
-
-		return list;
-	}	
+	public static void updateSolutionSolFocus(SolutionItem solutionItem, String sol_solFocusStr) throws SQLException {
+		int id = getSolFocusIdByName(sol_solFocusStr);
+		solutionItem.solFocus = id;
+	}
 	
-	public static List updateBusinessType(CompanyItem companyItem, String selected, int type ) throws SQLException {
-		if(type != 1 && type != 2)
-			return null;
-		List businessItems = BusinesstypeItemDAO.getBusinessTypeItems();
-		List list = new ArrayList();
-		int companyId = 0;
-		if(companyItem != null)
-			companyId = companyItem.getId();
-			
-		Connection con = null;
-		Statement stmt = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		try {
-			// first delete all the company previous sap solutions links
-			con = ConnectionPool.getConnection();
-
-			ps = con.prepareStatement(_DELETE_COMPANY_BUSINESS_TYPE);
-			ps.setInt(1, companyId);
-			ps.setInt(2, type);
-			ps.executeUpdate();
-
-			// add new values
-			String querry = "INSERT INTO tbl_companies_businesstype (companyId, businesstypeId, type_) values ";
-				
-			for(int j = 0; j<businessItems.size();j++)
-			{
-				if(selected.equalsIgnoreCase(((BusinesstypeItem)businessItems.get(j)).getBusinessName()))
-				{
-					querry += "(" + companyId + ", "+ ((BusinesstypeItem)businessItems.get(j)).getId() + ", "+ type + ")";
-				}
-			}
-			System.out.println(querry);
-			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
-                    java.sql.ResultSet.CONCUR_UPDATABLE);
-			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
-		}
-		finally {
-		    if (stmt != null) {
-		        try {
-		            stmt.close();
-		        } catch (SQLException ex) {
-		            // ignore
-		        }
-		    }
-			ConnectionPool.cleanUp(con, ps, rs);
-		}
-
-		return list;
-	}	
-
-	public static List updateCompanyCountryCoverage(CompanyItem companyItem, String[] selectedArray) throws SQLException {
-		
+	public static void updateSolutionCountryPriceEuro(SolutionItem solutionItem, String sol_countryPriceEuro)throws SQLException {
+		int id = getCountryIdByName(sol_countryPriceEuro);
+		solutionItem.countryPriceEuro = id;
+	}
+	
+	public static void updateSolutionGeographicCoverage(SolutionItem solutionItem, String[] selectedArray)throws SQLException {
 		List countries = CountryItemDAO.getCountryItems();
 		List list = new ArrayList();
-		int companyId = 0;
-		if(companyItem != null)
-			companyId = companyItem.getId();
+		long id = 0;
+		if(solutionItem != null)
+			id = solutionItem.getId();
 			
 		Connection con = null;
 		Statement stmt = null;
@@ -1302,13 +1289,13 @@ public class SolutionUtil {
 			// first delete all the company previous coverage links
 			con = ConnectionPool.getConnection();
 
-			ps = con.prepareStatement(_DELETE_COMPANY_COVERAGE);
-			ps.setInt(1, companyId);
+			ps = con.prepareStatement(_DELETE_SOLUTION_COVERAGE);
+			ps.setLong(1, id);
 			ps.executeUpdate();
 			if(selectedArray != null)
 			{
 				// add new values
-				String querry = "INSERT INTO tbl_companies_coverage (companyId, countryId) values ";
+				String querry = "INSERT INTO tbl_solution_coverage (solutionId, countryId) values ";
 					
 				boolean bFirst = true;
 				for(int i = 0; i<selectedArray.length; i++ )
@@ -1322,7 +1309,7 @@ public class SolutionUtil {
 							{
 								querry +=", ";
 							}
-							querry += "(" + companyId + ", "+ ((CountryItem)countries.get(j)).getId() +")";
+							querry += "(" + id + ", "+ ((CountryItem)countries.get(j)).getId() +")";
 							if(bFirst)
 							{
 								bFirst = false;
@@ -1346,11 +1333,671 @@ public class SolutionUtil {
 		    }
 			ConnectionPool.cleanUp(con, ps, rs);
 		}
-
-		return list;
-	}		
-
+	}
 	
+	public static void updateSolutionIndustry(SolutionItem solutionItem, String[] selectedArray) throws SQLException {
+		List industryItems = IndustryItemDAO.getIndustryItems();
+		long id = 0;
+		if(solutionItem != null)
+			id = solutionItem.getId();
+			
+		Connection con = null;
+		Statement stmt = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			// first delete all the company previous sap solutions links
+			con = ConnectionPool.getConnection();
+			ps = con.prepareStatement(_DELETE_SOLUTION_INDUSTRIES);
+			ps.setLong(1, id);
+			ps.executeUpdate();
+			if(selectedArray != null)
+			{
+			// add new values
+			String querry = "INSERT INTO tbl_solution_industries (solutionId, industryId) values ";
+				
+			boolean bFirst = true;
+			for(int i = 0; i<selectedArray.length; i++ )
+			{
+				String value = (String)selectedArray[i];
+				for(int j = 0; j<industryItems.size();j++)
+				{
+					if(value.equalsIgnoreCase(((IndustryItem)industryItems.get(j)).getIndustryName()))
+					{
+						if(!bFirst)
+						{
+							querry +=", ";
+						}
+						querry += "(" + id + ", "+ ((IndustryItem)industryItems.get(j)).getId() +")";
+						if(bFirst)
+						{
+							bFirst = false;
+						}
+					}
+				}
+			}
+			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
+                    java.sql.ResultSet.CONCUR_UPDATABLE);
+			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
+			}
+		}
+		finally {
+		    if (stmt != null) {
+		        try {
+		            stmt.close();
+		        } catch (SQLException ex) {
+		            // ignore
+		        }
+		    }
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+	}	
+
+	public static void updateMySAPAllInOneVers(SolutionItem solutionItem, String[] selectedArray)throws SQLException {
+
+		List list = new ArrayList();
+		List listId = new ArrayList();
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			String _GET_MYSAPALLINONE_VERISON ="SELECT name, id FROM tbl_sol_sapallinone ";
+			ps = con.prepareStatement(_GET_MYSAPALLINONE_VERISON);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+				listId.add(rs.getInt(2));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+		
+		long id = 0;
+		if(solutionItem != null)
+			id = solutionItem.getId();
+			
+		con = null;
+		Statement stmt = null;
+		ps = null;
+		rs = null;
+		
+		try {
+			// first delete all the company previous sap solutions links
+			con = ConnectionPool.getConnection();
+			ps = con.prepareStatement(_DELETE_SOLUTION_SAPALLINONE);
+			ps.setLong(1, id);
+			ps.executeUpdate();
+			if(selectedArray != null)
+			{
+			// add new values
+			String querry = "INSERT INTO tbl_sol_to_solsapallinone (solutionId, id) values ";
+				
+			boolean bFirst = true;
+			for(int i = 0; i<selectedArray.length; i++ )
+			{
+				String value = (String)selectedArray[i];
+				for(int j = 0; j<list.size();j++)
+				{
+					if(value.equalsIgnoreCase((String)list.get(j)))
+					{
+						if(!bFirst)
+						{
+							querry +=", ";
+						}
+						querry += "(" + id + ", "+ listId.get(j) +")";
+						if(bFirst)
+						{
+							bFirst = false;
+						}
+					}
+				}
+			}
+			System.out.println(querry);
+			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
+                    java.sql.ResultSet.CONCUR_UPDATABLE);
+			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
+			}
+		}
+		finally {
+		    if (stmt != null) {
+		        try {
+		            stmt.close();
+		        } catch (SQLException ex) {
+		            // ignore
+		        }
+		    }
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+	}
+	
+	public static void updateMySAPOneProductVers(SolutionItem solutionItem, String[] selectedArray)throws SQLException {
+
+		List list = new ArrayList();
+		List listId = new ArrayList();
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			String _GET_MYSAPONEPRODUCT_VERISON ="SELECT name, id FROM tbl_sol_saponeproduct ";
+			ps = con.prepareStatement(_GET_MYSAPONEPRODUCT_VERISON);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+				listId.add(rs.getInt(2));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+		
+		long id = 0;
+		if(solutionItem != null)
+			id = solutionItem.getId();
+			
+		con = null;
+		Statement stmt = null;
+		ps = null;
+		rs = null;
+		
+		try {
+			// first delete all the company previous sap solutions links
+			con = ConnectionPool.getConnection();
+			ps = con.prepareStatement(_DELETE_SOLUTION_SAPONEPRODUCT);
+			ps.setLong(1, id);
+			ps.executeUpdate();
+			if(selectedArray != null)
+			{
+			// add new values
+			String querry = "INSERT INTO tbl_sol_to_solsaponeproduct (solutionId, id) values ";
+				
+			boolean bFirst = true;
+			for(int i = 0; i<selectedArray.length; i++ )
+			{
+				String value = (String)selectedArray[i];
+				for(int j = 0; j<list.size();j++)
+				{
+					if(value.equalsIgnoreCase((String)list.get(j)))
+					{
+						if(!bFirst)
+						{
+							querry +=", ";
+						}
+						querry += "(" + id + ", "+ listId.get(j) +")";
+						if(bFirst)
+						{
+							bFirst = false;
+						}
+					}
+				}
+			}
+			System.out.println(querry);
+			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
+                    java.sql.ResultSet.CONCUR_UPDATABLE);
+			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
+			}
+		}
+		finally {
+		    if (stmt != null) {
+		        try {
+		            stmt.close();
+		        } catch (SQLException ex) {
+		            // ignore
+		        }
+		    }
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+	}
+	
+	public static void updateMaturity(SolutionItem solutionItem, String sol_maturity)throws SQLException {
+		int id = getMaturityIdByName(sol_maturity);
+		solutionItem.solMaturity = id;
+	}
+	
+	public static void updateSolStatusByProvider(SolutionItem solutionItem, String sol_statusByProvider)throws SQLException {
+		int id = getStatusByProviderIdByName(sol_statusByProvider);
+		solutionItem.statusByProvider = id;
+	}
+	
+	public static void updateSolStatusBySAP(SolutionItem solutionItem, String sol_statusBySAP)throws SQLException {
+		int id = getStatusBySAPIdByName(sol_statusBySAP);
+		solutionItem.statusBySAP = id;
+	}
+	
+	public static void updateSolTargetCompSize(SolutionItem solutionItem, String[] selectedArray)throws SQLException {
+
+		List list = new ArrayList();
+		List listId = new ArrayList();
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			String _GET_COMP_SIZES ="SELECT name, id FROM tbl_target_comp_size ";
+			ps = con.prepareStatement(_GET_COMP_SIZES);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+				listId.add(rs.getInt(2));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+		
+		long id = 0;
+		if(solutionItem != null)
+			id = solutionItem.getId();
+			
+		con = null;
+		Statement stmt = null;
+		ps = null;
+		rs = null;
+		
+		try {
+			// first delete all the company previous sap solutions links
+			con = ConnectionPool.getConnection();
+			ps = con.prepareStatement(_DELETE_SOLUTION_TO_TARGET_COMP_SIZE);
+			ps.setLong(1, id);
+			ps.executeUpdate();
+			if(selectedArray != null)
+			{
+			// add new values
+			String querry = "INSERT INTO tbl_sol_to_targetcompsize (solutionId, id) values ";
+				
+			boolean bFirst = true;
+			for(int i = 0; i<selectedArray.length; i++ )
+			{
+				String value = (String)selectedArray[i];
+				for(int j = 0; j<list.size();j++)
+				{
+					if(value.equalsIgnoreCase((String)list.get(j)))
+					{
+						if(!bFirst)
+						{
+							querry +=", ";
+						}
+						querry += "(" + id + ", "+ listId.get(j) +")";
+						if(bFirst)
+						{
+							bFirst = false;
+						}
+					}
+				}
+			}
+			System.out.println(querry);
+			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
+                    java.sql.ResultSet.CONCUR_UPDATABLE);
+			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
+			}
+		}
+		finally {
+		    if (stmt != null) {
+		        try {
+		            stmt.close();
+		        } catch (SQLException ex) {
+		            // ignore
+		        }
+		    }
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+	}
+	
+	public static void updateSolCategTarget(SolutionItem solutionItem, String[] selectedArray)throws SQLException {
+
+		List list = new ArrayList();
+		List listId = new ArrayList();
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			String _GET_CATEG_TARGET ="SELECT name, id FROM tbl_sol_categ_target ";
+			ps = con.prepareStatement(_GET_CATEG_TARGET);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+				listId.add(rs.getInt(2));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+		
+		long id = 0;
+		if(solutionItem != null)
+			id = solutionItem.getId();
+			
+		con = null;
+		Statement stmt = null;
+		ps = null;
+		rs = null;
+		
+		try {
+			// first delete all the company previous sap solutions links
+			con = ConnectionPool.getConnection();
+			ps = con.prepareStatement(_DELETE_SOLUTION_TO_CATEG_TARGET);
+			ps.setLong(1, id);
+			ps.executeUpdate();
+			if(selectedArray != null)
+			{
+			// add new values
+			String querry = "INSERT INTO tbl_sol_to_solcategtarget (solutionId, id) values ";
+				
+			boolean bFirst = true;
+			for(int i = 0; i<selectedArray.length; i++ )
+			{
+				String value = (String)selectedArray[i];
+				for(int j = 0; j<list.size();j++)
+				{
+					if(value.equalsIgnoreCase((String)list.get(j)))
+					{
+						if(!bFirst)
+						{
+							querry +=", ";
+						}
+						querry += "(" + id + ", "+ listId.get(j) +")";
+						if(bFirst)
+						{
+							bFirst = false;
+						}
+					}
+				}
+			}
+			System.out.println(querry);
+			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
+                    java.sql.ResultSet.CONCUR_UPDATABLE);
+			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
+			}
+		}
+		finally {
+		    if (stmt != null) {
+		        try {
+		            stmt.close();
+		        } catch (SQLException ex) {
+		            // ignore
+		        }
+		    }
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+	}
+	
+	public static void updateSolUserType(SolutionItem solutionItem, String sol_userType)throws SQLException {
+		int id = getUserTypeIdByName(sol_userType);
+		solutionItem.solUserType = id;
+	}
+	
+	public static void updateSolProgLang(SolutionItem solutionItem, String[] selectedArray)throws SQLException {
+
+		List list = new ArrayList();
+		List listId = new ArrayList();
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			String _GET_PROG_LANG ="SELECT name, id FROM tbl_prog_lang ";
+			ps = con.prepareStatement(_GET_PROG_LANG);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+				listId.add(rs.getInt(2));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+		
+		long id = 0;
+		if(solutionItem != null)
+			id = solutionItem.getId();
+			
+		con = null;
+		Statement stmt = null;
+		ps = null;
+		rs = null;
+		
+		try {
+			// first delete all the company previous sap solutions links
+			con = ConnectionPool.getConnection();
+			ps = con.prepareStatement(_DELETE_SOLUTION_TO_PROG_LANG);
+			ps.setLong(1, id);
+			ps.executeUpdate();
+			if(selectedArray != null)
+			{
+			// add new values
+			String querry = "INSERT INTO tbl_sol_to_proglang (solutionId, id) values ";
+				
+			boolean bFirst = true;
+			for(int i = 0; i<selectedArray.length; i++ )
+			{
+				String value = (String)selectedArray[i];
+				for(int j = 0; j<list.size();j++)
+				{
+					if(value.equalsIgnoreCase((String)list.get(j)))
+					{
+						if(!bFirst)
+						{
+							querry +=", ";
+						}
+						querry += "(" + id + ", "+ listId.get(j) +")";
+						if(bFirst)
+						{
+							bFirst = false;
+						}
+					}
+				}
+			}
+			System.out.println(querry);
+			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
+                    java.sql.ResultSet.CONCUR_UPDATABLE);
+			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
+			}
+		}
+		finally {
+		    if (stmt != null) {
+		        try {
+		            stmt.close();
+		        } catch (SQLException ex) {
+		            // ignore
+		        }
+		    }
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+	}
+	
+	public static void updateSolOS(SolutionItem solutionItem, String[] selectedArray)throws SQLException {
+
+		List list = new ArrayList();
+		List listId = new ArrayList();
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			String _GET_OS ="SELECT name, id FROM tbl_os ";
+			ps = con.prepareStatement(_GET_OS);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+				listId.add(rs.getInt(2));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+		
+		long id = 0;
+		if(solutionItem != null)
+			id = solutionItem.getId();
+			
+		con = null;
+		Statement stmt = null;
+		ps = null;
+		rs = null;
+		
+		try {
+			// first delete all the company previous sap solutions links
+			con = ConnectionPool.getConnection();
+			ps = con.prepareStatement(_DELETE_SOLUTION_TO_OS);
+			ps.setLong(1, id);
+			ps.executeUpdate();
+			if(selectedArray != null)
+			{
+			// add new values
+			String querry = "INSERT INTO tbl_sol_to_os (solutionId, id) values ";
+				
+			boolean bFirst = true;
+			for(int i = 0; i<selectedArray.length; i++ )
+			{
+				String value = (String)selectedArray[i];
+				for(int j = 0; j<list.size();j++)
+				{
+					if(value.equalsIgnoreCase((String)list.get(j)))
+					{
+						if(!bFirst)
+						{
+							querry +=", ";
+						}
+						querry += "(" + id + ", "+ listId.get(j) +")";
+						if(bFirst)
+						{
+							bFirst = false;
+						}
+					}
+				}
+			}
+			System.out.println(querry);
+			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
+                    java.sql.ResultSet.CONCUR_UPDATABLE);
+			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
+			}
+		}
+		finally {
+		    if (stmt != null) {
+		        try {
+		            stmt.close();
+		        } catch (SQLException ex) {
+		            // ignore
+		        }
+		    }
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+	}
+	
+	public static void updateSolAioBased(SolutionItem solutionItem, String[] selectedArray)throws SQLException {
+
+		List list = new ArrayList();
+		List listId = new ArrayList();
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			con = ConnectionPool.getConnection();
+
+			String _GET_OS ="SELECT name, id FROM tbl_sol_aio_based ";
+			ps = con.prepareStatement(_GET_OS);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+				listId.add(rs.getInt(2));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+		
+		long id = 0;
+		if(solutionItem != null)
+			id = solutionItem.getId();
+			
+		con = null;
+		Statement stmt = null;
+		ps = null;
+		rs = null;
+		
+		try {
+			// first delete all the company previous sap solutions links
+			con = ConnectionPool.getConnection();
+			ps = con.prepareStatement(_DELETE_SOLUTION_TO_AIO_BASED);
+			ps.setLong(1, id);
+			ps.executeUpdate();
+			if(selectedArray != null)
+			{
+			// add new values
+			String querry = "INSERT INTO tbl_sol_to_solaiobased (solutionId, id) values ";
+				
+			boolean bFirst = true;
+			for(int i = 0; i<selectedArray.length; i++ )
+			{
+				String value = (String)selectedArray[i];
+				for(int j = 0; j<list.size();j++)
+				{
+					if(value.equalsIgnoreCase((String)list.get(j)))
+					{
+						if(!bFirst)
+						{
+							querry +=", ";
+						}
+						querry += "(" + id + ", "+ listId.get(j) +")";
+						if(bFirst)
+						{
+							bFirst = false;
+						}
+					}
+				}
+			}
+			System.out.println(querry);
+			stmt = con.createStatement(java.sql.ResultSet.TYPE_FORWARD_ONLY,
+                    java.sql.ResultSet.CONCUR_UPDATABLE);
+			stmt.executeUpdate(querry, Statement.NO_GENERATED_KEYS);
+			}
+		}
+		finally {
+		    if (stmt != null) {
+		        try {
+		            stmt.close();
+		        } catch (SQLException ex) {
+		            // ignore
+		        }
+		    }
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+	}
+
+
+////////////// search related ///////////////////////////////////////////////////
 	public static List getSolutionItemsBySearch(String industry_search, String  sapsol_search, String country_search, String country_coverage_search, String primary_business_type_search) throws SQLException {
 		List list = new ArrayList();
 		List listByInd = new ArrayList();
@@ -1680,14 +2327,32 @@ public class SolutionUtil {
 	private static final String _DELETE_COMPANY_SAP_SOLUTIONS =	
 		"DELETE FROM tbl_companies_sapsolution WHERE companyId = ?";
 
-	private static final String _DELETE_COMPANY_INDUSTRIES =	
-		"DELETE FROM tbl_companies_industries WHERE companyId = ?";
+	private static final String _DELETE_SOLUTION_INDUSTRIES =	
+		"DELETE FROM tbl_solution_industries WHERE solutionId = ?";
 
-	private static final String _DELETE_COMPANY_BUSINESS_TYPE =	
-		"DELETE FROM tbl_companies_businesstype WHERE companyId = ? AND type_ = ?";
+	private static final String _DELETE_SOLUTION_SAPALLINONE =	
+		"DELETE FROM tbl_sol_to_solsapallinone WHERE solutionId = ?";
 
-	private static final String _DELETE_COMPANY_COVERAGE =	
-		"DELETE FROM tbl_companies_coverage WHERE companyId = ?";
+	private static final String _DELETE_SOLUTION_SAPONEPRODUCT =	
+		"DELETE FROM tbl_sol_to_solsaponeproduct WHERE solutionId = ?";
+
+	private static final String _DELETE_SOLUTION_TO_TARGET_COMP_SIZE =
+		"DELETE FROM tbl_sol_to_targetcompsize WHERE solutionId = ?";
+
+	private static final String _DELETE_SOLUTION_TO_CATEG_TARGET =
+		"DELETE FROM tbl_sol_to_solcategtarget WHERE solutionId = ?";
+	
+	private static final String _DELETE_SOLUTION_COVERAGE =	
+		"DELETE FROM tbl_solution_coverage WHERE solutionId = ?";
+
+	private static final String _DELETE_SOLUTION_TO_PROG_LANG = 
+		"DELETE FROM tbl_sol_to_proglang WHERE solutionId = ?";
+	
+	private static final String _DELETE_SOLUTION_TO_OS = 
+		"DELETE FROM tbl_sol_to_os WHERE solutionId = ?";
+		
+	private static final String _DELETE_SOLUTION_TO_AIO_BASED = 
+		"DELETE FROM tbl_sol_to_solaiobased WHERE solutionId = ?";
 
 	private static final String _GET_COMPANY_ITEMS_ALL =
 		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company";
