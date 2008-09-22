@@ -48,6 +48,7 @@ List countryItems = CountryItemDAO.getCountryItems();
 List coverageCountryItems = CountryItemDAO.getCountryItems();
 List sapSolutionItems = SAPSolutionItemDAO.getSAPSolutionItems();
 List industryItems = IndustryItemDAO.getIndustryItems(); 
+List companyItems = CompanyItemDAO.getCompanyItems(); 
 List sapSolFocusItems = SolutionUtil.getSolSapSol(); 
 List mySAPAllInOneVers = SolutionUtil.getMySAPAllInOneVersions(); 
 List mySAPOneProductVers = SolutionUtil.getMySAPOneProductVersions(); 
@@ -1258,11 +1259,11 @@ pout.write("<BR> Search by: ");
 if((industry_search_liv != null) && !industry_search_liv.equalsIgnoreCase(ANY))
 	pout.write(" industry --> " + industry_search_liv);
 if((sapsol_search_liv != null) && !sapsol_search_liv.equalsIgnoreCase(ANY))
-	pout.write(" sap solution --> " + sapsol_search_liv);
+	pout.write(" solution focus --> " + sapsol_search_liv);
 if((country_search_liv != null) && !country_search_liv.equalsIgnoreCase(ANY))
-	pout.write(" country --> " + country_search_liv);
+	pout.write(" partner name --> " + country_search_liv);
 if((country_coverage_search_liv != null) && !country_coverage_search_liv.equalsIgnoreCase(ANY))
-	pout.write(" country coverage --> " + country_coverage_search_liv);
+	pout.write(" geographic coverage --> " + country_coverage_search_liv);
 if((primary_business_type_search_liv != null) && !primary_business_type_search_liv.equalsIgnoreCase(ANY))
 	pout.write(" business type --> " + primary_business_type_search_liv);
 
@@ -1275,6 +1276,37 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 			Search By
 		</th>
 	</tr>
+	<tr>
+		<th colspan="2">
+			Partner Name
+		</th>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<SELECT NAME="country_search" style="width:40" >
+			<OPTION><%=ANY%></OPTION>
+			 <%
+		     for (int j = 0; j< companyItems.size(); j++ )
+		      {
+				CompanyItem companyItem = (CompanyItem)companyItems.get(j);			 
+				String optionCategoryValue = companyItem.getName();			 
+                //This is a category from the database
+                //Construct the option tag in a String variable
+                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                if(optionCategoryValue.equals(country_search_liv))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
+                    
+                //close the option tag
+                optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                //printout the option tag
+                out.println(optionTag);
+		      }			 
+            	//Close the result set and statment to free up resoures
+			%>
+		</td>
+	</tr>	
 	<tr>
 		<th colspan="2">
 			Solution Focus
