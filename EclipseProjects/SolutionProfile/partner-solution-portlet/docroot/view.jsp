@@ -302,9 +302,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<TEXTAREA style="text-align: left" rows="4" cols= "60" name="solDesc">
-			<%= solDesc.trim() %>
-			</TEXTAREA>
+			<TEXTAREA style="text-align: left" rows="4" cols= "60" name="solDesc"><%= solDesc.trim() %></TEXTAREA>
 		</td>
 	</tr>
 	<tr>
@@ -1340,18 +1338,19 @@ else {
  frmvalidator.addValidation("solFocus","dontselect=0", "Please select one option for solution focus");
  frmvalidator.addValidation("refCustAvailForUse","dontselect=0", "Please specify if there are reference customers available for use");
 
- frmvalidator.addValidation("mySAPAllInOneVers","dontselect=-1", "Please select at least one option for mySAP All-in-One versions");
- frmvalidator.addValidation("mySAPOneProductVers","dontselect=-1", "Please select at least one option for SAP Business One product versions");
+ //frmvalidator.addValidation("mySAPAllInOneVers","dontselect=-1", "Please select at least one option for mySAP All-in-One versions");
+ //frmvalidator.addValidation("mySAPOneProductVers","dontselect=-1", "Please select at least one option for SAP Business One product versions");
  frmvalidator.addValidation("maturity","dontselect=0", "Please select one option for Solution Maturity");
  frmvalidator.addValidation("industry","dontselect=-1", "Please select at least one option for Industry");
  frmvalidator.addValidation("statusByProvider","dontselect=0", "Please select one option for Solution Status (provided by partner)");
  frmvalidator.addValidation("geographic_coverage","dontselect=-1", "Please select at least one option for country coverage");
- frmvalidator.addValidation("targetCompSize","dontselect=-1", "Please select at least one option for Target Company Size");
+ frmvalidator.addValidation("langAvailable","dontselect=-1", "Please select at least one option for languages available");
+ //frmvalidator.addValidation("targetCompSize","dontselect=-1", "Please select at least one option for Target Company Size");
 
- frmvalidator.addValidation("noCustomers","req","Please enter the Number of Customers using this solution");
+ //frmvalidator.addValidation("noCustomers","req","Please enter the Number of Customers using this solution");
  frmvalidator.addValidation("refCustAvailForUse","dontselect=0", "Please select one option for customers available");
- frmvalidator.addValidation("progLang","dontselect=-1", "Please select at least one option for Programming language");
- frmvalidator.addValidation("os","dontselect=-1", "Please select at least one option for Operating system/platform");
+ //frmvalidator.addValidation("progLang","dontselect=-1", "Please select at least one option for Programming language");
+ //frmvalidator.addValidation("os","dontselect=-1", "Please select at least one option for Operating system/platform");
  frmvalidator.addValidation("thirdPartyUsed","dontselect=0", "Please specify if use another third-party product or partner to implement your solution");
 
  frmvalidator.addValidation("averTrainEndUser", "numeric", "Please provide a valid digit number");
