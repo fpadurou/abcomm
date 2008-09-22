@@ -192,6 +192,35 @@ public class CompanyItemDAO {
 		return companyItem;
 	}
 
+	public static int getCompanyItemIdByName(String name) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int i = 0;
+		if((name == null) || name.isEmpty())
+			return i;
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_COMPANY_ID_BY_NAME);
+
+			ps.setString(1, name);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				i = rs.getInt(1);
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return i;
+	}
+	
+	
 	public static List getCompanyItems() throws SQLException {
 		List list = new ArrayList();
 
@@ -293,6 +322,9 @@ public class CompanyItemDAO {
 
 	private static final String _GET_COMPANY_ITEM =
 		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company WHERE companyId = ?";
+
+	private static final String _GET_COMPANY_ID_BY_NAME =
+		"SELECT companyId FROM tbl_company WHERE companyName = ?";
 
 	private static final String _GET_COMPANY_ITEMS =
 		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company";
