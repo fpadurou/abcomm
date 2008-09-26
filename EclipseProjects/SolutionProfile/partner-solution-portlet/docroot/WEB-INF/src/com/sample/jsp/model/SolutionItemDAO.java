@@ -32,7 +32,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
-import java.sql.Types;
 import java.sql.*;
 /**
  * <a href="SolutionItemDAO.java.html"><b><i>View Source</i></b></a>
@@ -249,6 +248,67 @@ public class SolutionItemDAO {
 		return solutionItem;
 	}
 
+	public static List getSolutionItemsByUserId(long userId) throws SQLException {
+		List list = new ArrayList();
+		List listCompId = getCompanyIdsByUserId(userId);
+		int companyId = 0;
+		// get the first companyId only!!!
+		if(listCompId.size() > 0)
+			companyId = (Integer)listCompId.get(0);
+		else
+			return list;
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_SOLUTION_ITEMS_BY_COMP_ID);
+			ps.setInt(1, companyId);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getLong(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;		
+		
+		
+		
+	}
+
+	public static List getCompanyIdsByUserId(long userId) throws SQLException {
+		List list = new ArrayList();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_COMPANY_ID_BY_USER_ID);
+			ps.setLong(1, userId);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getInt(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
+	}		
+	
 	public static List getSolutionItems() throws SQLException {
 		List list = new ArrayList();
 
@@ -477,16 +537,7 @@ public class SolutionItemDAO {
 		"FROM tbl_sol_directory";
 
 	private static final String _GET_SOLUTION_ITEMS_BY_COMP_ID =
-		"SELECT solId, companyId, solName, solDesc, partComSite, solFocus, sapCertSince, lastReviewBySAP, averTrainEndUser, averImplTrainingDays, " +
-		"averImplEffort, averImplDuration, averSizeImplTeam, " +
-		"averSaleCycle, noCustomers, smallImpl, largeImpl, smallImplTime, largeImplTime, " +
-		"smallImplTeamNo, largeImplTeamNo, solSite, refCustAvailForUse, totalAppBaseLinePrice, " +
-		"appPriceEur, hardwareCost, hardwareCostEur, averLicensePrice, averLicensePriceEur, " +
-		"addServiceCost, addServicePriceEur, implCost, implCostEur, sapDiscount, dbUsed, " +
-		"SAPBusUsed, SAPGUIUsed, compA1B1Used, thirdPartyUsed, thirdPartyName, otherIT, " +
-		"addRemarks, solSAPMicroSite, lastPartRevieDate, reviewedBy, profileAdded, " +
-		"dateCreated, modifiedBy, dateUpdated, notificationProc, solMaturity, statusByProvider, statusBySAP, solUserType " +
-		"FROM tbl_sol_directory WHERE companyId = ?";
+		"SELECT solId FROM tbl_sol_directory WHERE companyId = ?";
 
 	
 	private static final String _UPDATE_SOLUTION_ITEM =
@@ -501,5 +552,8 @@ public class SolutionItemDAO {
 		"addRemarks = ?, solSAPMicroSite = ?, lastPartRevieDate = ?, reviewedBy = ?, profileAdded = ?, " +
 		"dateCreated = ?, modifiedBy = ?, dateUpdated = ?, notificationProc = ?, solMaturity = ?, statusByProvider = ?, statusBySAP = ?, solUserType = ? " +
 		"WHERE solId = ?";
+
+	private static final String _GET_COMPANY_ID_BY_USER_ID =
+		"SELECT companyId FROM tbl_company WHERE userId = ?";
 	
 }
