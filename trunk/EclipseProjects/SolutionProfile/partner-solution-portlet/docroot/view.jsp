@@ -65,6 +65,7 @@ String pleaseChoose = "---------------Please choose----------------";
 
 List YN = SolutionUtil.YesNoList();
 
+long lrUserId = PortalUtil.getUserId(request); 
 
 if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	int id = 0;
@@ -1272,6 +1273,7 @@ else {
 	<%
 	List solutionItems = null;
 	solutionItems = SolutionItemDAO.getSolutionItems();
+	//solutionItems = SolutionItemDAO.getSolutionItemsByUserId(lrUserId);
 	
 	int count = solutionItems.size();
 	boolean even = false;
