@@ -1272,8 +1272,9 @@ else {
 
 	<%
 	List solutionItems = null;
+	List solutionItemsIds = null;
 	solutionItems = SolutionItemDAO.getSolutionItems();
-	//solutionItems = SolutionItemDAO.getSolutionItemsByUserId(lrUserId);
+	solutionItemsIds = SolutionItemDAO.getSolutionItemsByUserId(lrUserId);
 	
 	int count = solutionItems.size();
 	boolean even = false;
@@ -1300,9 +1301,12 @@ else {
 				<%= SolutionUtil.getSolutionCountryCoverageString(solutionItem) %>
 			</td>
 			<td>
+			<% if(solutionItemsIds.contains(solutionItem.getId())){
+			%>
 				<input class="portlet-form-button" type="button" value="Edit" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="edit" /><portlet:param name="id" value="<%= String.valueOf(solutionItem.getId()) %>" /></portlet:renderURL>';">
 
 				<input class="portlet-form-button" type="button" value="Delete" onClick="document.solutionprofile.command.value = 'delete'; document.solutionprofile.id.value = '<%= solutionItem.getId() %>'; document.solutionprofile.submit();">
+			<% } %>
 			</td>
 		</tr>
 		<%} else  {%>

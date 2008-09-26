@@ -51,10 +51,13 @@ import org.apache.commons.logging.LogFactory;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.text.ParseException;
 import javax.portlet.PortletConfig;
+
+import com.liferay.portal.util.PortalUtil;
 
 /**
  * <a href="JSPPortlet.java.html"><b><i>View Source</i></b></a>
@@ -74,7 +77,16 @@ public class JSPPortlet extends GenericPortlet {
 			throws IOException, PortletException {
 
 		String command = req.getParameter("command");
-
+		long userId = 0;
+		userId = PortalUtil.getUserId(req);
+		List companyIds = null;
+		int companyId = 0;
+		try {
+			companyIds = SolutionItemDAO.getCompanyIdsByUserId(userId) ;
+			companyId = (Integer)companyIds.get(0); 
+		} catch (Exception e) {
+			System.out.println("SolutionItemDAO.getCompanyIdsByUserId throws exception for userId = " + String.valueOf(userId));
+		}
 		int id = 0;
 		try {
 			id = Integer.parseInt(req.getParameter("id"));
@@ -249,7 +261,8 @@ public class JSPPortlet extends GenericPortlet {
 				SolutionItem solutionItem = new SolutionItem();
 
 				//public int companyId;
-				//solutionItem.partNumber;	
+				//solutionItem.partNumber;
+				solutionItem.companyId = companyId; // get the first 
 				solutionItem.solName = solName  ;	
 				solutionItem.solDesc = solDesc ;	
 				solutionItem.partComSite = partComSite	;
