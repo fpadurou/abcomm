@@ -32,7 +32,26 @@ function submitconfirm(solutionprofile)
 	alert("Please enter a solution name.");
 	return false;
 	}
-	return true;
+	var ret = true;
+
+	var itemobj = document.getElementsByName("sapCertSince");
+	var objValue = document.getElementsByName("lastReviewBySAP");
+	if(!itemobj)
+    {
+      alert("BUG: Couldnot get the input object named: "+itemname);
+	    ret = false;                 
+        return ret;
+    }
+	if(Date.parse(objValue.value) < Date.parse(itemobj.value))
+	{ 
+	    if(!strError || strError.length ==0) 
+	    { 
+	      strError = objValue.name + " : value should be greater than SAP certified date"; 
+	    }//if               
+    sfm_show_error_msg(strError,objValue); 
+    ret = false;                 
+   }//if   
+return ret;          	
 }
 //-->
 </SCRIPT>
@@ -262,7 +281,8 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	}
 	else  //add
 	{
-	
+		sapCertSince = String.valueOf(dateFormatDateTime.format(new Date()));
+		lastReviewBySAP = String.valueOf(dateFormatDateTime.format(new Date()));	
 	}
 %>
 
@@ -538,7 +558,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="sapCertSince" type="text" value="<%= sapCertSince %>">
+			<input class="form-text" size = 40 id="sapCertSince" name="sapCertSince" type="text" value="<%= sapCertSince %>">
 		</td>
 	</tr>	
 	<tr>
@@ -1379,7 +1399,12 @@ else {
  frmvalidator.addValidation("implCost", "numeric", "Please provide a valid digit number");
 
  frmvalidator.addValidation("lastReviewBySAP","date", "Please enter a valid date, format MM/DD/YYYY");
+ frmvalidator.addValidation("lastReviewBySAP","date_lessthan_today", "The date is greater than today date");
+
  frmvalidator.addValidation("sapCertSince","date", "Please enter a valid date, format MM/DD/YYYY");
+ frmvalidator.addValidation("sapCertSince","date_lessthan_today", "The date is greater than today date");
+ //frmvalidator.addValidation("lastReviewBySAP","date_greater_than", "The date should be greater than certified date");
+
  
  //secondary_business_type
 </script>

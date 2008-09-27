@@ -45,6 +45,7 @@
 <%@ page import="com.sample.solutionprofile.model.SolutionUtil" %>
 
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Date" %>
 <%@ page import="java.text.DateFormat" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.io.PrintWriter" %>
