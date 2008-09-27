@@ -624,6 +624,45 @@ var ret = true;
 return ret;
 }
 
+function TestDateLessThanToday(objValue,strError)
+{
+	var ret = true;
+	if(objValue.value.length > 0 && Date.parse(objValue.value) > new Date())
+	{ 
+	    if(!strError || strError.length ==0) 
+	    { 
+	      strError = objValue.name + " : value should be less than today "; 
+	    }//if               
+    sfm_show_error_msg(strError,objValue); 
+    ret = false;                 
+   }//if   
+return ret;          
+}
+
+function TestDateGreaterThan(objValue,strError)
+{
+	var ret = true;
+
+	var itemobj = document.forms.solutionprofile.getElementsByName("sapCertSince");
+	if(!itemobj)
+    {
+      //alert("BUG: Couldnot get the input object named: "+itemname);
+	    ret = false;                 
+        return ret;
+    }
+	if(Date.parse(objValue.value) < Date.parse(itemobj.value))
+	{ 
+	    if(!strError || strError.length ==0) 
+	    { 
+	      strError = objValue.name + " : value should be greater than SAP certified date"; 
+	    }//if               
+    sfm_show_error_msg(strError,objValue); 
+    ret = false;                 
+   }//if   
+return ret;          
+}
+
+
 function TestEmail(objValue,strError)
 {
 var ret = true;
@@ -857,6 +896,16 @@ function validateInput(strValidateStr,objValue,strError)
 		case "date":
 		{
 			ret = TestDate(objValue,strError);
+		    break;
+		}		 
+		case "date_lessthan_today":
+		{
+			ret = TestDateLessThanToday(objValue,strError);
+		    break;
+		}		 
+		case "date_greater_than":
+		{
+			ret = TestDateGreaterThan(objValue,strError);
 		    break;
 		}		 
     }//switch 
