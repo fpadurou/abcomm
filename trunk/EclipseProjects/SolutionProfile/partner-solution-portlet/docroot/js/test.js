@@ -642,14 +642,13 @@ return ret;
 function TestDateGreaterThan(objValue,strError)
 {
 	var ret = true;
+	var itemobj ;
+	try{
+	itemobj = document.getElementById('sapCertSince');
+	} catch (e) {
+	alert("The following error occurred: " + e.name + " - " 
+	+ e.message); }
 
-	var itemobj = document.forms.solutionprofile.getElementsByName("sapCertSince");
-	if(!itemobj)
-    {
-      //alert("BUG: Couldnot get the input object named: "+itemname);
-	    ret = false;                 
-        return ret;
-    }
 	if(Date.parse(objValue.value) < Date.parse(itemobj.value))
 	{ 
 	    if(!strError || strError.length ==0) 

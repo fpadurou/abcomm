@@ -94,12 +94,12 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	long partNumber  = 0;	
 	String solName = "";	
 	String solDesc = "";	
-	String partComSite	= "";
+	String partComSite	= "http://";
 	int solFocus  = 0;
 	int solStatusPartner = 0;
 	int solStatusSAP = 0;
 	
-	String sapCertSince	= "";;
+	String sapCertSince	= "";
 	String lastReviewBySAP = "";	
 	int averTrainEndUser = 0;
 	int averImplTrainingDays = 0;	
@@ -114,7 +114,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	int largeImplTime = 0;	
 	int smallImplTeamNo = 0;	
 	int largeImplTeamNo = 0;	
-	String solSite = "";
+	String solSite = "http://";
 	
 	int countryPriceEuro = 0;
 	
@@ -182,6 +182,9 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	solName = solutionItem.solName;	
 	solDesc = solutionItem.solDesc;	
 	partComSite = solutionItem.partComSite ;
+	if(partComSite.isEmpty())
+		partComSite = "http://";
+		
 	solFocus =  solutionItem.solFocus;
 	solStatusPartner = solutionItem.solStatusPartner;
 	solStatusSAP = solutionItem.solStatusSAP;
@@ -224,7 +227,10 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	thirdPartyName = solutionItem.thirdPartyName;	
 	otherIT = solutionItem.otherIT;	
 	addRemarks = solutionItem.addRemarks;	
-	solSAPMicroSite = solutionItem.solSAPMicroSite;	
+	solSAPMicroSite = solutionItem.solSAPMicroSite;
+	if(solSAPMicroSite.isEmpty())
+		solSAPMicroSite = "http://";
+		
 	
 	lastPartRevieDate = String.valueOf(dateFormatDateTime.format(solutionItem.lastPartRevieDate));	
 	reviewedBy = solutionItem.reviewedBy	;
@@ -1403,7 +1409,7 @@ else {
 
  frmvalidator.addValidation("sapCertSince","date", "Please enter a valid date, format MM/DD/YYYY");
  frmvalidator.addValidation("sapCertSince","date_lessthan_today", "The date is greater than today date");
- //frmvalidator.addValidation("lastReviewBySAP","date_greater_than", "The date should be greater than certified date");
+ frmvalidator.addValidation("lastReviewBySAP","date_greater_than", "The date should be greater than certified date");
 
  
  //secondary_business_type
