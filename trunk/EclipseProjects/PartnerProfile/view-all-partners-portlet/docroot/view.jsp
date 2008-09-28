@@ -626,7 +626,7 @@ else {
 		<td width="10%">
 			<b>Industry</b>
 		</td>
-		<td>
+		<td width="10%">
 			<b>Company logo</b>
 		</td>
 		<td>
@@ -670,7 +670,16 @@ else {
 				<%= CompanyUtil.getCompanyIndustries(companyItem) %>
 			</td>
 			<td>
-				<img src='showImage?id="<%=i%>"'>
+				<!--  <img src='showImage?id="<%=i%>"'> -->
+				<%if ((i/2)%4 == 0) {%>
+				<IMG SRC="<%=request.getContextPath()%>/Logo/1.jpg" ALT="logo" HEIGHT = 30>
+				<% } else if ((i/2)%4 == 1) {%>
+				<IMG SRC="<%=request.getContextPath()%>/Logo/2.gif" ALT="logo" HEIGHT = 30>
+				<% } else if ((i/2)%4 == 2) {%>
+				<IMG SRC="<%=request.getContextPath()%>/Logo/3.jpg" ALT="logo" HEIGHT = 30>
+				<% } else if ((i/2)%4 == 3) {%>
+				<IMG SRC="<%=request.getContextPath()%>/Logo/4.png" ALT="logo" HEIGHT = 30>
+				<% } %>
 			</td>
 			<td>
 				<% if (companyItem.getCompanyEmpNo() > 0){ 
