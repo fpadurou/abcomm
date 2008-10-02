@@ -639,10 +639,13 @@ String sapsol_search_liv= request.getParameter("sap_solution_focus_search");
 String country_search_liv= request.getParameter("country_search");
 String country_coverage_search_liv= request.getParameter("country_coverage_search");
 String primary_business_type_search_liv= request.getParameter("primary_business_type_search");
-
+List companyItemsIdByUserIds = CompanyItemDAO.getCompanyItemsByUserId(lrUserId);
+if(companyItemsIdByUserIds.size()<1){
 %>
 	<input class="portlet-form-button" type="button" value="Add" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="add" /></portlet:renderURL>';">
-
+<%
+} 
+%>
 		<br><br>
 
 	<table class="lfr-table" border="1" cellpadding="4" cellspacing="2" width="100%">
