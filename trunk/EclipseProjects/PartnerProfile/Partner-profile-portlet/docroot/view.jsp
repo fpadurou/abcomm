@@ -112,7 +112,10 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		CompanyItem companyItem = CompanyItemDAO.getCompanyItem(id);
 		userCompanyName = companyItem.getName();
 		partnerDescription = companyItem.getDescription();
-		partnerNumber = companyItem.getCompanyNo(); 
+		if(partnerDescription == null)
+			partnerDescription = "";
+		partnerNumber = companyItem.getCompanyNo();
+		 
 	    parent_company_name = companyItem.getParentCompanyName(); 
 	    
 		if(companyItem.getYear() >0)
@@ -126,7 +129,12 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	    else
 	    	noemployees ="";	
 	    if(companyItem.getDateLastReview() != null)
-		    last_review_Date = String.valueOf(dateFormatDateTime.format(companyItem.getDateLastReview()));
+		{
+			try {
+				last_review_Date = String.valueOf(dateFormatDateTime.format(companyItem.getDateLastReview()));
+				}catch (Exception e) {
+				}
+		}
 		else
 			last_review_Date = "";
 	    
