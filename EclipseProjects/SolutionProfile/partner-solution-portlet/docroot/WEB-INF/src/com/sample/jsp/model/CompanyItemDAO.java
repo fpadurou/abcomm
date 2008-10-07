@@ -32,7 +32,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
-import java.sql.Types;
 import java.sql.*;
 /**
  * <a href="CompanyItemDAO.java.html"><b><i>View Source</i></b></a>
@@ -236,6 +235,84 @@ public class CompanyItemDAO {
 		return list;
 	}
 
+	public static List getCompanyNames() throws SQLException {
+		List list = new ArrayList();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionPool.getConnection();
+
+			ps = con.prepareStatement(_GET_COMPANY_NAMES);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				list.add(rs.getString(1));
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return list;
+	}
+
+	
+	public static String getCompanyNameById(long companyId) throws SQLException {
+		String companyName = "";
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionPool.getConnection();
+			ps = con.prepareStatement(_GET_COMPANY_NAME_BY_COMPANYID);
+			ps.setLong(1, companyId);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				companyName = rs.getString(1);
+				if(companyName == null)
+					companyName = "";
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return companyName;		
+	}
+
+	public static int getCompanyIdByName(String companyName) throws SQLException {
+		int companyId = 0;
+		if((companyName == null) || (companyName.isEmpty()) )
+			return companyId;
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = ConnectionPool.getConnection();
+			ps = con.prepareStatement(_GET_COMPANY_ID_BY_COMPANY_NAME);
+			ps.setString(1, companyName);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				companyId = rs.getInt(1);
+			}
+		}
+		finally {
+			ConnectionPool.cleanUp(con, ps, rs);
+		}
+
+		return companyId;		
+	}
+	
+	
 	public static void updateCompanyItem(CompanyItem companyItem) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -297,6 +374,15 @@ public class CompanyItemDAO {
 	private static final String _GET_COMPANY_ITEMS =
 		"SELECT companyId, companyName, description, parent_companyname, partnerNumber, friendlySAP_site, adressId, noEmployees, countryRegistrationId ,partner_since, last_review_date, reviewed_By, date_created, date_updated, modified_by, web_site FROM tbl_company";
 
+	private static final String _GET_COMPANY_NAMES =
+		"SELECT companyName FROM tbl_company";
+
+	private static final String _GET_COMPANY_NAME_BY_COMPANYID =
+		"SELECT companyName FROM tbl_company WHERE companyId = ?";
+	
+	private static final String _GET_COMPANY_ID_BY_COMPANY_NAME = 
+		"SELECT companyId FROM tbl_company WHERE companyName = ?";
+		
 	private static final String _UPDATE_COMPANY_ITEM =
 		"UPDATE tbl_company SET companyName = ?, description = ?, parent_companyname = ?, noEmployees = ?, partnerNumber = ?, friendlySAP_site = ?, adressId = ?, countryRegistrationId = ?, partner_since = ?, date_created = ?, date_updated = ?, last_review_date = ?, reviewed_By = ?, modified_by = ?, web_site = ? WHERE companyId = ?";
 	
