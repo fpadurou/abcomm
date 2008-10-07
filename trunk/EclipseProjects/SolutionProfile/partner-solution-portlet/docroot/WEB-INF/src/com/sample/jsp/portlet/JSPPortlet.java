@@ -80,19 +80,33 @@ public class JSPPortlet extends GenericPortlet {
 		long userId = 0;
 		userId = PortalUtil.getUserId(req);
 		List companyIds = null;
+
 		int companyId = 0;
-		try {
+		String company_name = req.getParameter("company_names");
+		
+		if((company_name != null) && (!company_name.isEmpty()))  
+		{
+			try {
+				companyId = CompanyItemDAO.getCompanyIdByName(company_name) ;
+				System.out.println("Company for solution is" + String.valueOf(companyId));
+			} catch (Exception e) {
+				System.out.println("Couldn't find the company");
+			}
+		}
+		// remove it for the moment, the user has choosed company ID
+		/*try {
 			companyIds = SolutionItemDAO.getCompanyIdsByUserId(userId) ;
 			companyId = (Integer)companyIds.get(0); 
 		} catch (Exception e) {
 			System.out.println("SolutionItemDAO.getCompanyIdsByUserId throws exception for userId = " + String.valueOf(userId));
-		}
+		}*/
 		int id = 0;
 		try {
 			id = Integer.parseInt(req.getParameter("id"));
 		} catch (Exception e) {
 			System.out.println("Bzz");
 		}
+		
 		//int companyId = 0;
 		String partNumberStr  = req.getParameter("partNumber");
 		long partNumber = 0; 
@@ -100,7 +114,6 @@ public class JSPPortlet extends GenericPortlet {
 			partNumber  = Integer.parseInt(partNumberStr);
 		}catch (Exception e) {
 			System.out.println("Bzz2");
-			// TODO: handle exception
 		}*/
 		
 		String solName = req.getParameter("solName");	
@@ -261,7 +274,6 @@ public class JSPPortlet extends GenericPortlet {
 				SolutionItem solutionItem = new SolutionItem();
 
 				//public int companyId;
-				//solutionItem.partNumber;
 				solutionItem.companyId = companyId; // get the first 
 				solutionItem.solName = solName  ;	
 				solutionItem.solDesc = solDesc ;	
@@ -380,7 +392,6 @@ public class JSPPortlet extends GenericPortlet {
 				//user
 				SolutionItem solutionItem = SolutionItemDAO.getSolutionItem(id);
 				//public int companyId;
-				//solutionItem.partNumber;	
 				solutionItem.solName = solName  ;	
 				solutionItem.solDesc = solDesc ;	
 				solutionItem.partComSite = partComSite	;

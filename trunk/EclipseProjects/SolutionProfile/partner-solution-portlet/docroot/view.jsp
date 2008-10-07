@@ -80,6 +80,7 @@ List userType = SolutionUtil.getSolUserType();
 List progLang = SolutionUtil.getProgLang(); 
 List os = SolutionUtil.getOS(); 
 List aioBased = SolutionUtil.getMySAPAllInOneBased(); 
+List company_names = CompanyItemDAO.getCompanyNames();
 String pleaseChoose = "---------------Please choose----------------";
 
 List YN = SolutionUtil.YesNoList();
@@ -166,7 +167,11 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	List sol_progLang  = null; 
 	List sol_os  = null; 
 	List sol_aioBased  = null;     
-        
+	String company_name  = null; 
+	
+	// all partner names
+	List partner_names = null;
+	        
 	if (command.equals("edit")) {
 		id = Integer.parseInt(request.getParameter("id"));
 		UserItem userItem = UserItemDAO.getUserItemByCompanyId(id);
@@ -178,6 +183,8 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		SolutionItem solutionItem = SolutionItemDAO.getSolutionItem(id);
 
 	companyId = solutionItem.companyId;
+	company_name = CompanyItemDAO.getCompanyNameById(companyId);
+	
 	partNumber = solutionItem.partNumber;	
 	solName = solutionItem.solName;	
 	solDesc = solutionItem.solDesc;	
@@ -241,25 +248,6 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	notificationProc = solutionItem.notificationProc;
 	notificationText = solutionItem.notificationText;
 	
-/*		userCompanyName = companyItem.getName();
-		partnerNumber = companyItem.getCompanyNo(); 
-	    parent_company_name = companyItem.getParentCompanyName(); 
-		micrositeAdress = companyItem.getCompanyFriendlySite();
-		company_website = companyItem.getCompanySite();
-		if(companyItem.getCompanyEmpNo() >0)
-	    	noemployees = String.valueOf(companyItem.getCompanyEmpNo());
-	    else
-	    	noemployees ="";	
-	    if(companyItem.getDateLastReview() != null)
-		    last_review_Date = String.valueOf(dateFormatDateTime.format(companyItem.getDateLastReview()));
-		else
-			last_review_Date = "";
-	    
-	    reviewed_by = companyItem.getReviewedBy(); 
-	    profile_added = String.valueOf(dateFormatDateTime.format(companyItem.getDateCreated())); 
-	    date_updated = String.valueOf(dateFormatDateTime.format(companyItem.getDateUpdated())); 
-	    modified_by = companyItem.getModifiedBy();
-*/	     		
 // get the childs item
 
 	    if(solFocus >0)
@@ -314,6 +302,37 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	<%
 	}
 	%>
+	<tr>
+		<td>
+			Partner Name
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<SELECT NAME="company_names" style="width:40" >
+			<OPTION><%=pleaseChoose%></OPTION>
+			 <%
+		     for (int j = 0; j< company_names.size(); j++ )
+		      {
+                String optionCategoryValue = (String)company_names.get(j);
+
+                //Construct the option tag in a String variable
+                String optionTag = "<OPTION VALUE=\"" + optionCategoryValue + "\"";
+                    
+                if(company_name != null && company_name.equals(optionCategoryValue))
+                {
+                    optionTag += " selected=\"selected\"";
+                }
+                    
+                //close the option tag
+                optionTag += ">" + optionCategoryValue + "</OPTION>";
+                    
+                //printout the option tag
+                out.println(optionTag);
+		      }			 
+            //Close the result set and statment to free up resoures
+			%>		
+		</td>
+	</tr>	
 	<tr>
 		<td>
 			Solution Name
