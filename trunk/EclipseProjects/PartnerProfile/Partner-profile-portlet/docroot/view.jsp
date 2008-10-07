@@ -158,6 +158,8 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 			zipcode = adressCompanyItem.getZip();	
 			city = adressCompanyItem.getCity();	
 			state_province = adressCompanyItem.getStateregionname();
+			if(state_province == null)
+				state_province ="";
 			countryId = adressCompanyItem.getCountryId();
 			telephone = AdressItemDAO.getPhone(adressCompanyItem.getPhoneId());
 			telefax = AdressItemDAO.getFax(adressCompanyItem.getFaxId());
@@ -712,8 +714,14 @@ if(companyItemsIdByUserIds.size()<1){
 				<%= CompanyUtil.getCompanyCountryName(companyItem) %>
 			</td>
 			<td>
+				<% if (CompanyUtil.getCompanyRegionName(companyItem) != null){ 
+				%>
 				<%= CompanyUtil.getCompanyRegionName(companyItem) %>
-				<!--  -->
+				<%} else  {%>
+				<b></b>
+				<% 
+				} 
+				%>
 			</td>
 			<td>
 				<input class="portlet-form-button" type="button" value="Edit" onClick="self.location = '<portlet:renderURL><portlet:param name="command" value="edit" /><portlet:param name="id" value="<%= String.valueOf(companyItem.getId()) %>" /></portlet:renderURL>';">
