@@ -177,9 +177,8 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	    secondary_business_type	= CompanyUtil.getCompanyBusinessSolution(id, 2);
 	
 	}
-	else  //add
+	else 
 	{
-	
 	}
 %>
 

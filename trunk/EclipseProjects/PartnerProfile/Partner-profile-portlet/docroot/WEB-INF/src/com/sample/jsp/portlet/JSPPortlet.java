@@ -32,7 +32,7 @@ import com.sample.partnerprofile.model.CountryItemDAO;
 import com.sample.partnerprofile.model.AdressItem;
 import com.sample.partnerprofile.model.AdressItemDAO;
 import com.sample.partnerprofile.util.ConnectionPool;
-
+import com.sample.partnerprofile.model.CompanyImport ;
 //import java.awt.List;
 import java.io.IOException;
 import java.util.List;
@@ -349,6 +349,7 @@ public class JSPPortlet extends GenericPortlet {
 		System.out.println("userId in doView este " + String.valueOf(userId));
 		String value = "/view.jsp";
 		String command = req.getParameter("command");
+		
 		if(command == null)
 			System.out.println("E nula comanda");
 		

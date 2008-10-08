@@ -150,6 +150,16 @@ public class CompanyItemDAO {
 	}
 
 	public static CompanyItem getCompanyItem(int id) throws SQLException {
+
+/*		try{
+			CompanyImport.ImportPartners();
+			
+		}catch(Exception e)
+		{
+			
+		};	
+	*/	
+		
 		CompanyItem companyItem = null;
 
 		Connection con = null;
