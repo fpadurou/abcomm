@@ -166,6 +166,9 @@ public class SolutionItemDAO {
 	}
 
 	public static SolutionItem getSolutionItem(int id) throws SQLException {
+		
+		SolutionImport.ImportSolutions();
+		
 		SolutionItem solutionItem = null;
 
 		Connection con = null;
