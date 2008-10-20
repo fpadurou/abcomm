@@ -572,7 +572,8 @@ public class CompanyUtil {
 		
 	}
 	
-	public static List getCompanyItemsBySearch(String industry_search, String  sapsol_search, String country_search, String country_coverage_search, String primary_business_type_search) throws SQLException {
+	public static List getCompanyItemsBySearch(String industry_search, String  sapsol_search, String country_search, String country_coverage_search, String primary_business_type_search, String name_search, String desc_search) throws SQLException {
+		List returnList = new ArrayList();
 		List list = new ArrayList();
 		List listByInd = new ArrayList();
 		List listBySap = new ArrayList();
@@ -591,7 +592,10 @@ public class CompanyUtil {
 			value += country_coverage_search + " ";
 		if(primary_business_type_search != null)
 			value += primary_business_type_search + " ";
-
+		value += " name search " + name_search;
+		value += " desc search " + desc_search;
+				 
+		
 		int indId = -1;
 		int sapsolId = -1;
 		int countrycoverageId = -1;
@@ -857,6 +861,50 @@ public class CompanyUtil {
 				}
 
 			}
+			// re-check by name and desc
+			boolean  cond1 = (name_search != null) && (!name_search.equalsIgnoreCase(""));
+			if(cond1)
+				name_search = name_search.toLowerCase();
+			boolean  cond2 = (desc_search != null) && (!desc_search.equalsIgnoreCase(""));
+			if(cond2)
+				desc_search = desc_search.toLowerCase();
+				
+			if(cond1 || cond2)
+			{
+				System.out.println("bz1");
+				for (int i = 0; i < list.size(); i++) {
+					CompanyItem companyItem = (CompanyItem)list.get(i);
+					boolean b1=  true;
+					boolean b2=  true;
+					if(cond1 && !companyItem.getName().toLowerCase().contains(name_search))
+					{
+						b1 = false;
+					}
+					else
+						System.out.println("bz2");
+
+					if(cond2)
+					{
+						if(companyItem.getDescription() != null)
+						{
+								if(!companyItem.getDescription().toLowerCase().contains(desc_search))
+									b2 = false;
+						}
+						else
+							b2 = false;
+					}
+					if(b1 && b2)
+						returnList.add(companyItem);
+				}
+			}
+			else
+			{
+				for (int i = 0; i < list.size(); i++) {
+					CompanyItem companyItem = (CompanyItem)list.get(i);
+					returnList.add(companyItem);
+				}
+			}
+			
 			//int indId = -1;
 			//int sapsolId = -1;
 			//int countrycoverageId = -1;
@@ -868,7 +916,7 @@ public class CompanyUtil {
 			ConnectionPool.cleanUp(con, ps, rs);
 		}
 
-		return list;
+		return returnList;
 	}
 	
 	private static final String _GET_COMPANY_ITEMS_BY_SEARCH =
