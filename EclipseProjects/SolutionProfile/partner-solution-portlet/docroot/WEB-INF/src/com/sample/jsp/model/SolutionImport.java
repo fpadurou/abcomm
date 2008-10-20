@@ -46,23 +46,23 @@ public class SolutionImport {
 	{
 		if(false)
 		{
-			ImportSolFocus(); //6 
-			ImportSolSAPAIO(); //7 
-			ImportSolSAPBOP(); //8 
-			ImportSolMaturity(); //9 
-			ImportSolIndustry(); //10 
-			ImportSolIndustryMV(); //11 
+			//ImportSolFocus(); //6 
+			//ImportSolSAPAIO(); //7 
+			//ImportSolSAPBOP(); //8 
+			//ImportSolMaturity(); //9 
+			//ImportSolIndustry(); //10 
+			//ImportSolIndustryMV(); //11 
 			ImportSolStatusByPartner(); //12 
 			ImportSolStatusBySAP(); //13 
-			ImportSolCoverage(); //16 
-			ImportSolTargetSize(); //17 
-			ImportSolCategTarget(); //18 
-			ImportSolLangAvailable(); //19 
-			ImportSolMainCountryEur(); //35 
-			ImportSolUserType(); //46 
-			ImportSolProgLang(); //48 
-			ImportSolOS(); //49 
-			ImportSolAIOBased(); //54 
+			//ImportSolCoverage(); //16 
+			//ImportSolTargetSize(); //17 
+			//ImportSolCategTarget(); //18 
+			//ImportSolLangAvailable(); //19 
+			//ImportSolMainCountryEur(); //35 
+			//ImportSolUserType(); //46 
+			//ImportSolProgLang(); //48 
+			//ImportSolOS(); //49 
+			//ImportSolAIOBased(); //54 
 		}
 	}
 	
