@@ -1252,10 +1252,21 @@ String sapsol_search_liv= request.getParameter("sap_solution_focus_search");
 String country_search_liv= request.getParameter("country_search");
 String country_coverage_search_liv= request.getParameter("country_coverage_search");
 String primary_business_type_search_liv= request.getParameter("primary_business_type_search");
+String name_search_liv= request.getParameter("name_search");
+if(name_search_liv == null)
+	name_search_liv = "";
+	
+String desc_search_liv= request.getParameter("desc_search");
+if(desc_search_liv == null)
+	desc_search_liv = "";
 
 PrintWriter pout=null;
 pout = response.getWriter();
 pout.write("<BR> Search by: ");
+if((name_search_liv != null) && !name_search_liv.equalsIgnoreCase(""))
+	pout.write(" solution name --> " + name_search_liv);
+if((desc_search_liv != null) && !desc_search_liv.equalsIgnoreCase(""))
+	pout.write(" solution description --> " + desc_search_liv);
 if((industry_search_liv != null) && !industry_search_liv.equalsIgnoreCase(ANY))
 	pout.write(" industry --> " + industry_search_liv);
 if((sapsol_search_liv != null) && !sapsol_search_liv.equalsIgnoreCase(ANY))
@@ -1305,6 +1316,24 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 		      }			 
             	//Close the result set and statment to free up resoures
 			%>
+		</td>
+	</tr>	
+	<tr>
+		<th colspan="2">
+			Solution name
+		</th>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="name_search" type="text" value="<%= name_search_liv %>">
+		</td>
+	</tr>	
+	<tr>
+		<th colspan="2">
+			Solution description
+		</th>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input class="form-text" size = 40 name="desc_search" type="text" value="<%= desc_search_liv %>">
 		</td>
 	</tr>	
 	<tr>
@@ -1436,13 +1465,16 @@ if((primary_business_type_search_liv != null) && !primary_business_type_search_l
 	List solutionItems = null;
 	boolean cond = industry_search_liv != null ||  
 				   sapsol_search_liv != null ||
-				   country_coverage_search_liv != null;
+				   country_coverage_search_liv != null ||
+				   ((name_search_liv != null) && (!name_search_liv.equalsIgnoreCase(""))) ||
+				   ((desc_search_liv != null) && (!desc_search_liv.equalsIgnoreCase("")));
+				   
 	if(!cond)
 		{
 		solutionItems = SolutionItemDAO.getSolutionItems();
 		}
 	else {
-		solutionItems = SolutionUtil.getSolutionItemsBySearch(industry_search_liv, sapsol_search_liv, country_search_liv, country_coverage_search_liv, primary_business_type_search_liv);
+		solutionItems = SolutionUtil.getSolutionItemsBySearch(industry_search_liv, sapsol_search_liv, country_search_liv, country_coverage_search_liv, primary_business_type_search_liv, name_search_liv, desc_search_liv);
 		}	
 	
 	int count = solutionItems.size();
