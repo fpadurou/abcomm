@@ -1998,15 +1998,14 @@ public class SolutionUtil {
 
 
 ////////////// search related ///////////////////////////////////////////////////
-	public static List getSolutionItemsBySearch(String industry_search, String  sapsol_search, String partner_search, String country_coverage_search, String primary_business_type_search) throws SQLException {
+	public static List getSolutionItemsBySearch(String industry_search, String  sapsol_search, String partner_search, String country_coverage_search, String primary_business_type_search, String name_search, String desc_search) throws SQLException {
 		List list = new ArrayList();
 		List listByInd = new ArrayList(); 
 		List listBySap = new ArrayList(); 
 		List listByCountryCov = new ArrayList(); 
 		List listByCountry = new ArrayList();
 		List listByBssType = new ArrayList();
-		System.out.println("Search ok -1");
-
+		List returnList = new ArrayList();
 		String value = "";
 		if(industry_search != null)
 			value += industry_search + " ";
@@ -2031,13 +2030,11 @@ public class SolutionUtil {
 			if(item != null)
 				indId = item.getId(); 
 		}
-		System.out.println("Search ok -2");
 
 		if(sapsol_search != null)
 		{
 			sapsolId = SolutionUtil.getSolFocusIdByName(sapsol_search); 
 		}
-		System.out.println("Search ok -3");
 
 		if(country_coverage_search != null)
 		{
@@ -2185,14 +2182,55 @@ public class SolutionUtil {
 			//int sapsolId = -1;
 			//int countrycoverageId = -1;
 			//int businesstypeId = -1;
-			
+			// re-check by name and desc
+			boolean  cond1 = (name_search != null) && (!name_search.equalsIgnoreCase(""));
+			if(cond1)
+			{
+				name_search = name_search.toLowerCase();
+			}
+			boolean  cond2 = (desc_search != null) && (!desc_search.equalsIgnoreCase(""));
+			if(cond2)
+				desc_search = desc_search.toLowerCase();
+				
+			if(cond1 || cond2)
+			{
+				for (int i = 0; i < list.size(); i++) {
+					SolutionItem solItem = (SolutionItem)list.get(i);
+					boolean b1=  true;
+					boolean b2=  true;
+					if(cond1 && !solItem.solName.toLowerCase().contains(name_search))
+					{
+						b1 = false;
+					}
+
+					if(cond2)
+					{
+						if(solItem.solDesc != null)
+						{
+								if(!solItem.solDesc.toLowerCase().contains(desc_search))
+									b2 = false;
+						}
+						else
+							b2 = false;
+					}
+					if(b1 && b2)
+						returnList.add(solItem);
+				}
+			}
+			else
+			{
+				for (int i = 0; i < list.size(); i++) {
+					SolutionItem solItem = (SolutionItem)list.get(i);
+					returnList.add(solItem);
+				}
+			}			
 
 		}
 		finally {
 			ConnectionPool.cleanUp(con, ps, rs);
 		}
 
-		return list;
+		return returnList;
 	}
 	
 	private static final String _GET_COMPANY_ITEMS_BY_SEARCH =
