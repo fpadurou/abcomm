@@ -138,7 +138,9 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		else
 			last_review_Date = "";
 	    
-	    reviewed_by = companyItem.getReviewedBy(); 
+	    reviewed_by = companyItem.getReviewedBy();
+	    if(reviewed_by == null)
+	    	reviewed_by = ""; 
 	    profile_added = String.valueOf(dateFormatDateTime.format(companyItem.getDateCreated())); 
 	    date_updated = String.valueOf(dateFormatDateTime.format(companyItem.getDateUpdated())); 
 	    modified_by = companyItem.getModifiedBy();
@@ -237,7 +239,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="telephone" type="text" value="<%= telephone %>" maxlength="14" onBlur="javascript:checkTelNo (this);" onKeyUp="javascript:formatTelNo (this);" onKeyDown="javascript:formatTelNo (this);">
+			<input class="form-text" size = 40 name="telephone" type="text" value="<%= telephone %>" maxlength="18">
 		</td>
 	</tr>
 	<tr>
@@ -246,7 +248,7 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<input class="form-text" size = 40 name="telefax" type="text" value="<%= telefax %>" maxlength="14" onBlur="javascript:checkTelNo (this);" onKeyUp="javascript:formatTelNo (this);" onKeyDown="javascript:formatTelNo (this);">
+			<input class="form-text" size = 40 name="telefax" type="text" value="<%= telefax %>" maxlength="18">
 		</td>
 	</tr>
 	<tr>
@@ -757,21 +759,16 @@ if(companyItemsIdByUserIds.size()<1){
 <script language="JavaScript" type="text/javascript">
  var frmvalidator = new Validator("compprofile");
  frmvalidator.addValidation("userCompanyName","req","Please enter the Company Name");
- //frmvalidator.addValidation("userCompanyName","alpha");
  
 
  frmvalidator.addValidation("mail","maxlen=50", "Please provide a valid e-mail adress");
- //frmvalidator.addValidation("mail","req");
  frmvalidator.addValidation("mail","email", "Please provide a valid e-mail adress");
  
- frmvalidator.addValidation("telephone","maxlen=15", "Please provide a valid phone number, data entered too long");
- //frmvalidator.addValidation("telephone","numeric", "Please provide a valid phone number, digits only");
- frmvalidator.addValidation("telefax","maxlen=15", "Please provide a valid fax number, data entered too long");
- //frmvalidator.addValidation("telefax","numeric", "Please provide a valid phone number, digits only");
-
+ frmvalidator.addValidation("telephone","maxlen=18", "Please provide a valid phone number, data entered too long");
+ frmvalidator.addValidation("telefax","maxlen=18", "Please provide a valid fax number, data entered too long");
+ 
  frmvalidator.addValidation("channel_partner_since", "numeric", "Please provide a valid 4 digit year");
  frmvalidator.addValidation("channel_partner_since", "maxlen=4", "Please provide a valid 4 digit year, data enetered too long");
-// frmvalidator.addValidation("channel_partner_since", "minlen=4", "Please provide a valid 4 digit year, data enetered too short");
 
  frmvalidator.addValidation("noemployees", "numeric", "Please provide a valid digit number");
   
@@ -785,5 +782,4 @@ if(companyItemsIdByUserIds.size()<1){
  frmvalidator.addValidation("sap_solution_focus","dontselect=-1", "Please select at least one option for SAP solution focus");
  frmvalidator.addValidation("industry","dontselect=-1", "Please select at least one option for industry");
  frmvalidator.addValidation("last_review_Date","date", "Please enter a valid date");
- //secondary_business_type
 </script>
