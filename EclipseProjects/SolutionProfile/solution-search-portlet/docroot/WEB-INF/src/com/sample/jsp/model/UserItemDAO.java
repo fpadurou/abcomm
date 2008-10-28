@@ -222,23 +222,23 @@ public class UserItemDAO {
 	}
 
 	private static final String _ADD_USER_ITEM =
-		"INSERT INTO Registration (userFirstName, userLastName, " +
+		"INSERT INTO registration (userFirstName, userLastName, " +
 		"userCompanyName, userPositionCompany, userMobilePhone, userWorkPhone, companyId, adressId ) " +
 		"VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 	private static final String _DELETE_USER_ITEM =
-		"DELETE FROM Registration WHERE userId = ?";
+		"DELETE FROM registration WHERE userId = ?";
 
 	private static final String _GET_USER_ITEM =
-		"SELECT userId, userFirstName, userLastName, userCompanyName, userPositionCompany, userMobilePhone, userWorkPhone, companyId, adressId FROM Registration WHERE userId = ?";
+		"SELECT userId, userFirstName, userLastName, userCompanyName, userPositionCompany, userMobilePhone, userWorkPhone, companyId, adressId FROM registration WHERE userId = ?";
 
 	private static final String _GET_USER_ITEM_BY_COMPANY_ID = 
-		"SELECT userId, userFirstName, userLastName, userCompanyName, userPositionCompany, userMobilePhone, userWorkPhone, companyId, adressId FROM Registration WHERE companyId = ?";
+		"SELECT userId, userFirstName, userLastName, userCompanyName, userPositionCompany, userMobilePhone, userWorkPhone, companyId, adressId FROM registration WHERE companyId = ?";
 		
 	private static final String _GET_USER_ITEMS =
-		"SELECT userId, userFirstName, userLastName, userCompanyName, userPositionCompany, userMobilePhone, userWorkPhone, companyId, adressId FROM Registration";
+		"SELECT userId, userFirstName, userLastName, userCompanyName, userPositionCompany, userMobilePhone, userWorkPhone, companyId, adressId FROM registration";
 
 	private static final String _UPDATE_USER_ITEM =
-		"UPDATE Registration SET userFirstName = ?, userLastName = ?, userCompanyName = ?, userPositionCompany = ?, userMobilePhone = ?, userWorkPhone = ?, companyId = ?, adressId = ? WHERE userId = ?";
+		"UPDATE registration SET userFirstName = ?, userLastName = ?, userCompanyName = ?, userPositionCompany = ?, userMobilePhone = ?, userWorkPhone = ?, companyId = ?, adressId = ? WHERE userId = ?";
 
 }
