@@ -40,7 +40,6 @@ function submitconfirm(compprofile)
 
 <form action="<portlet:actionURL />" method="post" name="compprofile" onSubmit="return submitconfirm(this)">
 <%
-//DateFormat dateFormatDateTime = DateFormat.getDateInstance(DateFormat.SHORT);
 SimpleDateFormat dateFormatDateTime = new SimpleDateFormat("MM/dd/yyyy");
 String command = request.getParameter("command");
 List countryItems = CountryItemDAO.getCountryItems();
@@ -54,11 +53,6 @@ List industryItems = IndustryItemDAO.getIndustryItems();
 String pleaseChoose = "---------------Please choose----------------";
 long lrUserId = PortalUtil.getUserId(request); 
 
-/*
-PrintWriter pout=null;
-pout = response.getWriter();
-pout.write("<BR> LR userId: " + String.valueOf(lrUserId));
-*/
 
 if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	int id = 0;
