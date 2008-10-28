@@ -174,11 +174,6 @@ if ((command != null) && (command.equals("add") || command.equals("edit"))) {
 	        
 	if (command.equals("edit")) {
 		id = Integer.parseInt(request.getParameter("id"));
-		UserItem userItem = UserItemDAO.getUserItemByCompanyId(id);
-		if(userItem != null)
-		{
-			userId = userItem.getId();
-		}
 		// company part
 		SolutionItem solutionItem = SolutionItemDAO.getSolutionItem(id);
 

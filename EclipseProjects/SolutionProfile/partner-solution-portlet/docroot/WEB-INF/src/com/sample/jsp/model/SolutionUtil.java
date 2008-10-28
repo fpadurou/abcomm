@@ -495,7 +495,7 @@ public class SolutionUtil {
 				
 		try {
 			con = ConnectionPool.getConnection();
-			String _GET_STATUS_BY_SAP_ID = "SELECT id FROM tbl_sol_status_by_SAP WHERE name = ?";
+			String _GET_STATUS_BY_SAP_ID = "SELECT id FROM tbl_sol_status_by_sap WHERE name = ?";
 			ps = con.prepareStatement(_GET_STATUS_BY_SAP_ID);
 			ps.setString(1, name);
 			rs = ps.executeQuery();
@@ -520,7 +520,7 @@ public class SolutionUtil {
 		
 		try {
 			con = ConnectionPool.getConnection();
-			String _GET_STATUS_BY_SAP = "SELECT name FROM tbl_sol_status_by_SAP ";
+			String _GET_STATUS_BY_SAP = "SELECT name FROM tbl_sol_status_by_sap ";
 			ps = con.prepareStatement(_GET_STATUS_BY_SAP);
 			rs = ps.executeQuery();
 
