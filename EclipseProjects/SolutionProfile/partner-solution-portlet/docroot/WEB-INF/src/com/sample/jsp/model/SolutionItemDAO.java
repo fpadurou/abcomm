@@ -251,7 +251,7 @@ public class SolutionItemDAO {
 		return solutionItem;
 	}
 
-	public static List getSolutionItemsByUserId(long userId) throws SQLException {
+	public static List getSolutionItemsIdByUserId(long userId) throws SQLException {
 		List list = new ArrayList();
 		List listCompId = getCompanyIdsByUserId(userId);
 		int companyId = 0;
@@ -395,6 +395,20 @@ public class SolutionItemDAO {
 		return list;
 	}
 
+	public static List getSolutionItemsByUserId(long userId) throws SQLException {
+		List list = getSolutionItems();
+		List listId = getSolutionItemsIdByUserId(userId);
+		List listResults = new ArrayList();
+		SolutionItem solutionItem;
+		for(int i = 0; i<list.size(); i++)
+		{
+			solutionItem = (SolutionItem)list.get(i);
+			if(listId.contains(solutionItem.getId()))
+				listResults.add(solutionItem);
+		}
+		return listResults;
+	}
+	
 	public static void updateSolutionItem(SolutionItem solutionItem) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
